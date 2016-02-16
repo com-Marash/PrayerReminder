@@ -9,8 +9,40 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.marash.prayerreminder.MainPage">
 
-    <TextView
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="show prayer times"
+        android:id="@+id/button_showPrayerTimes"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="set alerts"
+        android:id="@+id/button_setAlerts"
+        android:layout_marginTop="44dp"
+        android:layout_below="@+id/button_showPrayerTimes"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Setting"
+        android:id="@+id/button_setting"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About Us"
+        android:id="@+id/button_aboutUs"
+        android:layout_below="@+id/button_setting"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="52dp" />
+
 </RelativeLayout>
