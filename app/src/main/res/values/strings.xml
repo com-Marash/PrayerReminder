@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">PrayerReminder</string>
     <string name="title_activity_setting">Setting</string>
+    <string name="title_activity_about_us">About Us</string>
+    <string name="title_activity_set_alerts">Set Alerts</string>
+    <string name="title_activity_show_prayer_times">Prayer Times</string>
+    <string name="title_activity_select_location">Select Location</string>
 </resources>

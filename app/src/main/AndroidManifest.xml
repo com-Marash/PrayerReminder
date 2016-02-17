@@ -11,7 +11,6 @@
         <activity android:name=".MainPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -24,7 +23,66 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.marash.prayerreminder.MainPage" />
 
-            
+            <intent-filter>
+                <action android:name="com.marash.prayerreminder.Setting" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".aboutUs"
+            android:label="@string/title_activity_about_us"
+            android:parentActivityName=".MainPage"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.marash.prayerreminder.MainPage" />
+
+            <intent-filter>
+                <action android:name="com.marash.prayerreminder.aboutUs" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".setAlerts"
+            android:label="@string/title_activity_set_alerts"
+            android:parentActivityName=".MainPage"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.marash.prayerreminder.MainPage" />
+
+            <intent-filter>
+                <action android:name="com.marash.prayerreminder.setAlerts" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".showPrayerTimes"
+            android:label="@string/title_activity_show_prayer_times"
+            android:parentActivityName=".MainPage"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.marash.prayerreminder.MainPage" />
+
+            <intent-filter>
+                <action android:name="com.marash.prayerreminder.showPrayerTimes" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".selectLocation"
+            android:label="@string/title_activity_select_location"
+            android:parentActivityName=".Setting"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.marash.prayerreminder.Setting" />
+
+            <intent-filter>
+            <action android:name="com.marash.prayerreminder.selectLocation" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
         </activity>
     </application>
 
