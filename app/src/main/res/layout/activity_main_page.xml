@@ -13,7 +13,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="show prayer times"
+        android:text="@string/showPrayerTimes"
         android:id="@+id/button_showPrayerTimes"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -22,7 +22,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="set alerts"
+        android:text="@string/setAlerts"
         android:id="@+id/button_setAlerts"
         android:layout_marginTop="44dp"
         android:layout_below="@+id/button_showPrayerTimes"
@@ -31,7 +31,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Setting"
+        android:text="@string/setting"
         android:id="@+id/button_setting"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
@@ -39,7 +39,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="About Us"
+        android:text="@string/aboutUs"
         android:id="@+id/button_aboutUs"
         android:layout_below="@+id/button_setting"
         android:layout_centerHorizontal="true"

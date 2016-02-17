@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="showPrayerTimes">show prayer times</string>
+    <string name="setAlerts">set alerts</string>
+    <string name="setting">Setting</string>
+    <string name="aboutUs">About Us</string>
+</resources>
