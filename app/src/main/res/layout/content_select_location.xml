@@ -34,8 +34,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Update location"
-        android:id="@+id/button_updateLocation"
+        android:text="@string/UpdateLocationGPS"
+        android:id="@+id/button_updateLocationGPS"
         android:layout_below="@+id/textView_lastKnownLocation"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -44,10 +44,18 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Confirm the shown Location"
+        android:text="@string/confirmLocation"
         android:id="@+id/button_confirmLocation"
+        android:layout_below="@+id/button_updateLocationGPS"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="110dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/UpdateLocationNetwork"
+        android:id="@+id/updateLocationNetwork"
         android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
 </RelativeLayout>

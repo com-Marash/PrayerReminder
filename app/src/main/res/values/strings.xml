@@ -9,4 +9,7 @@
     <string name="setAlerts">set alerts</string>
     <string name="setting">Setting</string>
     <string name="aboutUs">About Us</string>
+    <string name="UpdateLocationGPS">Update location by GPS</string>
+    <string name="UpdateLocationNetwork">Update Location by Network</string>
+    <string name="confirmLocation">Confirm the shown Location</string>
 </resources>
