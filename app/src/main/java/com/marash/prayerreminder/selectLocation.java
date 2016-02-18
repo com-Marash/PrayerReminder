@@ -44,6 +44,7 @@ public class selectLocation extends AppCompatActivity {
 
         lastKnownLocationFunction();
         updateLocationByGPSFunction();
+        updateLocationByNetworkFunction();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -92,21 +93,60 @@ public class selectLocation extends AppCompatActivity {
 
             @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {
-
             }
 
             @Override
             public void onProviderEnabled(String provider) {
-
             }
 
             @Override
             public void onProviderDisabled(String provider) {
-
             }
         };
 
         updateByGPS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ActivityCompat.checkSelfPermission(selectLocation.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        && ActivityCompat.checkSelfPermission(selectLocation.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                    return;
+                }
+                myLocManager.requestLocationUpdates("gps", 5000, 2, myLocListener);
+            }
+        });
+
+    }
+
+
+    public void updateLocationByNetworkFunction(){
+
+        updateByNetwork = (Button) findViewById(R.id.updateLocationNetwork);
+        myLocListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                lastKnownLocationText.setText("Longtitude is:" + location.getLongitude() + "\n latitude is:" + location.getLatitude());
+                if (ActivityCompat.checkSelfPermission(selectLocation.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(selectLocation.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                    return;
+                }
+                myLocManager.removeUpdates(myLocListener);
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+            }
+        };
+
+        updateByNetwork.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (ActivityCompat.checkSelfPermission(selectLocation.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
