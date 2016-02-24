@@ -33,16 +33,24 @@
         android:layout_height="wrap_content"
         android:text="@string/setting"
         android:id="@+id/button_setting"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/button_aboutUs"
+        android:layout_alignStart="@+id/button_aboutUs" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/aboutUs"
         android:id="@+id/button_aboutUs"
-        android:layout_below="@+id/button_setting"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="52dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/button_setAlerts"
+        android:layout_marginBottom="53dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/showSavedAlerts"
+        android:id="@+id/button_showSavedAlerts"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/button_showPrayerTimes" />
 
 </RelativeLayout>

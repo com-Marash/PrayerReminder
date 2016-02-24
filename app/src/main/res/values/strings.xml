@@ -12,4 +12,5 @@
     <string name="UpdateLocationGPS">Update location by GPS</string>
     <string name="UpdateLocationNetwork">Update Location by Network</string>
     <string name="confirmLocation">Confirm the shown Location</string>
+    <string name="showSavedAlerts">Show saved alerts</string>
 </resources>
