@@ -13,4 +13,5 @@
     <string name="UpdateLocationNetwork">Update Location by Network</string>
     <string name="confirmLocation">Confirm the shown Location</string>
     <string name="showSavedAlerts">Show saved alerts</string>
+    <string name="title_activity_show_saved_alerts">showSavedAlerts</string>
 </resources>

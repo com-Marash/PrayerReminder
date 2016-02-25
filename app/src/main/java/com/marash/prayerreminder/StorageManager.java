@@ -17,14 +17,19 @@ public class StorageManager {
     Context context;
     FileOutputStream fos;
 
-    public boolean saveAlert(Alert alert){
+    public StorageManager(Context context){
+        this.context = context;
+    }
 
+
+    public boolean saveAlert(Alert alert){
 
         try {
             fos = context.openFileOutput(STORED_Alerts_TEXT, Context.MODE_PRIVATE);
             out = new OutputStreamWriter(fos);
-            out.append(alert.getPrayerName() + "," + alert.getBeforeAfter() + "," + alert.getTime() + "\n");
-        } catch (FileNotFoundException e) {
+            out.write(alert.getPrayerName() + "," + alert.getBeforeAfter() + "," + alert.getTime() + "\n");
+            return true;
+         }catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();

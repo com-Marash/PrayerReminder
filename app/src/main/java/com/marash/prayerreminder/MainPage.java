@@ -12,6 +12,7 @@ public class MainPage extends AppCompatActivity {
     private Button butten_aboutUs;
     private Button butten_setAlerts;
     private Button butten_showPrayerTimes;
+    private Button button_showSavedAlerts;
 
 
 
@@ -25,6 +26,19 @@ public class MainPage extends AppCompatActivity {
         aboutUsFunction();
         setAlertFunction();
         showprayerTimesFunction();
+        showSavedAlertsFunction();
+    }
+
+    private void showSavedAlertsFunction() {
+
+        button_showSavedAlerts = (Button)findViewById(R.id.button_showSavedAlerts);
+        button_showSavedAlerts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent showSavedAlertsIntent = new Intent("com.marash.prayerreminder.showSavedAlerts");
+                startActivity(showSavedAlertsIntent);
+            }
+        });
     }
 
     public void settingFunction(){
