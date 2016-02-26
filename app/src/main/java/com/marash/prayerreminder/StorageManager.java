@@ -1,6 +1,7 @@
 package com.marash.prayerreminder;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -14,18 +15,18 @@ public class StorageManager {
 
     private final static String STORED_Alerts_TEXT = "storedAlertsText.txt";
     OutputStreamWriter out;
-    Context context;
     FileOutputStream fos;
+    Context context;
 
     public StorageManager(Context context){
         this.context = context;
     }
 
-
     public boolean saveAlert(Alert alert){
 
         try {
             fos = context.openFileOutput(STORED_Alerts_TEXT, Context.MODE_PRIVATE);
+            Log.d("maedeh", context.getFilesDir().toString());
             out = new OutputStreamWriter(fos);
             out.write(alert.getPrayerName() + "," + alert.getBeforeAfter() + "," + alert.getTime() + "\n");
             return true;
