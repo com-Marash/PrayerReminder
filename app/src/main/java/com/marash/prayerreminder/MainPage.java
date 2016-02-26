@@ -71,7 +71,7 @@ public class MainPage extends AppCompatActivity {
         butten_setAlerts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent  setAlertIntent = new Intent("com.marash.prayerreminder.setAlerts");
+                Intent setAlertIntent = new Intent("com.marash.prayerreminder.setAlerts");
                 startActivity(setAlertIntent);
             }
         });
