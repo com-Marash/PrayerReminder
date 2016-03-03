@@ -60,14 +60,18 @@ public class showSavedAlerts extends AppCompatActivity {
 
 
         prayerListView = (ListView)findViewById(R.id.listView_savedAlertsList);
-        prayerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,alerts );
-        prayerListView.setAdapter(prayerAdapter);
-        prayerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        customAdaptorFor_showAlertLayout myAdaptor = new customAdaptorFor_showAlertLayout(alerts,this);
+        prayerListView.setAdapter(myAdaptor);
 
-            }
-        });
+
+//        prayerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,alerts );
+//        prayerListView.setAdapter(prayerAdapter);
+//        prayerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//            }
+//        });
 
 
 
