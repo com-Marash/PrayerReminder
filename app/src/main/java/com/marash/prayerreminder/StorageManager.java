@@ -2,7 +2,6 @@ package com.marash.prayerreminder;
 
 import android.content.Context;
 import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -50,15 +49,24 @@ public class StorageManager {
             inputFile = context.openFileInput(STORED_Alerts_TEXT);
             BufferedReader inputReader = new BufferedReader(new InputStreamReader(inputFile));
             String inputString;
-            StringBuffer stringBuffer = new StringBuffer();
+            //StringBuffer stringBuffer = new StringBuffer();
+            String alertInfo;
+            String[] alertParts;
+            ArrayList<Alert> alertsList = new ArrayList<Alert>();
             while ((inputString = inputReader.readLine()) != null) {
-                stringBuffer.append(inputString + "\n");
+                //stringBuffer.append(inputString);
+                alertInfo = inputString;
+                alertParts = alertInfo.split(",");
+                Alert a = new Alert(alertParts[0],alertParts[1],alertParts[2]);
+                alertsList.add(a);
+
+
                 Log.d("maedehSara", inputString);
 
             }
-            inputReader.close();
-            String result = stringBuffer.toString();
-            return result;
+            //inputReader.close();
+            //String result = stringBuffer.toString();
+            return alertsList;
         } catch (IOException e) {
             e.printStackTrace();
         }

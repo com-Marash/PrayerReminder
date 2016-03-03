@@ -9,7 +9,7 @@ public class Alert{
     private String prayerName;
     private String time;
 
-    public Alert(String beforeAfter, String prayerName, String time){
+    public Alert(String prayerName, String beforeAfter, String time){
         this.beforeAfter = beforeAfter;
         this.prayerName = prayerName;
         this.time = time;

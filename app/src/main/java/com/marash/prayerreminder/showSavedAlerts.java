@@ -7,12 +7,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class showSavedAlerts extends AppCompatActivity {
 
-    private String savedAlerts;
+    private ArrayList<Alert> savedAlerts;
     private EditText savedAlertsEditText;
+
+    private String savedAlertBeforeAfter;
+    private String savedAlertPrayerName;
+    private String savedAlertTime;
+
+    ListView prayerListView;
+    ArrayAdapter<String> prayerAdapter;
+
+    ArrayList<String> alerts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +45,35 @@ public class showSavedAlerts extends AppCompatActivity {
         StorageManager myManager = new StorageManager(showSavedAlerts.this.getApplicationContext());
         savedAlerts = myManager.loadAlert();
 
-        Log.d("maedehArash", savedAlerts);
+        //Log.d("maedehArash", savedAlerts);
+
+        alerts = new ArrayList<String>();
+        String st;
+
+        for (Alert a : savedAlerts){
+            savedAlertPrayerName = a.getPrayerName();
+            savedAlertBeforeAfter = a.getBeforeAfter();
+            savedAlertTime = a.getTime();
+            st = savedAlertTime + " minutes " + savedAlertBeforeAfter + " " + savedAlertPrayerName;
+            alerts.add(st);
+        }
 
 
-        savedAlertsEditText = (EditText)findViewById(R.id.editText_savedAlert1);
-        savedAlertsEditText.setText(savedAlerts);
+        prayerListView = (ListView)findViewById(R.id.listView_savedAlertsList);
+        prayerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,alerts );
+        prayerListView.setAdapter(prayerAdapter);
+        prayerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+
+
+
+
+        //savedAlertsEditText = (EditText)findViewById(R.id.editText_savedAlert1);
+        //savedAlertsEditText.setText(savedAlerts);
 
     }
 

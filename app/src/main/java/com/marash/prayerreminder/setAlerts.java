@@ -1,17 +1,17 @@
 package com.marash.prayerreminder;
 
-import android.app.Application;
-import android.content.Context;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Toast;
+        import android.app.Application;
+        import android.content.Context;
+        import android.os.Bundle;
+        import android.support.v7.app.AppCompatActivity;
+        import android.support.v7.widget.Toolbar;
+        import android.util.Log;
+        import android.view.View;
+        import android.widget.Button;
+        import android.widget.EditText;
+        import android.widget.RadioButton;
+        import android.widget.RadioGroup;
+        import android.widget.Toast;
 
 
 public class setAlerts extends AppCompatActivity {
@@ -92,7 +92,7 @@ public class setAlerts extends AppCompatActivity {
                     selectedBeforeAfterText = selectedBeforeAfter.getText().toString();
 
 
-                    Alert alert = new Alert(selectedBeforeAfterText, selectedPrayerText, timeString);
+                    Alert alert = new Alert(selectedPrayerText, selectedBeforeAfterText, timeString);
                     //Log.d("maedeh", selectedBeforeAfterText + "," + selectedPrayerText + "," + timeString);
 
                     StorageManager stManager = new StorageManager(setAlerts.this.getApplicationContext());
