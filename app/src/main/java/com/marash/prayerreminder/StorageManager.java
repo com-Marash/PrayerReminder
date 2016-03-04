@@ -14,16 +14,20 @@ import java.util.ArrayList;
 /**
  * Created by Maedeh on 2/22/2016.
  */
-public class StorageManager {
+public  class StorageManager {
 
     private final static String STORED_Alerts_TEXT = "storedAlertsText.txt";
     OutputStreamWriter out;
     FileOutputStream outputFile;
     FileInputStream inputFile;
     Context context;
+    private ArrayList<Alert> alertsList;
+    private BufferedReader inputReader;
+    String inputString;
 
     public StorageManager(Context context){
         this.context = context;
+        alertsList = new ArrayList<Alert>();
     }
 
     public boolean saveAlert(Alert alert){
@@ -32,6 +36,7 @@ public class StorageManager {
             outputFile = context.openFileOutput(STORED_Alerts_TEXT, Context.MODE_APPEND);
             out = new OutputStreamWriter(outputFile);
             out.write(alert.getPrayerName() + "," + alert.getBeforeAfter() + "," + alert.getTime() + "\n");
+            alertsList.add(alert);
             out.close();
             return true;
          }catch (FileNotFoundException e) {
@@ -47,12 +52,12 @@ public class StorageManager {
         try {
 
             inputFile = context.openFileInput(STORED_Alerts_TEXT);
-            BufferedReader inputReader = new BufferedReader(new InputStreamReader(inputFile));
-            String inputString;
+            inputReader = new BufferedReader(new InputStreamReader(inputFile));
+
             //StringBuffer stringBuffer = new StringBuffer();
             String alertInfo;
             String[] alertParts;
-            ArrayList<Alert> alertsList = new ArrayList<Alert>();
+
             while ((inputString = inputReader.readLine()) != null) {
                 //stringBuffer.append(inputString);
                 alertInfo = inputString;
@@ -64,8 +69,7 @@ public class StorageManager {
                 Log.d("maedehSara", inputString);
 
             }
-            //inputReader.close();
-            //String result = stringBuffer.toString();
+            inputReader.close();
             return alertsList;
         } catch (IOException e) {
             e.printStackTrace();
@@ -73,5 +77,27 @@ public class StorageManager {
         return null;
     }
 
-    
+    public void editAlert(Alert alert){
+
+    }
+
+    public void deleteAlert(int index){
+        this.loadAlert();
+        alertsList.remove(index);
+
+        // Because we dont know how to delete an specific line from file, we deleted that. And again write all alerts.
+        context.deleteFile(STORED_Alerts_TEXT);
+        try {
+            outputFile = context.openFileOutput(STORED_Alerts_TEXT, Context.MODE_APPEND);
+            out = new OutputStreamWriter(outputFile);
+            for (Alert alert:alertsList){
+                out.write(alert.getPrayerName() + "," + alert.getBeforeAfter() + "," + alert.getTime() + "\n");
+            }
+            out.close();
+        }catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
