@@ -24,13 +24,16 @@ public  class StorageManager {
     private ArrayList<Alert> alertsList;
     private BufferedReader inputReader;
     String inputString;
+    private String ringtone;
+    private final static String STORED_ringtone = "storedRingtoneText.txt";
 
-    public StorageManager(Context context){
+
+    public StorageManager(Context context) {
         this.context = context;
         alertsList = new ArrayList<Alert>();
     }
 
-    public boolean saveAlert(Alert alert){
+    public boolean saveAlert(Alert alert) {
 
         try {
             outputFile = context.openFileOutput(STORED_Alerts_TEXT, Context.MODE_APPEND);
@@ -39,7 +42,7 @@ public  class StorageManager {
             alertsList.add(alert);
             out.close();
             return true;
-         }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -48,7 +51,7 @@ public  class StorageManager {
         return false;
     }
 
-    public ArrayList<Alert> loadAlert(){
+    public ArrayList<Alert> loadAlert() {
         try {
 
             inputFile = context.openFileInput(STORED_Alerts_TEXT);
@@ -62,7 +65,7 @@ public  class StorageManager {
                 //stringBuffer.append(inputString);
                 alertInfo = inputString;
                 alertParts = alertInfo.split(",");
-                Alert a = new Alert(alertParts[0],alertParts[1],alertParts[2]);
+                Alert a = new Alert(alertParts[0], alertParts[1], alertParts[2]);
                 alertsList.add(a);
 
 
@@ -77,11 +80,11 @@ public  class StorageManager {
         return null;
     }
 
-    public void editAlert(Alert alert){
+    public void editAlert(Alert alert) {
 
     }
 
-    public void deleteAlert(int index){
+    public void deleteAlert(int index) {
         this.loadAlert();
         alertsList.remove(index);
 
@@ -90,14 +93,43 @@ public  class StorageManager {
         try {
             outputFile = context.openFileOutput(STORED_Alerts_TEXT, Context.MODE_APPEND);
             out = new OutputStreamWriter(outputFile);
-            for (Alert alert:alertsList){
+            for (Alert alert : alertsList) {
                 out.write(alert.getPrayerName() + "," + alert.getBeforeAfter() + "," + alert.getTime() + "\n");
             }
             out.close();
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void saveAlarmRingtone(String ringtone){
+        try {
+
+            outputFile = context.openFileOutput(STORED_ringtone, Context.MODE_PRIVATE);
+            out = new OutputStreamWriter(outputFile);
+            out.write(ringtone);
+            out.close();
+        }catch (IOException e){
+            e.printStackTrace();
+
+        }
+    }
+
+    public String loadAlarmRingtone() {
+        try {
+
+
+            inputFile = context.openFileInput(STORED_ringtone);
+            inputReader = new BufferedReader(new InputStreamReader(inputFile));
+
+            return (inputReader.readLine());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
 }

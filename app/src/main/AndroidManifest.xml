@@ -15,6 +15,7 @@
         <activity android:name=".MainPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -29,6 +30,7 @@
 
             <intent-filter>
                 <action android:name="com.marash.prayerreminder.Setting" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -43,6 +45,7 @@
 
             <intent-filter>
                 <action android:name="com.marash.prayerreminder.aboutUs" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -57,6 +60,7 @@
 
             <intent-filter>
                 <action android:name="com.marash.prayerreminder.setAlerts" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -71,6 +75,7 @@
 
             <intent-filter>
                 <action android:name="com.marash.prayerreminder.showPrayerTimes" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -85,6 +90,7 @@
 
             <intent-filter>
                 <action android:name="com.marash.prayerreminder.selectLocation" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -107,10 +113,33 @@
 
             <intent-filter>
                 <action android:name="com.marash.prayerreminder.showSavedAlerts" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".selectSound"
+            android:parentActivityName=".Setting"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.marash.prayerreminder.Setting" />
+
+            <intent-filter>
+                <action android:name="com.marash.prayerreminder.selectSound" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".sound_selection"
+            android:label="@string/title_activity_sound_selection"
+            android:parentActivityName=".Setting"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.marash.prayerreminder.Setting" />
         </activity>
     </application>
 
 </manifest>
-

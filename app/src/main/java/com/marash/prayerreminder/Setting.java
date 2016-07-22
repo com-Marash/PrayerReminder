@@ -12,6 +12,8 @@ import android.widget.Button;
 public class Setting extends AppCompatActivity {
 
     private Button selectLocationButton;
+    private Button SelectAlarmSound;
+
 
 
     @Override
@@ -24,7 +26,10 @@ public class Setting extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         selectLocationFunction();
+        selectAlarmSoundFunction();
     }
+
+
 
     public void selectLocationFunction(){
 
@@ -37,6 +42,18 @@ public class Setting extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void selectAlarmSoundFunction(){
+
+        SelectAlarmSound = (Button)findViewById(R.id.button_alarmSound);
+        SelectAlarmSound.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent selectSoundIntent = new Intent("com.marash.prayerreminder.selectSound");
+                startActivity(selectSoundIntent);
+            }
+        });
     }
 
 

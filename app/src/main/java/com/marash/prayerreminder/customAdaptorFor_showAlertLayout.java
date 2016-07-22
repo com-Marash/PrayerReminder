@@ -57,7 +57,7 @@ public class customAdaptorFor_showAlertLayout extends BaseAdapter implements Lis
 
         //Handle buttons and add onClickListeners
         Button deleteBtn = (Button)view.findViewById(R.id.delete_btn);
-        Button editBtn = (Button)view.findViewById(R.id.edit_btn);
+//        Button editBtn = (Button)view.findViewById(R.id.edit_btn);
 
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override

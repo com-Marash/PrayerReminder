@@ -7,11 +7,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.marash.prayerreminder.MainPage">
+    tools:context="com.marash.prayerreminder.MainPage"
+    android:weightSum="1.0">
 
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_weight="0.4"
+        android:layout_width="500px"
         android:layout_height="wrap_content"
         android:text="@string/showPrayerTimes"
         android:id="@+id/button_showPrayerTimes"
@@ -20,37 +22,39 @@
         android:layout_marginTop="54dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_weight="0.4"
+        android:layout_width="500px"
         android:layout_height="wrap_content"
         android:text="@string/setAlerts"
         android:id="@+id/button_setAlerts"
-        android:layout_marginTop="44dp"
-        android:layout_below="@+id/button_showPrayerTimes"
+        android:layout_below="@+id/button_showSavedAlerts"
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_weight="0.4"
+        android:layout_width="500px"
         android:layout_height="wrap_content"
         android:text="@string/setting"
         android:id="@+id/button_setting"
-        android:layout_above="@+id/button_aboutUs"
-        android:layout_alignStart="@+id/button_aboutUs" />
+        android:layout_below="@+id/button_setAlerts"
+        android:layout_alignStart="@+id/button_setAlerts" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_weight="0.4"
+        android:layout_width="500px"
         android:layout_height="wrap_content"
         android:text="@string/aboutUs"
         android:id="@+id/button_aboutUs"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/button_setAlerts"
-        android:layout_marginBottom="53dp" />
+        android:layout_below="@+id/button_setting"
+        android:layout_alignStart="@+id/button_setting" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_weight="0.4"
+        android:layout_width="500px"
         android:layout_height="wrap_content"
         android:text="@string/showSavedAlerts"
         android:id="@+id/button_showSavedAlerts"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/button_showPrayerTimes"
         android:layout_alignStart="@+id/button_showPrayerTimes" />
 
 </RelativeLayout>
