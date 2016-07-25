@@ -90,7 +90,7 @@
     </RadioGroup>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:inputType="time"
         android:ems="10"
@@ -98,7 +98,9 @@
         android:editable="true"
         android:layout_below="@+id/textView_setAnewAlertFor"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="47dp" />
+        android:layout_marginTop="35dp"
+        android:text="0"
+        android:autoText="false" />
 
     <Button
         android:layout_width="wrap_content"
@@ -106,5 +108,20 @@
         android:text="Save"
         android:id="@+id/button_saveAlert"
         android:layout_below="@+id/prayerGroup"
-        android:layout_alignEnd="@+id/editText_preferableTime" />
+        android:layout_marginTop="20dp"
+        <!--android:shadowColor="#007f00"-->
+        <!--android:shadowDx="1"-->
+        <!--android:shadowDy="1"-->
+        <!--android:shadowRadius="3"-->
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Minutes"
+        android:id="@+id/textView_minutes"
+        android:layout_below="@+id/textView_setAnewAlertFor"
+        android:layout_toRightOf="@+id/editText_preferableTime"
+        android:layout_marginTop="50dp"/>
 </RelativeLayout>

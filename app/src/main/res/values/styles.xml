@@ -9,9 +9,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     
-    <style name="CustomizadTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:windowBackground">@drawable/background_3</item>
-    </style>
+    <!--<style name="CustomizadTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+        <!--<item name="android:background">@drawable/background_3</item>-->
+    <!--</style>-->
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
