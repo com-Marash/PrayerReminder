@@ -106,13 +106,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
+        android:background="@drawable/button_shape"
         android:id="@+id/button_saveAlert"
         android:layout_below="@+id/prayerGroup"
         android:layout_marginTop="20dp"
-        <!--android:shadowColor="#007f00"-->
-        <!--android:shadowDx="1"-->
-        <!--android:shadowDy="1"-->
-        <!--android:shadowRadius="3"-->
         android:layout_alignParentEnd="true" />
 
     <TextView

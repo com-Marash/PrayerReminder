@@ -35,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/UpdateLocationGPS"
+        android:background="@drawable/button_shape"
         android:id="@+id/button_updateLocationGPS"
         android:layout_below="@+id/textView_lastKnownLocation"
         android:layout_alignParentLeft="true"
@@ -45,6 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/confirmLocation"
+        android:background="@drawable/button_shape"
         android:id="@+id/button_confirmLocation"
         android:layout_below="@+id/button_updateLocationGPS"
         android:layout_alignParentStart="true"
@@ -54,6 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/UpdateLocationNetwork"
+        android:background="@drawable/button_shape"
         android:id="@+id/updateLocationNetwork"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true" />

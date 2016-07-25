@@ -25,6 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Change the ringtone for prayers alarm"
+        android:background="@drawable/button_shape"
         android:id="@+id/button_changePrayerAlarm"
         android:layout_below="@+id/textView_soundText"
         android:layout_alignParentStart="true"

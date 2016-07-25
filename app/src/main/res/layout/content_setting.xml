@@ -16,6 +16,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Select Location "
+        android:background="@drawable/button_shape"
         android:id="@+id/button_selectLocation"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -25,6 +26,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Prayers alarm ringtone"
+        android:background="@drawable/button_shape"
         android:id="@+id/button_alarmSound"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/button_selectLocation" />

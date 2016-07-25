@@ -17,6 +17,7 @@
         android:layout_width="500px"
         android:layout_height="wrap_content"
         android:text="@string/showPrayerTimes"
+        android:background="@drawable/button_shape"
         android:id="@+id/button_showPrayerTimes"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -27,6 +28,7 @@
         android:layout_width="500px"
         android:layout_height="wrap_content"
         android:text="@string/setAlerts"
+        android:background="@drawable/button_shape"
         android:id="@+id/button_setAlerts"
         android:layout_below="@+id/button_showSavedAlerts"
         android:layout_centerHorizontal="true" />
@@ -36,6 +38,7 @@
         android:layout_width="500px"
         android:layout_height="wrap_content"
         android:text="@string/setting"
+        android:background="@drawable/button_shape"
         android:id="@+id/button_setting"
         android:layout_below="@+id/button_setAlerts"
         android:layout_alignStart="@+id/button_setAlerts" />
@@ -45,6 +48,7 @@
         android:layout_width="500px"
         android:layout_height="wrap_content"
         android:text="@string/aboutUs"
+        android:background="@drawable/button_shape"
         android:id="@+id/button_aboutUs"
         android:layout_below="@+id/button_setting"
         android:layout_alignStart="@+id/button_setting" />
@@ -54,6 +58,7 @@
         android:layout_width="500px"
         android:layout_height="wrap_content"
         android:text="@string/showSavedAlerts"
+        android:background="@drawable/button_shape"
         android:id="@+id/button_showSavedAlerts"
         android:layout_below="@+id/button_showPrayerTimes"
         android:layout_alignStart="@+id/button_showPrayerTimes" />
