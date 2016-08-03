@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,8 +14,9 @@
     tools:showIn="@layout/activity_setting">
 
     <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        app:layout_widthPercent="50%"
+        app:layout_heightPercent="10%"
+        app:layout_marginTopPercent="5%"
         android:text="Select Location "
         android:background="@drawable/button_shape"
         android:id="@+id/button_selectLocation"
@@ -23,11 +25,22 @@
          />
 
     <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Prayers alarm ringtone"
+        app:layout_widthPercent="50%"
+        app:layout_heightPercent="10%"
+        app:layout_marginTopPercent="5%"
+        android:text="Alarm ringtone"
         android:background="@drawable/button_shape"
         android:id="@+id/button_alarmSound"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/button_selectLocation" />
-</RelativeLayout>
+    <Button
+        app:layout_widthPercent="50%"
+        app:layout_heightPercent="10%"
+        app:layout_marginTopPercent="5%"
+        android:text="calculation methode"
+        android:background="@drawable/button_shape"
+        android:id="@+id/Button_calculationMethode"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/button_alarmSound" />
+
+</android.support.percent.PercentRelativeLayout>

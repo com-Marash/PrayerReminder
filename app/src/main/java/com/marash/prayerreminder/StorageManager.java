@@ -104,12 +104,12 @@ public  class StorageManager {
         }
     }
 
-    public void saveAlarmRingtone(String ringtone){
+    public void saveAlarmRingtone(String ringtoneTitle, String URIString){
         try {
 
             outputFile = context.openFileOutput(STORED_ringtone, Context.MODE_PRIVATE);
             out = new OutputStreamWriter(outputFile);
-            out.write(ringtone);
+            out.write(ringtoneTitle+ "\n"+URIString);
             out.close();
         }catch (IOException e){
             e.printStackTrace();
@@ -117,14 +117,15 @@ public  class StorageManager {
         }
     }
 
-    public String loadAlarmRingtone() {
+    public String[] loadAlarmRingtone() {
         try {
-
+            String[] result = new String[2];
 
             inputFile = context.openFileInput(STORED_ringtone);
             inputReader = new BufferedReader(new InputStreamReader(inputFile));
-
-            return (inputReader.readLine());
+            result[0] = inputReader.readLine();
+            result[1] = inputReader.readLine();
+            return result;
 
         } catch (IOException e) {
             e.printStackTrace();

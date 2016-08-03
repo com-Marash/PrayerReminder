@@ -1,5 +1,6 @@
 package com.marash.prayerreminder;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +14,7 @@ public class Setting extends AppCompatActivity {
 
     private Button selectLocationButton;
     private Button SelectAlarmSound;
+    private Button calculationMethodeButton;
 
 
 
@@ -27,6 +29,7 @@ public class Setting extends AppCompatActivity {
 
         selectLocationFunction();
         selectAlarmSoundFunction();
+        selectCalculationMethode();
     }
 
 
@@ -56,5 +59,21 @@ public class Setting extends AppCompatActivity {
         });
     }
 
+    public void selectCalculationMethode(){
+        calculationMethodeButton = (Button)findViewById(R.id.Button_calculationMethode);
+        calculationMethodeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculationMethodFunction();
+            }
+        });
+    }
 
+    public void calculationMethodFunction(){
+        Dialog dialog = new Dialog(Setting.this);
+        dialog.setContentView(R.layout.calculation_methode_dialog);
+        dialog.setTitle("Calculation Methode");
+        dialog.setCancelable(true);
+        dialog.show();
+    }
 }
