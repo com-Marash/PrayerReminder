@@ -1,6 +1,8 @@
 package com.marash.prayerreminder;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,12 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class Setting extends AppCompatActivity {
 
     private Button selectLocationButton;
     private Button SelectAlarmSound;
     private Button calculationMethodeButton;
+    private String selection;
 
 
 
@@ -64,16 +68,27 @@ public class Setting extends AppCompatActivity {
         calculationMethodeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calculationMethodFunction();
+                calculationMethodFunction().show();
             }
         });
     }
 
-    public void calculationMethodFunction(){
-        Dialog dialog = new Dialog(Setting.this);
-        dialog.setContentView(R.layout.calculation_methode_dialog);
-        dialog.setTitle("Calculation Methode");
-        dialog.setCancelable(true);
-        dialog.show();
+    public AlertDialog calculationMethodFunction(){
+        final CharSequence[] methodesItems = {"Qom","Tehran","Egypt"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
+        builder.setTitle("Choose Calculation Methode").setSingleChoiceItems(methodesItems, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int methodeNumber) {
+                selection = (String) methodesItems[methodeNumber];
+            }
+        }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(Setting.this,"You have selected " + selection + " as your calculation methode.",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        return builder.create();
     }
 }
