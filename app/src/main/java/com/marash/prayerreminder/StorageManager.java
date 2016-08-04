@@ -26,6 +26,7 @@ public  class StorageManager {
     String inputString;
     private String ringtone;
     private final static String STORED_ringtone = "storedRingtoneText.txt";
+    private final static String STORED_calcmethode = "storedCalculationMethode.txt";
 
 
     public StorageManager(Context context) {
@@ -57,7 +58,6 @@ public  class StorageManager {
             inputFile = context.openFileInput(STORED_Alerts_TEXT);
             inputReader = new BufferedReader(new InputStreamReader(inputFile));
 
-            //StringBuffer stringBuffer = new StringBuffer();
             String alertInfo;
             String[] alertParts;
 
@@ -131,6 +131,33 @@ public  class StorageManager {
             e.printStackTrace();
         }
         return null;
+    }
 
+    public void saveCalculationMethode(String calcMthode){
+        try {
+            outputFile = context.openFileOutput(STORED_calcmethode, Context.MODE_PRIVATE);
+            out = new OutputStreamWriter(outputFile);
+            out.write(calcMthode);
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String loadCalculationMethode() {
+        String temp;
+        try {
+            inputFile = context.openFileInput(STORED_calcmethode);
+            inputReader = new BufferedReader(new InputStreamReader(inputFile));
+            temp = inputReader.readLine();
+            inputReader.close();
+            return temp;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
