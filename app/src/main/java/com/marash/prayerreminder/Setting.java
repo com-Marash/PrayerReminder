@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.Arrays;
+
 public class Setting extends AppCompatActivity {
 
     private Button selectLocationButton;
@@ -73,22 +75,58 @@ public class Setting extends AppCompatActivity {
         });
     }
 
-    public AlertDialog calculationMethodFunction(){
-        final CharSequence[] methodesItems = {"Qom","Tehran","Egypt"};
+    public AlertDialog calculationMethodFunction() {
+        final CharSequence[] methodesItems = {"Qom", "Tehran", "Egypt"};
+        String savedCalcMethode;
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
-        builder.setTitle("Choose Calculation Methode").setSingleChoiceItems(methodesItems, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int methodeNumber) {
-                selection = (String) methodesItems[methodeNumber];
-            }
-        }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(Setting.this,"You have selected " + selection + " as your calculation methode.",Toast.LENGTH_LONG).show();
-            }
-        });
+        final StorageManager stManager = new StorageManager(Setting.this.getApplicationContext());
+        savedCalcMethode = stManager.loadCalculationMethode();
 
-        return builder.create();
+        if (savedCalcMethode == null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
+            builder.setTitle("Choose Calculation Methode").setSingleChoiceItems(methodesItems, -1, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int methodeNumber) {
+                    selection = (String) methodesItems[methodeNumber];
+                }
+            }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(Setting.this, "You have selected " + selection + " as your calculation methode.", Toast.LENGTH_LONG).show();
+                    stManager.saveCalculationMethode(selection);
+
+                    //// TODO: 8/4/2016 for arash code!
+                }
+            }).setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            return builder.create();
+        }else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
+            builder.setTitle("Choose Calculation Methode").setSingleChoiceItems(methodesItems, Arrays.asList(methodesItems).indexOf(savedCalcMethode), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int methodeNumber) {
+                    selection = (String) methodesItems[methodeNumber];
+                }
+            }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(Setting.this, "You have selected " + selection + " as your calculation methode.", Toast.LENGTH_LONG).show();
+                    stManager.saveCalculationMethode(selection);
+                    //// TODO: 8/4/2016 for arash code!
+                }
+            }).setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            return builder.create();
+        }
     }
 }
