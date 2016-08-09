@@ -105,7 +105,12 @@ public class showPrayerTimes extends AppCompatActivity {
                 calendar.set(Calendar.YEAR,selectedYear);
                 calendar.set(Calendar.MONTH,selectedMonth);
                 calendar.set(Calendar.DAY_OF_MONTH,selectedDay);
-                showDateText.setText(new StringBuilder().append(selectedDay).append("/")
+
+                SimpleDateFormat simpledateformat = new SimpleDateFormat("EEEE");
+                Date date = new Date(selectedYear, selectedMonth, selectedDay - 1);
+                String dayOfWeek = simpledateformat.format(date);
+
+                showDateText.setText(new StringBuilder().append(dayOfWeek+"  ").append(selectedDay).append("/")
                         .append(selectedMonth + 1).append("/").append(selectedYear));
             }
         };
