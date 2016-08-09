@@ -12,4 +12,15 @@
     tools:context="com.marash.prayerreminder.showPrayerTimes"
     tools:showIn="@layout/activity_show_prayer_times">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextShowDate"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:textStyle="bold"/>
 </RelativeLayout>
