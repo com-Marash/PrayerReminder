@@ -1,6 +1,7 @@
 package com.marash.prayerreminder;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +27,7 @@ import java.util.Locale;
 public class showPrayerTimes extends AppCompatActivity {
 
     private TextView showDateText;
-    DatePickerDialog.OnDateSetListener myDatePicker;
+    DatePickerDialog.OnDateSetListener myDatePickerListener;
     final Calendar calendar = new GregorianCalendar();
 
     /**
@@ -91,28 +92,38 @@ public class showPrayerTimes extends AppCompatActivity {
 //        System.out.println(calculatedTimes.getMidnight().getFormatedTime());
     }
 
-    private void showDate(int year, int month, int day, String weekDay) {
+    private void showDate(int year, int month, final int day, String weekDay) {
         showDateText = (TextView) findViewById(R.id.editTextShowDate);
 
         showDateText.setText(new StringBuilder().append(weekDay + "  ").append(day).append("/")
                 .append(month).append("/").append(year));
 
-        myDatePicker= new DatePickerDialog.OnDateSetListener() {
+        myDatePickerListener= new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-//                showDateText.setText(new StringBuilder().append(dayOfMonth).append("/")
-//                        .append(monthOfYear).append("/").append(year));
-                calendar.set(Calendar.YEAR,year);
-                calendar.set(Calendar.MONTH,monthOfYear);
-                calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+            public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
 
+                calendar.set(Calendar.YEAR,selectedYear);
+                calendar.set(Calendar.MONTH,selectedMonth);
+                calendar.set(Calendar.DAY_OF_MONTH,selectedDay);
+                showDateText.setText(new StringBuilder().append(selectedDay).append("/")
+                        .append(selectedMonth + 1).append("/").append(selectedYear));
             }
         };
+
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(showPrayerTimes.this,myDatePickerListener,Calendar.YEAR,Calendar.MONTH,Calendar.DAY_OF_MONTH);
+        datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                DatePicker datePicker = datePickerDialog
+                        .getDatePicker();
+                myDatePickerListener.onDateSet(datePicker, datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+            }
+        });
+
 
         showDateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(showPrayerTimes.this, myDatePicker, calendar
+                new DatePickerDialog(showPrayerTimes.this,myDatePickerListener, calendar
                         .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH)).show();
             }
