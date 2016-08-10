@@ -23,4 +23,18 @@
         android:clickable="true"
         android:onClick="onClick"
         android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textView_goToToday"
+        android:layout_below="@+id/editTextShowDate"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FF0000"
+        android:textSize="15dp"
+        android:gravity="center"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:textStyle="bold"/>
 </RelativeLayout>
