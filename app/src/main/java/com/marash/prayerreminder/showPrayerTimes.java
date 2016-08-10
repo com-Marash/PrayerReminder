@@ -93,7 +93,7 @@ public class showPrayerTimes extends AppCompatActivity {
 //        System.out.println(calculatedTimes.getMidnight().getFormatedTime());
     }
 
-    private void showDate(int year, int month, final int day, String weekDay) {
+    private void showDate(final int year, final int month, final int day, final String weekDay) {
         showDateText = (TextView) findViewById(R.id.editTextShowDate);
         goToTodayText = (TextView)findViewById(R.id.textView_goToToday);
 
@@ -104,10 +104,10 @@ public class showPrayerTimes extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
 
-                Calendar calendar = new GregorianCalendar();
-                int todayYear = (int) calendar.get(Calendar.YEAR);
-                int todayMonth = (int) calendar.get(Calendar.MONTH);
-                int todayDay = (int) calendar.get(Calendar.DAY_OF_MONTH);
+//                Calendar calendar = new GregorianCalendar();
+//                final int todayYear = (int) calendar.get(Calendar.YEAR);
+//                final int todayMonth = (int) calendar.get(Calendar.MONTH);
+//                final int todayDay = (int) calendar.get(Calendar.DAY_OF_MONTH);
 
 
 
@@ -123,7 +123,7 @@ public class showPrayerTimes extends AppCompatActivity {
 
 
 
-                if(selectedYear == todayYear && selectedMonth == todayMonth && selectedDay == todayDay){
+                if(selectedYear == year && selectedMonth == month && selectedDay == day){
                     showDateText.setText(new StringBuilder().append(dayOfWeek+"  ").append(selectedDay).append("/")
                             .append(selectedMonth + 1).append("/").append(selectedYear));
                     goToTodayText.setText("");
@@ -131,6 +131,17 @@ public class showPrayerTimes extends AppCompatActivity {
                     showDateText.setText(new StringBuilder().append(dayOfWeek+"  ").append(selectedDay).append("/")
                             .append(selectedMonth + 1).append("/").append(selectedYear));
                     goToTodayText.setText("Go to today");
+                    goToTodayText.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v){
+                            showDateText.setText(new StringBuilder().append(weekDay+"  ").append(day).append("/")
+                                    .append(month).append("/").append(year));
+                            calendar.set(Calendar.YEAR,year);
+                            calendar.set(Calendar.MONTH,month);
+                            calendar.set(Calendar.DAY_OF_MONTH, day);
+                            goToTodayText.setText("");
+                        }
+                    });
                 }
 
             }
