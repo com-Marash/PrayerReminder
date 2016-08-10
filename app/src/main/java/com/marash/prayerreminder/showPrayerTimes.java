@@ -27,6 +27,7 @@ import java.util.Locale;
 public class showPrayerTimes extends AppCompatActivity {
 
     private TextView showDateText;
+    private TextView goToTodayText;
     DatePickerDialog.OnDateSetListener myDatePickerListener;
     final Calendar calendar = new GregorianCalendar();
 
@@ -94,6 +95,7 @@ public class showPrayerTimes extends AppCompatActivity {
 
     private void showDate(int year, int month, final int day, String weekDay) {
         showDateText = (TextView) findViewById(R.id.editTextShowDate);
+        goToTodayText = (TextView)findViewById(R.id.textView_goToToday);
 
         showDateText.setText(new StringBuilder().append(weekDay + "  ").append(day).append("/")
                 .append(month).append("/").append(year));
@@ -102,35 +104,61 @@ public class showPrayerTimes extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
 
+                Calendar calendar = new GregorianCalendar();
+                int todayYear = (int) calendar.get(Calendar.YEAR);
+                int todayMonth = (int) calendar.get(Calendar.MONTH);
+                int todayDay = (int) calendar.get(Calendar.DAY_OF_MONTH);
+
+
+
                 calendar.set(Calendar.YEAR,selectedYear);
                 calendar.set(Calendar.MONTH,selectedMonth);
                 calendar.set(Calendar.DAY_OF_MONTH,selectedDay);
 
+                //getting the name of day in week, we want to know is it Friday or,...
                 SimpleDateFormat simpledateformat = new SimpleDateFormat("EEEE");
                 Date date = new Date(selectedYear, selectedMonth, selectedDay - 1);
                 String dayOfWeek = simpledateformat.format(date);
+                //
 
-                showDateText.setText(new StringBuilder().append(dayOfWeek+"  ").append(selectedDay).append("/")
-                        .append(selectedMonth + 1).append("/").append(selectedYear));
+
+
+                if(selectedYear == todayYear && selectedMonth == todayMonth && selectedDay == todayDay){
+                    showDateText.setText(new StringBuilder().append(dayOfWeek+"  ").append(selectedDay).append("/")
+                            .append(selectedMonth + 1).append("/").append(selectedYear));
+                    goToTodayText.setText("");
+                }else{
+                    showDateText.setText(new StringBuilder().append(dayOfWeek+"  ").append(selectedDay).append("/")
+                            .append(selectedMonth + 1).append("/").append(selectedYear));
+                    goToTodayText.setText("Go to today");
+                }
+
             }
         };
 
-        final DatePickerDialog datePickerDialog = new DatePickerDialog(showPrayerTimes.this,myDatePickerListener,Calendar.YEAR,Calendar.MONTH,Calendar.DAY_OF_MONTH);
-        datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                DatePicker datePicker = datePickerDialog
-                        .getDatePicker();
-                myDatePickerListener.onDateSet(datePicker, datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
-            }
-        });
+//        final DatePickerDialog datePickerDialog = new DatePickerDialog(showPrayerTimes.this,myDatePickerListener,Calendar.YEAR,Calendar.MONTH,Calendar.DAY_OF_MONTH);
+//        datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int which) {
+//                DatePicker datePicker = datePickerDialog
+//                        .getDatePicker();
+//                myDatePickerListener.onDateSet(datePicker, datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+//            }
+//        });
 
 
         showDateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(showPrayerTimes.this,myDatePickerListener, calendar
-                        .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DAY_OF_MONTH)).show();
+                final DatePickerDialog datePickerDialog = new DatePickerDialog(showPrayerTimes.this,myDatePickerListener, calendar
+                        .get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
+                datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        DatePicker datePicker = datePickerDialog
+                                .getDatePicker();
+                        myDatePickerListener.onDateSet(datePicker, datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+                    }
+                });
             }
         });
     }
