@@ -1,23 +1,18 @@
 package com.marash.prayerreminder;
 
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
-
-import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.marash.prayerTimes.dto.Coordination;
 import com.marash.prayerTimes.dto.prayerTimesData;
 import com.marash.prayerTimes.main.PrayerTimes;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,11 +21,9 @@ import java.util.Locale;
 
 public class showPrayerTimes extends AppCompatActivity {
 
-    private TextView showDateText;
-    private TextView goToTodayText;
-    DatePickerDialog.OnDateSetListener myDatePickerListener;
-    final Calendar calendar = new GregorianCalendar();
-
+    private TextView showDateText, goToTodayText;
+    private Button nextDayButton, previousDayButton;
+    private Calendar calendar = new GregorianCalendar();
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -45,136 +38,129 @@ public class showPrayerTimes extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        defaultFunction();
+        showDateText = (TextView) findViewById(R.id.editTextShowDate);
+        goToTodayText = (TextView) findViewById(R.id.textView_goToToday);
+        nextDayButton = (Button) findViewById(R.id.buttonNextDay);
+        previousDayButton = (Button) findViewById(R.id.buttonPreviousDay);
 
+        calendar.setTime(new Date());
+        setListeners();
+        showDateInformation();
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    public void defaultFunction() {
-        PrayerTimes myPrayerTimes = new PrayerTimes();
-        myPrayerTimes.setMethod(PrayerTimes.methods.ISNA);
-
-        Date date = new Date();
-        calendar.setTime(date);
-
-        String weekDay;
-        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
-        weekDay = dayFormat.format(calendar.getTime());
-
-        showDate((int) calendar.get(Calendar.YEAR), (int) calendar.get(Calendar.MONTH) + 1, (int) calendar.get(Calendar.DAY_OF_MONTH), weekDay);
-
-
-//        showDateText.setText(new StringBuilder().append(weekDay + "  ").append((int) calendar.get(Calendar.DAY_OF_MONTH)).append("/")
-//                .append((int) calendar.get(Calendar.MONTH) + 1).append("/").append((int) calendar.get(Calendar.YEAR)));
-
-
-
-
-
-
-//        prayerTimesData calculatedTimes = null;
-//        try {
-//            calculatedTimes = myPrayerTimes.getTimes(new int[]{calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH) +1,calendar.get(Calendar.DAY_OF_MONTH)}, new Coordination(40, -80), (double) -5, null);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-//        System.out.println(calculatedTimes.getImsak().getFormatedTime());
-//        System.out.println(calculatedTimes.getFajr().getFormatedTime());
-//        System.out.println(calculatedTimes.getSunrise().getFormatedTime());
-//        System.out.println(calculatedTimes.getDhuhr().getFormatedTime());
-//        System.out.println(calculatedTimes.getAsr().getFormatedTime());
-//        System.out.println(calculatedTimes.getSunset().getFormatedTime());
-//        System.out.println(calculatedTimes.getMaghrib().getFormatedTime());
-//        System.out.println(calculatedTimes.getIsha().getFormatedTime());
-//        System.out.println(calculatedTimes.getMidnight().getFormatedTime());
-    }
-
-    private void showDate(final int year, final int month, final int day, final String weekDay) {
-        showDateText = (TextView) findViewById(R.id.editTextShowDate);
-        goToTodayText = (TextView)findViewById(R.id.textView_goToToday);
-
-        showDateText.setText(new StringBuilder().append(weekDay + "  ").append(day).append("/")
-                .append(month).append("/").append(year));
-
-        myDatePickerListener= new DatePickerDialog.OnDateSetListener() {
+    private void setListeners() {
+        final DatePickerDialog.OnDateSetListener myDatePickerListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
-
-//                Calendar calendar = new GregorianCalendar();
-//                final int todayYear = (int) calendar.get(Calendar.YEAR);
-//                final int todayMonth = (int) calendar.get(Calendar.MONTH);
-//                final int todayDay = (int) calendar.get(Calendar.DAY_OF_MONTH);
-
-
-
-                calendar.set(Calendar.YEAR,selectedYear);
-                calendar.set(Calendar.MONTH,selectedMonth);
-                calendar.set(Calendar.DAY_OF_MONTH,selectedDay);
-
-                //getting the name of day in week, we want to know is it Friday or,...
-                SimpleDateFormat simpledateformat = new SimpleDateFormat("EEEE");
-                Date date = new Date(selectedYear, selectedMonth, selectedDay - 1);
-                String dayOfWeek = simpledateformat.format(date);
-                //
-
-
-
-                if(selectedYear == year && selectedMonth == month && selectedDay == day){
-                    showDateText.setText(new StringBuilder().append(dayOfWeek+"  ").append(selectedDay).append("/")
-                            .append(selectedMonth + 1).append("/").append(selectedYear));
-                    goToTodayText.setText("");
-                }else{
-                    showDateText.setText(new StringBuilder().append(dayOfWeek+"  ").append(selectedDay).append("/")
-                            .append(selectedMonth + 1).append("/").append(selectedYear));
-                    goToTodayText.setText("Go to today");
-                    goToTodayText.setOnClickListener(new View.OnClickListener(){
-                        @Override
-                        public void onClick(View v){
-                            showDateText.setText(new StringBuilder().append(weekDay+"  ").append(day).append("/")
-                                    .append(month).append("/").append(year));
-                            calendar.set(Calendar.YEAR,year);
-                            calendar.set(Calendar.MONTH,month);
-                            calendar.set(Calendar.DAY_OF_MONTH, day);
-                            goToTodayText.setText("");
-                        }
-                    });
-                }
-
+                calendar.set(Calendar.YEAR, selectedYear);
+                calendar.set(Calendar.MONTH, selectedMonth);
+                calendar.set(Calendar.DAY_OF_MONTH, selectedDay);
+                showDateInformation();
             }
         };
-
-//        final DatePickerDialog datePickerDialog = new DatePickerDialog(showPrayerTimes.this,myDatePickerListener,Calendar.YEAR,Calendar.MONTH,Calendar.DAY_OF_MONTH);
-//        datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int which) {
-//                DatePicker datePicker = datePickerDialog
-//                        .getDatePicker();
-//                myDatePickerListener.onDateSet(datePicker, datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
-//            }
-//        });
-
 
         showDateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final DatePickerDialog datePickerDialog = new DatePickerDialog(showPrayerTimes.this,myDatePickerListener, calendar
+                final DatePickerDialog datePickerDialog = new DatePickerDialog(showPrayerTimes.this, myDatePickerListener, calendar
                         .get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
                 datePickerDialog.show();
-                datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        DatePicker datePicker = datePickerDialog
-                                .getDatePicker();
-                        myDatePickerListener.onDateSet(datePicker, datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
-                    }
-                });
+            }
+        });
+
+        goToTodayText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar.setTime(new Date());
+                showDateInformation();
+            }
+        });
+
+        nextDayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar.add(Calendar.DATE, 1);
+                showDateInformation();
+            }
+        });
+
+        previousDayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar.add(Calendar.DATE, -1);
+                showDateInformation();
             }
         });
     }
 
+    private void showDateInformation() {
+
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE dd/MM/yyyy", Locale.US);
+        String dateText = dayFormat.format(calendar.getTime());
+        showDateText.setText(dateText);
+
+        Date todayDate = new Date();
+        SimpleDateFormat checkFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String todayFormat = checkFormat.format(todayDate);
+        String selectedDayFormat = checkFormat.format(calendar.getTime());
+
+        if (todayFormat.equals(selectedDayFormat)) {
+            goToTodayText.setVisibility(View.GONE);
+        } else {
+            goToTodayText.setVisibility(View.VISIBLE);
+        }
 
 
 
+        PrayerTimes myPrayerTimes = new PrayerTimes();
+
+        StorageManager stManager = new StorageManager(showPrayerTimes.this.getApplicationContext());
+        String savedCalcMethode = stManager.loadCalculationMethode();
+
+
+
+        myPrayerTimes.setMethod(PrayerTimes.methods.valueOf(savedCalcMethode));
+        prayerTimesData calculatedTimes = null;
+        try {
+
+            //TODO coordination has to be gotton from related class data
+            calculatedTimes = myPrayerTimes.getTimes(new int[]{calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH) +1,calendar.get(Calendar.DAY_OF_MONTH)}, new Coordination(+42.9870, - 81.2432), (double) -5, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        TextView fajr = (TextView)findViewById(R.id.textView_fajr);
+        fajr.setText(calculatedTimes.getFajr().getFormatedTime());
+
+        TextView sunrise = (TextView)findViewById(R.id.textView_sunrise);
+        sunrise.setText(calculatedTimes.getSunrise().getFormatedTime());
+
+        TextView Dhuhr = (TextView)findViewById(R.id.textView_Dhuhr);
+        Dhuhr.setText(calculatedTimes.getDhuhr().getFormatedTime());
+
+        TextView asr = (TextView)findViewById(R.id.textView_asr);
+        asr.setText(calculatedTimes.getAsr().getFormatedTime());
+
+        TextView sunset = (TextView)findViewById(R.id.textView_sunset);
+        sunset.setText(calculatedTimes.getSunset().getFormatedTime());
+
+        TextView maghrib = (TextView)findViewById(R.id.textView_maghrib);
+        maghrib.setText(calculatedTimes.getMaghrib().getFormatedTime());
+
+        TextView isha = (TextView)findViewById(R.id.textView_isha);
+        isha.setText(calculatedTimes.getIsha().getFormatedTime());
+
+        TextView midnight = (TextView)findViewById(R.id.textView_midnight);
+        midnight.setText(calculatedTimes.getMidnight().getFormatedTime());
+
+        TextView imsak = (TextView)findViewById(R.id.textView_imsak);
+        imsak.setText(calculatedTimes.getImsak().getFormatedTime());
+
+
+        // TODO: calculate prayer times based on mainDate and show them
+    }
 }

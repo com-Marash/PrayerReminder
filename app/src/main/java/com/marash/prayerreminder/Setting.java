@@ -76,7 +76,7 @@ public class Setting extends AppCompatActivity {
     }
 
     public AlertDialog calculationMethodFunction() {
-        final CharSequence[] methodesItems = {"Qom", "Tehran", "Egypt"};
+        final CharSequence[] methodesItems = {"ISNA", "MWL", "Makkah", "Karachi", "Jafari", "Tehran", "Egypt"};
         String savedCalcMethode;
 
         final StorageManager stManager = new StorageManager(Setting.this.getApplicationContext());
@@ -97,7 +97,7 @@ public class Setting extends AppCompatActivity {
 
                     //// TODO: 8/4/2016 for arash code!
                 }
-            }).setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -119,7 +119,7 @@ public class Setting extends AppCompatActivity {
                     stManager.saveCalculationMethode(selection);
                     //// TODO: 8/4/2016 for arash code!
                 }
-            }).setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
