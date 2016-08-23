@@ -1,5 +1,7 @@
 package com.marash.prayerreminder;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +11,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 public class setAlerts extends AppCompatActivity {
@@ -27,15 +31,12 @@ public class setAlerts extends AppCompatActivity {
     private Button saveButton;
     public boolean saveToStorage;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_alerts);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setPrayerTime();
@@ -88,20 +89,28 @@ public class setAlerts extends AppCompatActivity {
                     selectedBeforeAfter = (RadioButton)findViewById(selectedTimeId);
                     selectedBeforeAfterText = selectedBeforeAfter.getText().toString();
 
+                    ArrayList<Alert> savedAlerts = StorageManager.loadAlert(setAlerts.this.getApplicationContext());
+                    String savedAlertPrayerName,savedAlertBeforeAfter,savedAlertTime;
+                    boolean isNewAlert = true;
+                    for (Alert a : savedAlerts){
+                        savedAlertPrayerName = a.getPrayerName();
+                        savedAlertBeforeAfter = a.getBeforeAfter();
+                        savedAlertTime = a.getTime();
+                        if(selectedPrayerText.equals(savedAlertPrayerName) && selectedBeforeAfterText.equals(savedAlertBeforeAfter) && timeString.equals(savedAlertTime)) {
+                            isNewAlert = false;
+                            break;
+                        }
+                    }
 
-                    Alert alert = new Alert(selectedPrayerText, selectedBeforeAfterText, timeString);
-                    //Log.d("maedeh", selectedBeforeAfterText + "," + selectedPrayerText + "," + timeString);
-
-                    StorageManager stManager = new StorageManager(setAlerts.this.getApplicationContext());
-                    saveToStorage = stManager.saveAlert(alert);
-
-                    if (saveToStorage) {
+                    if(isNewAlert){
+                        Alert alert = new Alert(selectedPrayerText, selectedBeforeAfterText, timeString);
+                        StorageManager.saveAlert(alert, setAlerts.this.getApplicationContext());
                         Toast.makeText(setAlerts.this, "Your new alert has been successfully saved.", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(setAlerts.this, "There is a problem to save your alert. Please try again.", Toast.LENGTH_LONG).show();
+                        finish();
+                    }else{
+                        Toast.makeText(setAlerts.this, "This alert has been saved previously.", Toast.LENGTH_LONG).show();
                     }
                 }
-                //Log.d("maedeh", selectedBeforeAfterText + "," + selectedPrayerText + "," + timeString);
             }
         });
 

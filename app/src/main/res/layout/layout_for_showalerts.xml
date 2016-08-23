@@ -5,13 +5,14 @@
 
     <TextView
         android:id="@+id/list_item_string"
-        android:layout_width="wrap_content"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:paddingLeft="8dp"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#000000"/>
 
     <Button
         android:id="@+id/delete_btn"
@@ -21,7 +22,8 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
-        android:text="Delete" />
+        android:text="Delete"
+        android:textStyle="bold"/>
 
 
 </RelativeLayout>

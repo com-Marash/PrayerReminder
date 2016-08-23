@@ -1,6 +1,7 @@
 package com.marash.prayerreminder;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -114,12 +115,9 @@ public class showPrayerTimes extends AppCompatActivity {
             goToTodayText.setVisibility(View.VISIBLE);
         }
 
-
-
         PrayerTimes myPrayerTimes = new PrayerTimes();
 
-        StorageManager stManager = new StorageManager(showPrayerTimes.this.getApplicationContext());
-        String savedCalcMethode = stManager.loadCalculationMethode();
+        String savedCalcMethode = StorageManager.loadCalculationMethode(showPrayerTimes.this.getApplicationContext());
 
 
 
@@ -160,7 +158,5 @@ public class showPrayerTimes extends AppCompatActivity {
         TextView imsak = (TextView)findViewById(R.id.textView_imsak);
         imsak.setText(calculatedTimes.getImsak().getFormatedTime());
 
-
-        // TODO: calculate prayer times based on mainDate and show them
     }
 }

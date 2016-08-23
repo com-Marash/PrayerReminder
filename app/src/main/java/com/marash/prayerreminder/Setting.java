@@ -2,6 +2,7 @@ package com.marash.prayerreminder;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,15 +23,12 @@ public class Setting extends AppCompatActivity {
     private Button calculationMethodeButton;
     private String selection;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         selectLocationFunction();
@@ -79,8 +77,7 @@ public class Setting extends AppCompatActivity {
         final CharSequence[] methodesItems = {"ISNA", "MWL", "Makkah", "Karachi", "Jafari", "Tehran", "Egypt"};
         String savedCalcMethode;
 
-        final StorageManager stManager = new StorageManager(Setting.this.getApplicationContext());
-        savedCalcMethode = stManager.loadCalculationMethode();
+        savedCalcMethode = StorageManager.loadCalculationMethode(Setting.this.getApplicationContext());
 
         if (savedCalcMethode == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
@@ -93,7 +90,7 @@ public class Setting extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Toast.makeText(Setting.this, "You have selected " + selection + " as your calculation methode.", Toast.LENGTH_LONG).show();
-                    stManager.saveCalculationMethode(selection);
+                    StorageManager.saveCalculationMethode(selection, Setting.this.getApplicationContext());
 
                     //// TODO: 8/4/2016 for arash code!
                 }
@@ -116,7 +113,7 @@ public class Setting extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Toast.makeText(Setting.this, "You have selected " + selection + " as your calculation methode.", Toast.LENGTH_LONG).show();
-                    stManager.saveCalculationMethode(selection);
+                    StorageManager.saveCalculationMethode(selection, Setting.this.getApplicationContext());
                     //// TODO: 8/4/2016 for arash code!
                 }
             }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

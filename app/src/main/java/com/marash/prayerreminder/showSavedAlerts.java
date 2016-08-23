@@ -23,6 +23,8 @@ public class showSavedAlerts extends AppCompatActivity {
     private String savedAlertPrayerName;
     private String savedAlertTime;
 
+    private
+
     ListView prayerListView;
     ArrayAdapter<String> prayerAdapter;
 
@@ -42,10 +44,7 @@ public class showSavedAlerts extends AppCompatActivity {
 
     public void showSavedAlertsFunction(){
 
-        StorageManager myManager = new StorageManager(showSavedAlerts.this.getApplicationContext());
-        savedAlerts = myManager.loadAlert();
-
-        //Log.d("maedehArash", savedAlerts);
+        savedAlerts = StorageManager.loadAlert(showSavedAlerts.this.getApplicationContext());
 
         alerts = new ArrayList<String>();
         String st;
@@ -58,26 +57,10 @@ public class showSavedAlerts extends AppCompatActivity {
             alerts.add(st);
         }
 
-
         prayerListView = (ListView)findViewById(R.id.listView_savedAlertsList);
         customAdaptorFor_showAlertLayout myAdaptor = new customAdaptorFor_showAlertLayout(alerts,this);
         prayerListView.setAdapter(myAdaptor);
 
-
-//        prayerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,alerts );
-//        prayerListView.setAdapter(prayerAdapter);
-//        prayerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//            }
-//        });
-
-
-
-
-        //savedAlertsEditText = (EditText)findViewById(R.id.editText_savedAlert1);
-        //savedAlertsEditText.setText(savedAlerts);
 
     }
 

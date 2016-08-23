@@ -17,7 +17,6 @@ import java.util.ArrayList;
 public class customAdaptorFor_showAlertLayout extends BaseAdapter implements ListAdapter {
     private ArrayList<String> list = new ArrayList<String>();
     private Context context;
-    DeleteAlert deleteAlert;
 
     public customAdaptorFor_showAlertLayout(ArrayList<String> list, Context context){
         this.list = list;
@@ -53,29 +52,18 @@ public class customAdaptorFor_showAlertLayout extends BaseAdapter implements Lis
         listItemText.setText(list.get(position));
 
         //for deleting an alert from savedAlert list
-        deleteAlert = new DeleteAlert(this.context);
 
         //Handle buttons and add onClickListeners
         Button deleteBtn = (Button)view.findViewById(R.id.delete_btn);
-//        Button editBtn = (Button)view.findViewById(R.id.edit_btn);
-
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 //do something
                 list.remove(position); //or some other task
                 notifyDataSetChanged();
-                deleteAlert.deleteFunction(position);
-
+                StorageManager.deleteAlert(position, context);
             }
         });
-//        editBtn.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                //do something
-//                notifyDataSetChanged();
-//            }
-//        });
 
         return view;
     }
