@@ -1,17 +1,11 @@
 package com.marash.prayerreminder;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-
 import java.util.ArrayList;
 
 public class showSavedAlerts extends AppCompatActivity {
@@ -23,7 +17,6 @@ public class showSavedAlerts extends AppCompatActivity {
     private String savedAlertPrayerName;
     private String savedAlertTime;
 
-    private
 
     ListView prayerListView;
     ArrayAdapter<String> prayerAdapter;
@@ -60,8 +53,6 @@ public class showSavedAlerts extends AppCompatActivity {
         prayerListView = (ListView)findViewById(R.id.listView_savedAlertsList);
         customAdaptorFor_showAlertLayout myAdaptor = new customAdaptorFor_showAlertLayout(alerts,this);
         prayerListView.setAdapter(myAdaptor);
-
-
     }
 
 }

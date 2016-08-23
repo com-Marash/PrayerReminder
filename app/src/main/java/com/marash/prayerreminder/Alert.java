@@ -8,12 +8,23 @@ public class Alert{
     private String beforeAfter;
     private String prayerName;
     private String time;
+    private int alertNumber;
 
-    public Alert(String prayerName, String beforeAfter, String time){
+    public Alert(String prayerName, String beforeAfter, String time, int alertNumber){
         this.beforeAfter = beforeAfter;
         this.prayerName = prayerName;
         this.time = time;
+        this.alertNumber = alertNumber;
     }
+
+    public void setAlertNumber(int alertNumber){
+        this.alertNumber = alertNumber;
+    }
+
+    public int getAlertNumber(){
+        return alertNumber;
+    }
+
 
     public String getBeforeAfter() {
         return beforeAfter;
