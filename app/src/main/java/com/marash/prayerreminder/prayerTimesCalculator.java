@@ -1,8 +1,6 @@
 package com.marash.prayerreminder;
 
-import com.marash.prayerTimes.dto.Coordination;
 import com.marash.prayerTimes.dto.prayerTimesData;
-import com.marash.prayerTimes.dto.prayerTimesDouble;
 import com.marash.prayerTimes.main.PrayerTimes;
 
 import java.util.Calendar;
@@ -13,25 +11,19 @@ import java.util.Date;
  */
 public class prayerTimesCalculator {
     private static PrayerTimes prayerTimes;
-    private static Coordination coordination;
+    private static double latitude;
+    private static double longitude;
 
     public static void setPrayerTimes(String method){
-        prayerTimes = new PrayerTimes();
-        prayerTimes.setMethod(PrayerTimes.methods.valueOf(method));
+        prayerTimes = new PrayerTimes(PrayerTimes.methods.valueOf(method));
     }
-    public static void setPrayerTimes( double latitude, double longitute){
-        coordination = new Coordination(latitude,longitute);
+    public static void setCoordination( double lat, double lng){
+        latitude = lat;
+        longitude = lng;
     }
 
-    public static Date getTimes(String prayerType, Calendar calendar){
-        prayerTimesData calculatedTimes = null;
-        try {
-            calculatedTimes = prayerTimes.getTimes(new int[]{calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH) +1,calendar.get(Calendar.DAY_OF_MONTH)}, coordination, (double) -5, null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // TODO: continue code
-        return null
+    public static prayerTimesData getTimes(String prayerType, Calendar calendar){
+        return prayerTimes.getTimes(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH) +1,calendar.get(Calendar.DAY_OF_MONTH), latitude, longitude);
     }
 
 }
