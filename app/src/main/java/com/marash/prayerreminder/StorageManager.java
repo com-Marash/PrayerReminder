@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by Maedeh on 2/22/2016.
  */
-public  class StorageManager {
+public class StorageManager {
 
     private final static String STORED_Alerts_TEXT = "storedAlertsText.txt";
     static OutputStreamWriter out;

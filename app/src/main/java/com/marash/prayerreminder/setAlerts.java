@@ -109,7 +109,7 @@ public class setAlerts extends AppCompatActivity {
                         while(savedRandNumber.contains(randomNumber)) {
                             randomNumber = (int) (Math.random() * (10000001));
                         }
-                        Alert alert = new Alert(selectedPrayerText, selectedBeforeAfterText, timeString,randomNumber);
+                        Alert alert = new Alert(selectedPrayerText, selectedBeforeAfterText, timeString, randomNumber);
                         StorageManager.saveAlert(alert, setAlerts.this.getApplicationContext());
                         Toast.makeText(setAlerts.this, "Your new alert has been successfully saved.", Toast.LENGTH_LONG).show();
                         finish();
