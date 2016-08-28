@@ -30,7 +30,7 @@ public class StorageManager {
         try {
             outputFile = context.openFileOutput(STORED_Alerts_TEXT, Context.MODE_APPEND);
             out = new OutputStreamWriter(outputFile);
-            out.write(alert.getPrayerName() + "," + alert.getBeforeAfter() + "," + alert.getTime() + "," + alert.getAlertNumber() + "\n");
+            out.write(alert.getPrayerName() + "," + alert.getTime() + "," + alert.getAlertNumber() + "\n");
             out.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -52,7 +52,7 @@ public class StorageManager {
             while ((inputString = inputReader.readLine()) != null) {
                 alertInfo = inputString;
                 alertParts = alertInfo.split(",");
-                Alert a = new Alert(alertParts[0], alertParts[1], alertParts[2], Integer.parseInt(alertParts[3]));
+                Alert a = new Alert(alertParts[0], Integer.parseInt(alertParts[1]), Integer.parseInt(alertParts[2]));
                 alertsList.add(a);
             }
             inputReader.close();
@@ -74,7 +74,7 @@ public class StorageManager {
             outputFile = context.openFileOutput(STORED_Alerts_TEXT, Context.MODE_APPEND);
             out = new OutputStreamWriter(outputFile);
             for (Alert alert : alertsList) {
-                out.write(alert.getPrayerName() + "," + alert.getBeforeAfter() + "," + alert.getTime() + "," + alert.getAlertNumber() + "\n");
+                out.write(alert.getPrayerName() + "," + alert.getTime() + "," + alert.getAlertNumber() + "\n");
             }
             out.close();
         } catch (FileNotFoundException e) {

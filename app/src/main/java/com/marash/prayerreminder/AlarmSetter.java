@@ -38,14 +38,12 @@ public class AlarmSetter {
         Intent intent = new Intent(context, AlarmReciever.class);
         PendingIntent alarmIntent = PendingIntent.getBroadcast(context, alert.getAlertNumber(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        alert.getPrayerName(); // zohr
+        Calendar alertCalendar = prayerTimesCalculator.getPrayerTime(alert.getPrayerName(), Calendar.getInstance());
 
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        // Set the alarm's trigger time to 8:30 a.m.
-        calendar.set(Calendar.HOUR_OF_DAY, 8);
-        calendar.set(Calendar.MINUTE, 30);
+        alertCalendar.add(Calendar.MINUTE,alert.getTime());
+
+        alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,alertCalendar.getTimeInMillis(),alarmIntent);
 
     }
 

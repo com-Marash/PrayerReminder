@@ -5,13 +5,11 @@ package com.marash.prayerreminder;
  */
 public class Alert{
 
-    private String beforeAfter;
     private String prayerName;
-    private String time;
+    private int time;
     private int alertNumber;
 
-    public Alert(String prayerName, String beforeAfter, String time, int alertNumber){
-        this.beforeAfter = beforeAfter;
+    public Alert(String prayerName, int time, int alertNumber){
         this.prayerName = prayerName;
         this.time = time;
         this.alertNumber = alertNumber;
@@ -25,15 +23,6 @@ public class Alert{
         return alertNumber;
     }
 
-
-    public String getBeforeAfter() {
-        return beforeAfter;
-    }
-
-    public void setBeforeAfter(String beforeAfter) {
-        this.beforeAfter = beforeAfter;
-    }
-
     public String getPrayerName() {
         return prayerName;
     }
@@ -42,11 +31,11 @@ public class Alert{
         this.prayerName = prayerName;
     }
 
-    public String getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(int time) {
         this.time = time;
     }
 

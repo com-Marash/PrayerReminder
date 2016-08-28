@@ -26,7 +26,7 @@ public class setAlerts extends AppCompatActivity {
     private String selectedBeforeAfterText;
 
     private EditText timetext;
-    private String timeString;
+    private int desiredTime;
 
     private Button saveButton;
     public boolean saveToStorage;
@@ -55,7 +55,7 @@ public class setAlerts extends AppCompatActivity {
 
                 selectedPrayerText = null;
                 selectedBeforeAfterText = null;
-                timeString = null;
+
 
                 prayersButGroup = (RadioGroup)findViewById(R.id.prayerGroup);
                 int selectedPrayerId = prayersButGroup.getCheckedRadioButtonId();
@@ -66,21 +66,22 @@ public class setAlerts extends AppCompatActivity {
 
                 // here, we get the preferable time from user.
                 timetext = (EditText)findViewById(R.id.editText_preferableTime);
-                timeString = timetext.getText().toString();
+                desiredTime = Integer.parseInt(String.valueOf(timetext.getText()));
 
-                if((selectedPrayerId == -1) && (selectedTimeId == -1) && (timeString.matches(""))) {
+
+                if((selectedPrayerId == -1) && (selectedTimeId == -1) && (timetext.getText().toString().matches(""))) {
                     Toast.makeText(setAlerts.this, "Please complete all parts", Toast.LENGTH_LONG).show();
                 }else if((selectedPrayerId == -1) && (selectedTimeId == -1)){
                     Toast.makeText(setAlerts.this, "Please select one prayer and a time from two option, before or after prayer.", Toast.LENGTH_LONG).show();
-                }else if((selectedTimeId == -1) && (timeString.matches(""))){
+                }else if((selectedTimeId == -1) && (timetext.getText().toString().matches(""))){
                     Toast.makeText(setAlerts.this, "Please select a time from two option, before or after prayer and set a time for that.", Toast.LENGTH_LONG).show();
-                }else if((selectedPrayerId == -1) && (timeString.matches(""))){
+                }else if((selectedPrayerId == -1) && (timetext.getText().toString().matches(""))){
                     Toast.makeText(setAlerts.this, "Please select one prayer and set a time for that.", Toast.LENGTH_LONG).show();
                 }else if(selectedPrayerId == -1){
                     Toast.makeText(setAlerts.this, "Please select one prayer", Toast.LENGTH_LONG).show();
                 }else if(selectedTimeId == -1){
                     Toast.makeText(setAlerts.this, "Please select a time from two option, before or after prayer.", Toast.LENGTH_LONG).show();
-                }else if(timeString.matches("")){
+                }else if(timetext.getText().toString().matches("")){
                     Toast.makeText(setAlerts.this, "Please set a time for prayer.", Toast.LENGTH_LONG).show();
                 }else{
                     selectedPrayer = (RadioButton)findViewById(selectedPrayerId);
@@ -89,16 +90,20 @@ public class setAlerts extends AppCompatActivity {
                     selectedBeforeAfter = (RadioButton)findViewById(selectedTimeId);
                     selectedBeforeAfterText = selectedBeforeAfter.getText().toString();
 
+                    if(selectedBeforeAfterText.equals("Before")){
+                        desiredTime = -desiredTime;
+                    }
+
                     ArrayList<Alert> savedAlerts = StorageManager.loadAlert(setAlerts.this.getApplicationContext());
-                    String savedAlertPrayerName,savedAlertBeforeAfter,savedAlertTime;
+                    String savedAlertPrayerName;
+                    int savedAlertTime;
                     ArrayList<Integer> savedRandNumber = new ArrayList<Integer>();
                     boolean isNewAlert = true;
                     for (Alert a : savedAlerts){
                         savedAlertPrayerName = a.getPrayerName();
-                        savedAlertBeforeAfter = a.getBeforeAfter();
                         savedAlertTime = a.getTime();
                         savedRandNumber.add(a.getAlertNumber());
-                        if(selectedPrayerText.equals(savedAlertPrayerName) && selectedBeforeAfterText.equals(savedAlertBeforeAfter) && timeString.equals(savedAlertTime)) {
+                        if(selectedPrayerText.equals(savedAlertPrayerName) && desiredTime == savedAlertTime) {
                             isNewAlert = false;
                             break;
                         }
@@ -109,7 +114,7 @@ public class setAlerts extends AppCompatActivity {
                         while(savedRandNumber.contains(randomNumber)) {
                             randomNumber = (int) (Math.random() * (10000001));
                         }
-                        Alert alert = new Alert(selectedPrayerText, selectedBeforeAfterText, timeString, randomNumber);
+                        Alert alert = new Alert(selectedPrayerText, desiredTime, randomNumber);
                         StorageManager.saveAlert(alert, setAlerts.this.getApplicationContext());
                         Toast.makeText(setAlerts.this, "Your new alert has been successfully saved.", Toast.LENGTH_LONG).show();
                         finish();
