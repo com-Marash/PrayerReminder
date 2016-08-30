@@ -24,7 +24,9 @@ public class prayerTimesCalculator {
     }
 
     public static Calendar getPrayerTime(String prayerType, Calendar calendar){
-        prayerTimesData calculatedPrayerTimes = prayerTimes.getTimes(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH), latitude, longitude);
+
+        //TODO longtitude,lattitude
+        prayerTimesData calculatedPrayerTimes = prayerTimes.getTimes(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH), 81, 42);
 
         Calendar result = (Calendar) calendar.clone();
         PrayerTimesDate calculatedPrayerTime = null;

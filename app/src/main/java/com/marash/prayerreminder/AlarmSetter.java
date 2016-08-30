@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.marash.prayerTimes.main.PrayerTimes;
 
@@ -42,8 +43,13 @@ public class AlarmSetter {
 
 
         alertCalendar.add(Calendar.MINUTE,alert.getTime());
+        alertCalendar = Calendar.getInstance();
+        alertCalendar.set(Calendar.SECOND,5);
+        Log.d("createOrUpdateAlarm", alertCalendar.toString());
 
-        alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,alertCalendar.getTimeInMillis(),alarmIntent);
+        alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
+
+        Log.d("ArashSender", "we created reciever");
 
     }
 

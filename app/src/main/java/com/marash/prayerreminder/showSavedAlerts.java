@@ -4,27 +4,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import java.util.ArrayList;
 
 public class showSavedAlerts extends AppCompatActivity {
 
     private ArrayList<Alert> savedAlerts;
-    private EditText savedAlertsEditText;
 
-    private String savedAlertBeforeAfter;
     private String savedAlertPrayerName;
-    private String savedAlertTime;
-
+    private int savedAlertTime;
 
     ListView prayerListView;
-    ArrayAdapter<String> prayerAdapter;
-
     ArrayList<String> alerts;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_saved_alerts);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -35,6 +28,7 @@ public class showSavedAlerts extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+
     public void showSavedAlertsFunction(){
 
         savedAlerts = StorageManager.loadAlert(showSavedAlerts.this.getApplicationContext());
@@ -44,9 +38,14 @@ public class showSavedAlerts extends AppCompatActivity {
 
         for (Alert a : savedAlerts){
             savedAlertPrayerName = a.getPrayerName();
-            savedAlertBeforeAfter = a.getBeforeAfter();
             savedAlertTime = a.getTime();
-            st = savedAlertTime + " minutes " + savedAlertBeforeAfter + " " + savedAlertPrayerName;
+            if(savedAlertTime < 0){
+                savedAlertTime = -savedAlertTime;
+                st = savedAlertTime + " minutes before " + savedAlertPrayerName;
+
+            }else{
+                st = savedAlertTime + " minutes after " + savedAlertPrayerName;
+            }
             alerts.add(st);
         }
 

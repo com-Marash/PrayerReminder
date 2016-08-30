@@ -29,7 +29,6 @@ public class setAlerts extends AppCompatActivity {
     private int desiredTime;
 
     private Button saveButton;
-    public boolean saveToStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +39,7 @@ public class setAlerts extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setPrayerTime();
+
     }
 
 
@@ -116,6 +116,13 @@ public class setAlerts extends AppCompatActivity {
                         }
                         Alert alert = new Alert(selectedPrayerText, desiredTime, randomNumber);
                         StorageManager.saveAlert(alert, setAlerts.this.getApplicationContext());
+
+
+                        ///TODO, method
+                        prayerTimesCalculator.setPrayerTimes("Tehran");
+                        AlarmSetter.createOrUpdateAlarm(alert,setAlerts.this.getApplicationContext());
+                        ///
+
                         Toast.makeText(setAlerts.this, "Your new alert has been successfully saved.", Toast.LENGTH_LONG).show();
                         finish();
                     }else{
