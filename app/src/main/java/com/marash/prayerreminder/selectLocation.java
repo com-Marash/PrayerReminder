@@ -13,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -71,6 +70,7 @@ public class selectLocation extends AppCompatActivity {
 
             if (lastKnownLocation != null) {
                 lastKnownLocationText.setText("Longtitude is:" + lastKnownLocation.getLongitude() + "\n latitude is:" + lastKnownLocation.getLatitude());
+                prayerTimesCalculator.setCoordination(lastKnownLocation.getLatitude(),lastKnownLocation.getLongitude());
             } else {
                 lastKnownLocationText.setText("Unknown");
             }

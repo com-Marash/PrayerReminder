@@ -29,6 +29,7 @@ public class TimesUpActivity extends Activity {
 
     }
 
+    //TODO, get the pray information and show.
     public void setAlarmText(String alarmText) {
         alarmTextView.setText(alarmText);
     }

@@ -1,7 +1,5 @@
 package com.marash.prayerreminder;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,7 +9,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 
 
@@ -118,8 +115,9 @@ public class setAlerts extends AppCompatActivity {
                         StorageManager.saveAlert(alert, setAlerts.this.getApplicationContext());
 
 
-                        ///TODO, method
-                        prayerTimesCalculator.setPrayerTimes("Tehran");
+                        ///TODO, if method wasnt set, ask user to set it.
+                        String method = StorageManager.loadCalculationMethode(setAlerts.this.getApplicationContext());
+                        prayerTimesCalculator.setPrayerTimes(method);
                         AlarmSetter.createOrUpdateAlarm(alert,setAlerts.this.getApplicationContext());
                         ///
 
