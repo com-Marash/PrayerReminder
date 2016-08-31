@@ -73,7 +73,7 @@ public class Setting extends AppCompatActivity {
         });
     }
 
-    public AlertDialog calculationMethodFunction() {
+    private AlertDialog calculationMethodFunction() {
         final CharSequence[] methodesItems = {"ISNA", "MWL", "Makkah", "Karachi", "Jafari", "Tehran", "Egypt"};
         String savedCalcMethode;
 
@@ -81,7 +81,7 @@ public class Setting extends AppCompatActivity {
 
         if (savedCalcMethode == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
-            builder.setTitle("Choose Calculation Methode").setSingleChoiceItems(methodesItems, -1, new DialogInterface.OnClickListener() {
+            builder.setTitle("Choose Calculation Methode").setSingleChoiceItems(methodesItems, 0, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int methodeNumber) {
                     selection = (String) methodesItems[methodeNumber];
@@ -91,8 +91,6 @@ public class Setting extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     Toast.makeText(Setting.this, "You have selected " + selection + " as your calculation methode.", Toast.LENGTH_LONG).show();
                     StorageManager.saveCalculationMethode(selection, Setting.this.getApplicationContext());
-
-                    //// TODO: 8/4/2016 for arash code!
                 }
             }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
@@ -112,9 +110,12 @@ public class Setting extends AppCompatActivity {
             }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(Setting.this, "You have selected " + selection + " as your calculation methode.", Toast.LENGTH_LONG).show();
-                    StorageManager.saveCalculationMethode(selection, Setting.this.getApplicationContext());
-                    //// TODO: 8/4/2016 for arash code!
+                    if(selection == null){
+                        Toast.makeText(Setting.this, "Please select a method from the list.", Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(Setting.this, "You have selected " + selection + " as your calculation methode.", Toast.LENGTH_LONG).show();
+                        StorageManager.saveCalculationMethode(selection, Setting.this.getApplicationContext());
+                    }
                 }
             }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 

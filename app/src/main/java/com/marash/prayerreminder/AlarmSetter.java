@@ -32,6 +32,8 @@ public class AlarmSetter {
     }
 
     public static void createOrUpdateAlarm(Alert alert, Context context){
+        // 1- create/update pendingIntent for the specific alarm
+        // 2- set the alarm in android system
 
         AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReciever.class);
