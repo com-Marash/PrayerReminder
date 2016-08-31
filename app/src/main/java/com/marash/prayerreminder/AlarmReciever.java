@@ -15,21 +15,19 @@ import android.widget.Toast;
  */
 public class AlarmReciever extends WakefulBroadcastReceiver {
 
+    public static PowerManager.WakeLock wakelock;
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Log.d("MaedehReciever", "onReceive: ");
-
-        ////
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "");
         wl.acquire();
+        wakelock = wl;
 
         Intent timesUpIntent = new Intent(context,TimesUpActivity.class);
         timesUpIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(timesUpIntent);
-
 
     }
 }

@@ -44,7 +44,7 @@ public class AlarmSetter {
 
         alertCalendar.add(Calendar.MINUTE,alert.getTime());
         alertCalendar = Calendar.getInstance();
-        alertCalendar.set(Calendar.SECOND,5);
+        alertCalendar.set(Calendar.SECOND,10);
         Log.d("createOrUpdateAlarm", alertCalendar.toString());
 
         alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);

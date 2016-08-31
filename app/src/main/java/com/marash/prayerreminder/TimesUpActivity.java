@@ -5,6 +5,7 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 /**
@@ -13,6 +14,7 @@ import android.widget.TextView;
 public class TimesUpActivity extends Activity {
 
     private TextView alarmTextView;
+    Ringtone ringtone;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,12 +24,20 @@ public class TimesUpActivity extends Activity {
 
         String ringtoneUriString = StorageManager.loadAlarmRingtone(this)[1];
         Uri ringtoneUri = Uri.parse(ringtoneUriString);
-        Ringtone ringtone = RingtoneManager.getRingtone(this, ringtoneUri);
+        ringtone = RingtoneManager.getRingtone(this, ringtoneUri);
         ringtone.play();
+
     }
 
     public void setAlarmText(String alarmText) {
         alarmTextView.setText(alarmText);
     }
 
+    public void stopAlarm(View view) {
+
+        AlarmReciever.wakelock.release();
+        ringtone.stop();
+        this.finish();
+
+    }
 }
