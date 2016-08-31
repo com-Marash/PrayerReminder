@@ -142,6 +142,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.marash.prayerreminder.Setting" />
         </activity>
+        <activity
+            android:name=".FirstUsage"
+            android:parentActivityName=".MainPage"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.marash.prayerreminder.MainPage" />
+
+            <intent-filter>
+                <action android:name="com.marash.prayerreminder.FirstUsage" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
         <activity android:name=".TimesUpActivity"/>
         <receiver android:name=".AlarmReciever" ></receiver>
 

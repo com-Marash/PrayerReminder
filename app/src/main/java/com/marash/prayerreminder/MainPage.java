@@ -1,8 +1,10 @@
 package com.marash.prayerreminder;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -20,6 +22,27 @@ public class MainPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+
+        //FirstUse Handler
+        SharedPreferences prefs = getSharedPreferences("FirstUsePreferences", MODE_PRIVATE);
+        boolean isFirstUsage = prefs.getBoolean("first_usage", true);
+
+        Log.d("isFirstUsage", String.valueOf(isFirstUsage));
+
+        if(isFirstUsage){
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("first_usage", false);
+            editor.commit();
+
+            Log.d("IfWorks", "If works: ");
+
+            //TODO open a new activity firstUsage.java
+            Intent firstUsageIntent = new Intent("com.marash.prayerreminder.FirstUsage");
+            startActivity(firstUsageIntent);
+
+        }
+        //
+
 
         // call button handlers
         settingFunction();
