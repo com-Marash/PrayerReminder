@@ -157,6 +157,20 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".FirstUsageSecondPage"
+            android:parentActivityName=".FirstUsage"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.marash.prayerreminder.FirstUsage" />
+
+            <intent-filter>
+                <action android:name="com.marash.prayerreminder.FirstUsageSecondPage" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".TimesUpActivity"/>
         <receiver android:name=".AlarmReciever" ></receiver>

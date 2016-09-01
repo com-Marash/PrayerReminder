@@ -2,13 +2,8 @@ package com.marash.prayerreminder;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.PowerManager;
 import android.support.v4.content.WakefulBroadcastReceiver;
-import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Created by Maedeh on 8/23/2016.

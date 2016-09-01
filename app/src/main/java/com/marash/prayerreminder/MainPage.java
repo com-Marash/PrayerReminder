@@ -29,20 +29,16 @@ public class MainPage extends AppCompatActivity {
         setContentView(R.layout.activity_main_page);
 
         setMainAlarm();
+
         //FirstUse Handler
         SharedPreferences prefs = getSharedPreferences("FirstUsePreferences", MODE_PRIVATE);
         boolean isFirstUsage = prefs.getBoolean("first_usage", true);
-
-        Log.d("isFirstUsage", String.valueOf(isFirstUsage));
 
         if(isFirstUsage){
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean("first_usage", false);
             editor.commit();
 
-            Log.d("IfWorks", "If works: ");
-
-            //TODO open a new activity firstUsage.java
             Intent firstUsageIntent = new Intent("com.marash.prayerreminder.FirstUsage");
             startActivity(firstUsageIntent);
 

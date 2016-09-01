@@ -5,12 +5,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-
-import com.marash.prayerTimes.main.PrayerTimes;
-
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by Maedeh on 8/23/2016.
@@ -39,13 +35,13 @@ public class AlarmSetter {
 
         Calendar alertCalendar = prayerTimesCalculator.getPrayerTime(alert.getPrayerName(), Calendar.getInstance());
 
+        //TODO,write the real numbers here
         alertCalendar.add(Calendar.MINUTE,alert.getTime());
         alertCalendar = Calendar.getInstance();
         alertCalendar.set(Calendar.SECOND,10);
         Log.d("createOrUpdateAlarm", alertCalendar.toString());
 
         alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
-        
     }
 
     public static void deleteAlarm(Double alarmRandomNumber, String alarmType){
