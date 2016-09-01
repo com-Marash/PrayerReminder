@@ -18,7 +18,7 @@ import java.util.Date;
 public class AlarmSetter {
 
     public static void createOrUpdateAllAlarms(Context context){
-        // TODO 1- read all alarms in database
+
         ArrayList<Alert> savedAlerts = StorageManager.loadAlert(context);
 
         AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
@@ -26,14 +26,12 @@ public class AlarmSetter {
         Intent intent = new Intent(context, AlarmReciever.class);
         PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 123, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        // 2- create/update pendingIntent for each alarm (make it unique by using random number)
-        // 3- set alarms in android system
-
+        for (Alert a:savedAlerts){
+            createOrUpdateAlarm(a,context);
+        }
     }
 
     public static void createOrUpdateAlarm(Alert alert, Context context){
-        // 1- create/update pendingIntent for the specific alarm
-        // 2- set the alarm in android system
 
         AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReciever.class);
@@ -41,16 +39,13 @@ public class AlarmSetter {
 
         Calendar alertCalendar = prayerTimesCalculator.getPrayerTime(alert.getPrayerName(), Calendar.getInstance());
 
-
         alertCalendar.add(Calendar.MINUTE,alert.getTime());
         alertCalendar = Calendar.getInstance();
         alertCalendar.set(Calendar.SECOND,10);
         Log.d("createOrUpdateAlarm", alertCalendar.toString());
 
         alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
-
-        Log.d("ArashSender", "we created reciever");
-
+        
     }
 
     public static void deleteAlarm(Double alarmRandomNumber, String alarmType){

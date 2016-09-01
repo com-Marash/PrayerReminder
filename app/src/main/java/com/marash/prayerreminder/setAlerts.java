@@ -107,9 +107,9 @@ public class setAlerts extends AppCompatActivity {
                     }
 
                     if(isNewAlert){
-                        int randomNumber = (int)(Math.random() * (10000001));
+                        int randomNumber = (int)((Math.random() * (10000001)+1000));
                         while(savedRandNumber.contains(randomNumber)) {
-                            randomNumber = (int) (Math.random() * (10000001));
+                            randomNumber = (int) ((Math.random() * (10000001)+1000));
                         }
                         Alert alert = new Alert(selectedPrayerText, desiredTime, randomNumber);
                         StorageManager.saveAlert(alert, setAlerts.this.getApplicationContext());
