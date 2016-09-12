@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -37,7 +38,7 @@ public class selectSound extends AppCompatActivity {
         selectedRingToneData = StorageManager.loadAlarmRingtone(selectSound.this.getApplicationContext());
         sound_TextView = (TextView)findViewById(R.id.textView_soundText);
 
-        if(selectedRingToneData.equals(null) || selectedRingToneData[0] == null || selectedRingToneData[1] == null){
+        if(selectedRingToneData == null || selectedRingToneData[0] == null || selectedRingToneData[1] == null ){
             sound_TextView.setText("No ringtone has been set for prayers alarm. Please choose from list.");
             existingRingtone = (Uri) null;
         }else{

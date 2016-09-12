@@ -92,39 +92,54 @@ public class setAlerts extends AppCompatActivity {
                     }
 
                     ArrayList<Alert> savedAlerts = StorageManager.loadAlert(setAlerts.this.getApplicationContext());
-                    String savedAlertPrayerName;
-                    int savedAlertTime;
-                    ArrayList<Integer> savedRandNumber = new ArrayList<Integer>();
                     boolean isNewAlert = true;
-                    for (Alert a : savedAlerts){
-                        savedAlertPrayerName = a.getPrayerName();
-                        savedAlertTime = a.getTime();
-                        savedRandNumber.add(a.getAlertNumber());
-                        if(selectedPrayerText.equals(savedAlertPrayerName) && desiredTime == savedAlertTime) {
-                            isNewAlert = false;
-                            break;
-                        }
-                    }
 
-                    if(isNewAlert){
-                        int randomNumber = (int)((Math.random() * (10000001)+1000));
-                        while(savedRandNumber.contains(randomNumber)) {
-                            randomNumber = (int) ((Math.random() * (10000001)+1000));
+                    if(savedAlerts != null) {
+                        String savedAlertPrayerName;
+                        int savedAlertTime;
+                        ArrayList<Integer> savedRandNumber = new ArrayList<Integer>();
+                        for (Alert a : savedAlerts) {
+                            savedAlertPrayerName = a.getPrayerName();
+                            savedAlertTime = a.getTime();
+                            savedRandNumber.add(a.getAlertNumber());
+                            if (selectedPrayerText.equals(savedAlertPrayerName) && desiredTime == savedAlertTime) {
+                                isNewAlert = false;
+                                break;
+                            }
                         }
+
+                        if (isNewAlert) {
+                            int randomNumber = (int) ((Math.random() * (10000001) + 1000));
+                            while (savedRandNumber.contains(randomNumber)) {
+                                randomNumber = (int) ((Math.random() * (10000001) + 1000));
+                            }
+                            Alert alert = new Alert(selectedPrayerText, desiredTime, randomNumber);
+                            StorageManager.saveAlert(alert, setAlerts.this.getApplicationContext());
+
+
+                            ///TODO, if method wasnt set, ask user to set it.
+                            String method = StorageManager.loadCalculationMethode(setAlerts.this.getApplicationContext());
+                            prayerTimesCalculator.setPrayerTimes(method);
+                            AlarmSetter.createOrUpdateAlarm(alert, setAlerts.this.getApplicationContext());
+                            ///
+
+                            Toast.makeText(setAlerts.this, "Your new alert has been successfully saved.", Toast.LENGTH_LONG).show();
+                            finish();
+                        } else {
+                            Toast.makeText(setAlerts.this, "This alert has been saved previously.", Toast.LENGTH_LONG).show();
+                        }
+                    }else{
+                        int randomNumber = (int) ((Math.random() * (10000001) + 1000));
                         Alert alert = new Alert(selectedPrayerText, desiredTime, randomNumber);
                         StorageManager.saveAlert(alert, setAlerts.this.getApplicationContext());
-
-
                         ///TODO, if method wasnt set, ask user to set it.
                         String method = StorageManager.loadCalculationMethode(setAlerts.this.getApplicationContext());
                         prayerTimesCalculator.setPrayerTimes(method);
-                        AlarmSetter.createOrUpdateAlarm(alert,setAlerts.this.getApplicationContext());
+                        AlarmSetter.createOrUpdateAlarm(alert, setAlerts.this.getApplicationContext());
                         ///
 
                         Toast.makeText(setAlerts.this, "Your new alert has been successfully saved.", Toast.LENGTH_LONG).show();
                         finish();
-                    }else{
-                        Toast.makeText(setAlerts.this, "This alert has been saved previously.", Toast.LENGTH_LONG).show();
                     }
                 }
             }

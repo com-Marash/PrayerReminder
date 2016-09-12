@@ -28,8 +28,6 @@ import java.util.Locale;
 
 public class MainPage extends AppCompatActivity {
 
-    private Button butten_setting;
-
     private TextView showDateText, goToTodayText;
     private Button nextDayButton, previousDayButton;
     private Calendar calendar = new GregorianCalendar();
@@ -109,19 +107,6 @@ public class MainPage extends AppCompatActivity {
 
     }
 
-//    public void settingFunction(){
-//
-//        butten_setting = (Button)findViewById(R.id.button_setting);
-//        butten_setting.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent settingIntent = new Intent("com.marash.prayerreminder.Setting");
-//                startActivity(settingIntent);
-//            }
-//        });
-//    }
-
-//////////////////////////////
 
     private void setListeners() {
         final DatePickerDialog.OnDateSetListener myDatePickerListener = new DatePickerDialog.OnDateSetListener() {
@@ -190,7 +175,7 @@ public class MainPage extends AppCompatActivity {
         String savedCalcMethode = StorageManager.loadCalculationMethode(MainPage.this.getApplicationContext());
 
 
-        //TODO:here, we used hard code to have a ethode name. It must fix.
+        //TODO:here, we used hard code to have a ethode name. It must be fixed.
         myPrayerTimes.setMethod(PrayerTimes.methods.valueOf(savedCalcMethode));
         //myPrayerTimes.setMethod(PrayerTimes.methods.valueOf("Tehran"));
         prayerTimesData calculatedTimes = null;
