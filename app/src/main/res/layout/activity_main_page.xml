@@ -1,70 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.percent.PercentRelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.marash.prayerreminder.MainPage"
-    android:background="@drawable/background_3">
+    android:background="@drawable/background_3"
+    android:id="@+id/activity_main_page">
 
+    <android.support.v7.widget.ActionBarContainer
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></android.support.v7.widget.ActionBarContainer>
 
-    <Button
-        app:layout_widthPercent="50%"
-        app:layout_heightPercent="10%"
-        app:layout_marginTopPercent="5%"
-        android:text="@string/showPrayerTimes"
-        android:background="@drawable/button_shape"
-        android:id="@+id/button_showPrayerTimes"
+    <TextView
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextShowDate"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/roundedcorner"
+        android:padding="5dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textView_goToToday"
+        android:layout_below="@+id/editTextShowDate"
+        android:layout_centerHorizontal="true"
+        android:text="Return to today"
+        android:textColor="#FF0000"
+        android:textSize="15sp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:background="@drawable/roundedcorner"
+        android:textStyle="bold"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_marginTop="3dp"/>
 
     <Button
-
-        app:layout_widthPercent="50%"
-        app:layout_heightPercent="10%"
-        app:layout_marginTopPercent="5%"
-        android:text="@string/setAlerts"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="&gt;"
+        android:id="@+id/buttonNextDay"
+        android:layout_toEndOf="@+id/editTextShowDate"
+        android:layout_marginStart="10dp"
+        android:textSize="20dp"
         android:background="@drawable/button_shape"
-        android:id="@+id/button_setAlerts"
-        android:layout_below="@+id/button_showSavedAlerts"
-        android:layout_centerHorizontal="true" />
+        android:textStyle="bold"
+        android:padding="5dp"
+        android:layout_marginTop="18dp"/>
 
     <Button
-
-        app:layout_widthPercent="50%"
-        app:layout_heightPercent="10%"
-        app:layout_marginTopPercent="5%"
-        android:text="@string/setting"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="&lt;"
+        android:id="@+id/buttonPreviousDay"
+        android:layout_toStartOf="@+id/editTextShowDate"
+        android:layout_marginEnd="10dp"
+        android:textSize="20dp"
         android:background="@drawable/button_shape"
-        android:id="@+id/button_setting"
-        android:layout_below="@+id/button_setAlerts"
-        android:layout_alignStart="@+id/button_setAlerts" />
+        android:textStyle="bold"
+        android:padding="5dp"
+        android:gravity="center"
+        android:layout_marginTop="18dp"/>
 
-    <Button
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        style="@style/mainTable"
+        android:layout_below="@id/textView_goToToday">
 
-        app:layout_widthPercent="50%"
-        app:layout_heightPercent="10%"
-        app:layout_marginTopPercent="5%"
-        android:text="@string/aboutUs"
-        android:background="@drawable/button_shape"
-        android:id="@+id/button_aboutUs"
-        android:layout_below="@+id/button_setting"
-        android:layout_alignStart="@+id/button_setting" />
+        <TableRow>
 
-    <Button
+            <TextView
+                android:text="Fajr"
+                android:id="@+id/textView_fajrtext"
+                android:layout_marginTop="60dp"
+                style="@style/leftColumn"/>
 
-        app:layout_widthPercent="50%"
-        app:layout_heightPercent="10%"
-        app:layout_marginTopPercent="5%"
-        android:text="@string/showSavedAlerts"
-        android:background="@drawable/button_shape"
-        android:id="@+id/button_showSavedAlerts"
-        android:layout_below="@+id/button_showPrayerTimes"
-        android:layout_alignStart="@+id/button_showPrayerTimes" />
+            <TextView
+                android:id="@+id/textView_fajr"
+                android:layout_marginTop="60dp"
+                style="@style/rightColumn"/>
+        </TableRow>
 
-</android.support.percent.PercentRelativeLayout>
+        <TableRow>
+            <TextView
+                android:text="Sunrise"
+                android:id="@+id/textView_sunrisetext"
+                style="@style/leftColumn"/>
+
+            <TextView
+                style="@style/rightColumn"
+                android:id="@+id/textView_sunrise" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Dhuhr"
+                android:id="@+id/textView_Dhuhrtext"
+                style="@style/leftColumn"/>
+
+            <TextView
+                android:id="@+id/textView_Dhuhr"
+                style="@style/rightColumn"/>
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Asr"
+                android:id="@+id/textView_Asrtext"
+                style="@style/leftColumn"/>
+
+            <TextView
+                android:id="@+id/textView_asr"
+                style="@style/rightColumn"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Sunset"
+                android:id="@+id/textView_sunsettext"
+                style="@style/leftColumn"/>
+
+            <TextView
+                android:id="@+id/textView_sunset"
+                style="@style/rightColumn"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Maghrib"
+                android:id="@+id/textView_Maghribtext"
+                style="@style/leftColumn"/>
+
+            <TextView
+                android:id="@+id/textView_maghrib"
+                style="@style/rightColumn"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Isha"
+                android:id="@+id/textView_Ishatext"
+                style="@style/leftColumn"/>
+
+            <TextView
+                android:id="@+id/textView_isha"
+                style="@style/rightColumn"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Midnight"
+                android:id="@+id/textView_midnighttext"
+                style="@style/leftColumn"/>
+
+            <TextView
+                android:id="@+id/textView_midnight"
+                style="@style/rightColumn"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Imsaak"
+                android:id="@+id/textView_Imsaaktext"
+                style="@style/leftColumn"/>
+
+            <TextView
+                android:id="@+id/textView_imsak"
+                style="@style/rightColumn"/>
+        </TableRow>
+
+    </TableLayout>
+
+</RelativeLayout>

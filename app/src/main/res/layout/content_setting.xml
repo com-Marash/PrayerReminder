@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--suppress ALL -->
 <android.support.percent.PercentRelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,7 +16,7 @@
 
     <Button
         app:layout_widthPercent="50%"
-        app:layout_heightPercent="10%"
+        app:layout_heightPercent="8%"
         app:layout_marginTopPercent="5%"
         android:text="Select Location "
         android:background="@drawable/button_shape"
@@ -26,7 +27,7 @@
 
     <Button
         app:layout_widthPercent="50%"
-        app:layout_heightPercent="10%"
+        app:layout_heightPercent="8%"
         app:layout_marginTopPercent="5%"
         android:text="Alarm ringtone"
         android:background="@drawable/button_shape"
@@ -35,12 +36,41 @@
         android:layout_below="@+id/button_selectLocation" />
     <Button
         app:layout_widthPercent="50%"
-        app:layout_heightPercent="10%"
+        app:layout_heightPercent="8%"
         app:layout_marginTopPercent="5%"
         android:text="calculation methode"
         android:background="@drawable/button_shape"
         android:id="@+id/Button_calculationMethode"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/button_alarmSound" />
+    <Button
+        app:layout_widthPercent="50%"
+        app:layout_heightPercent="8%"
+        app:layout_marginTopPercent="5%"
+        android:text="About us"
+        android:background="@drawable/button_shape"
+        android:id="@+id/button_aboutUs"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/Button_calculationMethode" />
+
+    <Button
+        app:layout_widthPercent="50%"
+        app:layout_heightPercent="8%"
+        app:layout_marginTopPercent="5%"
+        android:text="Set Alert"
+        android:background="@drawable/button_shape"
+        android:id="@+id/button_setAlerts"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/button_aboutUs" />
+
+    <Button
+        app:layout_widthPercent="50%"
+        app:layout_heightPercent="8%"
+        app:layout_marginTopPercent="5%"
+        android:text="Show saved alerts"
+        android:background="@drawable/button_shape"
+        android:id="@+id/button_showSavedAlerts"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/button_setAlerts" />
 
 </android.support.percent.PercentRelativeLayout>

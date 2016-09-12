@@ -18,9 +18,8 @@ import java.util.Arrays;
 
 public class Setting extends AppCompatActivity {
 
-    private Button selectLocationButton;
-    private Button SelectAlarmSound;
-    private Button calculationMethodeButton;
+    private Button selectLocationButton,SelectAlarmSound,calculationMethodeButton,
+                    butten_aboutUs,butten_setAlerts,button_showSavedAlerts;
     private String selection;
 
     @Override
@@ -34,6 +33,12 @@ public class Setting extends AppCompatActivity {
         selectLocationFunction();
         selectAlarmSoundFunction();
         selectCalculationMethode();
+
+
+        aboutUsFunction();
+        setAlertFunction();
+        showSavedAlertsFunction();
+
     }
 
 
@@ -126,5 +131,42 @@ public class Setting extends AppCompatActivity {
             });
             return builder.create();
         }
+    }
+
+    private void showSavedAlertsFunction() {
+
+        button_showSavedAlerts = (Button)findViewById(R.id.button_showSavedAlerts);
+        button_showSavedAlerts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent showSavedAlertsIntent = new Intent("com.marash.prayerreminder.showSavedAlerts");
+                startActivity(showSavedAlertsIntent);
+            }
+        });
+    }
+
+
+    public void setAlertFunction(){
+
+        butten_setAlerts = (Button)findViewById(R.id.button_setAlerts);
+        butten_setAlerts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent setAlertIntent = new Intent("com.marash.prayerreminder.setAlerts");
+                startActivity(setAlertIntent);
+            }
+        });
+    }
+
+    public void aboutUsFunction(){
+
+        butten_aboutUs = (Button)findViewById(R.id.button_aboutUs);
+        butten_aboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent  aboutUsIntent = new Intent("com.marash.prayerreminder.aboutUs");
+                startActivity(aboutUsIntent);
+            }
+        });
     }
 }

@@ -23,7 +23,7 @@ public class selectLocation extends AppCompatActivity {
     private LocationManager myLocManager;
     private TextView lastKnownLocationText;
     private LocationListener myLocListener;
-    private Button updateByGPS, updateByNetwork, confirmLocation;
+    private Button updateByGPS, updateByNetwork;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -115,7 +115,6 @@ public class selectLocation extends AppCompatActivity {
                 myLocManager.requestLocationUpdates("gps", 5000, 2, myLocListener);
             }
         });
-
     }
 
 
@@ -154,7 +153,7 @@ public class selectLocation extends AppCompatActivity {
 
                     return;
                 }
-                myLocManager.requestLocationUpdates("gps", 5000, 2, myLocListener);
+                myLocManager.requestLocationUpdates("network", 5000, 2, myLocListener);
             }
         });
 

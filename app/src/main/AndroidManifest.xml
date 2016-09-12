@@ -39,11 +39,11 @@
         <activity
             android:name=".aboutUs"
             android:label="@string/title_activity_about_us"
-            android:parentActivityName=".MainPage"
+            android:parentActivityName=".Setting"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.marash.prayerreminder.MainPage" />
+                android:value="com.marash.prayerreminder.Setting" />
 
             <intent-filter>
                 <action android:name="com.marash.prayerreminder.aboutUs" />
@@ -54,29 +54,14 @@
         <activity
             android:name=".setAlerts"
             android:label="@string/title_activity_set_alerts"
-            android:parentActivityName=".MainPage"
+            android:parentActivityName=".Setting"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.marash.prayerreminder.MainPage" />
+                android:value="com.marash.prayerreminder.Setting" />
 
             <intent-filter>
                 <action android:name="com.marash.prayerreminder.setAlerts" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".showPrayerTimes"
-            android:label="@string/title_activity_show_prayer_times"
-            android:parentActivityName=".MainPage"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.marash.prayerreminder.MainPage" />
-
-            <intent-filter>
-                <action android:name="com.marash.prayerreminder.showPrayerTimes" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -107,11 +92,11 @@
         <activity
             android:name=".showSavedAlerts"
             android:label="@string/title_activity_show_saved_alerts"
-            android:parentActivityName=".MainPage"
+            android:parentActivityName=".Setting"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.marash.prayerreminder.MainPage" />
+                android:value="com.marash.prayerreminder.Setting" />
 
             <intent-filter>
                 <action android:name="com.marash.prayerreminder.showSavedAlerts" />

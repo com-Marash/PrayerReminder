@@ -1,13 +1,20 @@
 package com.marash.prayerreminder;
 
+import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
-import java.util.Arrays;
+import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Created by Maedeh on 8/31/2016.
@@ -17,19 +24,89 @@ import java.util.Arrays;
     //to set some custom settings by asking the user to select them.
 
 public class FirstUsage extends Activity{
-    private String selection;
+
+    private LocationListener myLocListener;
+    private LocationManager myLocManager;
+    private TextView tv;
+    private Button okButt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.first_use_page);
 
+        tv = (TextView)findViewById(R.id.TextView_firstPageCoordination);
+        okButt = (Button)findViewById(R.id.firstPageOKButt);
 
+        myLocManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        myLocListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+
+                tv.setText("Your current coordination is:\n" + "Longitude: " + location.getLongitude() + "   Latitude: " + location.getLatitude());
+
+                if (ActivityCompat.checkSelfPermission(FirstUsage.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(FirstUsage.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                myLocManager.removeUpdates(myLocListener);
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+            }
+        };
+
+        tv.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                okButt.setEnabled(true);
+            }
+        });
     }
 
 
     public void openSecondPage(View view) {
-        Intent firstUsageSecondPageIntent = new Intent("com.marash.prayerreminder.FirstUsageSecondPage");
-        startActivity(firstUsageSecondPageIntent);
+
+        if(okButt.isEnabled()) {
+            Intent firstUsageSecondPageIntent = new Intent("com.marash.prayerreminder.FirstUsageSecondPage");
+            startActivity(firstUsageSecondPageIntent);
+        }
+    }
+
+    public void findLocationByGPS(View view) {
+
+        if (ActivityCompat.checkSelfPermission(FirstUsage.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(FirstUsage.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        myLocManager.requestLocationUpdates("gps", 5000, 2, myLocListener);
+        tv.setText("Your current coordination is:\n" + "Longitude: " + (myLocManager.getLastKnownLocation("gps").getLongitude()) + "   Latitude: " + (myLocManager.getLastKnownLocation("gps").getLatitude()));
+        Log.d("maedehhm", "findLocationByGPS: ");
+    }
+
+    public void findLocationByNetwork(View view) {
+
+        if (ActivityCompat.checkSelfPermission(FirstUsage.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(FirstUsage.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
+        myLocManager.requestLocationUpdates("network", 5000, 2, myLocListener);
     }
 }
