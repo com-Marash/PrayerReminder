@@ -50,7 +50,8 @@
         android:id="@+id/button_confirmLocation"
         android:layout_below="@+id/button_updateLocationGPS"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="110dp" />
+        android:layout_marginTop="110dp"
+        android:onClick="updateLocationByGPSFunction"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -59,6 +60,7 @@
         android:background="@drawable/button_shape"
         android:id="@+id/updateLocationNetwork"
         android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="updateLocationByNetworkFunction"/>
 
 </RelativeLayout>

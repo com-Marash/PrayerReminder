@@ -3,6 +3,7 @@ package com.marash.prayerreminder;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -22,21 +23,25 @@ public class FirstUsageSecondPage extends Activity {
         setContentView(R.layout.first_use_secondpage);
 
         okButton = (Button)findViewById(R.id.secondPageOKButt);
-
+        methodSelection();
     }
 
-    public void methodSelection(View view) {
+    private void methodSelection() {
 
-        int checked_ID = ((RadioGroup) view).getCheckedRadioButtonId();
+        RadioGroup rg = (RadioGroup)findViewById(R.id.radioGroup);
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId != -1){
+                    selectedMethode = (RadioButton) findViewById(checkedId);
+                    selectedMethodeText = selectedMethode.getText().toString();
 
-        if (checked_ID != -1){
-            selectedMethode = (RadioButton) findViewById(checked_ID);
-            selectedMethodeText = selectedMethode.getText().toString();
+                    StorageManager.saveCalculationMethode(selectedMethodeText, FirstUsageSecondPage.this.getApplicationContext());
 
-            StorageManager.saveCalculationMethode(selectedMethodeText, FirstUsageSecondPage.this.getApplicationContext());
-
-            okButton.setEnabled(true);
-        }
+                    okButton.setEnabled(true);
+                }
+            }
+        });
     }
 
     public void OKButtFunction(View view) {

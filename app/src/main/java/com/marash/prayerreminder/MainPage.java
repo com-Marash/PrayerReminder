@@ -176,8 +176,8 @@ public class MainPage extends AppCompatActivity {
 
 
         //TODO:here, we used hard code to have a ethode name. It must be fixed.
-        myPrayerTimes.setMethod(PrayerTimes.methods.valueOf(savedCalcMethode));
-        //myPrayerTimes.setMethod(PrayerTimes.methods.valueOf("Tehran"));
+        //myPrayerTimes.setMethod(PrayerTimes.methods.valueOf(savedCalcMethode));
+        myPrayerTimes.setMethod(PrayerTimes.methods.valueOf("Tehran"));
         prayerTimesData calculatedTimes = null;
         try {
 

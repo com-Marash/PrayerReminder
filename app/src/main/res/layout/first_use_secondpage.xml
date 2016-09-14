@@ -50,7 +50,6 @@
         android:layout_below="@+id/textView_secondPageHint"
         android:orientation="vertical"
         android:layout_margin="20dp"
-        android:onClick="methodSelection"
         android:id="@+id/radioGroup">
 
         <RadioButton
@@ -58,6 +57,7 @@
          android:layout_height="wrap_content"
          android:text="ISNA"
          android:textSize="20sp" />
+
         <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -75,16 +75,19 @@
         android:layout_height="wrap_content"
         android:text="Karachi"
         android:textSize="20sp" />
+
         <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Jafari"
         android:textSize="20sp" />
+
         <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tehran"
         android:textSize="20sp" />
+
         <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
