@@ -81,6 +81,7 @@ public class selectLocation extends AppCompatActivity {
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.d("sara", "no permission! ");
             return;
         } else {
             lastKnownLocationText = (TextView) findViewById(R.id.textView_lastKnownLocation);
@@ -98,6 +99,7 @@ public class selectLocation extends AppCompatActivity {
                 prayerTimesCalculator.setCoordination(lastKnownLocation.getLatitude(),lastKnownLocation.getLongitude());
             } else {
                 lastKnownLocationText.setText("Unknown");
+                Log.d("saba", "unknown");
             }
         }
     }
