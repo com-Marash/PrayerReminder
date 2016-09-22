@@ -3,9 +3,7 @@ package com.marash.prayerreminder;
 import com.marash.prayerTimes.dto.PrayerTimesDate;
 import com.marash.prayerTimes.dto.prayerTimesData;
 import com.marash.prayerTimes.main.PrayerTimes;
-
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by Maedeh on 8/23/2016.

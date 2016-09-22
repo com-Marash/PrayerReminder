@@ -37,6 +37,7 @@ public class FirstUsage extends Activity{
     private LocationManager myLocManager;
     private TextView tv;
     private Button okButt;
+    private LocationBuilder lb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class FirstUsage extends Activity{
 
         myLocManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        setLocationChangeListener();
+        lb = new LocationBuilder(myLocManager,FirstUsage.this);
         coordinationTextChanged();
     }
 
@@ -69,56 +70,6 @@ public class FirstUsage extends Activity{
         });
     }
 
-    private void setLocationChangeListener() {
-        myLocListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-
-                /*----------to get City-Name from coordinates ------------- */
-
-                Geocoder gcd = new Geocoder(FirstUsage.this, Locale.getDefault());
-                if(gcd.isPresent()){
-                    List<Address> addresses;
-                    try {
-                        addresses = gcd.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                        if (addresses != null && addresses.size() > 0) {
-
-                            Address returnedAddress = addresses.get(0);
-                            String countryName = returnedAddress.getCountryName() != null ?  returnedAddress.getCountryName():"unknown country" ;
-                            String localityName = returnedAddress.getLocality() != null ? returnedAddress.getLocality():"unknwon city";
-                            tv.setText("Your current location is: " +countryName+","+localityName  + "\n Your current coordination is:\n" + "Longitude: " + location.getLongitude() + "   Latitude: " + location.getLatitude());
-                        }else{
-                            tv.setText("Your current coordination is:\n" + "Longitude: " + location.getLongitude() + "   Latitude: " + location.getLatitude());
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        tv.setText("Your current coordination is:\n" + "Longitude: " + location.getLongitude() + "   Latitude: " + location.getLatitude());
-                    }
-                }else{
-                    tv.setText("Your current coordination is:\n" + "Longitude: " + location.getLongitude() + "   Latitude: " + location.getLatitude());
-                }
-
-                if (ActivityCompat.checkSelfPermission(FirstUsage.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(FirstUsage.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
-                myLocManager.removeUpdates(myLocListener);
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-            }
-        };
-    }
-
-
     public void openSecondPage(View view) {
         if(okButt.isEnabled()) {
             Intent firstUsageSecondPageIntent = new Intent("com.marash.prayerreminder.FirstUsageSecondPage");
@@ -128,21 +79,8 @@ public class FirstUsage extends Activity{
 
     public void findLocationByGPS(View view) {
 
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (ContextCompat.checkSelfPermission(FirstUsage.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(FirstUsage.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-            } else {
-                try {
-                    myLocManager.requestLocationUpdates("gps", 5000, 2, myLocListener);
-                } catch (SecurityException e) {
-                }
-            }
-        } else {
-            try {
-                myLocManager.requestLocationUpdates("gps", 5000, 2, myLocListener);
-            } catch (SecurityException e) {
-            }
-        }
+        lb.GPS_Function(FirstUsage.this);
+        tv.setText(lb.getTextString());
     }
 
     public void findLocationByNetwork(View view) {
@@ -154,30 +92,5 @@ public class FirstUsage extends Activity{
         }
         myLocManager.requestLocationUpdates("network", 5000, 2, myLocListener);
     }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case 1: {
-
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    try {
-                        myLocManager.requestLocationUpdates("gps", 5000, 2, myLocListener);
-                    } catch (SecurityException e) {
-                        //Log.d("security exception", "onClick: ");
-                    }
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                    // todo: Show a message to user that you denied the permission
-                }
-                return;
-            }
-        }
-    }
-
-
 
 }
