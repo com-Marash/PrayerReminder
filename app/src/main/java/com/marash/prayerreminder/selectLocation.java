@@ -2,19 +2,14 @@ package com.marash.prayerreminder;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 
 public class selectLocation extends AppCompatActivity {
@@ -23,6 +18,7 @@ public class selectLocation extends AppCompatActivity {
     private TextView locationText;
     private LocationListener myLocListener;
     private LocationBuilder lb;
+    private String[] lastKnownLocationText;
 
 
     @Override
@@ -35,24 +31,34 @@ public class selectLocation extends AppCompatActivity {
         myLocManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         locationText = (TextView) findViewById(R.id.textView_lastKnownLocation);
 
-        //lastKnownLocationFunction();
+        lb = new LocationBuilder(myLocManager);
 
-
-        lb = new LocationBuilder(myLocManager,selectLocation.this);
+        checkForLastKnownLocation();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
-
-    public void updateLocationByGPSFunction(View view) {
-
-        lb.GPS_Function(selectLocation.this);
-        locationText.setText(lb.getTextString());
+    private void checkForLastKnownLocation(){
+        lastKnownLocationText = StorageManager.loadLocation(selectLocation.this);
+        String country = "Unknown";
+        String city = "Unknown";
+        if(lastKnownLocationText[2] == null && lastKnownLocationText[3] == null){
+        }else if(lastKnownLocationText[2] == null){
+            city = lastKnownLocationText[3];
+        }else if(lastKnownLocationText[3] == null){
+            country = lastKnownLocationText[2];
+        }else{
+            country = lastKnownLocationText[2];
+            city = lastKnownLocationText[3];
+        }
+        String longitude = lastKnownLocationText[0];
+        String latitude = lastKnownLocationText[1];
+        locationText.setText("Your last known location is: \n"+"Country name: "+country+" City name: "+city+"\n"+
+                                "Your last known Coordination is: \n"+"Longitude: "+longitude+"Latitude: "+latitude);
     }
 
-
-    public void updateLocationByNetworkFunction(View view){
+    private void updateLocationByNetworkFunction(View view){
 
         if (ActivityCompat.checkSelfPermission(selectLocation.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(selectLocation.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -60,5 +66,10 @@ public class selectLocation extends AppCompatActivity {
             return;
         }
         myLocManager.requestLocationUpdates("network", 5000, 2, myLocListener);
+    }
+
+    public void updateLocationByGPSFunction(View view) {
+        lb.setLocationListener(selectLocation.this, locationText);
+        lb.GPS_Function(selectLocation.this);
     }
 }

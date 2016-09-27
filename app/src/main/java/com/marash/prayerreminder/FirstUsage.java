@@ -4,25 +4,15 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by Maedeh on 8/31/2016.
@@ -33,11 +23,11 @@ import java.util.Locale;
 
 public class FirstUsage extends Activity{
 
-    private LocationListener myLocListener;
     private LocationManager myLocManager;
     private TextView tv;
     private Button okButt;
     private LocationBuilder lb;
+    private String currentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +39,10 @@ public class FirstUsage extends Activity{
 
         myLocManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        lb = new LocationBuilder(myLocManager,FirstUsage.this);
-        coordinationTextChanged();
+        lb = new LocationBuilder(myLocManager);
     }
 
-    private void coordinationTextChanged(){
+    private void coordinationTextChangedListener(){
         tv.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -66,6 +55,7 @@ public class FirstUsage extends Activity{
             @Override
             public void afterTextChanged(Editable s) {
                 okButt.setEnabled(true);
+                tv.removeTextChangedListener(this);
             }
         });
     }
@@ -79,10 +69,12 @@ public class FirstUsage extends Activity{
 
     public void findLocationByGPS(View view) {
 
+        lb.setLocationListener(FirstUsage.this, tv);
+        coordinationTextChangedListener();
         lb.GPS_Function(FirstUsage.this);
-        tv.setText(lb.getTextString());
-    }
 
+
+    }
     public void findLocationByNetwork(View view) {
 
         if (ActivityCompat.checkSelfPermission(FirstUsage.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -90,7 +82,28 @@ public class FirstUsage extends Activity{
 
             return;
         }
-        myLocManager.requestLocationUpdates("network", 5000, 2, myLocListener);
+        //myLocManager.requestLocationUpdates("network", 5000, 2, myLocListener);
     }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    try {
+                        myLocManager.requestLocationUpdates("gps", 1000, 1, lb.getLocl());
+                    } catch (SecurityException e) {
+                    }
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    // todo: Show a message to user that you denied the permission
+                }
+                return;
+            }
+        }
+    }
 }

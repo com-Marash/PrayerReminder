@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,26 +23,34 @@ import java.util.Locale;
 /**
  * Created by Maedeh on 9/20/2016.
  */
-public class LocationBuilder extends Activity {
+public class LocationBuilder{
 
-    private String textString = null;
     private LocationManager locm;
     private LocationListener locl;
-    String countryName,localityName;
 
-    public String getTextString(){
-        return textString;
+    LocationBuilder(LocationManager mylocm) {
+        this.locm = mylocm;
     }
 
-    LocationBuilder(LocationManager mylocm, final Context context){
-        this.locm = mylocm;
+
+    public LocationListener getLocl(){
+        return locl;
+    }
+    public void setLocationListener(final Context context, final TextView tv){
+
         this.locl = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
 
                 /*----------to get City-Name from coordinates ------------- */
-
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    Log.d("no permission granted", "onLocationChanged: ");
+                    // TODO: get permission
+                    return;
+                }
                 Geocoder gcd = new Geocoder(context, Locale.getDefault());
+                String localityName = "unknwon city";
+                String countryName = "unknown country";
                 if (gcd.isPresent()) {
                     List<Address> addresses;
                     try {
@@ -49,23 +58,16 @@ public class LocationBuilder extends Activity {
                         if (addresses != null && addresses.size() > 0) {
 
                             Address returnedAddress = addresses.get(0);
-                            countryName = returnedAddress.getCountryName() != null ? returnedAddress.getCountryName() : "unknown country";
-                            localityName = returnedAddress.getLocality() != null ? returnedAddress.getLocality() : "unknwon city";
-                            textString = ("Your current location is: " + countryName + "," + localityName + "\n Your current coordination is:\n" + "Longitude: " + location.getLongitude() + "   Latitude: " + location.getLatitude());
-                        } else {
-                            textString = ("Your current location is: " + countryName + "," + localityName + "\n Your current coordination is:\n" + "Longitude: " + location.getLongitude() + "   Latitude: " + location.getLatitude());
+                            countryName = returnedAddress.getCountryName() != null ? returnedAddress.getCountryName() : countryName;
+                            localityName = returnedAddress.getLocality() != null ? returnedAddress.getLocality() : localityName;
                         }
-                    } catch (IOException e) {
+                    }catch (IOException e) {
                         e.printStackTrace();
-                        textString = ("Your current location is: " + countryName + "," + localityName + "\n Your current coordination is:\n" + "Longitude: " + location.getLongitude() + "   Latitude: " + location.getLatitude());
                     }
-                } else {
-                    textString = ("Your current location is: " + countryName + "," + localityName + "\n Your current coordination is:\n" + "Longitude: " + location.getLongitude() + "   Latitude: " + location.getLatitude());
                 }
+                tv.setText("Your current location is: " + countryName + "," + localityName + "\n Your current coordination is:\n" + "Longitude: " + location.getLongitude() + "   Latitude: " + location.getLatitude());
+                StorageManager.saveLocation(location.getLongitude(),location.getLatitude(),countryName,localityName,context);
 
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
                 locm.removeUpdates(locl);
             }
 
@@ -88,44 +90,18 @@ public class LocationBuilder extends Activity {
 
     public void GPS_Function(Context context){
         if (Build.VERSION.SDK_INT >= 23) {
-            Log.d("sara", "GPS_Function: ");
             if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-                Log.d("saba", "GPS_Function: ");
             } else {
                 try {
-                    locm.requestLocationUpdates("gps", 5000, 2, locl);
-                    Log.d("sada", "GPS_Function: ");
+                    locm.requestLocationUpdates("gps", 1000, 1, locl);
                 } catch (SecurityException e) {
                 }
             }
         } else {
             try {
-                locm.requestLocationUpdates("gps", 5000, 2, locl);
+                locm.requestLocationUpdates("gps", 1000, 1, locl);
             } catch (SecurityException e) {
-            }
-        }
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case 1: {
-
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    try {
-                        locm.requestLocationUpdates("gps", 5000, 2, locl);
-                    } catch (SecurityException e) {
-                        //Log.d("security exception", "onClick: ");
-                    }
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                    // todo: Show a message to user that you denied the permission
-                }
-                return;
             }
         }
     }

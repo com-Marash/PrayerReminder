@@ -23,6 +23,7 @@ public class StorageManager {
     static String inputString;
     private final static String STORED_ringtone = "storedRingtoneText.txt";
     private final static String STORED_calcmethode = "storedCalculationMethode.txt";
+    private final static String STORED_location = "storedLocation.txt";
 
 
     public static void saveAlert(Alert alert, Context context) {
@@ -113,11 +114,11 @@ public class StorageManager {
         return null;
     }
 
-    public static void saveCalculationMethode(String calcMthode, Context context){
+    public static void saveCalculationMethode(String calcMethod, Context context){
         try {
             outputFile = context.openFileOutput(STORED_calcmethode, Context.MODE_PRIVATE);
             out = new OutputStreamWriter(outputFile);
-            out.write(calcMthode);
+            out.write(calcMethod);
             out.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -140,4 +141,34 @@ public class StorageManager {
         }
         return null;
     }
+
+    public static void saveLocation(Double longitude, Double latitude, String country, String city, Context context){
+        try {
+            outputFile = context.openFileOutput(STORED_location, Context.MODE_PRIVATE);
+            out = new OutputStreamWriter(outputFile);
+            out.write(longitude+"\n"+latitude+"\n"+country+"\n"+city);
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String[] loadLocation(Context context){
+        String[] temp = new String[4];
+        try {
+            inputFile = context.openFileInput(STORED_location);
+            inputReader = new BufferedReader(new InputStreamReader(inputFile));
+            for (int i = 0; i <4 ; i++) {
+                temp[i] = inputReader.readLine();
+            }
+            inputReader.close();
+            return temp;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
+
