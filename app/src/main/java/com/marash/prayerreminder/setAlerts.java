@@ -116,8 +116,6 @@ public class setAlerts extends AppCompatActivity {
                             Alert alert = new Alert(selectedPrayerText, desiredTime, randomNumber);
                             StorageManager.saveAlert(alert, setAlerts.this.getApplicationContext());
 
-
-                            ///TODO, if method wasnt set, ask user to set it.
                             String method = StorageManager.loadCalculationMethode(setAlerts.this.getApplicationContext());
                             prayerTimesCalculator.setPrayerTimes(method);
                             AlarmSetter.createOrUpdateAlarm(alert, setAlerts.this.getApplicationContext());
@@ -132,11 +130,10 @@ public class setAlerts extends AppCompatActivity {
                         int randomNumber = (int) ((Math.random() * (10000001) + 1000));
                         Alert alert = new Alert(selectedPrayerText, desiredTime, randomNumber);
                         StorageManager.saveAlert(alert, setAlerts.this.getApplicationContext());
-                        ///TODO, if method wasnt set, ask user to set it.
                         String method = StorageManager.loadCalculationMethode(setAlerts.this.getApplicationContext());
                         prayerTimesCalculator.setPrayerTimes(method);
                         AlarmSetter.createOrUpdateAlarm(alert, setAlerts.this.getApplicationContext());
-                        ///
+
 
                         Toast.makeText(setAlerts.this, "Your new alert has been successfully saved.", Toast.LENGTH_LONG).show();
                         finish();

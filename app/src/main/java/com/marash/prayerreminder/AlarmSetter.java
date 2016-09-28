@@ -16,12 +16,6 @@ public class AlarmSetter {
     public static void createOrUpdateAllAlarms(Context context){
 
         ArrayList<Alert> savedAlerts = StorageManager.loadAlert(context);
-
-        AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-
-        Intent intent = new Intent(context, AlarmReciever.class);
-        PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 123, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
         for (Alert a:savedAlerts){
             createOrUpdateAlarm(a,context);
         }
