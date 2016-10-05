@@ -36,15 +36,19 @@ public class AlarmSetter {
         Log.d("createOrUpdateAlarm", alertCalendar.toString());
 
         alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
+
+        //for set timesUpActivity String TextView.
+        TimesUpActivity.setAlarmText(alert.getTime(),alert.getPrayerName());
     }
 
-    public static void deleteAlarm(Double alarmRandomNumber, String alarmType){
-        // find the pendingIntent for the specific alarm
-        // delete it if it exists
+    public static void deleteAlarm(int alarmRandomNumber, String prayerName, Context context){
+
+        Intent intent = new Intent(context, AlarmReciever.class);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(context,alarmRandomNumber,intent,PendingIntent.FLAG_CANCEL_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(alarmIntent);
+
+        //TODO what to do with prayerName
     }
-
-
-
-
-
 }

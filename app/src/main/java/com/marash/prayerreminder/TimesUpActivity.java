@@ -13,25 +13,31 @@ import android.widget.TextView;
  */
 public class TimesUpActivity extends Activity {
 
-    private TextView alarmTextView;
+    private static TextView alarmTextView;
+    private static String textViewString;
     Ringtone ringtone;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timesup);
         alarmTextView = (TextView) findViewById(R.id.alarmText);
-
+        alarmTextView.setText(textViewString);
 
         String ringtoneUriString = StorageManager.loadAlarmRingtone(this)[1];
         Uri ringtoneUri = Uri.parse(ringtoneUriString);
         ringtone = RingtoneManager.getRingtone(this, ringtoneUri);
         ringtone.play();
-
     }
 
-    //TODO, get the pray information and show.
-    public void setAlarmText(String alarmText) {
-        alarmTextView.setText(alarmText);
+    public static void setAlarmText(int time, String prayerName) {
+        String beforeAfter;
+        if(time<0){
+            beforeAfter = "before";
+            time = -time;
+        }else{
+            beforeAfter = "after";
+        }
+        textViewString = "Time to pray! It is "+time+" minute "+beforeAfter+ " "+prayerName+".";
     }
 
     public void stopAlarm(View view) {
@@ -39,6 +45,5 @@ public class TimesUpActivity extends Activity {
         AlarmReciever.wakelock.release();
         ringtone.stop();
         this.finish();
-
     }
 }
