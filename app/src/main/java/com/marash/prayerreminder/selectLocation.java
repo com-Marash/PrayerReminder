@@ -1,22 +1,25 @@
 package com.marash.prayerreminder;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class selectLocation extends AppCompatActivity {
 
     private LocationManager myLocManager;
     private TextView locationText;
-    private LocationListener myLocListener;
     private LocationBuilder lb;
     private String[] lastKnownLocationText;
 
@@ -58,18 +61,23 @@ public class selectLocation extends AppCompatActivity {
                                 "Your last known Coordination is: \n"+"Longitude: "+longitude+"Latitude: "+latitude);
     }
 
-    private void updateLocationByNetworkFunction(View view){
-
-        if (ActivityCompat.checkSelfPermission(selectLocation.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(selectLocation.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            return;
-        }
-        myLocManager.requestLocationUpdates("network", 5000, 2, myLocListener);
-    }
-
     public void updateLocationByGPSFunction(View view) {
         lb.setLocationListener(selectLocation.this, locationText);
         lb.GPS_Function(selectLocation.this);
+    }
+
+    public void updateLocationByNetworkFunction(View view) {
+        if (isNetworkAvailable()){
+            lb.setLocationListener(selectLocation.this, locationText);
+            lb.Network_Function(selectLocation.this);
+        }else {
+            Toast.makeText(this,"You are offline! Please check your connectivity and try again.",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

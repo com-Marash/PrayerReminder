@@ -95,13 +95,33 @@ public class LocationBuilder{
                 ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
             } else {
                 try {
-                    locm.requestLocationUpdates("gps", 1000, 1, locl);
+                    locm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locl);
                 } catch (SecurityException e) {
                 }
             }
         } else {
             try {
-                locm.requestLocationUpdates("gps", 1000, 1, locl);
+                locm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locl);
+            } catch (SecurityException e) {
+            }
+        }
+    }
+
+    public void Network_Function(Context context){
+
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
+            } else {
+                try {
+                    locm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, locl);
+                } catch (SecurityException e) {
+                }
+            }
+        } else {
+            try {
+                locm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, locl);
             } catch (SecurityException e) {
             }
         }
