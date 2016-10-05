@@ -1,17 +1,19 @@
 package com.marash.prayerreminder;
 
-import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -27,7 +29,6 @@ public class FirstUsage extends Activity{
     private TextView tv;
     private Button okButt;
     private LocationBuilder lb;
-    private String currentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,19 +73,24 @@ public class FirstUsage extends Activity{
         lb.setLocationListener(FirstUsage.this, tv);
         coordinationTextChangedListener();
         lb.GPS_Function(FirstUsage.this);
-
-
     }
+
     public void findLocationByNetwork(View view) {
 
-        if (ActivityCompat.checkSelfPermission(FirstUsage.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(FirstUsage.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            return;
-        }
-        //myLocManager.requestLocationUpdates("network", 5000, 2, myLocListener);
+       if (isNetworkAvailable()){
+           lb.setLocationListener(FirstUsage.this, tv);
+           coordinationTextChangedListener();
+           lb.Network_Function(FirstUsage.this);
+       }else {
+           Toast.makeText(this,"You are offline! Please check your connectivity and try again.",Toast.LENGTH_LONG).show();
+       }
     }
 
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
@@ -93,7 +99,21 @@ public class FirstUsage extends Activity{
 
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     try {
-                        myLocManager.requestLocationUpdates("gps", 1000, 1, lb.getLocl());
+                        myLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, lb.getLocl());
+                    } catch (SecurityException e) {
+                    }
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    // todo: Show a message to user that you denied the permission
+                }
+                return;
+            }
+            case 2:{
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    try {
+                        myLocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, lb.getLocl());
                     } catch (SecurityException e) {
                     }
                 } else {
