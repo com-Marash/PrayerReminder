@@ -38,12 +38,13 @@ Thank you for choosing this application."
         android:layout_marginTop="53dp"
         android:layout_marginLeft="20dp"
         android:textSize="15dp"
-        android:background="@drawable/button_shape"/>
+        android:background="@drawable/button_shape"
+        android:onClick="rateFunction"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Donation"
+        android:text="Donate"
         android:id="@+id/button_donation"
         android:layout_below="@+id/textView_aboutUs"
         android:layout_alignParentStart="true"
