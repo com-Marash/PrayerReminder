@@ -157,4 +157,15 @@
         android:layout_below="@+id/prayerGroup"
         android:layout_marginTop="20dp"
         android:layout_alignParentEnd="true" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:background="@drawable/button_shape"
+        android:id="@+id/button_cancelAlert"
+        android:layout_below="@+id/prayerGroup"
+        android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@+id/button_saveAlert"
+        android:layout_marginRight="20dp"
+        android:onClick="cancelAlertFunction"/>
 </RelativeLayout>

@@ -39,7 +39,6 @@ public class MainPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
-
         setMainAlarm();
 
         showDateText = (TextView) findViewById(R.id.editTextShowDate);
@@ -53,9 +52,6 @@ public class MainPage extends AppCompatActivity {
 
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
-        // call button handlers
-//        settingFunction();
-
         //FirstUse Handler
         SharedPreferences prefs = getSharedPreferences("FirstUsePreferences", MODE_PRIVATE);
         boolean isFirstUsage = prefs.getBoolean("first_usage", true);
@@ -67,7 +63,6 @@ public class MainPage extends AppCompatActivity {
 
             Intent firstUsageIntent = new Intent("com.marash.prayerreminder.FirstUsage");
             startActivity(firstUsageIntent);
-
         }
     }
 
@@ -87,9 +82,7 @@ public class MainPage extends AppCompatActivity {
             case R.id.settingsItem:
                 Intent settingIntent = new Intent("com.marash.prayerreminder.Setting");
                 startActivity(settingIntent);
-
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -172,17 +165,13 @@ public class MainPage extends AppCompatActivity {
 
         PrayerTimes myPrayerTimes = new PrayerTimes();
 
-        String savedCalcMethode = StorageManager.loadCalculationMethode(MainPage.this.getApplicationContext());
-
-
-        //TODO:here, we used hard code to have a ethode name. It must be fixed.
-        //myPrayerTimes.setMethod(PrayerTimes.methods.valueOf(savedCalcMethode));
-        myPrayerTimes.setMethod(PrayerTimes.methods.valueOf("Tehran"));
+        String savedCalcMethode = StorageManager.loadCalculationMethode(MainPage.this);
+        myPrayerTimes.setMethod(PrayerTimes.methods.valueOf(savedCalcMethode));
         prayerTimesData calculatedTimes = null;
         try {
-
-            //TODO coordination has to be gotton from related class data
-            calculatedTimes = myPrayerTimes.getTimes(new int[]{calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH) +1,calendar.get(Calendar.DAY_OF_MONTH)}, new Coordination(+42.9870, - 81.2432), (double) -5, null);
+            int longitude = Integer.parseInt(StorageManager.loadLocation(MainPage.this)[0]);
+            int latitude = Integer.parseInt(StorageManager.loadLocation(MainPage.this)[1]);
+            calculatedTimes = myPrayerTimes.getTimes(new int[]{calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH) +1,calendar.get(Calendar.DAY_OF_MONTH)}, new Coordination(latitude, longitude), (double) -5, null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -213,7 +202,6 @@ public class MainPage extends AppCompatActivity {
 
         TextView imsak = (TextView)findViewById(R.id.textView_imsak);
         imsak.setText(calculatedTimes.getImsak().getFormatedTime());
-
     }
 }
 

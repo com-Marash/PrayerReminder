@@ -67,6 +67,7 @@ public class StorageManager {
 
     public static void deleteAlert(int index, Context context) {
         ArrayList<Alert> alertsList = loadAlert(context);
+        AlarmSetter.deleteAlarm(alertsList.get(index).getAlertNumber(), alertsList.get(index).getPrayerName(),context);
         alertsList.remove(index);
 
         // Because we dont know how to delete an specific line from file, we deleted that. And again write all alerts.
@@ -170,5 +171,6 @@ public class StorageManager {
         }
         return null;
     }
+
 }
 

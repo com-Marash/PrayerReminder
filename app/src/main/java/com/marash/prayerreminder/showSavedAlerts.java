@@ -24,13 +24,13 @@ public class showSavedAlerts extends AppCompatActivity {
         setContentView(R.layout.activity_show_saved_alerts);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("Saved Alerts");
 
         showText = (TextView)findViewById(R.id.textView_savedAlertsText);
         showSavedAlertsFunction();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
 
     public void showSavedAlertsFunction(){
 
@@ -58,9 +58,7 @@ public class showSavedAlerts extends AppCompatActivity {
             customAdaptorFor_showAlertLayout myAdaptor = new customAdaptorFor_showAlertLayout(alerts, this);
             prayerListView.setAdapter(myAdaptor);
         }else {
-            Log.d("mamama", "showSavedAlertsFunction: ");
             showText.setText("There is not any saved alerts to show.");
         }
     }
-
 }

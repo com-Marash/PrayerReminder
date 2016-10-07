@@ -82,7 +82,7 @@ public class Setting extends AppCompatActivity {
 
         if (savedCalcMethode == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
-            builder.setTitle("Choose Calculation Methode").setSingleChoiceItems(methodesItems, 0, new DialogInterface.OnClickListener() {
+            builder.setTitle("Change Calculation Methode").setSingleChoiceItems(methodesItems, 0, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int methodeNumber) {
                     selection = (String) methodesItems[methodeNumber];
@@ -103,7 +103,7 @@ public class Setting extends AppCompatActivity {
             return builder.create();
         }else{
             AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
-            builder.setTitle("Choose Calculation Methode").setSingleChoiceItems(methodesItems, Arrays.asList(methodesItems).indexOf(savedCalcMethode), new DialogInterface.OnClickListener() {
+            builder.setTitle("Change Calculation Methode").setSingleChoiceItems(methodesItems, Arrays.asList(methodesItems).indexOf(savedCalcMethode), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int methodeNumber) {
                     selection = (String) methodesItems[methodeNumber];

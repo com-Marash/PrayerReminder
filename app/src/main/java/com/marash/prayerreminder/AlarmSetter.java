@@ -25,20 +25,19 @@ public class AlarmSetter {
 
         AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReciever.class);
+
+        intent.putExtra("prayerName", alert.getPrayerName());
+        intent.putExtra("prayerTime", alert.getTime());
+
         PendingIntent alarmIntent = PendingIntent.getBroadcast(context, alert.getAlertNumber(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Calendar alertCalendar = prayerTimesCalculator.getPrayerTime(alert.getPrayerName(), Calendar.getInstance());
+        alertCalendar.add(Calendar.MINUTE, alert.getTime());
 
-        //TODO,write the real numbers here
-        alertCalendar.add(Calendar.MINUTE,alert.getTime());
-        alertCalendar = Calendar.getInstance();
-        alertCalendar.set(Calendar.SECOND,10);
-        Log.d("createOrUpdateAlarm", alertCalendar.toString());
+        //Log.d("createOrUpdateAlarm", alertCalendar.toString());
 
         alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
 
-        //for set timesUpActivity String TextView.
-        TimesUpActivity.setAlarmText(alert.getTime(),alert.getPrayerName());
     }
 
     public static void deleteAlarm(int alarmRandomNumber, String prayerName, Context context){
@@ -48,7 +47,5 @@ public class AlarmSetter {
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(alarmIntent);
-
-        //TODO what to do with prayerName
     }
 }

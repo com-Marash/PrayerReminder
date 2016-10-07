@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,22 +33,16 @@ public class LocationBuilder{
         this.locm = mylocm;
     }
 
-
     public LocationListener getLocl(){
         return locl;
     }
+
     public void setLocationListener(final Context context, final TextView tv){
 
         this.locl = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
 
-                /*----------to get City-Name from coordinates ------------- */
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    Log.d("no permission granted", "onLocationChanged: ");
-                    // TODO: get permission
-                    return;
-                }
                 Geocoder gcd = new Geocoder(context, Locale.getDefault());
                 String localityName = "unknwon city";
                 String countryName = "unknown country";
@@ -69,22 +64,24 @@ public class LocationBuilder{
                 StorageManager.saveLocation(location.getLongitude(),location.getLatitude(),countryName,localityName,context);
                 prayerTimesCalculator.setCoordination(location.getLatitude(),location.getLongitude());
 
+                   /*----------to get City-Name from coordinates ------------- */
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    Log.d("no permission granted", "onLocationChanged: ");
+                    return;
+                }
                 locm.removeUpdates(locl);
             }
 
             @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {
-
             }
 
             @Override
             public void onProviderEnabled(String provider) {
-
             }
 
             @Override
             public void onProviderDisabled(String provider) {
-
             }
         };
     }
@@ -108,8 +105,6 @@ public class LocationBuilder{
     }
 
     public void Network_Function(Context context){
-
-
         if (Build.VERSION.SDK_INT >= 23) {
             if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);

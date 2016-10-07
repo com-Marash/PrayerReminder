@@ -43,8 +43,6 @@ public class setAlerts extends AppCompatActivity {
     public void setPrayerTime(){
 
         // in this part, we get the name of prayer we want to set alert for that.
-
-
         saveButton = (Button)findViewById(R.id.button_saveAlert);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +50,6 @@ public class setAlerts extends AppCompatActivity {
 
                 selectedPrayerText = null;
                 selectedBeforeAfterText = null;
-
 
                 prayersButGroup = (RadioGroup)findViewById(R.id.prayerGroup);
                 int selectedPrayerId = prayersButGroup.getCheckedRadioButtonId();
@@ -64,7 +61,6 @@ public class setAlerts extends AppCompatActivity {
                 // here, we get the preferable time from user.
                 timetext = (EditText)findViewById(R.id.editText_preferableTime);
                 desiredTime = Integer.parseInt(String.valueOf(timetext.getText()));
-
 
                 if((selectedPrayerId == -1) && (selectedTimeId == -1) && (timetext.getText().toString().matches(""))) {
                     Toast.makeText(setAlerts.this, "Please complete all parts", Toast.LENGTH_LONG).show();
@@ -141,9 +137,9 @@ public class setAlerts extends AppCompatActivity {
                 }
             }
         });
-
     }
 
-
-
+    public void cancelAlertFunction(View view) {
+        finish();
+    }
 }

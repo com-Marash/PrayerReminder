@@ -101,12 +101,10 @@ public class FirstUsage extends Activity{
                     try {
                         myLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, lb.getLocl());
                     } catch (SecurityException e) {
+                        Toast.makeText(FirstUsage.this,"Cannot update location with GPS", Toast.LENGTH_LONG);
                     }
                 } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                    // todo: Show a message to user that you denied the permission
+                    Toast.makeText(FirstUsage.this,"Cannot update location without GPS permission", Toast.LENGTH_LONG);
                 }
                 return;
             }
@@ -115,12 +113,10 @@ public class FirstUsage extends Activity{
                     try {
                         myLocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, lb.getLocl());
                     } catch (SecurityException e) {
+                        Toast.makeText(FirstUsage.this,"Cannot update location with Network", Toast.LENGTH_LONG);
                     }
                 } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                    // todo: Show a message to user that you denied the permission
+                    Toast.makeText(FirstUsage.this,"Cannot update location without Network permission", Toast.LENGTH_LONG);
                 }
                 return;
             }
