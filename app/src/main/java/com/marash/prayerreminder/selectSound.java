@@ -61,7 +61,7 @@ public class selectSound extends AppCompatActivity {
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_RINGTONE);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select a ringtone as your prayer alarm");
 
-        if(existingRingtone==null){
+        if(existingRingtone == null){
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, Settings.System.DEFAULT_RINGTONE_URI);
 
         }else{

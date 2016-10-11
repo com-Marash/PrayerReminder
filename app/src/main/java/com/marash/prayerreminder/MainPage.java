@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,33 +38,27 @@ public class MainPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_page);
 
         setMainAlarm();
 
-        showDateText = (TextView) findViewById(R.id.editTextShowDate);
-        goToTodayText = (TextView) findViewById(R.id.textView_goToToday);
-        nextDayButton = (Button) findViewById(R.id.buttonNextDay);
-        previousDayButton = (Button) findViewById(R.id.buttonPreviousDay);
-
-        calendar.setTime(new Date());
-        setListeners();
-        showDateInformation();
-
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
         //FirstUse Handler
-        SharedPreferences prefs = getSharedPreferences("FirstUsePreferences", MODE_PRIVATE);
-        boolean isFirstUsage = prefs.getBoolean("first_usage", true);
+        if(isLocationAvailable(MainPage.this) && isCalculationAvailable(MainPage.this)){
+            setContentView(R.layout.activity_main_page);
 
-        if(isFirstUsage) {
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("first_usage", false);
-            editor.commit();
+            showDateText = (TextView) findViewById(R.id.editTextShowDate);
+            goToTodayText = (TextView) findViewById(R.id.textView_goToToday);
+            nextDayButton = (Button) findViewById(R.id.buttonNextDay);
+            previousDayButton = (Button) findViewById(R.id.buttonPreviousDay);
 
+            calendar.setTime(new Date());
+            setListeners();
+
+            showDateInformation();
+        }else {
             Intent firstUsageIntent = new Intent("com.marash.prayerreminder.FirstUsage");
             startActivity(firstUsageIntent);
         }
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
@@ -84,6 +79,24 @@ public class MainPage extends AppCompatActivity {
                 startActivity(settingIntent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean isLocationAvailable(Context context){
+        String[] temp = StorageManager.loadLocation(context);
+        if(temp == null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    private boolean isCalculationAvailable(Context context){
+        String temp = StorageManager.loadCalculationMethode(context);
+        if(temp == null){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     private void setMainAlarm() {
@@ -168,40 +181,44 @@ public class MainPage extends AppCompatActivity {
         String savedCalcMethode = StorageManager.loadCalculationMethode(MainPage.this);
         myPrayerTimes.setMethod(PrayerTimes.methods.valueOf(savedCalcMethode));
         prayerTimesData calculatedTimes = null;
+        String[] temp = StorageManager.loadLocation(MainPage.this);
         try {
-            int longitude = Integer.parseInt(StorageManager.loadLocation(MainPage.this)[0]);
-            int latitude = Integer.parseInt(StorageManager.loadLocation(MainPage.this)[1]);
+            Double longitude = Double.parseDouble(temp[0]);
+            Double latitude = Double.parseDouble(temp[1]);
+
             calculatedTimes = myPrayerTimes.getTimes(new int[]{calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH) +1,calendar.get(Calendar.DAY_OF_MONTH)}, new Coordination(latitude, longitude), (double) -5, null);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        TextView fajr = (TextView)findViewById(R.id.textView_fajr);
-        fajr.setText(calculatedTimes.getFajr().getFormatedTime());
+        if(calculatedTimes != null) {
+            TextView fajr = (TextView) findViewById(R.id.textView_fajr);
+            fajr.setText(calculatedTimes.getFajr().getFormatedTime());
 
-        TextView sunrise = (TextView)findViewById(R.id.textView_sunrise);
-        sunrise.setText(calculatedTimes.getSunrise().getFormatedTime());
+            TextView sunrise = (TextView) findViewById(R.id.textView_sunrise);
+            sunrise.setText(calculatedTimes.getSunrise().getFormatedTime());
 
-        TextView Dhuhr = (TextView)findViewById(R.id.textView_Dhuhr);
-        Dhuhr.setText(calculatedTimes.getDhuhr().getFormatedTime());
+            TextView Dhuhr = (TextView) findViewById(R.id.textView_Dhuhr);
+            Dhuhr.setText(calculatedTimes.getDhuhr().getFormatedTime());
 
-        TextView asr = (TextView)findViewById(R.id.textView_asr);
-        asr.setText(calculatedTimes.getAsr().getFormatedTime());
+            TextView asr = (TextView) findViewById(R.id.textView_asr);
+            asr.setText(calculatedTimes.getAsr().getFormatedTime());
 
-        TextView sunset = (TextView)findViewById(R.id.textView_sunset);
-        sunset.setText(calculatedTimes.getSunset().getFormatedTime());
+            TextView sunset = (TextView) findViewById(R.id.textView_sunset);
+            sunset.setText(calculatedTimes.getSunset().getFormatedTime());
 
-        TextView maghrib = (TextView)findViewById(R.id.textView_maghrib);
-        maghrib.setText(calculatedTimes.getMaghrib().getFormatedTime());
+            TextView maghrib = (TextView) findViewById(R.id.textView_maghrib);
+            maghrib.setText(calculatedTimes.getMaghrib().getFormatedTime());
 
-        TextView isha = (TextView)findViewById(R.id.textView_isha);
-        isha.setText(calculatedTimes.getIsha().getFormatedTime());
+            TextView isha = (TextView) findViewById(R.id.textView_isha);
+            isha.setText(calculatedTimes.getIsha().getFormatedTime());
 
-        TextView midnight = (TextView)findViewById(R.id.textView_midnight);
-        midnight.setText(calculatedTimes.getMidnight().getFormatedTime());
+            TextView midnight = (TextView) findViewById(R.id.textView_midnight);
+            midnight.setText(calculatedTimes.getMidnight().getFormatedTime());
 
-        TextView imsak = (TextView)findViewById(R.id.textView_imsak);
-        imsak.setText(calculatedTimes.getImsak().getFormatedTime());
+            TextView imsak = (TextView) findViewById(R.id.textView_imsak);
+            imsak.setText(calculatedTimes.getImsak().getFormatedTime());
+        }
     }
 }
 

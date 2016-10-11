@@ -5,8 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -27,7 +30,7 @@ public class FirstUsage extends Activity{
 
     private LocationManager myLocManager;
     private TextView tv;
-    private Button okButt;
+    private Button okButt,gpsButt,networkButt;
     private LocationBuilder lb;
 
     @Override
@@ -37,10 +40,20 @@ public class FirstUsage extends Activity{
 
         tv = (TextView)findViewById(R.id.TextView_firstPageCoordination);
         okButt = (Button)findViewById(R.id.firstPageOKButt);
+        gpsButt = (Button)findViewById(R.id.Button_firstPageGPS);
+        networkButt = (Button)findViewById(R.id.Button_firstPageNetwork);
 
         myLocManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         lb = new LocationBuilder(myLocManager);
+
+        //set a default ringtone for the first time. and we save it.
+
+        Uri uri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+        Ringtone ringtone = RingtoneManager.getRingtone(FirstUsage.this.getApplicationContext(), uri);
+        String title = ringtone.getTitle(this);
+        StorageManager.saveAlarmRingtone(title, uri.toString(),FirstUsage.this.getApplicationContext());
+
     }
 
     private void coordinationTextChangedListener(){
@@ -73,6 +86,8 @@ public class FirstUsage extends Activity{
         lb.setLocationListener(FirstUsage.this, tv);
         coordinationTextChangedListener();
         lb.GPS_Function(FirstUsage.this);
+        gpsButt.setEnabled(false);
+        networkButt.setEnabled(false);
     }
 
     public void findLocationByNetwork(View view) {
@@ -81,6 +96,8 @@ public class FirstUsage extends Activity{
            lb.setLocationListener(FirstUsage.this, tv);
            coordinationTextChangedListener();
            lb.Network_Function(FirstUsage.this);
+           gpsButt.setEnabled(false);
+           networkButt.setEnabled(false);
        }else {
            Toast.makeText(this,"You are offline! Please check your connectivity and try again.",Toast.LENGTH_LONG).show();
        }

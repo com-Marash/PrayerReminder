@@ -15,8 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainPage"
-            android:parentActivityName=".FirstUsageSecondPage">
+            android:name=".MainPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,9 +23,6 @@
             <intent-filter>
                 <action android:name="com.marash.prayerreminder.MainPage" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.marash.prayerreminder.FirstUsageSecondPage" />
             </intent-filter>
         </activity>
         <activity

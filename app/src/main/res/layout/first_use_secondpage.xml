@@ -105,6 +105,7 @@
         android:layout_below="@+id/radioGroup"
         android:layout_marginLeft="260dp"
         android:textSize="20dp"
+        android:background="@drawable/button_shape"
         android:enabled="false"
         android:onClick="OKButtFunction"/>
 
