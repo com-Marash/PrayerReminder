@@ -1,6 +1,7 @@
 package com.marash.prayerreminder;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -17,7 +18,11 @@ public class TimesUpActivity extends Activity {
     private static String textViewString;
     Ringtone ringtone;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String caller = getIntent().getStringExtra("caller");
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timesup);
         alarmTextView = (TextView) findViewById(R.id.alarmText);
@@ -27,6 +32,7 @@ public class TimesUpActivity extends Activity {
         Uri ringtoneUri = Uri.parse(ringtoneUriString);
         ringtone = RingtoneManager.getRingtone(this, ringtoneUri);
         ringtone.play();
+
     }
 
     public static void setAlarmText(int time, String prayerName) {
@@ -42,7 +48,9 @@ public class TimesUpActivity extends Activity {
 
     public void stopAlarm(View view) {
 
-        AlarmReciever.wakelock.release();
+        if (AlarmReciever.wakelock.isHeld()){
+            AlarmReciever.wakelock.release();
+        }
         ringtone.stop();
         this.finish();
     }

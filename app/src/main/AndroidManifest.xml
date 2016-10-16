@@ -161,8 +161,16 @@
         </activity>
 
         <activity android:name=".TimesUpActivity"/>
-        <receiver android:name=".AlarmReciever" ></receiver>
-        <receiver android:name=".mainAlarmReciever"/>
+        <receiver android:name=".AlarmReciever" >
+            <intent-filter>
+                <action android:name="com.marash.prayerreminder.AlarmReciever"></action>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".mainAlarmReciever">
+            <intent-filter>
+                <action android:name="com.marash.prayerreminder.mainAlarmReciever"></action>
+            </intent-filter>
+        </receiver>
 
     </application>
 

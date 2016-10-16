@@ -1,14 +1,14 @@
 package com.marash.prayerreminder;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
-import android.support.v4.content.WakefulBroadcastReceiver;
 
 /**
  * Created by Maedeh on 8/23/2016.
  */
-public class AlarmReciever extends WakefulBroadcastReceiver {
+public class AlarmReciever extends BroadcastReceiver {
 
     public static PowerManager.WakeLock wakelock;
 
@@ -22,6 +22,7 @@ public class AlarmReciever extends WakefulBroadcastReceiver {
 
         Intent timesUpIntent = new Intent(context,TimesUpActivity.class);
         timesUpIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        timesUpIntent.putExtra("caller","AlarmReciever");
         TimesUpActivity.setAlarmText(intent.getIntExtra("prayerTime", -1), intent.getStringExtra("prayerName"));
         context.startActivity(timesUpIntent);
     }

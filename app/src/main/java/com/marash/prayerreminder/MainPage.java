@@ -101,7 +101,7 @@ public class MainPage extends AppCompatActivity {
 
     private void setMainAlarm() {
         AlarmManager alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, mainAlarmReciever.class);
+        Intent intent = new Intent("com.marash.prayerreminder.mainAlarmReciever");
         PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Calendar alertCalendar = Calendar.getInstance();

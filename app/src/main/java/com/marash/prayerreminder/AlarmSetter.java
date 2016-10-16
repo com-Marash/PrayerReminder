@@ -25,7 +25,7 @@ public class AlarmSetter {
     public static void createOrUpdateAlarm(Alert alert, Context context){
 
         AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, AlarmReciever.class);
+        Intent intent = new Intent("com.marash.prayerreminder.AlarmReciever");
 
         intent.putExtra("prayerName", alert.getPrayerName());
         intent.putExtra("prayerTime", alert.getTime());
@@ -34,6 +34,9 @@ public class AlarmSetter {
 
         Calendar alertCalendar = prayerTimesCalculator.getPrayerTime(alert.getPrayerName(), Calendar.getInstance());
         alertCalendar.add(Calendar.MINUTE, alert.getTime());
+
+//        alertCalendar = Calendar.getInstance();
+//        alertCalendar.add(Calendar.SECOND, 10);
 
         //Log.d("createOrUpdateAlarm", alertCalendar.toString());
 

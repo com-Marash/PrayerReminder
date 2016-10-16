@@ -11,5 +11,6 @@ public class mainAlarmReciever extends WakefulBroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         AlarmSetter.createOrUpdateAllAlarms(context);
+        this.completeWakefulIntent(intent);
     }
 }
