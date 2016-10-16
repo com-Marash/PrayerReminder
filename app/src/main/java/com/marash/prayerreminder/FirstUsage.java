@@ -1,6 +1,7 @@
 package com.marash.prayerreminder;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -32,6 +33,7 @@ public class FirstUsage extends Activity{
     private TextView tv;
     private Button okButt,gpsButt,networkButt;
     private LocationBuilder lb;
+    private ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,11 @@ public class FirstUsage extends Activity{
         okButt = (Button)findViewById(R.id.firstPageOKButt);
         gpsButt = (Button)findViewById(R.id.Button_firstPageGPS);
         networkButt = (Button)findViewById(R.id.Button_firstPageNetwork);
+
+        pd = new ProgressDialog(FirstUsage.this);
+        pd.setTitle("Loading Location");
+        pd.setMessage("Please wait while the application is retrieving your location.");
+        pd.setCancelable(false);
 
         myLocManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -70,6 +77,7 @@ public class FirstUsage extends Activity{
             public void afterTextChanged(Editable s) {
                 okButt.setEnabled(true);
                 tv.removeTextChangedListener(this);
+                pd.dismiss();
             }
         });
     }
@@ -88,7 +96,8 @@ public class FirstUsage extends Activity{
         lb.GPS_Function(FirstUsage.this);
         gpsButt.setEnabled(false);
         networkButt.setEnabled(false);
-    }
+        pd.show();
+}
 
     public void findLocationByNetwork(View view) {
 
@@ -98,6 +107,7 @@ public class FirstUsage extends Activity{
            lb.Network_Function(FirstUsage.this);
            gpsButt.setEnabled(false);
            networkButt.setEnabled(false);
+           pd.show();
        }else {
            Toast.makeText(this,"You are offline! Please check your connectivity and try again.",Toast.LENGTH_LONG).show();
        }
