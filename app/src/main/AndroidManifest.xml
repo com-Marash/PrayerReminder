@@ -160,6 +160,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.marash.prayerreminder.ExitApplication"
+            android:theme="@android:style/Theme.NoDisplay"
+            android:autoRemoveFromRecents="true"/>
+
         <activity android:name=".TimesUpActivity"/>
         <receiver android:name=".AlarmReciever" >
             <intent-filter>

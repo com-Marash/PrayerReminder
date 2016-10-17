@@ -52,6 +52,6 @@ public class TimesUpActivity extends Activity {
             AlarmReciever.wakelock.release();
         }
         ringtone.stop();
-        this.finish();
+        ExitApplication.exitApp(TimesUpActivity.this);
     }
 }
