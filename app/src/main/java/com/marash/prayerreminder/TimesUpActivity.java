@@ -20,8 +20,6 @@ public class TimesUpActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String caller = getIntent().getStringExtra("caller");
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timesup);

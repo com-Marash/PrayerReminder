@@ -24,7 +24,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:textSize="20dp"
+        android:textSize="21dp"
         android:textColor="#FF3C6414"
         android:clickable="true"
         android:onClick="onClick"
@@ -41,16 +41,16 @@
         android:id="@+id/textView_goToToday"
         android:layout_below="@+id/editTextShowDate"
         android:layout_centerHorizontal="true"
-        android:text="Return to today"
-        android:textColor="#c10202"
-        android:textSize="15sp"
+        android:text="Go to today"
+        android:textColor="#7028a4"
+        android:textSize="20dp"
         android:clickable="true"
         android:onClick="onClick"
         android:background="@drawable/roundedcorner"
         android:textStyle="bold"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:layout_marginTop="3dp"/>
+        android:layout_marginTop="8dp"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"

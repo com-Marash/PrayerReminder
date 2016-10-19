@@ -1,5 +1,7 @@
 package com.marash.prayerreminder;
 
+import android.util.Log;
+
 import com.marash.prayerTimes.dto.PrayerTimesDate;
 import com.marash.prayerTimes.dto.prayerTimesData;
 import com.marash.prayerTimes.main.PrayerTimes;
@@ -23,7 +25,7 @@ public class prayerTimesCalculator {
 
     public static Calendar getPrayerTime(String prayerType, Calendar calendar){
 
-        prayerTimesData calculatedPrayerTimes = prayerTimes.getTimes(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH), longitude, latitude);
+        prayerTimesData calculatedPrayerTimes = prayerTimes.getTimes(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH), latitude, longitude);
 
         Calendar result = (Calendar) calendar.clone();
         PrayerTimesDate calculatedPrayerTime = null;
@@ -36,6 +38,7 @@ public class prayerTimesCalculator {
                 break;
             case "Dhuhr":
                 calculatedPrayerTime = calculatedPrayerTimes.getDhuhr();
+                Log.d("dhuhr", ""+calculatedPrayerTime.getHour() + "" + calculatedPrayerTime.getMin());
                 break;
             case "Asr":
                 calculatedPrayerTime = calculatedPrayerTimes.getAsr();
@@ -60,9 +63,8 @@ public class prayerTimesCalculator {
         }
         if (calculatedPrayerTime != null) {
             result.set(Calendar.HOUR, calculatedPrayerTime.getHour());
-            result.set(Calendar.MINUTE, calculatedPrayerTime.getHour());
+            result.set(Calendar.MINUTE, calculatedPrayerTime.getMin());
         }
-
         return result;
     }
 

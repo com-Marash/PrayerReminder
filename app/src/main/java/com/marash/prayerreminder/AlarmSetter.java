@@ -32,13 +32,20 @@ public class AlarmSetter {
 
         PendingIntent alarmIntent = PendingIntent.getBroadcast(context, alert.getAlertNumber(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+
         Calendar alertCalendar = prayerTimesCalculator.getPrayerTime(alert.getPrayerName(), Calendar.getInstance());
+        Log.d("calendarTime1",alertCalendar.toString());
+        Log.d("minute1", alertCalendar.get(Calendar.MINUTE) + " " + alertCalendar.get(Calendar.HOUR));
+        Log.d("Alert.gettime", "" + alert.getTime());
         alertCalendar.add(Calendar.MINUTE, alert.getTime());
+        Log.d("calendarTime2",alertCalendar.toString());
+
 
 //        alertCalendar = Calendar.getInstance();
 //        alertCalendar.add(Calendar.SECOND, 10);
+//        Log.d("createOrUpdateAlarm", alertCalendar.toString());
+//        Log.d("minute2", alertCalendar.MINUTE + " " + alertCalendar.DAY_OF_WEEK + " " + alertCalendar.HOUR_OF_DAY);
 
-        //Log.d("createOrUpdateAlarm", alertCalendar.toString());
 
         if (Build.VERSION.SDK_INT >= 23) {
             alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);

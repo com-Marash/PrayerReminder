@@ -1,13 +1,18 @@
 package com.marash.prayerreminder;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +23,8 @@ public class selectLocation extends AppCompatActivity {
     private TextView locationText;
     private LocationBuilder lb;
     private String[] lastKnownLocationText;
+    private ProgressDialog pd;
+    private Button confirmButt,gpsButt,networkButt;
 
 
     @Override
@@ -27,8 +34,22 @@ public class selectLocation extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        confirmButt = (Button)findViewById(R.id.button_confirmLocation);
+        gpsButt = (Button)findViewById(R.id.button_updateLocationGPS);
+        networkButt = (Button)findViewById(R.id.updateLocationNetwork);
         myLocManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         locationText = (TextView) findViewById(R.id.textView_lastKnownLocation);
+
+        pd = new ProgressDialog(selectLocation.this);
+        pd.setTitle("Loading Location");
+        pd.setMessage("Please wait while the application is retrieving your location.");
+        pd.setCancelable(false);
+        pd.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
 
         lb = new LocationBuilder(myLocManager);
 
@@ -53,19 +74,47 @@ public class selectLocation extends AppCompatActivity {
         }
         String longitude = lastKnownLocationText[0];
         String latitude = lastKnownLocationText[1];
-        locationText.setText("Your last known location is: \n"+"Country name: "+country+" City name: "+city+"\n"+
-                                "Your last known Coordination is: \n"+"Longitude: "+longitude+"Latitude: "+latitude);
+        locationText.setText("Your last known location is: \n"+country+", "+city+"\n"+
+                                "Last known Coordination is: \n"+"Longitude: "+longitude+", Latitude: "+latitude);
     }
+
+    private void coordinationTextChangedListener(){
+        locationText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                confirmButt.setEnabled(true);
+                locationText.removeTextChangedListener(this);
+                pd.dismiss();
+            }
+        });
+    }
+
 
     public void updateLocationByGPSFunction(View view) {
         lb.setLocationListener(selectLocation.this, locationText);
+        coordinationTextChangedListener();
         lb.GPS_Function(selectLocation.this);
+        gpsButt.setEnabled(false);
+        networkButt.setEnabled(false);
+        pd.show();
     }
 
     public void updateLocationByNetworkFunction(View view) {
         if (isNetworkAvailable()){
             lb.setLocationListener(selectLocation.this, locationText);
+            coordinationTextChangedListener();
             lb.Network_Function(selectLocation.this);
+            gpsButt.setEnabled(false);
+            networkButt.setEnabled(false);
+            pd.show();
         }else {
             Toast.makeText(this,"You are offline! Please check your connectivity and try again.",Toast.LENGTH_LONG).show();
         }

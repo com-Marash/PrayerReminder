@@ -92,13 +92,13 @@ public class LocationBuilder{
                 ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
             } else {
                 try {
-                    locm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locl);
+                    locm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 2000, locl);
                 } catch (SecurityException e) {
                 }
             }
         } else {
             try {
-                locm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locl);
+                locm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 2000, locl);
             } catch (SecurityException e) {
             }
         }

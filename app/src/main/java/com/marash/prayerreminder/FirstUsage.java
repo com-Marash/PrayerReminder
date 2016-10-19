@@ -3,6 +3,7 @@ package com.marash.prayerreminder;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
@@ -49,7 +50,12 @@ public class FirstUsage extends Activity{
         pd.setTitle("Loading Location");
         pd.setMessage("Please wait while the application is retrieving your location.");
         pd.setCancelable(false);
-
+        pd.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
         myLocManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         lb = new LocationBuilder(myLocManager);
@@ -116,7 +122,7 @@ public class FirstUsage extends Activity{
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        return (activeNetworkInfo != null && activeNetworkInfo.isConnected());
     }
 
     @Override
@@ -126,7 +132,7 @@ public class FirstUsage extends Activity{
 
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     try {
-                        myLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, lb.getLocl());
+                        myLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 2000, lb.getLocl());
                     } catch (SecurityException e) {
                         Toast.makeText(FirstUsage.this,"Cannot update location with GPS", Toast.LENGTH_LONG);
                     }
