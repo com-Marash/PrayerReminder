@@ -62,7 +62,7 @@ public class prayerTimesCalculator {
                 return null;
         }
         if (calculatedPrayerTime != null) {
-            result.set(Calendar.HOUR, calculatedPrayerTime.getHour());
+            result.set(Calendar.HOUR_OF_DAY, calculatedPrayerTime.getHour());
             result.set(Calendar.MINUTE, calculatedPrayerTime.getMin());
         }
         return result;
