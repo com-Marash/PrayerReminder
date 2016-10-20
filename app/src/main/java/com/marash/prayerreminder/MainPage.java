@@ -42,7 +42,7 @@ public class MainPage extends AppCompatActivity {
         setMainAlarm();
 
         //FirstUse Handler
-        if(isLocationAvailable(MainPage.this) && isCalculationAvailable(MainPage.this)){
+        if(isLocationAvailable(MainPage.this) && isMethodeAvailable(MainPage.this)){
             setContentView(R.layout.activity_main_page);
 
             showDateText = (TextView) findViewById(R.id.editTextShowDate);
@@ -59,6 +59,14 @@ public class MainPage extends AppCompatActivity {
             startActivity(firstUsageIntent);
         }
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     @Override
@@ -90,7 +98,7 @@ public class MainPage extends AppCompatActivity {
         }
     }
 
-    private boolean isCalculationAvailable(Context context){
+    private boolean isMethodeAvailable(Context context){
         String temp = StorageManager.loadCalculationMethode(context);
         if(temp == null){
             return false;
