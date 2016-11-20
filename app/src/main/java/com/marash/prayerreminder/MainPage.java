@@ -193,8 +193,9 @@ public class MainPage extends AppCompatActivity {
         try {
             Double longitude = Double.parseDouble(temp[0]);
             Double latitude = Double.parseDouble(temp[1]);
+            prayerTimesCalculator.setCoordination(latitude, longitude);
 
-            calculatedTimes = myPrayerTimes.getTimes(new int[]{calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH) +1,calendar.get(Calendar.DAY_OF_MONTH)}, new Coordination(latitude, longitude), (double) -5, null);
+            calculatedTimes = myPrayerTimes.getTimes(new int[]{calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH) +1,calendar.get(Calendar.DAY_OF_MONTH)}, new Coordination(latitude, longitude));
         } catch (Exception e) {
             e.printStackTrace();
         }

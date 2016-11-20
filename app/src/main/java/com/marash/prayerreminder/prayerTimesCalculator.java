@@ -38,7 +38,6 @@ public class prayerTimesCalculator {
                 break;
             case "Dhuhr":
                 calculatedPrayerTime = calculatedPrayerTimes.getDhuhr();
-                Log.d("dhuhr", ""+calculatedPrayerTime.getHour() + "" + calculatedPrayerTime.getMin());
                 break;
             case "Asr":
                 calculatedPrayerTime = calculatedPrayerTimes.getAsr();
@@ -64,6 +63,9 @@ public class prayerTimesCalculator {
         if (calculatedPrayerTime != null) {
             result.set(Calendar.HOUR_OF_DAY, calculatedPrayerTime.getHour());
             result.set(Calendar.MINUTE, calculatedPrayerTime.getMin());
+            Log.d("hour",calculatedPrayerTime.getHour()+"");
+            Log.d("min",calculatedPrayerTime.getMin()+"");
+            Log.d("lati - longi", latitude + " "+longitude);
         }
         return result;
     }

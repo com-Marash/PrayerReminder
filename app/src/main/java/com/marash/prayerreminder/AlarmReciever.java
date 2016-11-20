@@ -22,7 +22,7 @@ public class AlarmReciever extends BroadcastReceiver {
 
         Intent timesUpIntent = new Intent(context,TimesUpActivity.class);
         timesUpIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        timesUpIntent.putExtra("caller","AlarmReciever");
+        //timesUpIntent.putExtra("caller","AlarmReciever");
         TimesUpActivity.setAlarmText(intent.getIntExtra("prayerTime", -1), intent.getStringExtra("prayerName"));
         context.startActivity(timesUpIntent);
     }
