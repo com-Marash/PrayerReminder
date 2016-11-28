@@ -35,7 +35,7 @@ public class showSavedAlerts extends AppCompatActivity {
 
         savedAlerts = StorageManager.loadAlert(showSavedAlerts.this.getApplicationContext());
 
-        if(!(savedAlerts.isEmpty())) {
+        if( savedAlerts != null && !(savedAlerts.isEmpty())) {
             alerts = new ArrayList<String>();
             String st;
 
