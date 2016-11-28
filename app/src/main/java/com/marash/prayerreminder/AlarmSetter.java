@@ -27,12 +27,16 @@ public class AlarmSetter {
         Calendar alertCalendar = prayerTimesCalculator.getPrayerTime(alert.getPrayerName(), Calendar.getInstance());
         Log.d("calendarTime1",alertCalendar.toString());
         Log.d("minute1", alertCalendar.get(Calendar.MINUTE) + " " + alertCalendar.get(Calendar.HOUR_OF_DAY));
-        Log.d("Alert.gettime", "" + alert.getTime());
-        alertCalendar.add(Calendar.MINUTE, alert.getTime());
-        Log.d("calendarTime2",alertCalendar.toString());
-        Log.d("Time in millis",alertCalendar.getTimeInMillis()+"");
-        Log.d("Current time millis", System.currentTimeMillis()+"");
 
+        alertCalendar.add(Calendar.MINUTE, alert.getTime());
+        if(alertCalendar.getTimeInMillis() < Calendar.getInstance().getTimeInMillis()){
+            Calendar tomorrowCalendar = Calendar.getInstance();
+            tomorrowCalendar.add(Calendar.DAY_OF_YEAR,1);
+            alertCalendar = prayerTimesCalculator.getPrayerTime(alert.getPrayerName(),tomorrowCalendar);
+            alertCalendar.add(Calendar.MINUTE, alert.getTime());
+        }
+
+        Log.d("minute1", alertCalendar.get(Calendar.MINUTE) + " " + alertCalendar.get(Calendar.HOUR_OF_DAY));
 
         AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent("com.marash.prayerreminder.AlarmReciever");

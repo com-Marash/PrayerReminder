@@ -24,10 +24,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Change the ringtone for prayers alarm"
+        android:text="Change Alarm ringtone"
         android:background="@drawable/button_shape"
         android:id="@+id/button_changePrayerAlarm"
         android:layout_below="@+id/textView_soundText"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="89dp" />
+        android:layout_marginTop="89dp"
+        android:onClick="changeAlarmRingtone"/>
 </RelativeLayout>
