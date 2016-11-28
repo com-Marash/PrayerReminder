@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -114,10 +115,14 @@ public class MainPage extends AppCompatActivity {
 
         Calendar alertCalendar = Calendar.getInstance();
         alertCalendar.set(Calendar.HOUR,23);
-        alertCalendar.set(Calendar.MINUTE,59);
+        alertCalendar.set(Calendar.MINUTE,54);
         alertCalendar.set(Calendar.SECOND,59);
 
-        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), 24 * 3600 * 1000, alarmIntent);
+        if (Build.VERSION.SDK_INT >= 23) {
+            alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
+        }else{
+            alarmMgr.setExact(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
+        }
 
     }
 
