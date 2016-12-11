@@ -40,7 +40,6 @@ public class AlarmSetter {
 
         AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent("com.marash.prayerreminder.AlarmReciever");
-
         intent.putExtra("prayerName", alert.getPrayerName());
         intent.putExtra("prayerTime", alert.getTime());
 
@@ -52,15 +51,33 @@ public class AlarmSetter {
             alarmMgr.setExact(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
             //alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
         }
-
     }
 
     public static void deleteAlarm(int alarmRandomNumber, String prayerName, Context context){
-
-        Intent intent = new Intent(context, AlarmReciever.class);
+        Intent intent = new Intent("com.marash.prayerreminder.AlarmReciever");
         PendingIntent alarmIntent = PendingIntent.getBroadcast(context,alarmRandomNumber,intent,PendingIntent.FLAG_CANCEL_CURRENT);
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(alarmIntent);
+        alarmIntent.cancel();
+    }
+
+    public static void setMainAlarm(Context context) {
+        AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent("com.marash.prayerreminder.mainAlarmReciever");
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Calendar alertCalendar = Calendar.getInstance();
+
+        alertCalendar.set(Calendar.HOUR,12);
+        alertCalendar.set(Calendar.MINUTE,40);
+        alertCalendar.set(Calendar.SECOND,59);
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
+        }else{
+            alarmMgr.setExact(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
+        }
+
     }
 }

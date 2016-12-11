@@ -5,15 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 public class showSavedAlerts extends AppCompatActivity {
 
-    private ArrayList<Alert> savedAlerts;
     private TextView showText;
-    private String savedAlertPrayerName;
-    private int savedAlertTime;
 
     ListView prayerListView;
     ArrayList<String> alerts;
@@ -33,15 +29,15 @@ public class showSavedAlerts extends AppCompatActivity {
 
     public void showSavedAlertsFunction(){
 
-        savedAlerts = StorageManager.loadAlert(showSavedAlerts.this.getApplicationContext());
+        ArrayList<Alert> savedAlerts = StorageManager.loadAlert(showSavedAlerts.this.getApplicationContext());
 
         if( savedAlerts != null && !(savedAlerts.isEmpty())) {
             alerts = new ArrayList<String>();
             String st;
 
             for (Alert a : savedAlerts) {
-                savedAlertPrayerName = a.getPrayerName();
-                savedAlertTime = a.getTime();
+                String savedAlertPrayerName = a.getPrayerName();
+                int savedAlertTime = a.getTime();
                 if (savedAlertTime < 0) {
                     savedAlertTime = -savedAlertTime;
                     st = savedAlertTime + " minutes before " + savedAlertPrayerName;

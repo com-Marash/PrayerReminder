@@ -19,10 +19,8 @@ import android.widget.Toast;
 
 public class selectLocation extends AppCompatActivity {
 
-    private LocationManager myLocManager;
     private TextView locationText;
     private LocationBuilder lb;
-    private String[] lastKnownLocationText;
     private ProgressDialog pd;
     private Button confirmButt,gpsButt,networkButt;
 
@@ -37,7 +35,7 @@ public class selectLocation extends AppCompatActivity {
         confirmButt = (Button)findViewById(R.id.button_confirmLocation);
         gpsButt = (Button)findViewById(R.id.button_updateLocationGPS);
         networkButt = (Button)findViewById(R.id.updateLocationNetwork);
-        myLocManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        LocationManager myLocManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         locationText = (TextView) findViewById(R.id.textView_lastKnownLocation);
 
         pd = new ProgressDialog(selectLocation.this);
@@ -60,7 +58,7 @@ public class selectLocation extends AppCompatActivity {
     }
 
     private void checkForLastKnownLocation(){
-        lastKnownLocationText = StorageManager.loadLocation(selectLocation.this);
+        String[] lastKnownLocationText = StorageManager.loadLocation(selectLocation.this);
         String country = "Unknown";
         String city = "Unknown";
         if(lastKnownLocationText[2] == null && lastKnownLocationText[3] == null){

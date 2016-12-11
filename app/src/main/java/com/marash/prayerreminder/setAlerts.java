@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 
 
@@ -22,10 +23,8 @@ public class setAlerts extends AppCompatActivity {
     private RadioButton selectedBeforeAfter;
     private String selectedBeforeAfterText;
 
-    private EditText timetext;
+    private EditText timeText;
     private int desiredTime;
-
-    private Button saveButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +42,7 @@ public class setAlerts extends AppCompatActivity {
     public void setPrayerTime(){
 
         // in this part, we get the name of prayer we want to set alert for that.
-        saveButton = (Button)findViewById(R.id.button_saveAlert);
+        Button saveButton = (Button)findViewById(R.id.button_saveAlert);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,22 +58,22 @@ public class setAlerts extends AppCompatActivity {
                 int selectedTimeId = beforeAfterGroup.getCheckedRadioButtonId();
 
                 // here, we get the preferable time from user.
-                timetext = (EditText)findViewById(R.id.editText_preferableTime);
-                desiredTime = Integer.parseInt(String.valueOf(timetext.getText()));
+                timeText = (EditText)findViewById(R.id.editText_preferableTime);
+                desiredTime = Integer.parseInt(String.valueOf(timeText.getText()));
 
-                if((selectedPrayerId == -1) && (selectedTimeId == -1) && (timetext.getText().toString().matches(""))) {
+                if((selectedPrayerId == -1) && (selectedTimeId == -1) && (timeText.getText().toString().matches(""))) {
                     Toast.makeText(setAlerts.this, "Please complete all parts", Toast.LENGTH_LONG).show();
                 }else if((selectedPrayerId == -1) && (selectedTimeId == -1)){
                     Toast.makeText(setAlerts.this, "Please select one prayer and a time from two option, before or after prayer.", Toast.LENGTH_LONG).show();
-                }else if((selectedTimeId == -1) && (timetext.getText().toString().matches(""))){
+                }else if((selectedTimeId == -1) && (timeText.getText().toString().matches(""))){
                     Toast.makeText(setAlerts.this, "Please select a time from two option, before or after prayer and set a time for that.", Toast.LENGTH_LONG).show();
-                }else if((selectedPrayerId == -1) && (timetext.getText().toString().matches(""))){
+                }else if((selectedPrayerId == -1) && (timeText.getText().toString().matches(""))){
                     Toast.makeText(setAlerts.this, "Please select one prayer and set a time for that.", Toast.LENGTH_LONG).show();
                 }else if(selectedPrayerId == -1){
                     Toast.makeText(setAlerts.this, "Please select one prayer", Toast.LENGTH_LONG).show();
                 }else if(selectedTimeId == -1){
                     Toast.makeText(setAlerts.this, "Please select a time from two option, before or after prayer.", Toast.LENGTH_LONG).show();
-                }else if(timetext.getText().toString().matches("")){
+                }else if(timeText.getText().toString().matches("")){
                     Toast.makeText(setAlerts.this, "Please set a time for prayer.", Toast.LENGTH_LONG).show();
                 }else{
                     selectedPrayer = (RadioButton)findViewById(selectedPrayerId);
@@ -116,7 +115,7 @@ public class setAlerts extends AppCompatActivity {
                             prayerTimesCalculator.setPrayerTimes(method);
                             AlarmSetter.createOrUpdateAlarm(alert, setAlerts.this.getApplicationContext());
                             ///
-
+                            AlarmSetter.setMainAlarm(setAlerts.this);
                             Toast.makeText(setAlerts.this, "Your new alert has been successfully saved.", Toast.LENGTH_LONG).show();
                             finish();
                         } else {
@@ -129,7 +128,7 @@ public class setAlerts extends AppCompatActivity {
                         String method = StorageManager.loadCalculationMethode(setAlerts.this.getApplicationContext());
                         prayerTimesCalculator.setPrayerTimes(method);
                         AlarmSetter.createOrUpdateAlarm(alert, setAlerts.this.getApplicationContext());
-
+                        AlarmSetter.setMainAlarm(setAlerts.this);
 
                         Toast.makeText(setAlerts.this, "Your new alert has been successfully saved.", Toast.LENGTH_LONG).show();
                         finish();
@@ -138,7 +137,6 @@ public class setAlerts extends AppCompatActivity {
             }
         });
     }
-
     public void cancelAlertFunction(View view) {
         finish();
     }
