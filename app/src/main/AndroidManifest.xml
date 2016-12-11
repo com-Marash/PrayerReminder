@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
 
     <application
@@ -56,6 +57,23 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ShowExpectedTimes"
+            android:label="Show Expected Times"
+            android:parentActivityName=".Setting"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.marash.prayerreminder.Setting" />
+
+            <intent-filter>
+                <action android:name="com.marash.prayerreminder.ShowExpectedTimes" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
         <activity
             android:name=".setAlerts"
             android:label="@string/title_activity_set_alerts"
@@ -173,12 +191,19 @@
                 <action android:name="com.marash.prayerreminder.AlarmReciever"></action>
             </intent-filter>
         </receiver>
+
         <receiver android:name=".mainAlarmReciever">
             <intent-filter>
                 <action android:name="com.marash.prayerreminder.mainAlarmReciever"></action>
             </intent-filter>
         </receiver>
 
+        <receiver android:name=".DeviceBootReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

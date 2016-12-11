@@ -72,4 +72,16 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/button_setAlerts" />
 
+    <Button
+        app:layout_widthPercent="75%"
+        app:layout_heightPercent="8%"
+        app:layout_marginTopPercent="5%"
+        android:text="Expected alerts times"
+        android:background="@drawable/button_shape"
+        android:id="@+id/button_ExpectedAlerts"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/button_showSavedAlerts"
+        android:onClick="ExpectedAlertsFunction"/>
+
+
 </android.support.percent.PercentRelativeLayout>

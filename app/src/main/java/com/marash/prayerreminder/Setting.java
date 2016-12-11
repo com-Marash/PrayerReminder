@@ -165,4 +165,9 @@ public class Setting extends AppCompatActivity {
             }
         });
     }
+
+    public void ExpectedAlertsFunction(View view) {
+        Intent  ExpectedAlertsIntent = new Intent("com.marash.prayerreminder.ShowExpectedTimes");
+        startActivity(ExpectedAlertsIntent);
+    }
 }
