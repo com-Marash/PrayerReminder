@@ -42,7 +42,7 @@ public class ShowExpectedTimes extends AppCompatActivity {
         }else{
             for (Alert alert : savedAlerts) {
                 alarmIntent = PendingIntent.getBroadcast(ShowExpectedTimes.this, alert.getAlertNumber(),
-                        new Intent("com.marash.prayerreminder.AlarmReciever" + alert.getAlertNumber()), PendingIntent.FLAG_NO_CREATE);
+                        new Intent("com.marash.prayerreminder.AlarmReciever"), PendingIntent.FLAG_NO_CREATE);
                 if (alarmIntent != null) {
                     st += "alarm type: " + alert.getPrayerName() + " , alarm time: " + alert.getTime() + "\n";
                     Log.d("ExpectedAlert", "" + alarmIntent.toString());
