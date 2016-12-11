@@ -1,6 +1,8 @@
 package com.marash.prayerreminder;
 
 import android.content.Context;
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Maedeh on 2/22/2016.
@@ -34,9 +38,9 @@ public class StorageManager {
             out.write(alert.getPrayerName() + "," + alert.getTime() + "," + alert.getAlertNumber() + "\n");
             out.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
     }
 
@@ -59,7 +63,7 @@ public class StorageManager {
             inputReader.close();
             return alertsList;
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
         return null;
     }
@@ -80,9 +84,9 @@ public class StorageManager {
             }
             out.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
     }
 
@@ -94,7 +98,7 @@ public class StorageManager {
             out.write(ringtoneTitle+ "\n"+URIString);
             out.close();
         }catch (IOException e){
-            e.printStackTrace();
+
 
         }
     }
@@ -110,7 +114,7 @@ public class StorageManager {
             return result;
 
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
         return null;
     }
@@ -122,9 +126,9 @@ public class StorageManager {
             out.write(calcMethod);
             out.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
     }
 
@@ -138,7 +142,7 @@ public class StorageManager {
             return temp;
 
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
         return null;
     }
@@ -150,9 +154,9 @@ public class StorageManager {
             out.write(longitude+"\n"+latitude+"\n"+country+"\n"+city);
             out.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
     }
 
@@ -167,7 +171,7 @@ public class StorageManager {
             inputReader.close();
             return temp;
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
         return null;
     }
