@@ -4,8 +4,8 @@
     <style name="mainTable">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginLeft">10sp</item>
+        <item name="android:layout_marginRight">10sp</item>
     </style>
 
     <style name="leftColumn">
@@ -14,10 +14,10 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
         <item name="android:background">@drawable/roundedcorner</item>
-        <item name="android:layout_marginRight">3dp</item>
-        <item name="android:layout_marginLeft">70dp</item>
-        <item name="android:layout_marginBottom">3dp</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:layout_marginRight">3sp</item>
+        <item name="android:layout_marginLeft">3sp</item>
+        <item name="android:layout_marginBottom">3sp</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:textColor">#000000</item>
         <item name="android:textAlignment">center</item>
     </style>
@@ -25,12 +25,12 @@
     <style name="rightColumn">
         <item name="android:layout_weight">0.4</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_marginRight">60dp</item>
+        <item name="android:layout_marginRight">3sp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
         <item name="android:background">@drawable/roundedcorner</item>
         <item name="android:textColor">#000000</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:textAlignment">center</item>
     </style>
 

@@ -26,7 +26,7 @@ import android.widget.Toast;
  */
 
 //this class checks for the first time usage. Right after installation. and tries
-    //to set some custom settings by asking the user to select them.
+//to set some custom settings by asking the user to select them.
 
 public class FirstUsage extends Activity{
 
@@ -49,7 +49,6 @@ public class FirstUsage extends Activity{
         pd = new ProgressDialog(FirstUsage.this);
         pd.setTitle("Loading Location");
         pd.setMessage("Please wait while the application is retrieving your location.");
-        pd.setCancelable(false);
         pd.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -100,8 +99,6 @@ public class FirstUsage extends Activity{
         lb.setLocationListener(FirstUsage.this, tv);
         coordinationTextChangedListener();
         lb.GPS_Function(FirstUsage.this);
-        gpsButt.setEnabled(false);
-        networkButt.setEnabled(false);
         pd.show();
 }
 
@@ -111,8 +108,6 @@ public class FirstUsage extends Activity{
            lb.setLocationListener(FirstUsage.this, tv);
            coordinationTextChangedListener();
            lb.Network_Function(FirstUsage.this);
-           gpsButt.setEnabled(false);
-           networkButt.setEnabled(false);
            pd.show();
        }else {
            Toast.makeText(this,"You are offline! Please check your connectivity and try again.",Toast.LENGTH_LONG).show();
@@ -134,10 +129,10 @@ public class FirstUsage extends Activity{
                     try {
                         myLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 2000, lb.getLocl());
                     } catch (SecurityException e) {
-                        Toast.makeText(FirstUsage.this,"Cannot update location with GPS", Toast.LENGTH_LONG);
+                        Toast.makeText(FirstUsage.this,"Cannot update location with GPS", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(FirstUsage.this,"Cannot update location without GPS permission", Toast.LENGTH_LONG);
+                    Toast.makeText(FirstUsage.this,"Cannot update location without GPS permission", Toast.LENGTH_LONG).show();
                 }
                 return;
             }
@@ -146,10 +141,10 @@ public class FirstUsage extends Activity{
                     try {
                         myLocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, lb.getLocl());
                     } catch (SecurityException e) {
-                        Toast.makeText(FirstUsage.this,"Cannot update location with Network", Toast.LENGTH_LONG);
+                        Toast.makeText(FirstUsage.this,"Cannot update location with Network", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(FirstUsage.this,"Cannot update location without Network permission", Toast.LENGTH_LONG);
+                    Toast.makeText(FirstUsage.this,"Cannot update location without Network permission", Toast.LENGTH_LONG).show();
                 }
                 return;
             }

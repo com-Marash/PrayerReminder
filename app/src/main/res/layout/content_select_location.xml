@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Your last known location is:"
+        android:text="@string/last_location"
         android:id="@+id/lastLocationTiltle"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -24,12 +24,12 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Last known location"
+        android:text="@string/lastLocation"
         android:id="@+id/textView_lastKnownLocation"
         android:layout_below="@+id/lastLocationTiltle"
         android:layout_alignRight="@+id/lastLocationTiltle"
         android:layout_alignEnd="@+id/lastLocationTiltle"
-        android:layout_marginTop="58dp" />
+        android:layout_marginTop="58sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
         android:layout_below="@+id/textView_lastKnownLocation"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="55sp"
         android:onClick="updateLocationByGPSFunction"/>
 
     <Button
@@ -53,7 +53,7 @@
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
         android:onClick="updateLocationByNetworkFunction"
-        android:layout_marginTop="25dp"/>
+        android:layout_marginTop="25sp"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -63,6 +63,6 @@
         android:id="@+id/button_confirmLocation"
         android:layout_below="@+id/updateLocationNetwork"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="70dp" />
+        android:layout_marginTop="70sp" />
 
 </RelativeLayout>

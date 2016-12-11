@@ -15,7 +15,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
@@ -57,7 +56,7 @@ public class LocationBuilder{
                             localityName = returnedAddress.getLocality() != null ? returnedAddress.getLocality() : localityName;
                         }
                     }catch (IOException e) {
-                        e.printStackTrace();
+
                     }
                 }
                 tv.setText("Your current location is: " + countryName + "," + localityName + "\n Your current coordination is:\n" + "Longitude: " + location.getLongitude() + "   Latitude: " + location.getLatitude());
@@ -94,12 +93,14 @@ public class LocationBuilder{
                 try {
                     locm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 2000, locl);
                 } catch (SecurityException e) {
+
                 }
             }
         } else {
             try {
                 locm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 2000, locl);
             } catch (SecurityException e) {
+
             }
         }
     }
@@ -112,12 +113,14 @@ public class LocationBuilder{
                 try {
                     locm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, locl);
                 } catch (SecurityException e) {
+
                 }
             }
         } else {
             try {
                 locm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, locl);
             } catch (SecurityException e) {
+
             }
         }
     }

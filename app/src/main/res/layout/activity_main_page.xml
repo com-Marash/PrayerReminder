@@ -18,20 +18,20 @@
         android:layout_height="wrap_content"></android.support.v7.widget.ActionBarContainer>
 
     <TextView
-        android:layout_width="240dp"
+        android:layout_width="240sp"
         android:layout_height="wrap_content"
         android:id="@+id/editTextShowDate"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:textSize="21dp"
+        android:textSize="21sp"
         android:textColor="#FF3C6414"
         android:clickable="true"
         android:onClick="onClick"
         android:textStyle="bold"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="20sp"
         android:background="@drawable/roundedcorner"
-        android:padding="5dp" />
+        android:padding="5sp" />
 
 
     <TextView
@@ -41,45 +41,45 @@
         android:id="@+id/textView_goToToday"
         android:layout_below="@+id/editTextShowDate"
         android:layout_centerHorizontal="true"
-        android:text="Go to today"
+        android:text="@string/GoToday"
         android:textColor="#7028a4"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:clickable="true"
         android:onClick="onClick"
         android:background="@drawable/roundedcorner"
         android:textStyle="bold"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:layout_marginTop="8dp"/>
+        android:paddingLeft="5sp"
+        android:paddingRight="5sp"
+        android:layout_marginTop="8sp"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
         android:text="&gt;"
         android:id="@+id/buttonNextDay"
         android:layout_toEndOf="@+id/editTextShowDate"
-        android:layout_marginStart="10dp"
-        android:textSize="20dp"
+        android:layout_marginStart="10sp"
+        android:textSize="20sp"
         android:background="@drawable/button_shape"
         android:textStyle="bold"
-        android:padding="5dp"
-        android:layout_marginTop="18dp"/>
+        android:padding="5sp"
+        android:layout_marginTop="18sp"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
         android:text="&lt;"
         android:id="@+id/buttonPreviousDay"
         android:layout_toStartOf="@+id/editTextShowDate"
-        android:layout_marginEnd="10dp"
-        android:textSize="20dp"
+        android:layout_marginEnd="10sp"
+        android:textSize="20sp"
         android:background="@drawable/button_shape"
         android:textStyle="bold"
-        android:padding="5dp"
+        android:padding="5sp"
         android:gravity="center"
-        android:layout_marginTop="18dp"/>
+        android:layout_marginTop="18sp"/>
 
     <TableLayout
         android:id="@+id/tableLayout1"
@@ -89,20 +89,20 @@
         <TableRow>
 
             <TextView
-                android:text="Fajr"
+                android:text="@string/Fajr"
                 android:id="@+id/textView_fajrtext"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="60sp"
                 style="@style/leftColumn"/>
 
             <TextView
                 android:id="@+id/textView_fajr"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="60sp"
                 style="@style/rightColumn"/>
         </TableRow>
 
         <TableRow>
             <TextView
-                android:text="Sunrise"
+                android:text="@string/sunrise"
                 android:id="@+id/textView_sunrisetext"
                 style="@style/leftColumn"/>
 
@@ -113,7 +113,7 @@
 
         <TableRow>
             <TextView
-                android:text="Dhuhr"
+                android:text="@string/Dhuhr"
                 android:id="@+id/textView_Dhuhrtext"
                 style="@style/leftColumn"/>
 
@@ -125,7 +125,7 @@
 
         <TableRow>
             <TextView
-                android:text="Asr"
+                android:text="@string/Asr"
                 android:id="@+id/textView_Asrtext"
                 style="@style/leftColumn"/>
 
@@ -136,7 +136,7 @@
 
         <TableRow>
             <TextView
-                android:text="Sunset"
+                android:text="@string/sunset"
                 android:id="@+id/textView_sunsettext"
                 style="@style/leftColumn"/>
 
@@ -147,7 +147,7 @@
 
         <TableRow>
             <TextView
-                android:text="Maghrib"
+                android:text="@string/Maghrib"
                 android:id="@+id/textView_Maghribtext"
                 style="@style/leftColumn"/>
 
@@ -169,7 +169,7 @@
 
         <TableRow>
             <TextView
-                android:text="Midnight"
+                android:text="@string/Midnight"
                 android:id="@+id/textView_midnighttext"
                 style="@style/leftColumn"/>
 

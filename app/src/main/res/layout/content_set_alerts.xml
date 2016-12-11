@@ -16,10 +16,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Set a new alert for:"
+        android:text="@string/setAlertsFor"
         android:id="@+id/textView_setAnewAlertFor"
         android:layout_alignParentTop="true"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textColor="#000000"/>
 
     <RadioGroup
@@ -29,13 +29,13 @@
         android:id="@+id/prayerGroup"
         android:layout_below="@+id/beforeAfter"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="30sp">
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fajr"
-            android:textSize="16dp"
+            android:text="@string/Fajr"
+            android:textSize="16sp"
             android:id="@+id/radioButton_fajr"
             android:checked="false" />
 
@@ -43,39 +43,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sunrise"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:id="@+id/radioButton_sunrise"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dhuhr"
-            android:textSize="16dp"
+            android:text="@string/Dhuhr"
+            android:textSize="16sp"
             android:id="@+id/radioButton_zohr"
             android:checked="false"/>
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Asr"
-            android:textSize="16dp"
+            android:text="@string/Asr"
+            android:textSize="16sp"
             android:id="@+id/radioButton_asr"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sunset"
-            android:textSize="16dp"
+            android:text="@string/sunset"
+            android:textSize="16sp"
             android:id="@+id/radioButton_sunset"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Maghrib"
-            android:textSize="16dp"
+            android:text="@string/Maghrib"
+            android:textSize="16sp"
             android:id="@+id/radioButton_maghrib"
             android:checked="false" />
 
@@ -83,15 +83,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Isha"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:id="@+id/radioButton_isha"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Midnight"
-            android:textSize="16dp"
+            android:text="@string/Midnight"
+            android:textSize="16sp"
             android:id="@+id/radioButton_midnight"
             android:checked="false" />
     </RadioGroup>
@@ -101,71 +101,70 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/beforeAfter"
-        android:layout_marginTop="65dp"
-        android:layout_marginLeft="130dp"
+        android:layout_marginTop="65sp"
+        android:layout_marginLeft="130sp"
         android:layout_alignParentStart="true">
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Before"
-            android:textSize="16dp"
+            android:text="@string/Before"
+            android:textSize="16sp"
             android:id="@+id/radioButton_before"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="After"
-            android:textSize="16dp"
+            android:text="@string/After"
+            android:textSize="16sp"
             android:id="@+id/radioButton_after"
             android:checked="false" />
     </RadioGroup>
 
     <EditText
-        android:layout_width="50dp"
+        android:layout_width="50sp"
         android:layout_height="wrap_content"
         android:inputType="time"
         android:id="@+id/editText_preferableTime"
-        android:editable="true"
         android:layout_below="@+id/textView_setAnewAlertFor"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginTop="25sp"
+        android:layout_marginRight="5sp"
         android:text="0"
-        android:textSize="18dp"/>
+        android:textSize="18sp"/>
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Minutes"
+        android:text="@string/Minutes"
         android:id="@+id/textView_minutes"
         android:layout_below="@+id/textView_setAnewAlertFor"
         android:layout_toRightOf="@+id/editText_preferableTime"
-        android:layout_marginTop="40dp"
-        android:textSize="18dp"
+        android:layout_marginTop="40sp"
+        android:textSize="18sp"
         android:textColor="#000000"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/save"
         android:background="@drawable/button_shape"
         android:id="@+id/button_saveAlert"
         android:layout_below="@+id/prayerGroup"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="20sp"
         android:layout_alignParentEnd="true" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel"
+        android:text="@string/cancel"
         android:background="@drawable/button_shape"
         android:id="@+id/button_cancelAlert"
         android:layout_below="@+id/prayerGroup"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="20sp"
         android:layout_toLeftOf="@+id/button_saveAlert"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="20sp"
         android:onClick="cancelAlertFunction"/>
 </RelativeLayout>

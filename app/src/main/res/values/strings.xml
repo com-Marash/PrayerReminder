@@ -15,4 +15,44 @@
     <string name="showSavedAlerts">Show saved alerts</string>
     <string name="title_activity_show_saved_alerts">showSavedAlerts</string>
     <string name="title_activity_sound_selection">sound_selection</string>
+    <string name="Step1">Step 1</string>
+    <string name="last_location">Your last known location is:</string>
+    <string name="setAlertsFor">Set a new alert for:</string>
+    <string name="aboutUsText">This application was written by Marash Company. Marash company started its activity in February 2016.\n
+                               If you liked this application, kindly support our team. Rate or donate for this app.\n
+                               Thank you for choosing this application.</string>
+    <string name="NoRingtone">No ringtone selected yet.</string>
+    <string name="step2">Step 2</string>
+    <string name="Delete">Delete</string>
+    <string name="lastLocation">Last known location</string>
+    <string name="changeRingtone">Change Alarm ringtone</string>
+    <string name="Rate">Rate</string>
+    <string name="Dismiss">Dismiss</string>
+    <string name="Fajr">Fajr</string>
+    <string name="PrefferedMethod">Select your preffered calculation method to have precise paryer times.</string>
+    <string name="ApplicationGetLocation">This application needs to get your location to set up precise prayer times.</string>
+    <string name="GoToday">Go to today</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="Donate">Donate</string>
+    <string name="Dhuhr">Dhuhr</string>
+    <string name="CurrentCoordination">Your current coordination is:</string>
+    <string name="Isna">ISNA</string>
+    <string name="Asr">Asr</string>
+    <string name="MWL">MWL</string>
+    <string name="FindGPS">Find Location By GPS</string>
+    <string name="sunset">Sunset</string>
+    <string name="Makkah">Makkah</string>
+    <string name="Maghrib">Maghrib</string>
+    <string name="Karachi">Karachi</string>
+    <string name="FindNetwork">Find Location By Network</string>
+    <string name="Tehran">Tehran</string>
+    <string name="Minutes">Minutes</string>
+    <string name="save">Save</string>
+    <string name="Before">Before</string>
+    <string name="cancel">Cancel</string>
+    <string name="OK">OK</string>
+    <string name="After">After</string>
+    <string name="Midnight">Midnight</string>
+    <string name="Jafari">Jafari</string>
+    <string name="Egypt">Egypt</string>
 </resources>

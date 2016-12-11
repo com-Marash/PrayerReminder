@@ -25,46 +25,46 @@ public class prayerTimesCalculator {
 
     public static Calendar getPrayerTime(String prayerType, Calendar calendar){
 
-        prayerTimesData calculatedPrayerTimes = prayerTimes.getTimes(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH), latitude, longitude);
+        prayerTimesData calculatesprayerTimes = prayerTimes.getTimes(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH), latitude, longitude);
 
         Calendar result = (Calendar) calendar.clone();
-        PrayerTimesDate calculatedPrayerTime = null;
+        PrayerTimesDate calculatesprayerTime = null;
         switch (prayerType){
             case "Fajr":
-                calculatedPrayerTime = calculatedPrayerTimes.getFajr();
+                calculatesprayerTime = calculatesprayerTimes.getFajr();
                 break;
             case "Sunrise":
-                calculatedPrayerTime = calculatedPrayerTimes.getSunrise();
+                calculatesprayerTime = calculatesprayerTimes.getSunrise();
                 break;
             case "Dhuhr":
-                calculatedPrayerTime = calculatedPrayerTimes.getDhuhr();
+                calculatesprayerTime = calculatesprayerTimes.getDhuhr();
                 break;
             case "Asr":
-                calculatedPrayerTime = calculatedPrayerTimes.getAsr();
+                calculatesprayerTime = calculatesprayerTimes.getAsr();
                 break;
             case "Sunset":
-                calculatedPrayerTime = calculatedPrayerTimes.getSunset();
+                calculatesprayerTime = calculatesprayerTimes.getSunset();
                 break;
             case "Maghrib":
-                calculatedPrayerTime = calculatedPrayerTimes.getMaghrib();
+                calculatesprayerTime = calculatesprayerTimes.getMaghrib();
                 break;
             case "Isha":
-                calculatedPrayerTime = calculatedPrayerTimes.getIsha();
+                calculatesprayerTime = calculatesprayerTimes.getIsha();
                 break;
             case "Midnight":
-                calculatedPrayerTime = calculatedPrayerTimes.getMidnight();
+                calculatesprayerTime = calculatesprayerTimes.getMidnight();
                 break;
             case "Imsak":
-                calculatedPrayerTime = calculatedPrayerTimes.getImsak();
+                calculatesprayerTime = calculatesprayerTimes.getImsak();
                 break;
             default:
                 return null;
         }
-        if (calculatedPrayerTime != null) {
-            result.set(Calendar.HOUR_OF_DAY, calculatedPrayerTime.getHour());
-            result.set(Calendar.MINUTE, calculatedPrayerTime.getMin());
-            Log.d("hour",calculatedPrayerTime.getHour()+"");
-            Log.d("min",calculatedPrayerTime.getMin()+"");
+        if (calculatesprayerTime != null) {
+            result.set(Calendar.HOUR_OF_DAY, calculatesprayerTime.getHour());
+            result.set(Calendar.MINUTE, calculatesprayerTime.getMin());
+            Log.d("hour",calculatesprayerTime.getHour()+"");
+            Log.d("min",calculatesprayerTime.getMin()+"");
             Log.d("lati - longi", latitude + " "+longitude);
         }
         return result;
