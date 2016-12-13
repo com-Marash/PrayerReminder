@@ -9,6 +9,8 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Created by Maedeh on 8/23/2016.
  */
@@ -17,15 +19,17 @@ public class AlarmSetter {
     public static void createOrUpdateAllAlarms(Context context){
 
         ArrayList<Alert> savedAlerts = StorageManager.loadAlert(context);
-        for (Alert a:savedAlerts){
-            createOrUpdateAlarm(a,context);
+        if (savedAlerts != null && !(savedAlerts.isEmpty())){
+            for (Alert a:savedAlerts){
+                createOrUpdateAlarm(a,context);
+            }
         }
     }
 
     public static void createOrUpdateAlarm(Alert alert, Context context){
 
         Calendar alertCalendar = prayerTimesCalculator.getPrayerTime(alert.getPrayerName(), Calendar.getInstance());
-        Log.d("calendarTime1",alertCalendar.toString());
+
         Log.d("minute1", alertCalendar.get(Calendar.MINUTE) + " " + alertCalendar.get(Calendar.HOUR_OF_DAY));
 
         alertCalendar.add(Calendar.MINUTE, alert.getTime());
@@ -35,8 +39,6 @@ public class AlarmSetter {
             alertCalendar = prayerTimesCalculator.getPrayerTime(alert.getPrayerName(),tomorrowCalendar);
             alertCalendar.add(Calendar.MINUTE, alert.getTime());
         }
-
-        Log.d("minute1", alertCalendar.get(Calendar.MINUTE) + " " + alertCalendar.get(Calendar.HOUR_OF_DAY));
 
         AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent("com.marash.prayerreminder.AlarmReciever");
@@ -49,7 +51,6 @@ public class AlarmSetter {
             alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
         }else{
             alarmMgr.setExact(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
-            //alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
         }
     }
 
@@ -68,16 +69,18 @@ public class AlarmSetter {
         PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Calendar alertCalendar = Calendar.getInstance();
-
-        alertCalendar.set(Calendar.HOUR,12);
-        alertCalendar.set(Calendar.MINUTE,40);
+        alertCalendar.set(Calendar.HOUR_OF_DAY,20);
+        alertCalendar.set(Calendar.MINUTE,7);
         alertCalendar.set(Calendar.SECOND,59);
 
+        if (alertCalendar.compareTo(Calendar.getInstance()) < 0){
+            alertCalendar.add(Calendar.DAY_OF_YEAR,1);
+        }
+        Log.d(TAG, "setMainAlarm: " + alertCalendar.toString());
         if (Build.VERSION.SDK_INT >= 23) {
             alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
         }else{
             alarmMgr.setExact(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
         }
-
     }
 }
