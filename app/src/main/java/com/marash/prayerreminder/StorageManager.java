@@ -147,11 +147,11 @@ public class StorageManager {
         return null;
     }
 
-    public static void saveLocation(Double longitude, Double latitude, String country, String city, Context context){
+    public static void saveLocation(Double latitude , Double longitude, String country, String city, Context context){
         try {
             outputFile = context.openFileOutput(STORED_location, Context.MODE_PRIVATE);
             out = new OutputStreamWriter(outputFile);
-            out.write(longitude+"\n"+latitude+"\n"+country+"\n"+city);
+            out.write(latitude+"\n"+longitude+"\n"+country+"\n"+city);
             out.close();
         } catch (FileNotFoundException e) {
 

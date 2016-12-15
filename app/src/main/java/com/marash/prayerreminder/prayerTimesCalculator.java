@@ -1,5 +1,6 @@
 package com.marash.prayerreminder;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.marash.prayerTimes.dto.PrayerTimesDate;
@@ -11,21 +12,40 @@ import java.util.Calendar;
  * Created by Maedeh on 8/23/2016.
  */
 public class prayerTimesCalculator {
-    private static PrayerTimes prayerTimes;
-    private static double latitude;
-    private static double longitude;
 
-    public static void setPrayerTimes(String method){
-        prayerTimes = new PrayerTimes(PrayerTimes.methods.valueOf(method));
+    private static String method;
+    private static Double latitude;
+    private static Double longitude;
+
+    public static void setLatitude(Double latitude) {
+        prayerTimesCalculator.latitude = latitude;
     }
-    public static void setCoordination( double lat, double lng){
-        latitude = lat;
-        longitude = lng;
+    public static void setLongitude(Double longitude) {prayerTimesCalculator.longitude = longitude;}
+    public static void setMethod(String method) {
+        prayerTimesCalculator.method = method;
     }
 
-    public static Calendar getPrayerTime(String prayerType, Calendar calendar){
+    public static double[] getLccation(Context context) {
+        if (latitude == null || longitude == null){
+            String[] location = StorageManager.loadLocation(context);
+            latitude = Double.valueOf(location[0]);
+            longitude = Double.valueOf(location[1]);
+        }
+        return new double[]{latitude,longitude};
+    }
 
-        prayerTimesData calculatesprayerTimes = prayerTimes.getTimes(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH), latitude, longitude);
+    public static String getMethod(Context context) {
+        if (method == null){
+            method = StorageManager.loadCalculationMethode(context);
+        }
+        return method;
+    }
+
+    public static Calendar getPrayerTime(String prayerType, Calendar calendar, Context context){
+
+        PrayerTimes prayerTimes = new PrayerTimes(PrayerTimes.methods.valueOf(getMethod(context)));
+        double[] location = getLccation(context);
+        prayerTimesData calculatesprayerTimes = prayerTimes.getTimes(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH), location[0], location[1]);
 
         Calendar result = (Calendar) calendar.clone();
         PrayerTimesDate calculatesprayerTime = null;

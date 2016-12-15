@@ -39,7 +39,7 @@ public class MainPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //FirstUse Handler
-        if(isLocationAvailable(MainPage.this) && isMethodeAvailable(MainPage.this)){
+        if(isLocationAvailable(MainPage.this) && isMethodAvailable(MainPage.this)){
             setContentView(R.layout.activity_main_page);
 
             showDateText = (TextView) findViewById(R.id.editTextShowDate);
@@ -87,21 +87,11 @@ public class MainPage extends AppCompatActivity {
     }
 
     private boolean isLocationAvailable(Context context){
-        String[] temp = StorageManager.loadLocation(context);
-        if(temp == null){
-            return false;
-        }else{
-            return true;
-        }
+        return StorageManager.loadLocation(context)== null ? false:true;
     }
 
-    private boolean isMethodeAvailable(Context context){
-        String temp = StorageManager.loadCalculationMethode(context);
-        if(temp == null){
-            return false;
-        }else{
-            return true;
-        }
+    private boolean isMethodAvailable(Context context){
+        return StorageManager.loadCalculationMethode(context)==null ? false:true;
     }
 
     private void setListeners() {
@@ -166,21 +156,9 @@ public class MainPage extends AppCompatActivity {
             goToTodayText.setVisibility(View.VISIBLE);
         }
 
-        PrayerTimes myPrayerTimes = new PrayerTimes();
-
-        String savedCalcMethode = StorageManager.loadCalculationMethode(MainPage.this);
-        myPrayerTimes.setMethod(PrayerTimes.methods.valueOf(savedCalcMethode));
-        prayerTimesData calculatedTimes = null;
-        String[] temp = StorageManager.loadLocation(MainPage.this);
-        try {
-            Double longitude = Double.parseDouble(temp[0]);
-            Double latitude = Double.parseDouble(temp[1]);
-            prayerTimesCalculator.setCoordination(latitude, longitude);
-
-            calculatedTimes = myPrayerTimes.getTimes(new int[]{calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH) +1,calendar.get(Calendar.DAY_OF_MONTH)}, new Coordination(latitude, longitude));
-        } catch (Exception e) {
-
-        }
+        PrayerTimes myPrayerTimes = new PrayerTimes(PrayerTimes.methods.valueOf(prayerTimesCalculator.getMethod(this)));
+        double[] location = prayerTimesCalculator.getLccation(this);
+        prayerTimesData calculatedTimes = myPrayerTimes.getTimes(new int[]{calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH) +1,calendar.get(Calendar.DAY_OF_MONTH)}, new Coordination(location[0], location[1]));
 
         if(calculatedTimes != null) {
             TextView fajr = (TextView) findViewById(R.id.textView_fajr);

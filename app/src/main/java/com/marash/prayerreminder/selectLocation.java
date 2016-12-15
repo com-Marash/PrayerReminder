@@ -70,8 +70,8 @@ public class selectLocation extends AppCompatActivity {
             country = lastKnownLocationText[2];
             city = lastKnownLocationText[3];
         }
-        String longitude = lastKnownLocationText[0];
-        String latitude = lastKnownLocationText[1];
+        String longitude = lastKnownLocationText[1];
+        String latitude = lastKnownLocationText[0];
         locationText.setText("Your last known location is: \n"+country+", "+city+"\n"+
                                 "Last known Coordination is: \n"+"Longitude: "+longitude+", Latitude: "+latitude);
     }

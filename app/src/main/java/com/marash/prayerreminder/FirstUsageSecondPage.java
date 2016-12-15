@@ -36,7 +36,7 @@ public class FirstUsageSecondPage extends Activity {
                     selectedMethodeText = selectedMethode.getText().toString();
 
                     StorageManager.saveCalculationMethode(selectedMethodeText, FirstUsageSecondPage.this.getApplicationContext());
-
+                    prayerTimesCalculator.setMethod(selectedMethodeText);
                     okButton.setEnabled(true);
                 }
             }

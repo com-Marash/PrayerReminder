@@ -60,8 +60,10 @@ public class LocationBuilder{
                     }
                 }
                 tv.setText("Your current location is: " + countryName + "," + localityName + "\n Your current coordination is:\n" + "Longitude: " + location.getLongitude() + "   Latitude: " + location.getLatitude());
-                StorageManager.saveLocation(location.getLongitude(),location.getLatitude(),countryName,localityName,context);
-                prayerTimesCalculator.setCoordination(location.getLatitude(),location.getLongitude());
+                tv.setText("Your current location is: " + countryName + "," + localityName + "\n Your current coordination is:\n" + "Longitude: " + location.getLongitude() + "   Latitude: " + location.getLatitude());
+                StorageManager.saveLocation(location.getLatitude(),location.getLongitude(),countryName,localityName,context);
+                prayerTimesCalculator.setLatitude(location.getLatitude());
+                prayerTimesCalculator.setLongitude(location.getLongitude());
 
                    /*----------to get City-Name from coordinates ------------- */
                 if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

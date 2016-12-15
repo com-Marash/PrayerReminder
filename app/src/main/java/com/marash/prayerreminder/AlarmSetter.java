@@ -28,7 +28,7 @@ public class AlarmSetter {
 
     public static void createOrUpdateAlarm(Alert alert, Context context){
 
-        Calendar alertCalendar = prayerTimesCalculator.getPrayerTime(alert.getPrayerName(), Calendar.getInstance());
+        Calendar alertCalendar = prayerTimesCalculator.getPrayerTime(alert.getPrayerName(), Calendar.getInstance() , context);
 
         Log.d("minute1", alertCalendar.get(Calendar.MINUTE) + " " + alertCalendar.get(Calendar.HOUR_OF_DAY));
 
@@ -36,7 +36,7 @@ public class AlarmSetter {
         if(alertCalendar.getTimeInMillis() < Calendar.getInstance().getTimeInMillis()){
             Calendar tomorrowCalendar = Calendar.getInstance();
             tomorrowCalendar.add(Calendar.DAY_OF_YEAR,1);
-            alertCalendar = prayerTimesCalculator.getPrayerTime(alert.getPrayerName(),tomorrowCalendar);
+            alertCalendar = prayerTimesCalculator.getPrayerTime(alert.getPrayerName(),tomorrowCalendar, context);
             alertCalendar.add(Calendar.MINUTE, alert.getTime());
         }
 
@@ -69,8 +69,8 @@ public class AlarmSetter {
         PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Calendar alertCalendar = Calendar.getInstance();
-        alertCalendar.set(Calendar.HOUR_OF_DAY,20);
-        alertCalendar.set(Calendar.MINUTE,7);
+        alertCalendar.set(Calendar.HOUR_OF_DAY,10);
+        alertCalendar.set(Calendar.MINUTE,30);
         alertCalendar.set(Calendar.SECOND,59);
 
         if (alertCalendar.compareTo(Calendar.getInstance()) < 0){

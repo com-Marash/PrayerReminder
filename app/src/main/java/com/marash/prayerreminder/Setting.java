@@ -92,6 +92,7 @@ public class Setting extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     Toast.makeText(Setting.this, "You have selected " + selection + " as your calculation methode.", Toast.LENGTH_LONG).show();
                     StorageManager.saveCalculationMethode(selection, Setting.this.getApplicationContext());
+                    prayerTimesCalculator.setMethod(selection);
                 }
             }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
@@ -116,6 +117,7 @@ public class Setting extends AppCompatActivity {
                     }else {
                         Toast.makeText(Setting.this, "You have selected " + selection + " as your calculation methode.", Toast.LENGTH_LONG).show();
                         StorageManager.saveCalculationMethode(selection, Setting.this.getApplicationContext());
+                        prayerTimesCalculator.setMethod(selection);
                     }
                 }
             }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
