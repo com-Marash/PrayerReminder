@@ -40,7 +40,7 @@ public class selectLocation extends AppCompatActivity {
 
         pd = new ProgressDialog(selectLocation.this);
         pd.setTitle("Loading Location");
-        pd.setMessage("Please wait while the application is retrieving your location.");
+        pd.setMessage("Please wait while location is loading.");
         pd.setCancelable(false);
         pd.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -72,8 +72,8 @@ public class selectLocation extends AppCompatActivity {
         }
         String longitude = lastKnownLocationText[1];
         String latitude = lastKnownLocationText[0];
-        locationText.setText("Your last known location is: \n"+country+", "+city+"\n"+
-                                "Last known Coordination is: \n"+"Longitude: "+longitude+", Latitude: "+latitude);
+        locationText.setText("Country: " + country + "\n" + "City: " + city + "\n"+
+                                "Longitude: " + longitude + "\n" + "Latitude: " + latitude);
     }
 
     private void coordinationTextChangedListener(){
