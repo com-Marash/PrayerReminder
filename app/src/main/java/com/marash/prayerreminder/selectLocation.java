@@ -3,6 +3,8 @@ package com.marash.prayerreminder;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -15,6 +17,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.graphics.Color.*;
 
 
 public class selectLocation extends AppCompatActivity {
@@ -32,16 +36,19 @@ public class selectLocation extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        confirmButt = (Button)findViewById(R.id.button_confirmLocation);
         gpsButt = (Button)findViewById(R.id.button_updateLocationGPS);
         networkButt = (Button)findViewById(R.id.updateLocationNetwork);
+        confirmButt = (Button)findViewById(R.id.button_confirmLocation);
+        //disabling confirm button
+        confirmButt.setEnabled(false);
+        confirmButt.getBackground().setColorFilter(GRAY, PorterDuff.Mode.MULTIPLY);
+        //
         LocationManager myLocManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         locationText = (TextView) findViewById(R.id.textView_lastKnownLocation);
 
         pd = new ProgressDialog(selectLocation.this);
         pd.setTitle("Loading Location");
-        pd.setMessage("Please wait while location is loading.");
-        pd.setCancelable(false);
+        pd.setMessage("Please wait while the location is being loaded.");
         pd.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -76,7 +83,8 @@ public class selectLocation extends AppCompatActivity {
                                 "Longitude: " + longitude + "\n" + "Latitude: " + latitude);
     }
 
-    private void coordinationTextChangedListener(){
+    private void coordinationTextChangedListener(Context context){
+        AlarmSetter.createOrUpdateAllAlarms(context);
         locationText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -88,7 +96,10 @@ public class selectLocation extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                //Enabling confirm button
                 confirmButt.setEnabled(true);
+                confirmButt.getBackground().setColorFilter(null);
+                //
                 locationText.removeTextChangedListener(this);
                 pd.dismiss();
             }
@@ -98,23 +109,19 @@ public class selectLocation extends AppCompatActivity {
 
     public void updateLocationByGPSFunction(View view) {
         lb.setLocationListener(selectLocation.this, locationText);
-        coordinationTextChangedListener();
+        coordinationTextChangedListener(view.getContext());
         lb.GPS_Function(selectLocation.this);
-        gpsButt.setEnabled(false);
-        networkButt.setEnabled(false);
         pd.show();
     }
 
     public void updateLocationByNetworkFunction(View view) {
         if (isNetworkAvailable()){
             lb.setLocationListener(selectLocation.this, locationText);
-            coordinationTextChangedListener();
+            coordinationTextChangedListener(view.getContext());
             lb.Network_Function(selectLocation.this);
-            gpsButt.setEnabled(false);
-            networkButt.setEnabled(false);
             pd.show();
         }else {
-            Toast.makeText(this,"You are offline! Please check your connectivity and try again.",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"You are offline! Check connection and try again.",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -122,5 +129,10 @@ public class selectLocation extends AppCompatActivity {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public void confirmButtFunction(View view) {
+        Toast.makeText(selectLocation.this, "Location updated successfully.", Toast.LENGTH_LONG).show();
+        finish();
     }
 }

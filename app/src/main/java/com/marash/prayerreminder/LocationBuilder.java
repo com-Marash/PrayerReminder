@@ -43,8 +43,8 @@ public class LocationBuilder{
             public void onLocationChanged(Location location) {
 
                 Geocoder gcd = new Geocoder(context, Locale.getDefault());
-                String localityName = "unknwon city";
-                String countryName = "unknown country";
+                String localityName = "Unknown city";
+                String countryName = "Unknown country";
                 if (gcd.isPresent()) {
                     List<Address> addresses;
                     try {
@@ -56,11 +56,9 @@ public class LocationBuilder{
                             localityName = returnedAddress.getLocality() != null ? returnedAddress.getLocality() : localityName;
                         }
                     }catch (IOException e) {
-
                     }
                 }
-                tv.setText("Your current location is: " + countryName + "," + localityName + "\n Your current coordination is:\n" + "Longitude: " + location.getLongitude() + "   Latitude: " + location.getLatitude());
-                tv.setText("Your current location is: " + countryName + "," + localityName + "\n Your current coordination is:\n" + "Longitude: " + location.getLongitude() + "   Latitude: " + location.getLatitude());
+                tv.setText("Current location: " + countryName + ", " + localityName + "\nCurrent coordination:\n" + "Longitude: " + location.getLongitude() + "   Latitude: " + location.getLatitude());
                 StorageManager.saveLocation(location.getLatitude(),location.getLongitude(),countryName,localityName,context);
                 prayerTimesCalculator.setLatitude(location.getLatitude());
                 prayerTimesCalculator.setLongitude(location.getLongitude());

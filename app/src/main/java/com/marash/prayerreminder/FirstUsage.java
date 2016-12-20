@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.PorterDuff;
 import android.location.LocationManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -19,6 +20,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.graphics.Color.GRAY;
 
 
 /**
@@ -43,12 +46,16 @@ public class FirstUsage extends Activity{
 
         tv = (TextView)findViewById(R.id.TextView_firstPageCoordination);
         okButt = (Button)findViewById(R.id.firstPageOKButt);
+        //disabling confirm button
+        okButt.setEnabled(false);
+        okButt.getBackground().setColorFilter(GRAY, PorterDuff.Mode.MULTIPLY);
+        //
         gpsButt = (Button)findViewById(R.id.Button_firstPageGPS);
         networkButt = (Button)findViewById(R.id.Button_firstPageNetwork);
 
         pd = new ProgressDialog(FirstUsage.this);
         pd.setTitle("Loading Location");
-        pd.setMessage("Please wait while the application is retrieving your location.");
+        pd.setMessage("Please wait while the location is being loaded.");
         pd.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -80,7 +87,10 @@ public class FirstUsage extends Activity{
 
             @Override
             public void afterTextChanged(Editable s) {
+                //Enabling confirm button
                 okButt.setEnabled(true);
+                okButt.getBackground().setColorFilter(null);
+                //
                 tv.removeTextChangedListener(this);
                 pd.dismiss();
             }

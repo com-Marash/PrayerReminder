@@ -16,7 +16,7 @@
     <string name="title_activity_show_saved_alerts">showSavedAlerts</string>
     <string name="title_activity_sound_selection">sound_selection</string>
     <string name="Step1">Step 1</string>
-    <string name="last_location">Your last known location is:</string>
+    <string name="last_location">Your last known location:</string>
     <string name="setAlertsFor">Set a new alert for:</string>
     <string name="aboutUsText">This application was written by Marash Company. Marash company started its activity in February 2016.\n
                                If you liked this application, kindly support our team. Rate or donate for this app.\n

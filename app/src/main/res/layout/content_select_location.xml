@@ -63,6 +63,7 @@
         android:id="@+id/button_confirmLocation"
         android:layout_below="@+id/updateLocationNetwork"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="70sp" />
+        android:layout_marginTop="70sp"
+        android:onClick="confirmButtFunction"/>
 
 </RelativeLayout>
