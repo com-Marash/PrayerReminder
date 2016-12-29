@@ -80,13 +80,13 @@ public class selectSound extends AppCompatActivity {
                 Toast.makeText(selectSound.this, title + " was set as your prayer alarm.", Toast.LENGTH_LONG).show();
 
                 sound_TextView = (TextView) findViewById(R.id.textView_soundText);
-                sound_TextView.setText(title + " has been set as your prayers alarm ringtone.");
+                sound_TextView.setText(title + " was selected as your prayers alarm ringtone.");
 
                 StorageManager.saveAlarmRingtone(title, uri.toString(),selectSound.this);
-
+                finish();
 
             } else {
-                Toast.makeText(selectSound.this, "Please select a ringtone as your prayers alarm from the list.", Toast.LENGTH_LONG).show();
+                Toast.makeText(selectSound.this, "Please select a ringtone from the list.", Toast.LENGTH_LONG).show();
             }
         }
     }

@@ -91,12 +91,12 @@
             <TextView
                 android:text="@string/Fajr"
                 android:id="@+id/textView_fajrtext"
-                android:layout_marginTop="60sp"
+                android:layout_marginTop="30sp"
                 style="@style/leftColumn"/>
 
             <TextView
                 android:id="@+id/textView_fajr"
-                android:layout_marginTop="60sp"
+                android:layout_marginTop="30sp"
                 style="@style/rightColumn"/>
         </TableRow>
 

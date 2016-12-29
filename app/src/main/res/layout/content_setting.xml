@@ -18,49 +18,11 @@
         app:layout_widthPercent="75%"
         app:layout_heightPercent="8%"
         app:layout_marginTopPercent="5%"
-        android:text="Select Location"
-        android:background="@drawable/button_shape"
-        android:id="@+id/button_selectLocation"
+        android:text="Set an Alert"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
-
-    <Button
-        app:layout_widthPercent="75%"
-        app:layout_heightPercent="8%"
-        app:layout_marginTopPercent="5%"
-        android:text="Alarm Ringtone"
-        android:background="@drawable/button_shape"
-        android:id="@+id/button_alarmSound"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/button_selectLocation" />
-    <Button
-        app:layout_widthPercent="75%"
-        app:layout_heightPercent="8%"
-        app:layout_marginTopPercent="5%"
-        android:text="Calculation Methode"
-        android:background="@drawable/button_shape"
-        android:id="@+id/Button_calculationMethode"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/button_alarmSound" />
-    <Button
-        app:layout_widthPercent="75%"
-        app:layout_heightPercent="8%"
-        app:layout_marginTopPercent="5%"
-        android:text="About Us"
-        android:background="@drawable/button_shape"
-        android:id="@+id/button_aboutUs"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/Button_calculationMethode" />
-
-    <Button
-        app:layout_widthPercent="75%"
-        app:layout_heightPercent="8%"
-        app:layout_marginTopPercent="5%"
-        android:text="Set Alert"
         android:background="@drawable/button_shape"
         android:id="@+id/button_setAlerts"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/button_aboutUs" />
+        android:layout_centerHorizontal="true"/>
 
     <Button
         app:layout_widthPercent="75%"
@@ -76,11 +38,51 @@
         app:layout_widthPercent="75%"
         app:layout_heightPercent="8%"
         app:layout_marginTopPercent="5%"
+        android:text="Update Location"
+        android:background="@drawable/button_shape"
+        android:id="@+id/button_selectLocation"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/button_showSavedAlerts"/>
+
+    <Button
+        app:layout_widthPercent="75%"
+        app:layout_heightPercent="8%"
+        app:layout_marginTopPercent="5%"
+        android:text="Alarm Ringtone"
+        android:background="@drawable/button_shape"
+        android:id="@+id/button_alarmSound"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/button_selectLocation" />
+
+    <Button
+        app:layout_widthPercent="75%"
+        app:layout_heightPercent="8%"
+        app:layout_marginTopPercent="5%"
+        android:text="Calculation Method"
+        android:background="@drawable/button_shape"
+        android:id="@+id/Button_calculationMethode"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/button_alarmSound" />
+
+    <Button
+        app:layout_widthPercent="75%"
+        app:layout_heightPercent="8%"
+        app:layout_marginTopPercent="5%"
+        android:text="About Us"
+        android:background="@drawable/button_shape"
+        android:id="@+id/button_aboutUs"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/Button_calculationMethode" />
+
+    <Button
+        app:layout_widthPercent="75%"
+        app:layout_heightPercent="8%"
+        app:layout_marginTopPercent="5%"
         android:text="Expected alerts times"
         android:background="@drawable/button_shape"
         android:id="@+id/button_ExpectedAlerts"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/button_showSavedAlerts"
+        android:layout_below="@+id/button_aboutUs"
         android:onClick="ExpectedAlertsFunction"/>
 
 

@@ -9,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import java.util.Arrays;
 
 public class Setting extends AppCompatActivity {
@@ -28,16 +27,13 @@ public class Setting extends AppCompatActivity {
 
         selectLocationFunction();
         selectAlarmSoundFunction();
-        selectCalculationMethode();
-
+        selectCalculationMethod();
 
         aboutUsFunction();
         setAlertFunction();
         showSavedAlertsFunction();
 
     }
-
-
 
     public void selectLocationFunction(){
 
@@ -49,7 +45,6 @@ public class Setting extends AppCompatActivity {
                 startActivity(selectLocationIntent);
             }
         });
-
     }
 
     public void selectAlarmSoundFunction(){
@@ -64,7 +59,7 @@ public class Setting extends AppCompatActivity {
         });
     }
 
-    public void selectCalculationMethode(){
+    public void selectCalculationMethod(){
         calculationMethodeButton = (Button)findViewById(R.id.Button_calculationMethode);
         calculationMethodeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,22 +70,22 @@ public class Setting extends AppCompatActivity {
     }
 
     private AlertDialog calculationMethodFunction() {
-        final CharSequence[] methodesItems = {"ISNA", "MWL", "Makkah", "Karachi", "Jafari", "Tehran", "Egypt"};
-        String savedCalcMethode;
+        final CharSequence[] methodsItems = {"Egypt", "ISNA", "Jafari", "Karachi", "Makkah", "MWL", "Tehran"};
+        String savedCalcMethod;
 
-        savedCalcMethode = StorageManager.loadCalculationMethode(Setting.this.getApplicationContext());
+        savedCalcMethod = StorageManager.loadCalculationMethode(Setting.this.getApplicationContext());
 
-        if (savedCalcMethode == null) {
+        if (savedCalcMethod == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
-            builder.setTitle("Change Calculation Methode").setSingleChoiceItems(methodesItems, 0, new DialogInterface.OnClickListener() {
+            builder.setTitle("Change Calculation Methode").setSingleChoiceItems(methodsItems, 0, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int methodeNumber) {
-                    selection = (String) methodesItems[methodeNumber];
+                    selection = (String) methodsItems[methodeNumber];
                 }
             }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(Setting.this, "You have selected " + selection + " as your calculation methode.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Setting.this, "You have selected " + selection + " as calculation method.", Toast.LENGTH_LONG).show();
                     StorageManager.saveCalculationMethode(selection, Setting.this.getApplicationContext());
                     prayerTimesCalculator.setMethod(selection);
                 }
@@ -104,27 +99,25 @@ public class Setting extends AppCompatActivity {
             return builder.create();
         }else{
             AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
-            builder.setTitle("Change Calculation Methode").setSingleChoiceItems(methodesItems, Arrays.asList(methodesItems).indexOf(savedCalcMethode), new DialogInterface.OnClickListener() {
+            builder.setTitle("Calculation Method").setSingleChoiceItems(methodsItems, Arrays.asList(methodsItems).indexOf(savedCalcMethod), new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int methodeNumber) {
-                    selection = (String) methodesItems[methodeNumber];
+                public void onClick(DialogInterface dialog, int methodNumber) {
+                    selection = (String) methodsItems[methodNumber];
                 }
             }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    if(selection == null){
-                        Toast.makeText(Setting.this, "Please select a method from the list.", Toast.LENGTH_LONG).show();
-                    }else {
-                        Toast.makeText(Setting.this, "You have selected " + selection + " as your calculation methode.", Toast.LENGTH_LONG).show();
+                    if(selection != null) {
+                        Toast.makeText(Setting.this, selection + " was selected as calculation method.", Toast.LENGTH_LONG).show();
                         StorageManager.saveCalculationMethode(selection, Setting.this.getApplicationContext());
                         prayerTimesCalculator.setMethod(selection);
+                        AlarmSetter.createOrUpdateAllAlarms(Setting.this);
                     }
                 }
             }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-
                 }
             });
             return builder.create();
