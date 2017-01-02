@@ -26,8 +26,27 @@ public class selectLocation extends AppCompatActivity {
     private TextView locationText;
     private LocationBuilder lb;
     private ProgressDialog pd;
-    private Button confirmButt,gpsButt,networkButt;
+    private Button confirmButt;
 
+    private TextWatcher locationTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            //Enabling confirm button
+            confirmButt.setEnabled(true);
+            confirmButt.getBackground().setColorFilter(null);
+            //
+            locationText.removeTextChangedListener(this);
+            pd.dismiss();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +55,6 @@ public class selectLocation extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        gpsButt = (Button)findViewById(R.id.button_updateLocationGPS);
-        networkButt = (Button)findViewById(R.id.updateLocationNetwork);
         confirmButt = (Button)findViewById(R.id.button_confirmLocation);
         //disabling confirm button
         confirmButt.setEnabled(false);
@@ -53,6 +70,7 @@ public class selectLocation extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+                cancelCoordinationTextChangedListener();
             }
         });
 
@@ -85,27 +103,12 @@ public class selectLocation extends AppCompatActivity {
 
     private void coordinationTextChangedListener(Context context){
         AlarmSetter.createOrUpdateAllAlarms(context);
-        locationText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                //Enabling confirm button
-                confirmButt.setEnabled(true);
-                confirmButt.getBackground().setColorFilter(null);
-                //
-                locationText.removeTextChangedListener(this);
-                pd.dismiss();
-            }
-        });
+        locationText.addTextChangedListener(locationTextWatcher);
     }
 
+    private void cancelCoordinationTextChangedListener(){
+        locationText.removeTextChangedListener(locationTextWatcher);
+    }
 
     public void updateLocationByGPSFunction(View view) {
         lb.setLocationListener(selectLocation.this, locationText);
