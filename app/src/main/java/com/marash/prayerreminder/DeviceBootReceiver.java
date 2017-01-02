@@ -12,11 +12,8 @@ import android.support.v4.content.WakefulBroadcastReceiver;
 public class DeviceBootReceiver extends WakefulBroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
-            // Set the alarm here.
-            AlarmSetter.createOrUpdateAllAlarms(context);
-            this.completeWakefulIntent(intent);
-        }
-
+        AlarmSetter.setMainAlarm(context);
+        AlarmSetter.createOrUpdateAllAlarms(context);
+        this.completeWakefulIntent(intent);
     }
 }
