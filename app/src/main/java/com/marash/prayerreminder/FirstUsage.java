@@ -35,9 +35,30 @@ public class FirstUsage extends Activity{
 
     private LocationManager myLocManager;
     private TextView tv;
-    private Button okButt,gpsButt,networkButt;
+    private Button okButt;
     private LocationBuilder lb;
     private ProgressDialog pd;
+    private TextWatcher locationTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            //Enabling confirm button
+            okButt.setEnabled(true);
+            okButt.getBackground().setColorFilter(null);
+            //
+            tv.removeTextChangedListener(this);
+            pd.dismiss();
+        }
+    };
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +70,9 @@ public class FirstUsage extends Activity{
         //disabling confirm button
         okButt.setEnabled(false);
         okButt.getBackground().setColorFilter(GRAY, PorterDuff.Mode.MULTIPLY);
-        //
-        gpsButt = (Button)findViewById(R.id.Button_firstPageGPS);
-        networkButt = (Button)findViewById(R.id.Button_firstPageNetwork);
+
+        myLocManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        lb = new LocationBuilder(myLocManager);
 
         pd = new ProgressDialog(FirstUsage.this);
         pd.setTitle("Loading Location");
@@ -59,12 +80,12 @@ public class FirstUsage extends Activity{
         pd.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                lb.cancelLocationUpdate(FirstUsage.this);
+                cancelCoordinationTextChangedListener();
                 dialog.dismiss();
             }
         });
-        myLocManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        lb = new LocationBuilder(myLocManager);
 
         //set a default ringtone for the first time. and we save it.
 
@@ -76,25 +97,11 @@ public class FirstUsage extends Activity{
     }
 
     private void coordinationTextChangedListener(){
-        tv.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+        tv.addTextChangedListener(locationTextWatcher);
+    }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                //Enabling confirm button
-                okButt.setEnabled(true);
-                okButt.getBackground().setColorFilter(null);
-                //
-                tv.removeTextChangedListener(this);
-                pd.dismiss();
-            }
-        });
+    private void cancelCoordinationTextChangedListener(){
+        tv.removeTextChangedListener(locationTextWatcher);
     }
 
     public void openSecondPage(View view) {

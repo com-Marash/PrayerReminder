@@ -65,7 +65,6 @@ public class LocationBuilder{
 
                    /*----------to get City-Name from coordinates ------------- */
                 if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    Log.d("no permission granted", "onLocationChanged: ");
                     return;
                 }
                 locm.removeUpdates(locl);
@@ -111,17 +110,25 @@ public class LocationBuilder{
                 ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
             } else {
                 try {
-                    locm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, locl);
+                    locm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 2000, locl);
                 } catch (SecurityException e) {
 
                 }
             }
         } else {
             try {
-                locm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, locl);
+                locm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 2000, locl);
             } catch (SecurityException e) {
 
             }
         }
+    }
+
+    public void cancelLocationUpdate(Context context){
+           /*----------to get City-Name from coordinates ------------- */
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        locm.removeUpdates(locl);
     }
 }

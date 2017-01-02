@@ -69,8 +69,9 @@ public class selectLocation extends AppCompatActivity {
         pd.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
+                lb.cancelLocationUpdate(selectLocation.this);
                 cancelCoordinationTextChangedListener();
+                dialog.dismiss();
             }
         });
 
