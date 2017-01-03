@@ -12,14 +12,14 @@ import android.widget.RadioGroup;
  * Created by Maedeh on 9/1/2016.
  */
 public class FirstUsageSecondPage extends Activity {
-    private RadioButton selectedMethode;
-    private String selectedMethodeText;
+    private RadioButton selectedMethod;
+    private String selectedMethodText;
     private Button okButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.first_use_secondpage);
+        setContentView(R.layout.content_first_use_second_page);
 
         okButton = (Button)findViewById(R.id.secondPageOKButt);
         methodSelection();
@@ -32,11 +32,11 @@ public class FirstUsageSecondPage extends Activity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId != -1){
-                    selectedMethode = (RadioButton) findViewById(checkedId);
-                    selectedMethodeText = selectedMethode.getText().toString();
+                    selectedMethod = (RadioButton) findViewById(checkedId);
+                    selectedMethodText = selectedMethod.getText().toString();
 
-                    StorageManager.saveCalculationMethode(selectedMethodeText, FirstUsageSecondPage.this.getApplicationContext());
-                    prayerTimesCalculator.setMethod(selectedMethodeText);
+                    StorageManager.saveCalculationMethode(selectedMethodText, FirstUsageSecondPage.this.getApplicationContext());
+                    prayerTimesCalculator.setMethod(selectedMethodText);
                     okButton.setEnabled(true);
                 }
             }

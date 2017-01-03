@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_first_use_second_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16sp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.marash.prayerreminder.FirstUsageSecondPage"
+    tools:showIn="@layout/activity_first_use_second_page">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/Step1"
+        android:id="@+id/textView_secondPageStep1"
+        android:layout_marginLeft="30sp"
+        android:layout_marginTop="20sp"
+        android:textSize="25sp"
+        android:textColor="#4c7815"
+        android:background="@drawable/textview_border"
+        android:padding="10sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/step2"
+        android:id="@+id/textView_secondPageStep2"
+        android:layout_toRightOf="@+id/textView_secondPageStep1"
+        android:layout_marginLeft="40sp"
+        android:layout_marginTop="20sp"
+        android:textSize="25sp"
+        android:textColor="#4c7815"
+        android:background="@drawable/textview_border"
+        android:padding="10sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_secondPageStep1"
+        android:layout_margin="20sp"
+        android:text="@string/PreferredMethod"
+        android:textSize="18sp"
+        android:padding="8sp"
+        android:textColor="#000000"
+        android:background="#a6d76a"
+        android:id="@+id/textView_secondPageHint"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/textView_secondPageHint"
+        android:orientation="vertical"
+        android:layout_margin="20sp"
+        android:id="@+id/radioGroup">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Egypt"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Isna"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Jafari"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Karachi"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Makkah"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/MWL"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Tehran"
+            android:textSize="20sp" />
+
+    </RadioGroup>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/OK"
+        android:id="@+id/secondPageOKButt"
+        android:layout_below="@+id/radioGroup"
+        android:layout_marginLeft="260sp"
+        android:textSize="20sp"
+        android:background="@drawable/button_shape"
+        android:enabled="false"
+        android:onClick="OKButtFunction"/>
+
+</RelativeLayout>

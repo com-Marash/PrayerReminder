@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_first_use"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.marash.prayerreminder.FirstUsage"
+    tools:showIn="@layout/activity_firstuse">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/Step1"
+        android:id="@+id/textView_firstPageStep1"
+        android:layout_marginLeft="30sp"
+        android:layout_marginTop="20sp"
+        android:textSize="25sp"
+        android:textColor="#4c7815"
+        android:background="@drawable/textview_border"
+        android:padding="10sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/step2"
+        android:id="@+id/textView_firstPageStep2"
+        android:layout_toRightOf="@+id/textView_firstPageStep1"
+        android:layout_marginLeft="40sp"
+        android:layout_marginTop="20sp"
+        android:textSize="25sp"
+        android:textColor="#7c7c7c"
+        android:background="@drawable/textview_border"
+        android:padding="10sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_firstPageStep1"
+        android:layout_margin="20sp"
+        android:text="@string/ApplicationGetLocation"
+        android:textSize="18sp"
+        android:padding="8sp"
+        android:textColor="#000000"
+        android:background="@drawable/roundedcorner"
+        android:id="@+id/textView_firstPageHint"></TextView>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_firstPageHint"
+        android:id="@+id/TextView_firstPageCoordination"
+        android:layout_marginLeft="20sp"
+        android:text="@string/CurrentCoordination"
+        android:textSize="15sp"
+        android:padding="8sp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TextView_firstPageCoordination"
+        android:layout_marginLeft="20sp"
+        android:layout_marginTop="40sp"
+        android:text="@string/FindGPS"
+        android:id="@+id/Button_firstPageGPS"
+        android:padding="15sp"
+        android:textSize="15sp"
+        android:background="@drawable/button_shape"
+        android:onClick="findLocationByGPS"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Button_firstPageGPS"
+        android:layout_margin="20sp"
+        android:text="@string/FindNetwork"
+        android:id="@+id/Button_firstPageNetwork"
+        android:background="@drawable/button_shape"
+        android:padding="15sp"
+        android:textSize="15sp"
+        android:onClick="findLocationByNetwork"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:layout_below="@+id/Button_firstPageNetwork"
+        android:layout_marginLeft="260sp"
+        android:layout_marginTop="40sp"
+        android:textSize="20sp"
+        android:background="@drawable/button_shape"
+        android:onClick="openSecondPage"
+        android:id="@+id/firstPageOKButt"/>
+
+</RelativeLayout>

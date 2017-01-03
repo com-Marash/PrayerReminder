@@ -63,7 +63,7 @@ public class FirstUsage extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.first_use_page);
+        setContentView(R.layout.content_first_use);
 
         tv = (TextView)findViewById(R.id.TextView_firstPageCoordination);
         okButt = (Button)findViewById(R.id.firstPageOKButt);
