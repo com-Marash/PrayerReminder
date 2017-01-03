@@ -9,6 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background_3"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.marash.prayerreminder.FirstUsage"
     tools:showIn="@layout/activity_firstuse">
@@ -52,7 +53,7 @@
         android:padding="8sp"
         android:textColor="#000000"
         android:background="@drawable/roundedcorner"
-        android:id="@+id/textView_firstPageHint"></TextView>
+        android:id="@+id/textView_firstPageHint"/>
 
 
     <TextView
@@ -98,7 +99,7 @@
         android:text="OK"
         android:layout_below="@+id/Button_firstPageNetwork"
         android:layout_marginLeft="260sp"
-        android:layout_marginTop="40sp"
+        android:layout_marginTop="15sp"
         android:textSize="20sp"
         android:background="@drawable/button_shape"
         android:onClick="openSecondPage"
