@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -28,6 +30,7 @@ public class TimesUpActivity extends Activity {
         setContentView(R.layout.timesup);
         alarmTextView = (TextView) findViewById(R.id.alarmText);
         alarmTextView.setText(textViewString);
+        blink();
 
         String ringtoneUriString = StorageManager.loadAlarmRingtone(this)[1];
         Uri ringtoneUri = Uri.parse(ringtoneUriString);
@@ -47,6 +50,15 @@ public class TimesUpActivity extends Activity {
         final Window win= getWindow();
         win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+    }
+
+    private void blink() {
+        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(30); //You can manage the blinking time with this parameter
+        anim.setStartOffset(10);
+        anim.setRepeatMode(Animation.REVERSE);
+        anim.setRepeatCount(Animation.INFINITE);
+        alarmTextView.startAnimation(anim);
     }
 
     public static void setAlarmText(int time, String prayerName) {
