@@ -3,7 +3,6 @@ package com.marash.prayerreminder;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;

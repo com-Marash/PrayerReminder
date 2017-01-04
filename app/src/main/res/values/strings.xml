@@ -22,7 +22,12 @@
                                If you liked this application, kindly support our team. Rate or donate for this app.\n
                                Thank you for choosing this application.</string>
     <string name="NoRingtone">No ringtone selected yet.</string>
+    <string name="zero">0</string>
+    <string name="beforeSymbol">&gt;</string>
+    <string name="Isha">Isha</string>
     <string name="step2">Step 2</string>
+    <string name="afterSymbol">&lt;</string>
+    <string name="Imsaak">Imsaak</string>
     <string name="Delete">Delete</string>
     <string name="lastLocation">Last known location</string>
     <string name="changeRingtone">Change Alarm ringtone</string>
@@ -30,7 +35,7 @@
     <string name="Dismiss">Dismiss</string>
     <string name="Fajr">Fajr</string>
     <string name="PreferredMethod">Select preferred calculation method.</string>
-    <string name="ApplicationGetLocation">This application needs to get your location to set up precise prayer times.</string>
+    <string name="ApplicationGetLocation">Application needs to get your location to set up precise prayer times.</string>
     <string name="GoToday">Go to today</string>
     <string name="sunrise">Sunrise</string>
     <string name="Donate">Donate</string>

@@ -4,7 +4,6 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
 import java.util.ArrayList;
@@ -15,13 +14,12 @@ import java.util.ArrayList;
 
 public class ShowExpectedTimes extends AppCompatActivity {
 
-    private TextView tv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_expected_alerts);
 
-        tv = (TextView) findViewById(R.id.textView_showExpectedAlerts);
+        TextView tv = (TextView) findViewById(R.id.textView_showExpectedAlerts);
         String st = "List of all alerts: \n \n";
 
         // chcek main alert

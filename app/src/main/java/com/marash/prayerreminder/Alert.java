@@ -15,10 +15,6 @@ public class Alert{
         this.alertNumber = alertNumber;
     }
 
-    public void setAlertNumber(int alertNumber){
-        this.alertNumber = alertNumber;
-    }
-
     public int getAlertNumber(){
         return alertNumber;
     }
@@ -26,11 +22,7 @@ public class Alert{
     public String getPrayerName() {
         return prayerName;
     }
-
-    public void setPrayerName(String prayerName) {
-        this.prayerName = prayerName;
-    }
-
+    
     public int getTime() {
         return time;
     }

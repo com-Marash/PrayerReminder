@@ -54,7 +54,7 @@ public class AlarmSetter {
         }
     }
 
-    public static void deleteAlarm(int alarmRandomNumber, String prayerName, Context context){
+    public static void deleteAlarm(int alarmRandomNumber, Context context){
         Intent intent = new Intent("com.marash.prayerreminder.AlarmReciever");
         PendingIntent alarmIntent = PendingIntent.getBroadcast(context,alarmRandomNumber,intent,PendingIntent.FLAG_CANCEL_CURRENT);
 

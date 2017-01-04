@@ -42,7 +42,7 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sunrise"
+            android:text="@string/sunrise"
             android:textSize="16sp"
             android:id="@+id/radioButton_sunrise"
             android:checked="false" />
@@ -82,7 +82,7 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Isha"
+            android:text="@string/Isha"
             android:textSize="16sp"
             android:id="@+id/radioButton_isha"
             android:checked="false" />
@@ -102,7 +102,7 @@
         android:orientation="horizontal"
         android:id="@+id/beforeAfter"
         android:layout_marginTop="65sp"
-        android:layout_marginLeft="130sp"
+        android:layout_marginStart="130sp"
         android:layout_alignParentStart="true">
 
         <RadioButton
@@ -130,8 +130,8 @@
         android:layout_below="@+id/textView_setAnewAlertFor"
         android:layout_alignParentStart="true"
         android:layout_marginTop="25sp"
-        android:layout_marginRight="5sp"
-        android:text="0"
+        android:layout_marginEnd="5sp"
+        android:text="@string/zero"
         android:textSize="18sp"/>
 
 
@@ -142,7 +142,7 @@
         android:text="@string/Minutes"
         android:id="@+id/textView_minutes"
         android:layout_below="@+id/textView_setAnewAlertFor"
-        android:layout_toRightOf="@+id/editText_preferableTime"
+        android:layout_toEndOf="@+id/editText_preferableTime"
         android:layout_marginTop="40sp"
         android:textSize="18sp"
         android:textColor="#000000"/>
@@ -164,7 +164,7 @@
         android:id="@+id/button_cancelAlert"
         android:layout_below="@+id/prayerGroup"
         android:layout_marginTop="20sp"
-        android:layout_toLeftOf="@+id/button_saveAlert"
-        android:layout_marginRight="20sp"
+        android:layout_toStartOf="@+id/button_saveAlert"
+        android:layout_marginEnd="20sp"
         android:onClick="cancelAlertFunction"/>
 </RelativeLayout>

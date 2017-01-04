@@ -27,7 +27,6 @@ import java.util.Locale;
 
 public class MainPage extends AppCompatActivity {
 
-    private static final String TAG = "MainPage";
     private TextView showDateText, goToTodayText;
     private Button nextDayButton, previousDayButton;
     private Calendar calendar = new GregorianCalendar();

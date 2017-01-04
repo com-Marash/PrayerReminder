@@ -1,8 +1,6 @@
 package com.marash.prayerreminder;
 
 import android.content.Context;
-import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,8 +9,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by Maedeh on 2/22/2016.
@@ -71,7 +67,7 @@ public class StorageManager {
 
     public static void deleteAlert(int index, Context context) {
         ArrayList<Alert> alertsList = loadAlert(context);
-        AlarmSetter.deleteAlarm(alertsList.get(index).getAlertNumber(), alertsList.get(index).getPrayerName(),context);
+        AlarmSetter.deleteAlarm(alertsList.get(index).getAlertNumber(),context);
         alertsList.remove(index);
 
         // Because we dont know how to delete an specific line from file, we deleted that. And again write all alerts.

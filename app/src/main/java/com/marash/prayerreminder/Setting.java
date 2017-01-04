@@ -13,8 +13,6 @@ import java.util.Arrays;
 
 public class Setting extends AppCompatActivity {
 
-    private Button selectLocationButton,SelectAlarmSound,calculationMethodeButton,
-                    butten_aboutUs,butten_setAlerts,button_showSavedAlerts;
     private String selection;
 
     @Override
@@ -37,7 +35,7 @@ public class Setting extends AppCompatActivity {
 
     public void selectLocationFunction(){
 
-        selectLocationButton = (Button)findViewById(R.id.button_selectLocation);
+        Button selectLocationButton = (Button) findViewById(R.id.button_selectLocation);
         selectLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,8 +47,8 @@ public class Setting extends AppCompatActivity {
 
     public void selectAlarmSoundFunction(){
 
-        SelectAlarmSound = (Button)findViewById(R.id.button_alarmSound);
-        SelectAlarmSound.setOnClickListener(new View.OnClickListener() {
+        Button selectAlarmSound = (Button) findViewById(R.id.button_alarmSound);
+        selectAlarmSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent selectSoundIntent = new Intent("com.marash.prayerreminder.selectSound");
@@ -60,7 +58,7 @@ public class Setting extends AppCompatActivity {
     }
 
     public void selectCalculationMethod(){
-        calculationMethodeButton = (Button)findViewById(R.id.Button_calculationMethode);
+        Button calculationMethodeButton = (Button) findViewById(R.id.Button_calculationMethode);
         calculationMethodeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +124,7 @@ public class Setting extends AppCompatActivity {
 
     private void showSavedAlertsFunction() {
 
-        button_showSavedAlerts = (Button)findViewById(R.id.button_showSavedAlerts);
+        Button button_showSavedAlerts = (Button) findViewById(R.id.button_showSavedAlerts);
         button_showSavedAlerts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,7 +137,7 @@ public class Setting extends AppCompatActivity {
 
     public void setAlertFunction(){
 
-        butten_setAlerts = (Button)findViewById(R.id.button_setAlerts);
+        Button butten_setAlerts = (Button) findViewById(R.id.button_setAlerts);
         butten_setAlerts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,7 +149,7 @@ public class Setting extends AppCompatActivity {
 
     public void aboutUsFunction(){
 
-        butten_aboutUs = (Button)findViewById(R.id.button_aboutUs);
+        Button butten_aboutUs = (Button) findViewById(R.id.button_aboutUs);
         butten_aboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

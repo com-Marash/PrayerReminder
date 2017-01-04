@@ -45,7 +45,6 @@ public class FirstUsageSecondPage extends Activity {
 
     public void OKButtFunction(View view) {
         if(okButton.isEnabled()){
-
             Intent mainPageIntent = new Intent("com.marash.prayerreminder.MainPage");
             startActivity(mainPageIntent);
         }

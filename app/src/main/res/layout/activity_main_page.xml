@@ -56,7 +56,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="40sp"
         android:layout_height="40sp"
-        android:text="&gt;"
+        android:text="@string/beforeSymbol"
         android:id="@+id/buttonNextDay"
         android:layout_toEndOf="@+id/editTextShowDate"
         android:layout_marginStart="10sp"
@@ -70,7 +70,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="40sp"
         android:layout_height="40sp"
-        android:text="&lt;"
+        android:text="@string/afterSymbol"
         android:id="@+id/buttonPreviousDay"
         android:layout_toStartOf="@+id/editTextShowDate"
         android:layout_marginEnd="10sp"
@@ -158,7 +158,7 @@
 
         <TableRow>
             <TextView
-                android:text="Isha"
+                android:text="@string/Isha"
                 android:id="@+id/textView_Ishatext"
                 style="@style/leftColumn"/>
 
@@ -180,7 +180,7 @@
 
         <TableRow>
             <TextView
-                android:text="Imsaak"
+                android:text="@string/Imsaak"
                 android:id="@+id/textView_Imsaaktext"
                 style="@style/leftColumn"/>
 
