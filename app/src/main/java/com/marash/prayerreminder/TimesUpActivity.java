@@ -1,6 +1,7 @@
 package com.marash.prayerreminder;
 
 import android.app.Activity;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import java.io.IOException;
 
 /**
  * Created by Maedeh on 8/30/2016.
@@ -29,8 +32,15 @@ public class TimesUpActivity extends Activity {
         String ringtoneUriString = StorageManager.loadAlarmRingtone(this)[1];
         Uri ringtoneUri = Uri.parse(ringtoneUriString);
 
-        mp = MediaPlayer.create(TimesUpActivity.this,ringtoneUri);
+        mp = new MediaPlayer();
+        mp.setAudioStreamType(AudioManager.STREAM_ALARM);
         mp.setLooping(true);
+        try {
+            mp.setDataSource(this,ringtoneUri);
+            mp.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         mp.start();
         //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
