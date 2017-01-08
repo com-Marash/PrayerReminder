@@ -6,6 +6,7 @@ import android.util.Log;
 import com.marash.prayerTimes.dto.PrayerTimesDate;
 import com.marash.prayerTimes.dto.prayerTimesData;
 import com.marash.prayerTimes.main.PrayerTimes;
+
 import java.util.Calendar;
 
 /**
@@ -20,28 +21,32 @@ public class prayerTimesCalculator {
     public static void setLatitude(Double latitude) {
         prayerTimesCalculator.latitude = latitude;
     }
-    public static void setLongitude(Double longitude) {prayerTimesCalculator.longitude = longitude;}
+
+    public static void setLongitude(Double longitude) {
+        prayerTimesCalculator.longitude = longitude;
+    }
+
     public static void setMethod(String method) {
         prayerTimesCalculator.method = method;
     }
 
     public static double[] getLccation(Context context) {
-        if (latitude == null || longitude == null){
+        if (latitude == null || longitude == null) {
             String[] location = StorageManager.loadLocation(context);
             latitude = Double.valueOf(location[0]);
             longitude = Double.valueOf(location[1]);
         }
-        return new double[]{latitude,longitude};
+        return new double[]{latitude, longitude};
     }
 
     public static String getMethod(Context context) {
-        if (method == null){
+        if (method == null) {
             method = StorageManager.loadCalculationMethode(context);
         }
         return method;
     }
 
-    public static Calendar getPrayerTime(String prayerType, Calendar calendar, Context context){
+    public static Calendar getPrayerTime(String prayerType, Calendar calendar, Context context) {
 
         PrayerTimes prayerTimes = new PrayerTimes(PrayerTimes.methods.valueOf(getMethod(context)));
         double[] location = getLccation(context);
@@ -49,7 +54,7 @@ public class prayerTimesCalculator {
 
         Calendar result = (Calendar) calendar.clone();
         PrayerTimesDate calculatesprayerTime = null;
-        switch (prayerType){
+        switch (prayerType) {
             case "Fajr":
                 calculatesprayerTime = calculatesprayerTimes.getFajr();
                 break;
@@ -83,9 +88,9 @@ public class prayerTimesCalculator {
         if (calculatesprayerTime != null) {
             result.set(Calendar.HOUR_OF_DAY, calculatesprayerTime.getHour());
             result.set(Calendar.MINUTE, calculatesprayerTime.getMin());
-            Log.d("hour",calculatesprayerTime.getHour()+"");
-            Log.d("min",calculatesprayerTime.getMin()+"");
-            Log.d("lati - longi", latitude + " "+longitude);
+            Log.d("hour", calculatesprayerTime.getHour() + "");
+            Log.d("min", calculatesprayerTime.getMin() + "");
+            Log.d("lati - longi", latitude + " " + longitude);
         }
         return result;
     }

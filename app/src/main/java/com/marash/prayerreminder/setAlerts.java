@@ -39,10 +39,10 @@ public class setAlerts extends AppCompatActivity {
     }
 
 
-    public void setPrayerTime(){
+    public void setPrayerTime() {
 
         // in this part, we get the name of prayer we want to set alert for that.
-        Button saveButton = (Button)findViewById(R.id.button_saveAlert);
+        Button saveButton = (Button) findViewById(R.id.button_saveAlert);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,46 +50,46 @@ public class setAlerts extends AppCompatActivity {
                 selectedPrayerText = null;
                 selectedBeforeAfterText = null;
 
-                prayersButGroup = (RadioGroup)findViewById(R.id.prayerGroup);
+                prayersButGroup = (RadioGroup) findViewById(R.id.prayerGroup);
                 int selectedPrayerId = prayersButGroup.getCheckedRadioButtonId();
 
                 // in this part, we determine whether time is before or after for the selected prayer.
-                beforeAfterGroup = (RadioGroup)findViewById(R.id.beforeAfter);
+                beforeAfterGroup = (RadioGroup) findViewById(R.id.beforeAfter);
                 int selectedTimeId = beforeAfterGroup.getCheckedRadioButtonId();
 
                 // here, we get the preferable time from user.
-                timeText = (EditText)findViewById(R.id.editText_preferableTime);
+                timeText = (EditText) findViewById(R.id.editText_preferableTime);
                 desiredTime = Integer.parseInt(String.valueOf(timeText.getText()));
 
-                if((selectedPrayerId == -1) && (selectedTimeId == -1) && (timeText.getText().toString().matches(""))) {
+                if ((selectedPrayerId == -1) && (selectedTimeId == -1) && (timeText.getText().toString().matches(""))) {
                     Toast.makeText(setAlerts.this, "Please complete all parts", Toast.LENGTH_LONG).show();
-                }else if((selectedPrayerId == -1) && (selectedTimeId == -1)){
+                } else if ((selectedPrayerId == -1) && (selectedTimeId == -1)) {
                     Toast.makeText(setAlerts.this, "Please select one prayer and a time from two option, before or after prayer.", Toast.LENGTH_LONG).show();
-                }else if((selectedTimeId == -1) && (timeText.getText().toString().matches(""))){
+                } else if ((selectedTimeId == -1) && (timeText.getText().toString().matches(""))) {
                     Toast.makeText(setAlerts.this, "Please select a time from two option, before or after prayer and set a time for that.", Toast.LENGTH_LONG).show();
-                }else if((selectedPrayerId == -1) && (timeText.getText().toString().matches(""))){
+                } else if ((selectedPrayerId == -1) && (timeText.getText().toString().matches(""))) {
                     Toast.makeText(setAlerts.this, "Please select one prayer and set a time for that.", Toast.LENGTH_LONG).show();
-                }else if(selectedPrayerId == -1){
+                } else if (selectedPrayerId == -1) {
                     Toast.makeText(setAlerts.this, "Please select one prayer", Toast.LENGTH_LONG).show();
-                }else if(selectedTimeId == -1){
+                } else if (selectedTimeId == -1) {
                     Toast.makeText(setAlerts.this, "Please select a time from two option, before or after prayer.", Toast.LENGTH_LONG).show();
-                }else if(timeText.getText().toString().matches("")){
+                } else if (timeText.getText().toString().matches("")) {
                     Toast.makeText(setAlerts.this, "Please set a time for prayer.", Toast.LENGTH_LONG).show();
-                }else{
-                    selectedPrayer = (RadioButton)findViewById(selectedPrayerId);
+                } else {
+                    selectedPrayer = (RadioButton) findViewById(selectedPrayerId);
                     selectedPrayerText = selectedPrayer.getText().toString();
 
-                    selectedBeforeAfter = (RadioButton)findViewById(selectedTimeId);
+                    selectedBeforeAfter = (RadioButton) findViewById(selectedTimeId);
                     selectedBeforeAfterText = selectedBeforeAfter.getText().toString();
 
-                    if(selectedBeforeAfterText.equals("Before")){
+                    if (selectedBeforeAfterText.equals("Before")) {
                         desiredTime = -desiredTime;
                     }
 
                     ArrayList<Alert> savedAlerts = StorageManager.loadAlert(setAlerts.this.getApplicationContext());
                     boolean isNewAlert = true;
 
-                    if(savedAlerts != null) {
+                    if (savedAlerts != null) {
                         String savedAlertPrayerName;
                         int savedAlertTime;
                         ArrayList<Integer> savedRandNumber = new ArrayList<Integer>();
@@ -118,7 +118,7 @@ public class setAlerts extends AppCompatActivity {
                         } else {
                             Toast.makeText(setAlerts.this, "This alert has been saved previously.", Toast.LENGTH_LONG).show();
                         }
-                    }else{
+                    } else {
                         int randomNumber = (int) ((Math.random() * (10000001) + 1000));
                         Alert alert = new Alert(selectedPrayerText, desiredTime, randomNumber);
                         StorageManager.saveAlert(alert, setAlerts.this.getApplicationContext());
@@ -132,6 +132,7 @@ public class setAlerts extends AppCompatActivity {
             }
         });
     }
+
     public void cancelAlertFunction(View view) {
         finish();
     }

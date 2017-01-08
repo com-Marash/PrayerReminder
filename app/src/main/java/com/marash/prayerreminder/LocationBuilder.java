@@ -22,7 +22,7 @@ import java.util.Locale;
 /**
  * Created by Maedeh on 9/20/2016.
  */
-public class LocationBuilder{
+public class LocationBuilder {
 
     private LocationManager locm;
     private LocationListener locl;
@@ -31,11 +31,11 @@ public class LocationBuilder{
         this.locm = mylocm;
     }
 
-    public LocationListener getLocl(){
+    public LocationListener getLocl() {
         return locl;
     }
 
-    public void setLocationListener(final Context context, final TextView tv){
+    public void setLocationListener(final Context context, final TextView tv) {
 
         this.locl = new LocationListener() {
             @Override
@@ -54,11 +54,11 @@ public class LocationBuilder{
                             countryName = returnedAddress.getCountryName() != null ? returnedAddress.getCountryName() : countryName;
                             localityName = returnedAddress.getLocality() != null ? returnedAddress.getLocality() : localityName;
                         }
-                    }catch (IOException e) {
+                    } catch (IOException e) {
                     }
                 }
                 tv.setText("Current location: " + countryName + ", " + localityName + "\nCurrent coordination:\n" + "Longitude: " + location.getLongitude() + "   Latitude: " + location.getLatitude());
-                StorageManager.saveLocation(location.getLatitude(),location.getLongitude(),countryName,localityName,context);
+                StorageManager.saveLocation(location.getLatitude(), location.getLongitude(), countryName, localityName, context);
                 prayerTimesCalculator.setLatitude(location.getLatitude());
                 prayerTimesCalculator.setLongitude(location.getLongitude());
 
@@ -83,7 +83,7 @@ public class LocationBuilder{
         };
     }
 
-    public void GPS_Function(Context context){
+    public void GPS_Function(Context context) {
         if (Build.VERSION.SDK_INT >= 23) {
             if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
@@ -103,7 +103,7 @@ public class LocationBuilder{
         }
     }
 
-    public void Network_Function(Context context){
+    public void Network_Function(Context context) {
         if (Build.VERSION.SDK_INT >= 23) {
             if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
@@ -123,7 +123,7 @@ public class LocationBuilder{
         }
     }
 
-    public void cancelLocationUpdate(Context context){
+    public void cancelLocationUpdate(Context context) {
            /*----------to get City-Name from coordinates ------------- */
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;

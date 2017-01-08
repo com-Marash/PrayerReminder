@@ -21,17 +21,17 @@ public class FirstUsageSecondPage extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_first_use_second_page);
 
-        okButton = (Button)findViewById(R.id.secondPageOKButt);
+        okButton = (Button) findViewById(R.id.secondPageOKButt);
         methodSelection();
     }
 
     private void methodSelection() {
 
-        RadioGroup rg = (RadioGroup)findViewById(R.id.radioGroup);
+        RadioGroup rg = (RadioGroup) findViewById(R.id.radioGroup);
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId != -1){
+                if (checkedId != -1) {
                     selectedMethod = (RadioButton) findViewById(checkedId);
                     selectedMethodText = selectedMethod.getText().toString();
 
@@ -44,7 +44,7 @@ public class FirstUsageSecondPage extends Activity {
     }
 
     public void OKButtFunction(View view) {
-        if(okButton.isEnabled()){
+        if (okButton.isEnabled()) {
             Intent mainPageIntent = new Intent("com.marash.prayerreminder.MainPage");
             startActivity(mainPageIntent);
         }

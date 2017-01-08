@@ -1,6 +1,7 @@
 package com.marash.prayerreminder;
 
 import android.content.Context;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -67,7 +68,7 @@ public class StorageManager {
 
     public static void deleteAlert(int index, Context context) {
         ArrayList<Alert> alertsList = loadAlert(context);
-        AlarmSetter.deleteAlarm(alertsList.get(index).getAlertNumber(),context);
+        AlarmSetter.deleteAlarm(alertsList.get(index).getAlertNumber(), context);
         alertsList.remove(index);
 
         // Because we dont know how to delete an specific line from file, we deleted that. And again write all alerts.
@@ -86,14 +87,14 @@ public class StorageManager {
         }
     }
 
-    public static void saveAlarmRingtone(String ringtoneTitle, String URIString, Context context){
+    public static void saveAlarmRingtone(String ringtoneTitle, String URIString, Context context) {
         try {
 
             outputFile = context.openFileOutput(STORED_ringtone, Context.MODE_PRIVATE);
             out = new OutputStreamWriter(outputFile);
-            out.write(ringtoneTitle+ "\n"+URIString);
+            out.write(ringtoneTitle + "\n" + URIString);
             out.close();
-        }catch (IOException e){
+        } catch (IOException e) {
 
 
         }
@@ -115,7 +116,7 @@ public class StorageManager {
         return null;
     }
 
-    public static void saveCalculationMethode(String calcMethod, Context context){
+    public static void saveCalculationMethode(String calcMethod, Context context) {
         try {
             outputFile = context.openFileOutput(STORED_calcmethode, Context.MODE_PRIVATE);
             out = new OutputStreamWriter(outputFile);
@@ -143,11 +144,11 @@ public class StorageManager {
         return null;
     }
 
-    public static void saveLocation(Double latitude , Double longitude, String country, String city, Context context){
+    public static void saveLocation(Double latitude, Double longitude, String country, String city, Context context) {
         try {
             outputFile = context.openFileOutput(STORED_location, Context.MODE_PRIVATE);
             out = new OutputStreamWriter(outputFile);
-            out.write(latitude+"\n"+longitude+"\n"+country+"\n"+city);
+            out.write(latitude + "\n" + longitude + "\n" + country + "\n" + city);
             out.close();
         } catch (FileNotFoundException e) {
 
@@ -156,12 +157,12 @@ public class StorageManager {
         }
     }
 
-    public static String[] loadLocation(Context context){
+    public static String[] loadLocation(Context context) {
         String[] temp = new String[4];
         try {
             inputFile = context.openFileInput(STORED_location);
             inputReader = new BufferedReader(new InputStreamReader(inputFile));
-            for (int i = 0; i <4 ; i++) {
+            for (int i = 0; i < 4; i++) {
                 temp[i] = inputReader.readLine();
             }
             inputReader.close();

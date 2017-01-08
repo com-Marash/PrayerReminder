@@ -31,7 +31,7 @@ import static android.graphics.Color.GRAY;
 //this class checks for the first time usage. Right after installation. and tries
 //to set some custom settings by asking the user to select them.
 
-public class FirstUsage extends Activity{
+public class FirstUsage extends Activity {
 
     private LocationManager myLocManager;
     private TextView tv;
@@ -59,14 +59,13 @@ public class FirstUsage extends Activity{
     };
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_first_use);
 
-        tv = (TextView)findViewById(R.id.TextView_firstPageCoordination);
-        okButt = (Button)findViewById(R.id.firstPageOKButt);
+        tv = (TextView) findViewById(R.id.TextView_firstPageCoordination);
+        okButt = (Button) findViewById(R.id.firstPageOKButt);
         //disabling confirm button
         okButt.setEnabled(false);
         okButt.getBackground().setColorFilter(GRAY, PorterDuff.Mode.MULTIPLY);
@@ -89,23 +88,23 @@ public class FirstUsage extends Activity{
 
         //set a default ringtone for the first time. and we save it.
 
-        Uri uri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+        Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
         Ringtone ringtone = RingtoneManager.getRingtone(FirstUsage.this.getApplicationContext(), uri);
         String title = ringtone.getTitle(this);
-        StorageManager.saveAlarmRingtone(title, uri.toString(),FirstUsage.this.getApplicationContext());
+        StorageManager.saveAlarmRingtone(title, uri.toString(), FirstUsage.this.getApplicationContext());
 
     }
 
-    private void coordinationTextChangedListener(){
+    private void coordinationTextChangedListener() {
         tv.addTextChangedListener(locationTextWatcher);
     }
 
-    private void cancelCoordinationTextChangedListener(){
+    private void cancelCoordinationTextChangedListener() {
         tv.removeTextChangedListener(locationTextWatcher);
     }
 
     public void openSecondPage(View view) {
-        if(okButt.isEnabled()) {
+        if (okButt.isEnabled()) {
             Intent firstUsageSecondPageIntent = new Intent("com.marash.prayerreminder.FirstUsageSecondPage");
             startActivity(firstUsageSecondPageIntent);
         }
@@ -117,18 +116,18 @@ public class FirstUsage extends Activity{
         coordinationTextChangedListener();
         lb.GPS_Function(FirstUsage.this);
         pd.show();
-}
+    }
 
     public void findLocationByNetwork(View view) {
 
-       if (isNetworkAvailable()){
-           lb.setLocationListener(FirstUsage.this, tv);
-           coordinationTextChangedListener();
-           lb.Network_Function(FirstUsage.this);
-           pd.show();
-       }else {
-           Toast.makeText(this,"You are offline! Please check your connectivity and try again.",Toast.LENGTH_LONG).show();
-       }
+        if (isNetworkAvailable()) {
+            lb.setLocationListener(FirstUsage.this, tv);
+            coordinationTextChangedListener();
+            lb.Network_Function(FirstUsage.this);
+            pd.show();
+        } else {
+            Toast.makeText(this, "You are offline! Please check your connectivity and try again.", Toast.LENGTH_LONG).show();
+        }
     }
 
     private boolean isNetworkAvailable() {
@@ -146,22 +145,22 @@ public class FirstUsage extends Activity{
                     try {
                         myLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 2000, lb.getLocl());
                     } catch (SecurityException e) {
-                        Toast.makeText(FirstUsage.this,"Cannot update location with GPS", Toast.LENGTH_LONG).show();
+                        Toast.makeText(FirstUsage.this, "Cannot update location with GPS", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(FirstUsage.this,"Cannot update location without GPS permission", Toast.LENGTH_LONG).show();
+                    Toast.makeText(FirstUsage.this, "Cannot update location without GPS permission", Toast.LENGTH_LONG).show();
                 }
                 return;
             }
-            case 2:{
+            case 2: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     try {
                         myLocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, lb.getLocl());
                     } catch (SecurityException e) {
-                        Toast.makeText(FirstUsage.this,"Cannot update location with Network", Toast.LENGTH_LONG).show();
+                        Toast.makeText(FirstUsage.this, "Cannot update location with Network", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(FirstUsage.this,"Cannot update location without Network permission", Toast.LENGTH_LONG).show();
+                    Toast.makeText(FirstUsage.this, "Cannot update location without Network permission", Toast.LENGTH_LONG).show();
                 }
                 return;
             }

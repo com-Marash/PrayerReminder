@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.TextView;
+
 import java.io.IOException;
 
 /**
@@ -38,7 +39,7 @@ public class TimesUpActivity extends Activity {
         mp.setAudioStreamType(AudioManager.STREAM_ALARM);
         mp.setLooping(true);
         try {
-            mp.setDataSource(this,ringtoneUri);
+            mp.setDataSource(this, ringtoneUri);
             mp.prepare();
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,7 +47,7 @@ public class TimesUpActivity extends Activity {
         mp.start();
         //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        final Window win= getWindow();
+        final Window win = getWindow();
         win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
     }
@@ -62,18 +63,18 @@ public class TimesUpActivity extends Activity {
 
     public static void setAlarmText(int time, String prayerName) {
         String beforeAfter;
-        if(time<0){
+        if (time < 0) {
             beforeAfter = "before";
             time = -time;
-        }else{
+        } else {
             beforeAfter = "after";
         }
-        textViewString = "Time to pray! It is "+time+" minute "+beforeAfter+ " "+prayerName+".";
+        textViewString = "Time to pray! It is " + time + " minute " + beforeAfter + " " + prayerName + ".";
     }
 
     public void stopAlarm(View view) {
 
-        if (AlarmReciever.wakelock.isHeld()){
+        if (AlarmReciever.wakelock.isHeld()) {
             AlarmReciever.wakelock.release();
         }
         mp.stop();

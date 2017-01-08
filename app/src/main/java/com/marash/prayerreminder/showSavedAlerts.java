@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 
 public class showSavedAlerts extends AppCompatActivity {
@@ -14,24 +15,25 @@ public class showSavedAlerts extends AppCompatActivity {
     ListView prayerListView;
     ArrayList<String> alerts;
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_saved_alerts);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("Saved Alerts");
 
-        showText = (TextView)findViewById(R.id.textView_savedAlertsText);
+        showText = (TextView) findViewById(R.id.textView_savedAlertsText);
         showSavedAlertsFunction();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void showSavedAlertsFunction(){
+    public void showSavedAlertsFunction() {
 
         ArrayList<Alert> savedAlerts = StorageManager.loadAlert(showSavedAlerts.this.getApplicationContext());
 
-        if( savedAlerts != null && !(savedAlerts.isEmpty())) {
+        if (savedAlerts != null && !(savedAlerts.isEmpty())) {
             alerts = new ArrayList<String>();
             String st;
 
@@ -52,7 +54,7 @@ public class showSavedAlerts extends AppCompatActivity {
             prayerListView = (ListView) findViewById(R.id.listView_savedAlertsList);
             customAdaptorFor_showAlertLayout myAdaptor = new customAdaptorFor_showAlertLayout(alerts, this);
             prayerListView.setAdapter(myAdaptor);
-        }else {
+        } else {
             showText.setText("There is not any saved alerts to show.");
         }
     }

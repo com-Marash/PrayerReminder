@@ -38,9 +38,8 @@ public class MainPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //FirstUse Handler
-        if(isLocationAvailable(MainPage.this) && isMethodAvailable(MainPage.this)){
+        if (isLocationAvailable(MainPage.this) && isMethodAvailable(MainPage.this)) {
             setContentView(R.layout.activity_main_page);
-
             showDateText = (TextView) findViewById(R.id.editTextShowDate);
             goToTodayText = (TextView) findViewById(R.id.textView_goToToday);
             nextDayButton = (Button) findViewById(R.id.buttonNextDay);
@@ -50,7 +49,7 @@ public class MainPage extends AppCompatActivity {
             setListeners();
 
             showDateInformation();
-        }else {
+        } else {
             Intent firstUsageIntent = new Intent("com.marash.prayerreminder.FirstUsage");
             startActivity(firstUsageIntent);
         }
@@ -76,7 +75,7 @@ public class MainPage extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
 
             case R.id.settingsItem:
                 Intent settingIntent = new Intent("com.marash.prayerreminder.Setting");
@@ -85,12 +84,12 @@ public class MainPage extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private boolean isLocationAvailable(Context context){
-        return StorageManager.loadLocation(context)== null ? false:true;
+    private boolean isLocationAvailable(Context context) {
+        return StorageManager.loadLocation(context) == null ? false : true;
     }
 
-    private boolean isMethodAvailable(Context context){
-        return StorageManager.loadCalculationMethode(context)==null ? false:true;
+    private boolean isMethodAvailable(Context context) {
+        return StorageManager.loadCalculationMethode(context) == null ? false : true;
     }
 
     private void setListeners() {
@@ -138,18 +137,20 @@ public class MainPage extends AppCompatActivity {
         });
     }
 
+    /**
+     * show the current date on top of main page and also show/hide gotoToday text
+     * Also, calculate the new prayer times and update all prayer times text
+     */
     private void showDateInformation() {
 
         SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE dd/MM/yyyy", Locale.US);
         String dateText = dayFormat.format(calendar.getTime());
         showDateText.setText(dateText);
 
-        Date todayDate = new Date();
-        SimpleDateFormat checkFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String todayFormat = checkFormat.format(todayDate);
-        String selectedDayFormat = checkFormat.format(calendar.getTime());
-
-        if (todayFormat.equals(selectedDayFormat)) {
+        Calendar currentCalender = Calendar.getInstance();
+        if (calendar.get(Calendar.YEAR) == currentCalender.get(Calendar.YEAR)
+                && calendar.get(Calendar.MONTH) == currentCalender.get(Calendar.MONTH)
+                && calendar.get(Calendar.DAY_OF_YEAR) == currentCalender.get(Calendar.DAY_OF_YEAR)) {
             goToTodayText.setVisibility(View.GONE);
         } else {
             goToTodayText.setVisibility(View.VISIBLE);
@@ -157,9 +158,9 @@ public class MainPage extends AppCompatActivity {
 
         PrayerTimes myPrayerTimes = new PrayerTimes(PrayerTimes.methods.valueOf(prayerTimesCalculator.getMethod(this)));
         double[] location = prayerTimesCalculator.getLccation(this);
-        prayerTimesData calculatedTimes = myPrayerTimes.getTimes(new int[]{calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH) +1,calendar.get(Calendar.DAY_OF_MONTH)}, new Coordination(location[0], location[1]));
+        prayerTimesData calculatedTimes = myPrayerTimes.getTimes(new int[]{calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH)}, new Coordination(location[0], location[1]));
 
-        if(calculatedTimes != null) {
+        if (calculatedTimes != null) {
             TextView fajr = (TextView) findViewById(R.id.textView_fajr);
             fajr.setText(calculatedTimes.getFajr().getFormatedTime());
 

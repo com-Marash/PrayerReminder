@@ -27,7 +27,7 @@
         android:text="@string/lastLocation"
         android:id="@+id/textView_lastKnownLocation"
         android:layout_below="@+id/lastLocationTiltle"
-        android:layout_alignRight="@+id/lastLocationTiltle"
+        android:layout_alignParentEnd="@+id/lastLocationTiltle"
         android:layout_alignEnd="@+id/lastLocationTiltle"
         android:textSize="18sp"
         android:layout_marginTop="58sp" />

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 
 /**
@@ -29,7 +30,7 @@ public class ShowExpectedTimes extends AppCompatActivity {
         if (alarmIntent != null) {
             st += "Main Alert is available" + "\n";
             Log.d("ExpectedAlert", "mainAlert is available");
-        }else{
+        } else {
             st += "not main alert" + "\n";
         }
 
@@ -37,7 +38,7 @@ public class ShowExpectedTimes extends AppCompatActivity {
         ArrayList<Alert> savedAlerts = StorageManager.loadAlert(ShowExpectedTimes.this);
         if (savedAlerts == null || savedAlerts.size() == 0) {
             st += ("not any prayer alert!");
-        }else{
+        } else {
             for (Alert alert : savedAlerts) {
                 alarmIntent = PendingIntent.getBroadcast(ShowExpectedTimes.this, alert.getAlertNumber(),
                         new Intent("com.marash.prayerreminder.AlarmReciever"), PendingIntent.FLAG_NO_CREATE);

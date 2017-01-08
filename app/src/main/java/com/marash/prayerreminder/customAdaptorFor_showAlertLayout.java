@@ -18,7 +18,7 @@ public class customAdaptorFor_showAlertLayout extends BaseAdapter implements Lis
     private ArrayList<String> list = new ArrayList<String>();
     private Context context;
 
-    public customAdaptorFor_showAlertLayout(ArrayList<String> list, Context context){
+    public customAdaptorFor_showAlertLayout(ArrayList<String> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -44,18 +44,18 @@ public class customAdaptorFor_showAlertLayout extends BaseAdapter implements Lis
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.layout_for_showalerts, null);
+            view = inflater.inflate(R.layout.layout_for_showalerts, parent, false);
         }
 
         //Handle TextView and display string from your list
-        TextView listItemText = (TextView)view.findViewById(R.id.list_item_string);
+        TextView listItemText = (TextView) view.findViewById(R.id.list_item_string);
         listItemText.setText(list.get(position));
 
         //for deleting an alert from savedAlert list
 
         //Handle buttons and add onClickListeners
-        Button deleteBtn = (Button)view.findViewById(R.id.delete_btn);
-        deleteBtn.setOnClickListener(new View.OnClickListener(){
+        Button deleteBtn = (Button) view.findViewById(R.id.delete_btn);
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //do something

@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static android.graphics.Color.*;
+import static android.graphics.Color.GRAY;
 
 
 public class selectLocation extends AppCompatActivity {
@@ -54,7 +54,7 @@ public class selectLocation extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        confirmButt = (Button)findViewById(R.id.button_confirmLocation);
+        confirmButt = (Button) findViewById(R.id.button_confirmLocation);
         //disabling confirm button
         confirmButt.setEnabled(false);
         confirmButt.getBackground().setColorFilter(GRAY, PorterDuff.Mode.MULTIPLY);
@@ -82,31 +82,31 @@ public class selectLocation extends AppCompatActivity {
 
     }
 
-    private void checkForLastKnownLocation(){
+    private void checkForLastKnownLocation() {
         String[] lastKnownLocationText = StorageManager.loadLocation(selectLocation.this);
         String country = "Unknown";
         String city = "Unknown";
-        if(lastKnownLocationText[2] == null && lastKnownLocationText[3] == null){
-        }else if(lastKnownLocationText[2] == null){
+        if (lastKnownLocationText[2] == null && lastKnownLocationText[3] == null) {
+        } else if (lastKnownLocationText[2] == null) {
             city = lastKnownLocationText[3];
-        }else if(lastKnownLocationText[3] == null){
+        } else if (lastKnownLocationText[3] == null) {
             country = lastKnownLocationText[2];
-        }else{
+        } else {
             country = lastKnownLocationText[2];
             city = lastKnownLocationText[3];
         }
         String longitude = lastKnownLocationText[1];
         String latitude = lastKnownLocationText[0];
-        locationText.setText("Country: " + country + "\n" + "City: " + city + "\n"+
-                                "Longitude: " + longitude + "\n" + "Latitude: " + latitude);
+        locationText.setText("Country: " + country + "\n" + "City: " + city + "\n" +
+                "Longitude: " + longitude + "\n" + "Latitude: " + latitude);
     }
 
-    private void coordinationTextChangedListener(Context context){
+    private void coordinationTextChangedListener(Context context) {
         AlarmSetter.createOrUpdateAllAlarms(context);
         locationText.addTextChangedListener(locationTextWatcher);
     }
 
-    private void cancelCoordinationTextChangedListener(){
+    private void cancelCoordinationTextChangedListener() {
         locationText.removeTextChangedListener(locationTextWatcher);
     }
 
@@ -118,13 +118,13 @@ public class selectLocation extends AppCompatActivity {
     }
 
     public void updateLocationByNetworkFunction(View view) {
-        if (isNetworkAvailable()){
+        if (isNetworkAvailable()) {
             lb.setLocationListener(selectLocation.this, locationText);
             coordinationTextChangedListener(view.getContext());
             lb.Network_Function(selectLocation.this);
             pd.show();
-        }else {
-            Toast.makeText(this,"You are offline! Check connection and try again.",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "You are offline! Check connection and try again.", Toast.LENGTH_LONG).show();
         }
     }
 

@@ -31,16 +31,16 @@ public class selectSound extends AppCompatActivity {
         defaultFunction();
     }
 
-    public void defaultFunction(){
+    public void defaultFunction() {
         String[] selectedRingToneData;
         selectedRingToneData = StorageManager.loadAlarmRingtone(selectSound.this);
-        sound_TextView = (TextView)findViewById(R.id.textView_soundText);
+        sound_TextView = (TextView) findViewById(R.id.textView_soundText);
 
-        if(selectedRingToneData == null || selectedRingToneData[0] == null || selectedRingToneData[1] == null ){
+        if (selectedRingToneData == null || selectedRingToneData[0] == null || selectedRingToneData[1] == null) {
             sound_TextView.setText("No ringtone has been set for prayers alarm. Please choose from list.");
             existingRingtone = (Uri) null;
-        }else{
-            sound_TextView.setText(selectedRingToneData[0]+ " has been set as your prayers alarm ringtone.");
+        } else {
+            sound_TextView.setText(selectedRingToneData[0] + " has been set as your prayers alarm ringtone.");
             existingRingtone = Uri.parse(selectedRingToneData[1]);
         }
     }
@@ -50,10 +50,10 @@ public class selectSound extends AppCompatActivity {
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_RINGTONE);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select a new ringtone");
 
-        if(existingRingtone == null){
+        if (existingRingtone == null) {
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, Settings.System.DEFAULT_RINGTONE_URI);
 
-        }else{
+        } else {
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, existingRingtone);
         }
 
@@ -63,8 +63,7 @@ public class selectSound extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent intent)
-    {
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
 
         //very important
         if (resultCode == Activity.RESULT_OK && requestCode == 5) {
@@ -82,7 +81,7 @@ public class selectSound extends AppCompatActivity {
                 sound_TextView = (TextView) findViewById(R.id.textView_soundText);
                 sound_TextView.setText(title + " was selected as your prayers alarm ringtone.");
 
-                StorageManager.saveAlarmRingtone(title, uri.toString(),selectSound.this);
+                StorageManager.saveAlarmRingtone(title, uri.toString(), selectSound.this);
                 finish();
 
             } else {
