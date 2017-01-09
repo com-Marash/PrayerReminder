@@ -1,20 +1,25 @@
 package com.marash.prayerreminder;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.Toast;
-
 import java.util.Arrays;
 
 public class Setting extends AppCompatActivity {
 
     private String selection;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,8 +165,51 @@ public class Setting extends AppCompatActivity {
         });
     }
 
-    public void ExpectedAlertsFunction(View view) {
-        Intent ExpectedAlertsIntent = new Intent("com.marash.prayerreminder.ShowExpectedTimes");
-        startActivity(ExpectedAlertsIntent);
+    public void AlarmVolume(View view) {
+
+        /*
+        This part of code creates a dialog which has a seekbar for volume.
+         */
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflater.inflate(R.layout.volume_dialog, (ViewGroup) findViewById(R.id.settingsItem));
+        builder.setView(v).setTitle("Adjust Alarm Volume").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //TODO save new volume amount
+            }
+        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        //setContentView(R.layout.volume_dialog);
+        SeekBar seekbarVolume = (SeekBar)v.findViewById(R.id.volumeSeekBar);
+        final AudioManager audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        seekbarVolume.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM));
+        seekbarVolume.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_ALARM));
+
+        seekbarVolume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                audioManager.setStreamVolume(AudioManager.STREAM_ALARM, progress, 0);
+            }
+        });
+        builder.create();
+        builder.show();
     }
 }
