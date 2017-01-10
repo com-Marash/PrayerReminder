@@ -27,8 +27,10 @@
         android:text="@string/lastLocation"
         android:id="@+id/textView_lastKnownLocation"
         android:layout_below="@+id/lastLocationTiltle"
+        android:layout_alignParentRight="@+id/lastLocationTiltle"
         android:layout_alignParentEnd="@+id/lastLocationTiltle"
         android:layout_alignEnd="@+id/lastLocationTiltle"
+        android:layout_alignRight="@+id/lastLocationTiltle"
         android:textSize="18sp"
         android:layout_marginTop="58sp" />
 
@@ -53,6 +55,7 @@
         android:layout_below="@+id/button_updateLocationGPS"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:onClick="updateLocationByNetworkFunction"
         android:layout_marginTop="25sp"/>
 
@@ -64,6 +67,7 @@
         android:id="@+id/button_confirmLocation"
         android:layout_below="@+id/updateLocationNetwork"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginTop="70sp"
         android:onClick="confirmButtFunction"/>
 

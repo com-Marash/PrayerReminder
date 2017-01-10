@@ -18,6 +18,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/textView_savedAlertsText"
         android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <ListView
@@ -26,6 +27,7 @@
         android:id="@+id/listView_savedAlertsList"
         android:layout_below="@+id/textView_savedAlertsText"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginTop="53sp"
         android:background="@drawable/roundedcorner"/>
 
