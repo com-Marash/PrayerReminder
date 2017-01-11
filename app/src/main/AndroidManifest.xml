@@ -31,8 +31,8 @@
         <activity
             android:name=".Setting"
             android:label="@string/title_activity_setting"
-            android:parentActivityName=".MainPage"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".MainPage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.marash.prayerreminder.MainPage" />
@@ -128,7 +128,7 @@
         <activity
             android:name=".FirstUsage"
             android:parentActivityName=".MainPage"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.marash.prayerreminder.MainPage" />
@@ -142,7 +142,7 @@
         <activity
             android:name=".FirstUsageSecondPage"
             android:parentActivityName=".FirstUsage"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.marash.prayerreminder.FirstUsage" />

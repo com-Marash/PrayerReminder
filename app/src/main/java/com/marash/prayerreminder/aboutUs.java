@@ -21,7 +21,7 @@ public class aboutUs extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    final String appPackageName = "com.marash.prayerreminder";
+    private final String appPackageName = "com.marash.prayerreminder";
 
     public void rateFunction(View view) {
         try {
