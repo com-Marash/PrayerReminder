@@ -18,7 +18,7 @@
         app:layout_widthPercent="75%"
         app:layout_heightPercent="8%"
         app:layout_marginTopPercent="5%"
-        android:text="Set an Alert"
+        android:text="Set New Alarm"
         android:layout_alignParentTop="true"
         android:background="@drawable/button_shape"
         android:id="@+id/button_setAlerts"
@@ -28,7 +28,7 @@
         app:layout_widthPercent="75%"
         app:layout_heightPercent="8%"
         app:layout_marginTopPercent="5%"
-        android:text="Saved alerts"
+        android:text="Saved alarms"
         android:background="@drawable/button_shape"
         android:id="@+id/button_showSavedAlerts"
         android:layout_centerHorizontal="true"
@@ -68,22 +68,22 @@
         app:layout_widthPercent="75%"
         app:layout_heightPercent="8%"
         app:layout_marginTopPercent="5%"
-        android:text="About Us"
+        android:text="Alarm Volume"
         android:background="@drawable/button_shape"
-        android:id="@+id/button_aboutUs"
+        android:id="@+id/button_ExpectedAlerts"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/Button_calculationMethode" />
+        android:layout_below="@+id/Button_calculationMethode"
+        android:onClick="AlarmVolume" />
 
     <Button
         app:layout_widthPercent="75%"
         app:layout_heightPercent="8%"
         app:layout_marginTopPercent="5%"
-        android:text="Alarm Volume"
+        android:text="About Us"
         android:background="@drawable/button_shape"
-        android:id="@+id/button_ExpectedAlerts"
+        android:id="@+id/button_aboutUs"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/button_aboutUs"
-        android:onClick="AlarmVolume" />
+        android:layout_below="@+id/button_ExpectedAlerts"/>
 
 
 </android.support.percent.PercentRelativeLayout>

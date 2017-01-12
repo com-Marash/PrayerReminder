@@ -113,10 +113,10 @@ public class setAlerts extends AppCompatActivity {
                             AlarmSetter.createOrUpdateAlarm(alert, setAlerts.this.getApplicationContext());
                             ///
                             AlarmSetter.setMainAlarm(setAlerts.this);
-                            Toast.makeText(setAlerts.this, "Your new alert has been successfully saved.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(setAlerts.this, "Your new alarm has been successfully saved.", Toast.LENGTH_LONG).show();
                             finish();
                         } else {
-                            Toast.makeText(setAlerts.this, "This alert has been saved previously.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(setAlerts.this, "This alarm has been saved previously.", Toast.LENGTH_LONG).show();
                         }
                     } else {
                         int randomNumber = (int) ((Math.random() * (10000001) + 1000));
@@ -125,7 +125,7 @@ public class setAlerts extends AppCompatActivity {
                         AlarmSetter.createOrUpdateAlarm(alert, setAlerts.this.getApplicationContext());
                         AlarmSetter.setMainAlarm(setAlerts.this);
 
-                        Toast.makeText(setAlerts.this, "Your new alert has been successfully saved.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(setAlerts.this, "Your new alarm has been successfully saved.", Toast.LENGTH_LONG).show();
                         finish();
                     }
                 }
