@@ -32,7 +32,9 @@
         android:layout_alignEnd="@+id/lastLocationTiltle"
         android:layout_alignRight="@+id/lastLocationTiltle"
         android:textSize="18sp"
-        android:layout_marginTop="58sp" />
+        android:layout_marginTop="58sp"
+        android:background="@drawable/text_view_shape"
+        android:padding="10sp"/>
 
     <Button
         android:layout_width="wrap_content"

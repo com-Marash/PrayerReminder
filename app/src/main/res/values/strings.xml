@@ -19,8 +19,8 @@
     <string name="last_location">Your last known location:</string>
     <string name="setAlertsFor">Set a new alarm for:</string>
     <string name="aboutUsText">This application was written by Marash Company. Marash company started its activity in February 2016.\n
-                               If you liked this application, kindly support our team. Rate or donate for this app.\n
-                               Thank you for choosing this application.</string>
+        \nIf you liked this application, kindly support our team. Rate or donate for this app.
+        \n\nThank you for choosing this application.</string>
     <string name="NoRingtone">No ringtone selected yet.</string>
     <string name="zero">0</string>
     <string name="beforeSymbol">&gt;</string>
