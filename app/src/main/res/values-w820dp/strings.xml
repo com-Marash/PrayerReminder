@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="setting">Setting</string>
-    <string name="UpdateLocationGPS">Update location by GPS</string>
-    <string name="UpdateLocationNetwork">Update Location by Network</string>
-    <string name="confirmLocation">Confirm the shown Location</string>
-</resources>

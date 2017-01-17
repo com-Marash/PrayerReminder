@@ -9,9 +9,9 @@
     <string name="setAlerts">set alerts</string>
     <string name="setting">Setting</string>
     <string name="aboutUs">About Us</string>
-    <string name="UpdateLocationGPS">Update location by GPS</string>
-    <string name="UpdateLocationNetwork">Update Location by Network</string>
-    <string name="confirmLocation">Confirm the shown Location</string>
+    <string name="UpdateLocationGPS">Update by GPS</string>
+    <string name="UpdateLocationNetwork">Update by Network</string>
+    <string name="confirmLocation">Confirm Location</string>
     <string name="showSavedAlerts">Show saved alerts</string>
     <string name="title_activity_show_saved_alerts">showSavedAlerts</string>
     <string name="title_activity_sound_selection">sound_selection</string>
