@@ -53,8 +53,8 @@ public class TimesUpActivity extends Activity {
     }
 
     private void blink() {
-        Animation anim = new AlphaAnimation(0.0f, 1.0f);
-        anim.setDuration(60); //You can manage the blinking time with this parameter
+        Animation anim = new AlphaAnimation(0.4f, 1.0f);
+        anim.setDuration(1000); //You can manage the blinking time with this parameter
         anim.setStartOffset(10);
         anim.setRepeatMode(Animation.REVERSE);
         anim.setRepeatCount(Animation.INFINITE);
