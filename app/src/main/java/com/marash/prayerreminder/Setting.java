@@ -74,7 +74,7 @@ public class Setting extends AppCompatActivity {
     }
 
     private AlertDialog calculationMethodFunction() {
-        final CharSequence[] methodsItems = {"Egypt", "ISNA", "Jafari", "Karachi", "Makkah", "MWL", "Tehran"};
+        final CharSequence[] methodsItems = {"Egypt", "Tehran", "Jafari", "Karachi", "Makkah", "MWL (Muslim World League)", "ISNA (North American Muslims)" };
         String savedCalcMethod;
 
         savedCalcMethod = StorageManager.loadCalculationMethode(Setting.this.getApplicationContext());
