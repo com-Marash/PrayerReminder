@@ -162,32 +162,44 @@ public class MainPage extends AppCompatActivity {
 
         if (calculatedTimes != null) {
             TextView fajr = (TextView) findViewById(R.id.textView_fajr);
-            fajr.setText(calculatedTimes.getFajr().getFormatedTime());
+            fajr.setText(minuteFormatting(calculatedTimes.getFajr().getFormatedTime()));
 
             TextView sunrise = (TextView) findViewById(R.id.textView_sunrise);
-            sunrise.setText(calculatedTimes.getSunrise().getFormatedTime());
+            sunrise.setText(minuteFormatting(calculatedTimes.getSunrise().getFormatedTime()));
 
             TextView Dhuhr = (TextView) findViewById(R.id.textView_Dhuhr);
-            Dhuhr.setText(calculatedTimes.getDhuhr().getFormatedTime());
+            Dhuhr.setText(minuteFormatting(calculatedTimes.getDhuhr().getFormatedTime()));
 
             TextView asr = (TextView) findViewById(R.id.textView_asr);
-            asr.setText(calculatedTimes.getAsr().getFormatedTime());
+            asr.setText(minuteFormatting(calculatedTimes.getAsr().getFormatedTime()));
 
             TextView sunset = (TextView) findViewById(R.id.textView_sunset);
-            sunset.setText(calculatedTimes.getSunset().getFormatedTime());
+            sunset.setText(minuteFormatting(calculatedTimes.getSunset().getFormatedTime()));
 
             TextView maghrib = (TextView) findViewById(R.id.textView_maghrib);
-            maghrib.setText(calculatedTimes.getMaghrib().getFormatedTime());
+            maghrib.setText(minuteFormatting(calculatedTimes.getMaghrib().getFormatedTime()));
 
             TextView isha = (TextView) findViewById(R.id.textView_isha);
-            isha.setText(calculatedTimes.getIsha().getFormatedTime());
+            isha.setText(minuteFormatting(calculatedTimes.getIsha().getFormatedTime()));
 
             TextView midnight = (TextView) findViewById(R.id.textView_midnight);
-            midnight.setText(calculatedTimes.getMidnight().getFormatedTime());
+            midnight.setText(minuteFormatting(calculatedTimes.getMidnight().getFormatedTime()));
 
             TextView imsak = (TextView) findViewById(R.id.textView_imsak);
-            imsak.setText(calculatedTimes.getImsak().getFormatedTime());
+            imsak.setText(minuteFormatting(calculatedTimes.getImsak().getFormatedTime()));
         }
+    }
+
+    private String minuteFormatting(String s){
+        String result;
+        String[] t = s.split(":");
+        String s1 = t[0];
+        String s2 = t[1];
+        if(s2.length() == 1){
+            s2 = "0" + s2;
+        }
+        result = s1 + ":" + s2;
+        return result;
     }
 }
 
