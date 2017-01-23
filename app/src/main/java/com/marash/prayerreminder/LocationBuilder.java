@@ -57,7 +57,7 @@ public class LocationBuilder {
                     } catch (IOException e) {
                     }
                 }
-                tv.setText("Current location: " + countryName + ", " + localityName + "\nCurrent coordination:\n" + "Longitude: " + location.getLongitude() + "   Latitude: " + location.getLatitude());
+                tv.setText("Current location: " + countryName + ", " + localityName + "\nCurrent coordination:\n" + "Longitude: " + location.getLongitude() + "\nLatitude: " + location.getLatitude());
                 StorageManager.saveLocation(location.getLatitude(), location.getLongitude(), countryName, localityName, context);
                 prayerTimesCalculator.setLatitude(location.getLatitude());
                 prayerTimesCalculator.setLongitude(location.getLongitude());

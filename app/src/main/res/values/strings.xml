@@ -41,9 +41,9 @@
     <string name="Donate">Donate</string>
     <string name="Dhuhr">Dhuhr</string>
     <string name="CurrentCoordination">Your current coordination is:</string>
-    <string name="Isna">ISNA</string>
+    <string name="Isna">ISNA (North American Muslims)</string>
     <string name="Asr">Asr</string>
-    <string name="MWL">MWL</string>
+    <string name="MWL">MWL (Muslim World League)</string>
     <string name="FindGPS">Find Location By GPS</string>
     <string name="sunset">Sunset</string>
     <string name="Makkah">Makkah</string>

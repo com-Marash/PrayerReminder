@@ -3,6 +3,8 @@ package com.marash.prayerreminder;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.AbsoluteSizeSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -23,6 +25,7 @@ public class FirstUsageSecondPage extends Activity {
 
         okButton = (Button) findViewById(R.id.secondPageOKButt);
         methodSelection();
+
     }
 
     private void methodSelection() {
