@@ -15,7 +15,7 @@
     <string name="showSavedAlerts">Show saved alerts</string>
     <string name="title_activity_show_saved_alerts">showSavedAlerts</string>
     <string name="title_activity_sound_selection">sound_selection</string>
-    <string name="Step1">Step 1</string>
+    <string name="Step1">Step 1 of 2</string>
     <string name="last_location">Your last known location:</string>
     <string name="setAlertsFor">Set a new alarm for:</string>
     <string name="aboutUsText">This application was written by Marash Company. Marash company started its activity in February 2016.\n
@@ -25,7 +25,7 @@
     <string name="zero">0</string>
     <string name="beforeSymbol">&gt;</string>
     <string name="Isha">Isha</string>
-    <string name="step2">Step 2</string>
+    <string name="step2">Step 2 of 2</string>
     <string name="afterSymbol">&lt;</string>
     <string name="Imsaak">Imsaak</string>
     <string name="Delete">Delete</string>
