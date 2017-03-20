@@ -58,42 +58,49 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Egypt"
+            android:tag="Egypt"
             android:textSize="20sp" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Jafari"
+            android:tag="Jafari"
             android:textSize="20sp" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Karachi"
+            android:tag="Karachi"
             android:textSize="20sp" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Makkah"
+            android:tag="Makkah"
             android:textSize="20sp" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Tehran"
+            android:tag="Tehran"
             android:textSize="20sp" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/MWL"
+            android:tag="MWL"
             android:textSize="20sp" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Isna"
+            android:tag="ISNA"
             android:textSize="20sp" />
 
     </RadioGroup>

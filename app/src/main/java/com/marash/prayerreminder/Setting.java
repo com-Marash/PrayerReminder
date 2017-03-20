@@ -14,12 +14,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Toast;
+
 import java.util.Arrays;
 
 public class Setting extends AppCompatActivity {
 
     private String selection;
-
+    private String selectionValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,58 +75,38 @@ public class Setting extends AppCompatActivity {
     }
 
     private AlertDialog calculationMethodFunction() {
-        final CharSequence[] methodsItems = {"Egypt", "Tehran", "Jafari", "Karachi", "Makkah", "MWL (Muslim World League)", "ISNA (North American Muslims)" };
+        final CharSequence[] methodsItems = {"Egypt", "Tehran", "Jafari", "Karachi", "Makkah", "MWL (Muslim World League)", "ISNA (North American Muslims)"};
+        final CharSequence[] methodsItemValues = {"Egypt", "Tehran", "Jafari", "Karachi", "Makkah", "MWL", "ISNA"};
         String savedCalcMethod;
 
         savedCalcMethod = StorageManager.loadCalculationMethode(Setting.this.getApplicationContext());
 
-        if (savedCalcMethod == null) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
-            builder.setTitle("Change Calculation Methode").setSingleChoiceItems(methodsItems, 0, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int methodeNumber) {
-                    selection = (String) methodsItems[methodeNumber];
-                }
-            }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(Setting.this, "You have selected " + selection + " as calculation method.", Toast.LENGTH_LONG).show();
-                    StorageManager.saveCalculationMethode(selection, Setting.this.getApplicationContext());
-                    prayerTimesCalculator.setMethod(selection);
-                }
-            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
+        builder.setTitle("Calculation Method").setSingleChoiceItems(methodsItems, Arrays.asList(methodsItemValues).indexOf(savedCalcMethod), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int methodNumber) {
+                selection = (String) methodsItems[methodNumber];
+                selectionValue = (String) methodsItemValues[methodNumber];
+            }
+        }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (selection != null) {
+                    Toast.makeText(Setting.this, selection + " was selected as calculation method.", Toast.LENGTH_LONG).show();
+                    StorageManager.saveCalculationMethode(selectionValue, Setting.this.getApplicationContext());
+                    prayerTimesCalculator.setMethod(selectionValue);
+                    AlarmSetter.createOrUpdateAllAlarms(Setting.this);
+                }
+            }
+        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
-                }
-            });
-            return builder.create();
-        } else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
-            builder.setTitle("Calculation Method").setSingleChoiceItems(methodsItems, Arrays.asList(methodsItems).indexOf(savedCalcMethod), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int methodNumber) {
-                    selection = (String) methodsItems[methodNumber];
-                }
-            }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if (selection != null) {
-                        Toast.makeText(Setting.this, selection + " was selected as calculation method.", Toast.LENGTH_LONG).show();
-                        StorageManager.saveCalculationMethode(selection, Setting.this.getApplicationContext());
-                        prayerTimesCalculator.setMethod(selection);
-                        AlarmSetter.createOrUpdateAllAlarms(Setting.this);
-                    }
-                }
-            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        return builder.create();
 
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                }
-            });
-            return builder.create();
-        }
     }
 
     private void showSavedAlertsFunction() {
@@ -185,8 +166,8 @@ public class Setting extends AppCompatActivity {
         });
 
         //setContentView(R.layout.volume_dialog);
-        SeekBar seekbarVolume = (SeekBar)v.findViewById(R.id.volumeSeekBar);
-        final AudioManager audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        SeekBar seekbarVolume = (SeekBar) v.findViewById(R.id.volumeSeekBar);
+        final AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         seekbarVolume.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM));
         seekbarVolume.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_ALARM));
 
