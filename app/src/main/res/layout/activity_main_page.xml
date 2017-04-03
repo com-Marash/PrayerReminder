@@ -83,16 +83,26 @@
         android:layout_below="@id/textView_goToToday">
 
         <TableRow>
-
             <TextView
-                android:text="@string/Fajr"
-                android:id="@+id/textView_fajrtext"
+                android:text="@string/Imsaak"
+                android:id="@+id/textView_Imsaaktext"
                 android:layout_marginTop="30sp"
                 style="@style/leftColumn"/>
 
             <TextView
-                android:id="@+id/textView_fajr"
+                android:id="@+id/textView_imsak"
                 android:layout_marginTop="30sp"
+                style="@style/rightColumn"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="@string/Fajr"
+                android:id="@+id/textView_fajrtext"
+                style="@style/leftColumn"/>
+
+            <TextView
+                android:id="@+id/textView_fajr"
                 style="@style/rightColumn"/>
         </TableRow>
 
@@ -171,17 +181,6 @@
 
             <TextView
                 android:id="@+id/textView_midnight"
-                style="@style/rightColumn"/>
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:text="@string/Imsaak"
-                android:id="@+id/textView_Imsaaktext"
-                style="@style/leftColumn"/>
-
-            <TextView
-                android:id="@+id/textView_imsak"
                 style="@style/rightColumn"/>
         </TableRow>
 
