@@ -37,10 +37,10 @@ public class selectSound extends AppCompatActivity {
         sound_TextView = (TextView) findViewById(R.id.textView_soundText);
 
         if (selectedRingToneData == null || selectedRingToneData[0] == null || selectedRingToneData[1] == null) {
-            sound_TextView.setText("No ringtone has been set for prayers alarm. Please choose from list.");
+            sound_TextView.setText(getString(R.string.noRingtone));
             existingRingtone = (Uri) null;
         } else {
-            sound_TextView.setText(selectedRingToneData[0] + " has been set as your prayers alarm ringtone.");
+            sound_TextView.setText(selectedRingToneData[0] + " " + getString(R.string.ringtoneHasSet));
             existingRingtone = Uri.parse(selectedRingToneData[1]);
         }
     }
@@ -48,7 +48,7 @@ public class selectSound extends AppCompatActivity {
     public void sound_selection_list() {
         Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_RINGTONE);
-        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select a new ringtone");
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, getString(R.string.selectANewRingtone));
 
         if (existingRingtone == null) {
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, Settings.System.DEFAULT_RINGTONE_URI);
@@ -76,16 +76,16 @@ public class selectSound extends AppCompatActivity {
                 Ringtone ringtone = RingtoneManager.getRingtone(selectSound.this.getApplicationContext(), uri);
                 String title = ringtone.getTitle(this);
 
-                Toast.makeText(selectSound.this, title + " was set as your prayer alarm.", Toast.LENGTH_LONG).show();
+                Toast.makeText(selectSound.this, title + " " + getString(R.string.alarmWasSet), Toast.LENGTH_LONG).show();
 
                 sound_TextView = (TextView) findViewById(R.id.textView_soundText);
-                sound_TextView.setText(title + " was selected as your prayers alarm ringtone.");
+                sound_TextView.setText(title + " " + getString(R.string.alarmWasSelected));
 
                 StorageManager.saveAlarmRingtone(title, uri.toString(), selectSound.this);
                 finish();
 
             } else {
-                Toast.makeText(selectSound.this, "Please select a ringtone from the list.", Toast.LENGTH_LONG).show();
+                Toast.makeText(selectSound.this, getString(R.string.selectARingtone), Toast.LENGTH_LONG).show();
             }
         }
     }

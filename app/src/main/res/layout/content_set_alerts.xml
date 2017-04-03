@@ -37,7 +37,17 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/Imsaak"
+            android:tag="Imsaak"
+            android:textSize="16sp"
+            android:id="@+id/radioButton_Imsaak"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/Fajr"
+            android:tag="Fajr"
             android:textSize="16sp"
             android:id="@+id/radioButton_fajr"
             android:checked="false" />
@@ -46,6 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sunrise"
+            android:tag="Sunrise"
             android:textSize="16sp"
             android:id="@+id/radioButton_sunrise"
             android:checked="false" />
@@ -54,6 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Dhuhr"
+            android:tag="Dhuhr"
             android:textSize="16sp"
             android:id="@+id/radioButton_zohr"
             android:checked="false"/>
@@ -62,6 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Asr"
+            android:tag="Asr"
             android:textSize="16sp"
             android:id="@+id/radioButton_asr"
             android:checked="false" />
@@ -70,6 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sunset"
+            android:tag="Sunset"
             android:textSize="16sp"
             android:id="@+id/radioButton_sunset"
             android:checked="false" />
@@ -78,6 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Maghrib"
+            android:tag="Maghrib"
             android:textSize="16sp"
             android:id="@+id/radioButton_maghrib"
             android:checked="false" />
@@ -86,6 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Isha"
+            android:tag="Isha"
             android:textSize="16sp"
             android:id="@+id/radioButton_isha"
             android:checked="false" />
@@ -94,6 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Midnight"
+            android:tag="Midnight"
             android:textSize="16sp"
             android:id="@+id/radioButton_midnight"
             android:checked="false" />
@@ -114,6 +131,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Before"
+            android:tag="Before"
             android:textSize="16sp"
             android:id="@+id/radioButton_before"
             android:checked="false" />
@@ -122,6 +140,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/After"
+            android:tag="After"
             android:textSize="16sp"
             android:id="@+id/radioButton_after"
             android:checked="false" />

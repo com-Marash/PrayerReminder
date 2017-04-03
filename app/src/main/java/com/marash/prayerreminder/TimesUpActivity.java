@@ -1,6 +1,7 @@
 package com.marash.prayerreminder;
 
 import android.app.Activity;
+import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -61,15 +62,15 @@ public class TimesUpActivity extends Activity {
         alarmTextView.startAnimation(anim);
     }
 
-    public static void setAlarmText(int time, String prayerName) {
+    public static void setAlarmText(int time, String prayerName, Context context) {
         String beforeAfter;
         if (time < 0) {
-            beforeAfter = "before";
+            beforeAfter = context.getString(R.string.Before);
             time = -time;
         } else {
-            beforeAfter = "after";
+            beforeAfter = context.getString(R.string.After);
         }
-        textViewString = "Time to pray! It is " + time + " minute " + beforeAfter + " " + prayerName + ".";
+        textViewString = context.getString(R.string.timeToPray) + " " + time + " " + context.getString(R.string.Minutes) + " " + beforeAfter + " " + prayerName + ".";
     }
 
     public void stopAlarm(View view) {

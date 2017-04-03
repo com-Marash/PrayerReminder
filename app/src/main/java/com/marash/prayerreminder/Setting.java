@@ -83,23 +83,23 @@ public class Setting extends AppCompatActivity {
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
-        builder.setTitle("Calculation Method").setSingleChoiceItems(methodsItems, Arrays.asList(methodsItemValues).indexOf(savedCalcMethod), new DialogInterface.OnClickListener() {
+        builder.setTitle(getString(R.string.calculationMethodButton)).setSingleChoiceItems(methodsItems, Arrays.asList(methodsItemValues).indexOf(savedCalcMethod), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int methodNumber) {
                 selection = (String) methodsItems[methodNumber];
                 selectionValue = (String) methodsItemValues[methodNumber];
             }
-        }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        }).setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (selection != null) {
-                    Toast.makeText(Setting.this, selection + " was selected as calculation method.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Setting.this, selection + " " + getString(R.string.calculationMethodSelected), Toast.LENGTH_LONG).show();
                     StorageManager.saveCalculationMethode(selectionValue, Setting.this.getApplicationContext());
                     prayerTimesCalculator.setMethod(selectionValue);
                     AlarmSetter.createOrUpdateAllAlarms(Setting.this);
                 }
             }
-        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -154,12 +154,11 @@ public class Setting extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.volume_dialog, (ViewGroup) findViewById(R.id.settingsItem));
-        builder.setView(v).setTitle("Adjust Alarm Volume").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setView(v).setTitle(getString(R.string.alarmVolumeTitle)).setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //TODO save new volume amount
             }
-        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }
@@ -175,14 +174,10 @@ public class Setting extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
-
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
-
             }
 
             @Override

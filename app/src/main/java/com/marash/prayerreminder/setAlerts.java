@@ -62,25 +62,25 @@ public class setAlerts extends AppCompatActivity {
                 desiredTime = Integer.parseInt(String.valueOf(timeText.getText()));
 
                 if ((selectedPrayerId == -1) && (selectedTimeId == -1) && (timeText.getText().toString().matches(""))) {
-                    Toast.makeText(setAlerts.this, "Please complete all parts", Toast.LENGTH_LONG).show();
+                    Toast.makeText(setAlerts.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
                 } else if ((selectedPrayerId == -1) && (selectedTimeId == -1)) {
-                    Toast.makeText(setAlerts.this, "Please select one prayer and a time from two option, before or after prayer.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(setAlerts.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
                 } else if ((selectedTimeId == -1) && (timeText.getText().toString().matches(""))) {
-                    Toast.makeText(setAlerts.this, "Please select a time from two option, before or after prayer and set a time for that.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(setAlerts.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
                 } else if ((selectedPrayerId == -1) && (timeText.getText().toString().matches(""))) {
-                    Toast.makeText(setAlerts.this, "Please select one prayer and set a time for that.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(setAlerts.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
                 } else if (selectedPrayerId == -1) {
-                    Toast.makeText(setAlerts.this, "Please select one prayer", Toast.LENGTH_LONG).show();
+                    Toast.makeText(setAlerts.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
                 } else if (selectedTimeId == -1) {
-                    Toast.makeText(setAlerts.this, "Please select a time from two option, before or after prayer.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(setAlerts.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
                 } else if (timeText.getText().toString().matches("")) {
-                    Toast.makeText(setAlerts.this, "Please set a time for prayer.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(setAlerts.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
                 } else {
                     selectedPrayer = (RadioButton) findViewById(selectedPrayerId);
-                    selectedPrayerText = selectedPrayer.getText().toString();
+                    selectedPrayerText = selectedPrayer.getTag().toString();
 
                     selectedBeforeAfter = (RadioButton) findViewById(selectedTimeId);
-                    selectedBeforeAfterText = selectedBeforeAfter.getText().toString();
+                    selectedBeforeAfterText = selectedBeforeAfter.getTag().toString();
 
                     if (selectedBeforeAfterText.equals("Before")) {
                         desiredTime = -desiredTime;
@@ -113,10 +113,10 @@ public class setAlerts extends AppCompatActivity {
                             AlarmSetter.createOrUpdateAlarm(alert, setAlerts.this.getApplicationContext());
                             ///
                             AlarmSetter.setMainAlarm(setAlerts.this);
-                            Toast.makeText(setAlerts.this, "Your new alarm has been successfully saved.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(setAlerts.this, getString(R.string.newAlarmSaved), Toast.LENGTH_LONG).show();
                             finish();
                         } else {
-                            Toast.makeText(setAlerts.this, "This alarm has been saved previously.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(setAlerts.this, getString(R.string.alarmPreviouslySaved), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         int randomNumber = (int) ((Math.random() * (10000001) + 1000));
@@ -125,7 +125,7 @@ public class setAlerts extends AppCompatActivity {
                         AlarmSetter.createOrUpdateAlarm(alert, setAlerts.this.getApplicationContext());
                         AlarmSetter.setMainAlarm(setAlerts.this);
 
-                        Toast.makeText(setAlerts.this, "Your new alarm has been successfully saved.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(setAlerts.this, getString(R.string.newAlarmSaved), Toast.LENGTH_LONG).show();
                         finish();
                     }
                 }

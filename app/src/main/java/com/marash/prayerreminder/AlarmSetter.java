@@ -31,7 +31,7 @@ public class AlarmSetter {
 
         Calendar alertCalendar = prayerTimesCalculator.getPrayerTime(alert.getPrayerName(), Calendar.getInstance(), context);
 
-        Log.d("minute1", alertCalendar.get(Calendar.MINUTE) + " " + alertCalendar.get(Calendar.HOUR_OF_DAY));
+//        Log.d("minute1", alertCalendar.get(Calendar.MINUTE) + " " + alertCalendar.get(Calendar.HOUR_OF_DAY));
 
         alertCalendar.add(Calendar.MINUTE, alert.getTime());
         if (alertCalendar.getTimeInMillis() < Calendar.getInstance().getTimeInMillis()) {

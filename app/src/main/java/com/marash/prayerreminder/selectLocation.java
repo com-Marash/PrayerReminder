@@ -63,9 +63,9 @@ public class selectLocation extends AppCompatActivity {
         locationText = (TextView) findViewById(R.id.textView_lastKnownLocation);
 
         pd = new ProgressDialog(selectLocation.this);
-        pd.setTitle("Loading Location");
-        pd.setMessage("Please wait while the location is being loaded.");
-        pd.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+        pd.setTitle(getString(R.string.loadLocation));
+        pd.setMessage(getString(R.string.waitLocation));
+        pd.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel) , new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 lb.cancelLocationUpdate(selectLocation.this);
@@ -97,8 +97,8 @@ public class selectLocation extends AppCompatActivity {
         }
         String longitude = lastKnownLocationText[1];
         String latitude = lastKnownLocationText[0];
-        locationText.setText("Country: " + country + "\n" + "City: " + city + "\n" +
-                "Longitude: " + longitude + "\n" + "Latitude: " + latitude);
+        locationText.setText(getString(R.string.country) + ": " + country + "\n" + getString(R.string.city) + ": " + city + "\n" +
+                getString(R.string.longitude) + ": " + longitude + "\n" + getString(R.string.latitude) + ": " + latitude);
     }
 
     private void coordinationTextChangedListener(Context context) {
@@ -124,7 +124,7 @@ public class selectLocation extends AppCompatActivity {
             lb.Network_Function(selectLocation.this);
             pd.show();
         } else {
-            Toast.makeText(this, "You are offline! Check connection and try again.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.offlineMessage), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -135,7 +135,7 @@ public class selectLocation extends AppCompatActivity {
     }
 
     public void confirmButtFunction(View view) {
-        Toast.makeText(selectLocation.this, "Location updated successfully.", Toast.LENGTH_LONG).show();
+        Toast.makeText(selectLocation.this, getString(R.string.locationUpdated), Toast.LENGTH_LONG).show();
         finish();
     }
 }

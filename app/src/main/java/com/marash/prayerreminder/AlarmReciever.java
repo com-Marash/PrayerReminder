@@ -24,7 +24,7 @@ public class AlarmReciever extends BroadcastReceiver {
         Intent timesUpIntent = new Intent(context, TimesUpActivity.class);
         timesUpIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        TimesUpActivity.setAlarmText(intent.getIntExtra("prayerTime", -1), intent.getStringExtra("prayerName"));
+        TimesUpActivity.setAlarmText(intent.getIntExtra("prayerTime", -1), intent.getStringExtra("prayerName"),context);
         Log.d("recieved this alarm: ", String.valueOf(intent.getIntExtra("prayerTime", -1)));
         Log.d("recieved this alarm: ", intent.getStringExtra("prayerName"));
         context.startActivity(timesUpIntent);

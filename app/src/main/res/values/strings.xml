@@ -1,24 +1,27 @@
 <resources>
     <string name="app_name">PrayerReminder</string>
+    <string name="loadLocation">Loading Location</string>
+    <string name="waitLocation">Please wait while the location is being loaded.</string>
     <string name="title_activity_setting">Setting</string>
     <string name="title_activity_about_us">About Us</string>
-    <string name="title_activity_set_alerts">Set Alerts</string>
-    <string name="title_activity_show_prayer_times">Prayer Times</string>
-    <string name="title_activity_select_location">Select Location</string>
-    <string name="showPrayerTimes">show prayer times</string>
-    <string name="setAlerts">set alerts</string>
-    <string name="setting">Setting</string>
-    <string name="aboutUs">About Us</string>
+    <string name="title_activity_set_alerts">Set Alarm</string>
+    <string name="title_activity_select_location">Update Location</string>
     <string name="UpdateLocationGPS">Update by GPS</string>
     <string name="UpdateLocationNetwork">Update by Network</string>
     <string name="confirmLocation">Confirm Location</string>
-    <string name="showSavedAlerts">Show saved alerts</string>
-    <string name="title_activity_show_saved_alerts">showSavedAlerts</string>
-    <string name="title_activity_sound_selection">sound_selection</string>
+    <string name="title_activity_show_saved_alerts">Saved Alarms</string>
+    <string name="noSavedAlarm">No saved alarm to show.</string>
+    <string name="minutesBefore">minutes before</string>
+    <string name="minutesAfter">minutes after</string>
+    <string name="setNewAlarmButton">Set New Alarm</string>
+    <string name="updateLocationButton">Update Location</string>
+    <string name="AlarmRingtoneButton">Alarm Ringtone</string>
+    <string name="calculationMethodButton">Calculation Method</string>
+    <string name="aَlarmVolumeButton">Alarm Volume</string>
     <string name="Step1">Step 1 of 2</string>
     <string name="last_location">Your last known location:</string>
     <string name="setAlertsFor">Set a new alarm for:</string>
-    <string name="aboutUsText">This application was written by Marash Company. Marash company started its activity in February 2016.\n
+    <string name="aboutUsText">This application was written by Marash Company.\n
         \nIf you liked this application, kindly support our team. Rate or donate for this app.
         \n\nThank you for choosing this application.</string>
     <string name="NoRingtone">No ringtone selected yet.</string>
@@ -60,4 +63,26 @@
     <string name="Midnight">Midnight</string>
     <string name="Jafari">Jafari</string>
     <string name="Egypt">Egypt</string>
+    <string name="country">Country</string>
+    <string name="city">City</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="offlineMessage">You are offline! Check connection and try again.</string>
+    <string name="locationUpdated">Location updated successfully.</string>
+    <string name="completeAll">Please complete all parts.</string>
+    <string name="newAlarmSaved">Your new alarm has been successfully saved.</string>
+    <string name="alarmPreviouslySaved">This alarm has been saved previously.</string>
+    <string name="noRingtone">No ringtone has been set for prayers alarm. Please choose from list.</string>
+    <string name="ringtoneHasSet">has been set as your prayers alarm ringtone.</string>
+    <string name="selectANewRingtone">Select a new ringtone</string>
+    <string name="alarmWasSet">was set as your prayer alarm.</string>
+    <string name="alarmWasSelected">was selected as your prayers alarm ringtone.</string>
+    <string name="selectARingtone">Please select a ringtone from the list.</string>
+    <string name="calculationMethodSelected">was selected as calculation method.</string>
+    <string name="alarmVolumeTitle">Adjust Alarm Volume</string>
+    <string name="timeToPray">Time to pray! It is</string>
+    <string name="cannotUpdateByGPS">Cannot update location with GPS.</string>
+    <string name="GPSPermission">Cannot update location without GPS permission.</string>
+    <string name="cannotUpdateByNetwork">Cannot update location with Network.</string>
+    <string name="networkPermission">Cannot update location without Network permission.</string>
 </resources>
