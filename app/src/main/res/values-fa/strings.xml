@@ -70,12 +70,12 @@
     <string name="completeAll">لطفا تمامی موارد خواسته شده را انتخاب نمایید.</string>
     <string name="newAlarmSaved">یادآور جدید شما با موفقیت ذخیره شد.</string>
     <string name="alarmPreviouslySaved">این یادآور قبلا ایجاد شده است.</string>
-    <string name="noRingtone">موزیکی برای زنگ یادآور انتخاب نشده است. لطفا از لیست انتخاب نمایید.</string>
+    <string name="noRingtone">موردی برای زنگ یادآور انتخاب نشده است. لطفا از لیست انتخاب نمایید.</string>
     <string name="ringtoneHasSet">به عنوان موزیک یادآور نمازهای شما انتخاب شده است.</string>
-    <string name="selectANewRingtone">موزیک جدید دلخواهتان را انتخاب نمایید.</string>
+    <string name="selectANewRingtone">صدای زنگ دلخواه خود را انتخاب نمایید.</string>
     <string name="alarmWasSet">به عنوان زنگ یادآور شما انتخاب شد.</string>
-    <string name="alarmWasSelected">به عنوان موزیک یادآور شما انتخاب شد.</string>
-    <string name="selectARingtone">لطفا یک موزیک از لیست زیر انتخاب نمایید.</string>
+    <string name="alarmWasSelected">به عنوان زنگ یادآور شما انتخاب شد.</string>
+    <string name="selectARingtone">لطفا از لیست صدای زنگ دلخواه را انتخاب نمایید.</string>
     <string name="calculationMethodSelected">به عنوان روش محاسبه انتخاب شد.</string>
     <string name="alarmVolumeTitle">تنظیم صدای زنگ</string>
     <string name="timeToPray">وقت نماز است! الان </string>

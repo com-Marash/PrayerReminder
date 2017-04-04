@@ -75,7 +75,8 @@ public class Setting extends AppCompatActivity {
     }
 
     private AlertDialog calculationMethodFunction() {
-        final CharSequence[] methodsItems = {"Egypt", "Tehran", "Jafari", "Karachi", "Makkah", "MWL (Muslim World League)", "ISNA (North American Muslims)"};
+        final CharSequence[] methodsItems = {getString(R.string.Egypt), getString(R.string.Tehran), getString(R.string.Jafari), getString(R.string.Karachi),
+                getString(R.string.Makkah), getString(R.string.MWL), getString(R.string.Isna)};
         final CharSequence[] methodsItemValues = {"Egypt", "Tehran", "Jafari", "Karachi", "Makkah", "MWL", "ISNA"};
         String savedCalcMethod;
 

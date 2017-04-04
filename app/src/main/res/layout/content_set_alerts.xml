@@ -30,7 +30,7 @@
         android:layout_below="@+id/beforeAfter"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="30sp"
+        android:layout_marginTop="20sp"
         android:background="@drawable/text_view_shape"
         android:padding="10sp">
 
@@ -121,7 +121,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/beforeAfter"
-        android:layout_marginTop="65sp"
+        android:layout_marginTop="50sp"
         android:layout_marginStart="130sp"
         android:layout_marginLeft="130sp"
         android:layout_alignParentLeft="true"
@@ -154,7 +154,7 @@
         android:layout_below="@+id/textView_setAnewAlertFor"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="25sp"
+        android:layout_marginTop="15sp"
         android:layout_marginEnd="5sp"
         android:layout_marginRight="5sp"
         android:text="@string/zero"
@@ -170,7 +170,7 @@
         android:layout_below="@+id/textView_setAnewAlertFor"
         android:layout_toEndOf="@+id/editText_preferableTime"
         android:layout_toRightOf="@+id/editText_preferableTime"
-        android:layout_marginTop="40sp"
+        android:layout_marginTop="27sp"
         android:textSize="18sp"
         android:labelFor="@id/editText_preferableTime"
         android:textColor="#000000"/>
