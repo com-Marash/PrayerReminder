@@ -49,11 +49,11 @@
     <string name="MWL">MWL (Muslim World League)</string>
     <string name="FindGPS">Find Location By GPS</string>
     <string name="Sunset">Sunset</string>
-    <string name="Makkah">Makkah</string>
+    <string name="Makkah">Umm al-Qura, Makkah</string>
     <string name="Maghrib">Maghrib</string>
-    <string name="Karachi">Karachi</string>
+    <string name="Karachi">Univ. of Islamic Sci., Karachi</string>
     <string name="FindNetwork">Find Location By Network</string>
-    <string name="Tehran">Tehran</string>
+    <string name="Tehran">Geophysics Univ. of Tehran</string>
     <string name="Minutes">Minutes</string>
     <string name="save">Save</string>
     <string name="Before">Before</string>
