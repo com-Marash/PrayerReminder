@@ -38,7 +38,7 @@
     <string name="PreferredMethod">روش محاسبه دلخواه را انتخاب نمایید.</string>
     <string name="ApplicationGetLocation">برنامه جهت محاسبه دقیق اوقات شرعی، نیاز به دانستن موقعیت جغرافیایی دقیق شما دارد.</string>
     <string name="GoToday">برو به امروز</string>
-    <string name="sunrise">طلوع</string>
+    <string name="Sunrise">طلوع</string>
     <string name="Donate">حمایت مالی</string>
     <string name="Dhuhr">ظهر</string>
     <string name="CurrentCoordination">موقعیت جغرافیایی فعلی شما:</string>
@@ -46,7 +46,7 @@
     <string name="Asr">عصر</string>
     <string name="MWL">جامعه جهانی مسلمانان</string>
     <string name="FindGPS">یافتن موقعیت جغرافیایی از طریق جی پی اس</string>
-    <string name="sunset">غروب</string>
+    <string name="Sunset">غروب</string>
     <string name="Makkah">مکه</string>
     <string name="Maghrib">مغرب</string>
     <string name="Karachi">کراچی</string>

@@ -55,7 +55,7 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sunrise"
+            android:text="@string/Sunrise"
             android:tag="Sunrise"
             android:textSize="16sp"
             android:id="@+id/radioButton_sunrise"
@@ -82,7 +82,7 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sunset"
+            android:text="@string/Sunset"
             android:tag="Sunset"
             android:textSize="16sp"
             android:id="@+id/radioButton_sunset"

@@ -108,7 +108,7 @@
 
         <TableRow>
             <TextView
-                android:text="@string/sunrise"
+                android:text="@string/Sunrise"
                 android:id="@+id/textView_sunrisetext"
                 style="@style/leftColumn"/>
 
@@ -142,7 +142,7 @@
 
         <TableRow>
             <TextView
-                android:text="@string/sunset"
+                android:text="@string/Sunset"
                 android:id="@+id/textView_sunsettext"
                 style="@style/leftColumn"/>
 

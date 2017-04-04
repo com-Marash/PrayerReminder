@@ -41,10 +41,10 @@ public class showSavedAlerts extends AppCompatActivity {
                 int savedAlertTime = a.getTime();
                 if (savedAlertTime < 0) {
                     savedAlertTime = -savedAlertTime;
-                    st = savedAlertTime + " " + getString(R.string.minutesBefore) + " " + savedAlertPrayerName;
+                    st = savedAlertTime + " " + getString(R.string.minutesBefore) + " " + getString(savedAlertPrayerName);
 
                 } else {
-                    st = savedAlertTime + " " + getString(R.string.minutesAfter) + " " + savedAlertPrayerName;
+                    st = savedAlertTime + " " + getString(R.string.minutesAfter) + " " + getString(savedAlertPrayerName);
                 }
                 alerts.add(st);
             }
@@ -55,5 +55,12 @@ public class showSavedAlerts extends AppCompatActivity {
         } else {
             showText.setText(R.string.noSavedAlarm);
         }
+    }
+
+    public String getString(String abc){
+
+        int resID = getResources().getIdentifier(abc, "string",  getPackageName());
+
+        return this.getResources().getString(resID);
     }
 }
