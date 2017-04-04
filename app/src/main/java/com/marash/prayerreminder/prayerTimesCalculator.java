@@ -79,7 +79,8 @@ public class prayerTimesCalculator {
             case "Midnight":
                 calculatesprayerTime = calculatesprayerTimes.getMidnight();
                 break;
-            case "Imsak":
+            case "Imsaak":
+                // TODO: fix this issue after prayerTime module got fixed
                 calculatesprayerTime = calculatesprayerTimes.getImsak();
                 break;
             default:
