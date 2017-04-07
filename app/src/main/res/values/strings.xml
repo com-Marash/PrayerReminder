@@ -85,4 +85,7 @@
     <string name="GPSPermission">Cannot update location without GPS permission.</string>
     <string name="cannotUpdateByNetwork">Cannot update location with Network.</string>
     <string name="networkPermission">Cannot update location without Network permission.</string>
+    <string name="currentLocation">Current location:</string>
+    <string name="unknownCity">Unknown city</string>
+    <string name="unknownCountry">Unknown country</string>
 </resources>

@@ -83,4 +83,7 @@
     <string name="GPSPermission">امکان بروزرسانی موقعیت جغرافیایی بدون دسترسی به جی پی اس نیست.</string>
     <string name="cannotUpdateByNetwork">امکان بروزرسانی موقعیت جغرافیایی با اینترنت نیست.</string>
     <string name="networkPermission">امکان بروزرسانی موقعیت جغرافیایی بدون دسترسی به اینترنت نیست.</string>
+    <string name="currentLocation">موقعیت فعلی شما:</string>
+    <string name="unknownCity">شهر نامشخص است.</string>
+    <string name="unknownCountry">کشور نامشخص است.</string>
 </resources>

@@ -84,8 +84,8 @@ public class selectLocation extends AppCompatActivity {
 
     private void checkForLastKnownLocation() {
         String[] lastKnownLocationText = StorageManager.loadLocation(selectLocation.this);
-        String country = "Unknown";
-        String city = "Unknown";
+        String country = this.getString(R.string.unknownCountry);
+        String city = this.getString(R.string.unknownCity);
         if (lastKnownLocationText[2] == null && lastKnownLocationText[3] == null) {
         } else if (lastKnownLocationText[2] == null) {
             city = lastKnownLocationText[3];
