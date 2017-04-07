@@ -23,7 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 
 public class MainPage extends AppCompatActivity {
 
@@ -143,8 +142,9 @@ public class MainPage extends AppCompatActivity {
      */
     private void showDateInformation() {
 
-        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE dd/MM/yyyy", Locale.US);
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE dd/MM/yyyy");
         String dateText = dayFormat.format(calendar.getTime());
+
         showDateText.setText(dateText);
 
         Calendar currentCalender = Calendar.getInstance();
