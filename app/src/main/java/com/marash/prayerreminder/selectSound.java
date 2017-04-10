@@ -40,7 +40,7 @@ public class selectSound extends AppCompatActivity {
             sound_TextView.setText(getString(R.string.noRingtone));
             existingRingtone = (Uri) null;
         } else {
-            sound_TextView.setText(selectedRingToneData[0] + " " + getString(R.string.ringtoneHasSet));
+            sound_TextView.setText(getString(R.string.musicWithName) +selectedRingToneData[0] + " " + getString(R.string.ringtoneHasSet));
             existingRingtone = Uri.parse(selectedRingToneData[1]);
         }
     }

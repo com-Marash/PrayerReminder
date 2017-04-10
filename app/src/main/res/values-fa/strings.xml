@@ -86,4 +86,5 @@
     <string name="currentLocation">موقعیت فعلی شما:</string>
     <string name="unknownCity">شهر نامشخص است.</string>
     <string name="unknownCountry">کشور نامشخص است.</string>
+    <string name="musicWithName">موزیک با نام </string>
 </resources>

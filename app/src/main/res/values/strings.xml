@@ -88,4 +88,5 @@
     <string name="currentLocation">Current location:</string>
     <string name="unknownCity">Unknown city</string>
     <string name="unknownCountry">Unknown country</string>
+    <string name="musicWithName">Music with name </string>
 </resources>
