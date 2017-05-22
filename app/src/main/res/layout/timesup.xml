@@ -7,13 +7,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:layout_marginTop="30sp"
         android:layout_marginLeft="30sp"
         android:layout_marginRight="30sp"
         android:id="@+id/alarmText"
         android:textStyle="bold"
-        android:textColor="#4c7815"/>
+        android:textColor="#233809"/>
 
 
     <LinearLayout
