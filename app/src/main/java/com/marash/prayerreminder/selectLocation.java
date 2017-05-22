@@ -98,7 +98,7 @@ public class selectLocation extends AppCompatActivity {
         String longitude = lastKnownLocationText[1];
         String latitude = lastKnownLocationText[0];
         locationText.setText(getString(R.string.country) + ": " + country + "\n" + getString(R.string.city) + ": " + city + "\n" +
-                getString(R.string.longitude) + ": " + longitude + "\n" + getString(R.string.latitude) + ": " + latitude);
+                getString(R.string.longitude) + " " + longitude + "\n" + getString(R.string.latitude) + " " + latitude);
     }
 
     private void coordinationTextChangedListener(Context context) {
