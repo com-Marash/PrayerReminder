@@ -3,7 +3,6 @@ package com.marash.prayerreminder;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,10 +31,10 @@ public class MainPage extends AppCompatActivity {
 
     protected GoogleApiClient client;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         //FirstUse Handler
         if (isLocationAvailable(MainPage.this) && isMethodAvailable(MainPage.this)) {
             setContentView(R.layout.activity_main_page);

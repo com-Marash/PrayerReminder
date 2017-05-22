@@ -65,8 +65,8 @@
     <string name="Egypt">Egypt</string>
     <string name="country">Country</string>
     <string name="city">City</string>
-    <string name="longitude">Longitude</string>
-    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude:</string>
+    <string name="latitude">Latitude:</string>
     <string name="offlineMessage">You are offline! Check connection and try again.</string>
     <string name="locationUpdated">Location updated successfully.</string>
     <string name="completeAll">Please complete all parts.</string>
