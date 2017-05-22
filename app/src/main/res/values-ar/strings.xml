@@ -21,8 +21,7 @@
     <string name="Step1"> الخطوه ١ من ٢ </string>
     <string name="last_location">موقعك الاخير المحدد</string>
     <string name="setAlertsFor">ضبط منبه جديد: </string>
-    <string name="aboutUsText">هذا التطبيق من صنع شركه مارش. اذا اعجبك التطبيق يرجى دعم فريق العمل بتقييم التطبيق او التبرع
-المالي. شكرا لك لاختيارك هذا التطبيق</string>
+    <string name="aboutUsText">هذا التطبيق من صنع شركه مارش. اذا اعجبك التطبيق يرجى دعم فريق العمل بتقييم التطبيق. شكرا لك لاختيارك هذا التطبيق</string>
     <string name="NoRingtone">لم يتم تحديد نغمه التنبيه</string>
     <string name="zero">0</string>
     <string name="beforeSymbol">&gt;</string>
@@ -40,7 +39,6 @@
     <string name="ApplicationGetLocation">التطبيق يحتاج لتحديد موقعك ليتم تحديد اوقات الصلاه بدقه</string>
     <string name="GoToday">اذهب إلى اليوم</string>
     <string name="Sunrise"> الشروق الشمس</string>
-    <string name="Donate">تبرع</string>
     <string name="Dhuhr">الظهر</string>
     <string name="CurrentCoordination"> موقعك الحالي: </string>
     <string name="Isna">المسلمين في شمال امريكا</string>

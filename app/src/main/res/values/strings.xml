@@ -22,7 +22,7 @@
     <string name="last_location">Your last known location:</string>
     <string name="setAlertsFor">Set a new alarm for:</string>
     <string name="aboutUsText">This application was written by Marash Company.\n
-        \nIf you liked this application, kindly support our team. Rate or donate for this app.
+        \nIf you liked this application, kindly support our team and rate for this app.
         \n\nThank you for choosing this application.</string>
     <string name="NoRingtone">No ringtone selected yet.</string>
     <string name="zero">0</string>
@@ -41,7 +41,6 @@
     <string name="ApplicationGetLocation">Application needs to get your location to set up precise prayer times.</string>
     <string name="GoToday">Go to today</string>
     <string name="Sunrise">Sunrise</string>
-    <string name="Donate">Donate</string>
     <string name="Dhuhr">Dhuhr</string>
     <string name="CurrentCoordination">Your current coordination is:</string>
     <string name="Isna">ISNA (North American Muslims)</string>
