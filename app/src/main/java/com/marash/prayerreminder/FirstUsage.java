@@ -90,6 +90,7 @@ public class FirstUsage extends Activity {
 
         Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
         Ringtone ringtone = RingtoneManager.getRingtone(FirstUsage.this.getApplicationContext(), uri);
+        //TODO: make sure exception fix is working
         String title = ringtone.getTitle(this);
         StorageManager.saveAlarmRingtone(title, uri.toString(), FirstUsage.this.getApplicationContext());
 

@@ -57,6 +57,7 @@ public class LocationBuilder {
                     } catch (IOException e) {
                     }
                 }
+                //TODO crash here!
                 tv.setText(context.getString(R.string.currentLocation) + " " + localityName + ", " + countryName + "\n" + context.getString(R.string.CurrentCoordination) + "\n" + context.getString(R.string.longitude) + " " + location.getLongitude() + "\n" + context.getString(R.string.latitude) + " " + location.getLatitude());
                 StorageManager.saveLocation(location.getLatitude(), location.getLongitude(), countryName, localityName, context);
                 prayerTimesCalculator.setLatitude(location.getLatitude());

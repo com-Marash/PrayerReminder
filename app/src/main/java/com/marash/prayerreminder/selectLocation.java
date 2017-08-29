@@ -86,19 +86,27 @@ public class selectLocation extends AppCompatActivity {
         String[] lastKnownLocationText = StorageManager.loadLocation(selectLocation.this);
         String country = this.getString(R.string.unknownCountry);
         String city = this.getString(R.string.unknownCity);
-        if (lastKnownLocationText[2] == null && lastKnownLocationText[3] == null) {
-        } else if (lastKnownLocationText[2] == null) {
-            city = lastKnownLocationText[3];
-        } else if (lastKnownLocationText[3] == null) {
-            country = lastKnownLocationText[2];
-        } else {
-            country = lastKnownLocationText[2];
-            city = lastKnownLocationText[3];
+        // lastKnownLocationText null point exception fixed
+        // TODO: support string.xml files
+        if(lastKnownLocationText != null){
+            if (lastKnownLocationText[2] == null && lastKnownLocationText[3] == null) {
+            } else if (lastKnownLocationText[2] == null) {
+                city = lastKnownLocationText[3];
+            } else if (lastKnownLocationText[3] == null) {
+                country = lastKnownLocationText[2];
+            } else {
+                country = lastKnownLocationText[2];
+                city = lastKnownLocationText[3];
+            }
+            String longitude = lastKnownLocationText[1];
+            String latitude = lastKnownLocationText[0];
+            locationText.setText(getString(R.string.country) + ": " + country + "\n" + getString(R.string.city) + ": " + city + "\n" +
+                    getString(R.string.longitude) + " " + longitude + "\n" + getString(R.string.latitude) + " " + latitude);
+        }else{
+            locationText.setText(getString(R.string.country) + ": " + country + "\n" + getString(R.string.city) + ": " + city + "\n" +
+                    getString(R.string.longitude) + " " + "Unknown longitude" + "\n" + getString(R.string.latitude) + " " + "Unknown latitude");
         }
-        String longitude = lastKnownLocationText[1];
-        String latitude = lastKnownLocationText[0];
-        locationText.setText(getString(R.string.country) + ": " + country + "\n" + getString(R.string.city) + ": " + city + "\n" +
-                getString(R.string.longitude) + " " + longitude + "\n" + getString(R.string.latitude) + " " + latitude);
+
     }
 
     private void coordinationTextChangedListener(Context context) {

@@ -156,7 +156,7 @@ public class MainPage extends AppCompatActivity {
         }
 
         PrayerTimes myPrayerTimes = new PrayerTimes(PrayerTimes.methods.valueOf(prayerTimesCalculator.getMethod(this)));
-        double[] location = prayerTimesCalculator.getLccation(this);
+        double[] location = prayerTimesCalculator.getLocation(this);
         prayerTimesData calculatedTimes = myPrayerTimes.getTimes(new int[]{calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH)}, new Coordination(location[0], location[1]));
 
         if (calculatedTimes != null) {

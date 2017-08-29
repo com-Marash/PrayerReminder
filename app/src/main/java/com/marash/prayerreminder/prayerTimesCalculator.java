@@ -30,7 +30,7 @@ public class prayerTimesCalculator {
         prayerTimesCalculator.method = method;
     }
 
-    public static double[] getLccation(Context context) {
+    public static double[] getLocation(Context context) {
         if (latitude == null || longitude == null) {
             String[] location = StorageManager.loadLocation(context);
             latitude = Double.valueOf(location[0]);
@@ -49,7 +49,7 @@ public class prayerTimesCalculator {
     public static Calendar getPrayerTime(String prayerType, Calendar calendar, Context context) {
 
         PrayerTimes prayerTimes = new PrayerTimes(PrayerTimes.methods.valueOf(getMethod(context)));
-        double[] location = getLccation(context);
+        double[] location = getLocation(context);
         prayerTimesData calculatesprayerTimes = prayerTimes.getTimes(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH), location[0], location[1]);
 
         Calendar result = (Calendar) calendar.clone();
