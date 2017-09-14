@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
+import android.location.Location;
 import android.location.LocationManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -20,6 +21,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.concurrent.Future;
 
 import static android.graphics.Color.GRAY;
 
@@ -71,6 +74,9 @@ public class FirstUsage extends Activity {
         okButt.getBackground().setColorFilter(GRAY, PorterDuff.Mode.MULTIPLY);
 
         myLocManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        //check if location in disabled in user setting
+        //TODO
+
         lb = new LocationBuilder(myLocManager);
 
         pd = new ProgressDialog(FirstUsage.this);
@@ -96,6 +102,7 @@ public class FirstUsage extends Activity {
 
     }
 
+
     private void coordinationTextChangedListener() {
         tv.addTextChangedListener(locationTextWatcher);
     }
@@ -112,11 +119,23 @@ public class FirstUsage extends Activity {
     }
 
     public void findLocationByGPS(View view) {
+        Future<Location> locationFuture = lb.getLocationByGPS(FirstUsage.this);
 
-        lb.setLocationListener(FirstUsage.this, tv);
-        coordinationTextChangedListener();
-        lb.GPS_Function(FirstUsage.this);
-        pd.show();
+        try {
+            pd.show();
+            Location location = locationFuture.get();
+            //Enabling confirm button
+            tv.setText(this.getString(R.string.currentLocation) + " " + localityName + ", " + countryName + "\n" + context.getString(R.string.CurrentCoordination) + "\n" + context.getString(R.string.longitude) + " " + location.getLongitude() + "\n" + context.getString(R.string.latitude) + " " + location.getLatitude());
+            StorageManager.saveLocation(location.getLatitude(), location.getLongitude(), countryName, localityName, context);
+            prayerTimesCalculator.setLatitude(location.getLatitude());
+            prayerTimesCalculator.setLongitude(location.getLongitude());
+            okButt.setEnabled(true);
+            okButt.getBackground().setColorFilter(null);
+            //
+            pd.dismiss();
+        } catch (Exception e) {
+            // TODO: show an alert that we could not get location
+        }
     }
 
     public void findLocationByNetwork(View view) {

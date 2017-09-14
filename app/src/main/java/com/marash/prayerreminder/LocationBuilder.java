@@ -11,6 +11,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.TextView;
@@ -18,6 +19,10 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Created by Maedeh on 9/20/2016.
@@ -34,6 +39,37 @@ public class LocationBuilder {
     public LocationListener getLocl() {
         return locl;
     }
+
+    public Future<Location> getLocationByGPS(final Context context){
+        Future<Location> future = new Future<Location>() {
+            @Override
+            public boolean cancel(boolean b) {
+                return false;
+            }
+
+            @Override
+            public boolean isCancelled() {
+                return false;
+            }
+
+            @Override
+            public boolean isDone() {
+                return false;
+            }
+
+            @Override
+            public Location get() throws InterruptedException, ExecutionException {
+                return null;
+            }
+
+            @Override
+            public Location get(long l, @NonNull TimeUnit timeUnit) throws InterruptedException, ExecutionException, TimeoutException {
+                return null;
+            }
+        };
+        return future;
+    }
+
 
     public void setLocationListener(final Context context, final TextView tv) {
 
