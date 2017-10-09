@@ -16,11 +16,15 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.TextView;
 
+import com.marash.prayerreminder.dto.PRLocation;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
@@ -40,62 +44,43 @@ public class LocationBuilder {
         return locl;
     }
 
-    public Future<Location> getLocationByGPS(final Context context){
-        Future<Location> future = new Future<Location>() {
-            @Override
-            public boolean cancel(boolean b) {
-                return false;
-            }
+    public Future<PRLocation> getLocationByGPS(final Context context){
 
-            @Override
-            public boolean isCancelled() {
-                return false;
-            }
-
-            @Override
-            public boolean isDone() {
-                return false;
-            }
-
-            @Override
-            public Location get() throws InterruptedException, ExecutionException {
-                return null;
-            }
-
-            @Override
-            public Location get(long l, @NonNull TimeUnit timeUnit) throws InterruptedException, ExecutionException, TimeoutException {
-                return null;
-            }
-        };
-        return future;
     }
 
 
-    public void setLocationListener(final Context context, final TextView tv) {
+    private Future<PRLocation> getLocation(final Context context){
+        Future<PRLocation> prLocationFuture= new FutureTask<PRLocation>(new Callable<PRLocation>() {
+            @Override
+            public PRLocation call() throws Exception {
+                return null;
+            }
+        });
 
         this.locl = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-
-                Geocoder gcd = new Geocoder(context, Locale.getDefault());
-                String localityName = context.getString(R.string.unknownCity);
-                String countryName = context.getString(R.string.unknownCountry);
-                if (gcd.isPresent()) {
+                PRLocation prLocation = new PRLocation(context);
+                prLocation.setLocation(location);
+                if (Geocoder.isPresent()) {
+                    Geocoder gcd = new Geocoder(context, Locale.getDefault());
                     List<Address> addresses;
                     try {
                         addresses = gcd.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                         if (addresses != null && addresses.size() > 0) {
-
                             Address returnedAddress = addresses.get(0);
-                            countryName = returnedAddress.getCountryName() != null ? returnedAddress.getCountryName() : countryName;
-                            localityName = returnedAddress.getLocality() != null ? returnedAddress.getLocality() : localityName;
+                            if (returnedAddress.getCountryName() != null) {
+                                prLocation.setCountry(returnedAddress.getCountryName());
+                            }
+                            if (returnedAddress.getLocality() != null){
+                                prLocation.setCity(returnedAddress.getLocality());
+                            }
                         }
                     } catch (IOException e) {
+                        // could not get country and city. It is fine, we show them as "unknown" , continue the code
                     }
                 }
-                //TODO crash here!
-                tv.setText(context.getString(R.string.currentLocation) + " " + localityName + ", " + countryName + "\n" + context.getString(R.string.CurrentCoordination) + "\n" + context.getString(R.string.longitude) + " " + location.getLongitude() + "\n" + context.getString(R.string.latitude) + " " + location.getLatitude());
-                StorageManager.saveLocation(location.getLatitude(), location.getLongitude(), countryName, localityName, context);
+                StorageManager.saveLocation(location.getLatitude(), location.getLongitude(), prLocation.getCountry(), prLocation.getCity(), context);
                 prayerTimesCalculator.setLatitude(location.getLatitude());
                 prayerTimesCalculator.setLongitude(location.getLongitude());
 
@@ -107,17 +92,22 @@ public class LocationBuilder {
             }
 
             @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
             }
 
             @Override
-            public void onProviderEnabled(String provider) {
+            public void onProviderEnabled(String s) {
+
             }
 
             @Override
-            public void onProviderDisabled(String provider) {
+            public void onProviderDisabled(String s) {
+
             }
-        };
+        }
+
+
     }
 
     public void GPS_Function(Context context) {

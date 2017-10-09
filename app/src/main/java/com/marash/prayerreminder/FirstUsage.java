@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
-import android.location.Location;
 import android.location.LocationManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -21,6 +20,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.marash.prayerreminder.dto.PRLocation;
 
 import java.util.concurrent.Future;
 
@@ -118,23 +119,21 @@ public class FirstUsage extends Activity {
         }
     }
 
-    public void findLocationByGPS(View view) {
-        Future<Location> locationFuture = lb.getLocationByGPS(FirstUsage.this);
-
+    public void findLocationByGPS(Context context) {
+        Future<PRLocation> locationFuture = lb.getLocationByGPS(FirstUsage.this);
         try {
             pd.show();
-            Location location = locationFuture.get();
-            //Enabling confirm button
-            tv.setText(this.getString(R.string.currentLocation) + " " + localityName + ", " + countryName + "\n" + context.getString(R.string.CurrentCoordination) + "\n" + context.getString(R.string.longitude) + " " + location.getLongitude() + "\n" + context.getString(R.string.latitude) + " " + location.getLatitude());
-            StorageManager.saveLocation(location.getLatitude(), location.getLongitude(), countryName, localityName, context);
-            prayerTimesCalculator.setLatitude(location.getLatitude());
-            prayerTimesCalculator.setLongitude(location.getLongitude());
+            PRLocation prLocation = locationFuture.get();
+            tv.setText(this.getString(R.string.currentLocation) + " " + prLocation.getCity() + ", " + prLocation.getCountry() + "\n" + context.getString(R.string.CurrentCoordination) + "\n" + context.getString(R.string.longitude) + " " + prLocation.getLocation().getLongitude() + "\n" + context.getString(R.string.latitude) + " " + prLocation.getLocation().getLatitude());
+            StorageManager.saveLocation(prLocation.getLocation().getLatitude(), prLocation.getLocation().getLongitude(), prLocation.getCountry(), prLocation.getCity(), context);
+            prayerTimesCalculator.setLatitude(prLocation.getLocation().getLatitude());
+            prayerTimesCalculator.setLongitude(prLocation.getLocation().getLongitude());
             okButt.setEnabled(true);
             okButt.getBackground().setColorFilter(null);
-            //
             pd.dismiss();
         } catch (Exception e) {
             // TODO: show an alert that we could not get location
+            pd.dismiss();
         }
     }
 
