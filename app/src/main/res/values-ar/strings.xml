@@ -86,4 +86,16 @@
     <string name="unknownCity">مدينه غير معروفه</string>
     <string name="unknownCountry">دوله غير معروفه</string>
     <string name="musicWithName">موسيقى مع الاسم </string>
+    <string name="Muharram">محرّم</string>
+    <string name="Safar">صفر</string>
+    <string name="RabiAwwal">ربیع الاوّل</string>
+    <string name="RabiAkhir">ربیع الاخیر</string>
+    <string name="JumadalUla">جمادی الاولی</string>
+    <string name="JumadalAkhira">جمادی الاخیر</string>
+    <string name="Rajab">رجب</string>
+    <string name="Shaban">شعبان</string>
+    <string name="Ramadan">رمضان</string>
+    <string name="Shawwal">شوّال</string>
+    <string name="DhulQaada">ذوالقعده</string>
+    <string name="DhulHijja">ذوالحجه</string>
 </resources>

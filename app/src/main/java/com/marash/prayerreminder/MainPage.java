@@ -144,6 +144,8 @@ public class MainPage extends AppCompatActivity {
         SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE dd/MM/yyyy");
         String dateText = dayFormat.format(calendar.getTime());
 
+        dateText = dateText + "\n" + DateHijri.writeIslamicDate(MainPage.this, calendar);
+
         showDateText.setText(dateText);
 
         Calendar currentCalender = Calendar.getInstance();

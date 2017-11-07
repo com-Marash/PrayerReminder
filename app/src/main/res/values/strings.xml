@@ -88,4 +88,17 @@
     <string name="unknownCity">Unknown city</string>
     <string name="unknownCountry">Unknown country</string>
     <string name="musicWithName">Music with name </string>
+    <string name="Muharram">Muharram</string>
+    <string name="Safar">Safar</string>
+    <string name="RabiAwwal">Rabi Awwal</string>
+    <string name="RabiAkhir">Rabi Akhir</string>
+    <string name="JumadalUla">Jumadal Ula</string>
+    <string name="JumadalAkhira">Jumadal Akhira</string>
+    <string name="Rajab">Rajab</string>
+    <string name="Shaban">Shaaban</string>
+    <string name="Ramadan">Ramadan</string>
+    <string name="Shawwal">Shawwal</string>
+    <string name="DhulQaada">Dhul Qaaada</string>
+    <string name="DhulHijja">Dhul Hijja</string>
+
 </resources>
