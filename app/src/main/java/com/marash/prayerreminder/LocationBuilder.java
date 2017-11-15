@@ -15,7 +15,10 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.marash.prayerreminder.dto.PRLocation;
 
 import java.io.IOException;
@@ -44,24 +47,27 @@ public class LocationBuilder {
         return locl;
     }
 
-    public Future<PRLocation> getLocationByGPS(final Context context){
-
+    public SettableFuture<PRLocation> getLocationByGPS(final Context context) {
+        SettableFuture<PRLocation> settableFuture = SettableFuture.create();
+        setLocationListener(settableFuture, context);
+        requestLocationUpdatebyGPS(settableFuture, context);
+        return settableFuture;
     }
 
+    public SettableFuture<PRLocation> getLocationByNetwork(final Context context) {
+        SettableFuture<PRLocation> settableFuture = SettableFuture.create();
+        setLocationListener(settableFuture, context);
+        requestLocationUpdateByNetwork(settableFuture, context);
+        return settableFuture;
+    }
 
-    private Future<PRLocation> getLocation(final Context context){
-        Future<PRLocation> prLocationFuture= new FutureTask<PRLocation>(new Callable<PRLocation>() {
-            @Override
-            public PRLocation call() throws Exception {
-                return null;
-            }
-        });
-
+    private void setLocationListener(final SettableFuture<PRLocation> futureToUpdate, final Context context) {
         this.locl = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                PRLocation prLocation = new PRLocation(context);
-                prLocation.setLocation(location);
+                locm.removeUpdates(locl);
+                String city = context.getString(R.string.unknownCity);
+                String country = context.getString(R.string.unknownCountry);
                 if (Geocoder.isPresent()) {
                     Geocoder gcd = new Geocoder(context, Locale.getDefault());
                     List<Address> addresses;
@@ -70,91 +76,86 @@ public class LocationBuilder {
                         if (addresses != null && addresses.size() > 0) {
                             Address returnedAddress = addresses.get(0);
                             if (returnedAddress.getCountryName() != null) {
-                                prLocation.setCountry(returnedAddress.getCountryName());
+                                country = returnedAddress.getCountryName();
                             }
-                            if (returnedAddress.getLocality() != null){
-                                prLocation.setCity(returnedAddress.getLocality());
+                            if (returnedAddress.getLocality() != null) {
+                                city = returnedAddress.getLocality();
                             }
                         }
                     } catch (IOException e) {
                         // could not get country and city. It is fine, we show them as "unknown" , continue the code
                     }
                 }
-                StorageManager.saveLocation(location.getLatitude(), location.getLongitude(), prLocation.getCountry(), prLocation.getCity(), context);
-                prayerTimesCalculator.setLatitude(location.getLatitude());
-                prayerTimesCalculator.setLongitude(location.getLongitude());
-
-                   /*----------to get City-Name from coordinates ------------- */
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
-                locm.removeUpdates(locl);
+                futureToUpdate.set(new PRLocation(city, country, location));
             }
 
             @Override
             public void onStatusChanged(String s, int i, Bundle bundle) {
-
             }
 
             @Override
             public void onProviderEnabled(String s) {
-
             }
 
             @Override
             public void onProviderDisabled(String s) {
-
             }
-        }
-
-
+        };
     }
 
-    public void GPS_Function(Context context) {
+    private void requestLocationUpdatebyGPS(SettableFuture<PRLocation> settableFuture, Context context) {
         if (Build.VERSION.SDK_INT >= 23) {
-            if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                settableFuture.cancel(true);
+                cancelLocationUpdate();
+                ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             } else {
                 try {
-                    locm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 2000, locl);
+                    locm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 200, locl);
                 } catch (SecurityException e) {
-
+                    settableFuture.cancel(true);
+                    cancelLocationUpdate();
+                    Toast.makeText(context, context.getString(R.string.cannotUpdateByGPS), Toast.LENGTH_LONG).show();
                 }
             }
         } else {
             try {
-                locm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 2000, locl);
+                locm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 200, locl);
             } catch (SecurityException e) {
-
+                settableFuture.cancel(true);
+                cancelLocationUpdate();
+                Toast.makeText(context, context.getString(R.string.cannotUpdateByGPS), Toast.LENGTH_LONG).show();
             }
         }
     }
 
-    public void Network_Function(Context context) {
+    private void requestLocationUpdateByNetwork(SettableFuture<PRLocation> settableFuture, Context context) {
         if (Build.VERSION.SDK_INT >= 23) {
-            if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                settableFuture.cancel(true);
+                cancelLocationUpdate();
+                ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 2);
             } else {
                 try {
-                    locm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 2000, locl);
+                    locm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 200, locl);
                 } catch (SecurityException e) {
-
+                    settableFuture.cancel(true);
+                    cancelLocationUpdate();
+                    Toast.makeText(context, context.getString(R.string.cannotUpdateByNetwork), Toast.LENGTH_LONG).show();
                 }
             }
         } else {
             try {
-                locm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 2000, locl);
+                locm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 200, locl);
             } catch (SecurityException e) {
-
+                settableFuture.cancel(true);
+                cancelLocationUpdate();
+                Toast.makeText(context, context.getString(R.string.cannotUpdateByNetwork), Toast.LENGTH_LONG).show();
             }
         }
     }
 
-    public void cancelLocationUpdate(Context context) {
-           /*----------to get City-Name from coordinates ------------- */
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
+    public void cancelLocationUpdate() {
         locm.removeUpdates(locl);
     }
 }

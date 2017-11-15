@@ -17,6 +17,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.common.util.concurrent.SettableFuture;
+import com.marash.prayerreminder.dto.PRLocation;
+
 import static android.graphics.Color.GRAY;
 
 
@@ -24,28 +27,8 @@ public class selectLocation extends AppCompatActivity {
 
     private TextView locationText;
     private LocationBuilder lb;
-    private ProgressDialog pd;
     private Button confirmButt;
-
-    private TextWatcher locationTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            //Enabling confirm button
-            confirmButt.setEnabled(true);
-            confirmButt.getBackground().setColorFilter(null);
-            //
-            locationText.removeTextChangedListener(this);
-            pd.dismiss();
-        }
-    };
+    private PRLocation currentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,22 +45,9 @@ public class selectLocation extends AppCompatActivity {
         LocationManager myLocManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         locationText = (TextView) findViewById(R.id.textView_lastKnownLocation);
 
-        pd = new ProgressDialog(selectLocation.this);
-        pd.setTitle(getString(R.string.loadLocation));
-        pd.setMessage(getString(R.string.waitLocation));
-        pd.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel) , new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                lb.cancelLocationUpdate(selectLocation.this);
-                cancelCoordinationTextChangedListener();
-                dialog.dismiss();
-            }
-        });
-
         lb = new LocationBuilder(myLocManager);
 
         checkForLastKnownLocation();
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
@@ -109,41 +79,84 @@ public class selectLocation extends AppCompatActivity {
 
     }
 
-    private void coordinationTextChangedListener(Context context) {
-        AlarmSetter.createOrUpdateAllAlarms(context);
-        locationText.addTextChangedListener(locationTextWatcher);
-    }
-
-    private void cancelCoordinationTextChangedListener() {
-        locationText.removeTextChangedListener(locationTextWatcher);
-    }
-
     public void updateLocationByGPSFunction(View view) {
-        lb.setLocationListener(selectLocation.this, locationText);
-        coordinationTextChangedListener(view.getContext());
-        lb.GPS_Function(selectLocation.this);
-        pd.show();
+        final Context context = view.getContext();
+        final SettableFuture<PRLocation> locationFuture = lb.getLocationByGPS(context);
+        if (locationFuture != null) {
+            handleFuture(locationFuture, context);
+        }
     }
 
     public void updateLocationByNetworkFunction(View view) {
+        Context context = view.getContext();
         if (isNetworkAvailable()) {
-            lb.setLocationListener(selectLocation.this, locationText);
-            coordinationTextChangedListener(view.getContext());
-            lb.Network_Function(selectLocation.this);
-            pd.show();
+            SettableFuture<PRLocation> locationFuture = lb.getLocationByNetwork(context);
+            if (locationFuture != null) {
+                handleFuture(locationFuture, context);
+            }
         } else {
             Toast.makeText(this, getString(R.string.offlineMessage), Toast.LENGTH_LONG).show();
         }
     }
 
+    private void handleFuture(final SettableFuture<PRLocation> locationFuture, final Context context) {
+        final ProgressDialog pd = createPD(locationFuture);
+        pd.show();
+        Thread mThread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    final PRLocation prLocation = locationFuture.get();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            locationText.setText(context.getString(R.string.currentLocation) + " " + prLocation.getCity() + ", " + prLocation.getCountry() + "\n" + context.getString(R.string.CurrentCoordination) + "\n" + context.getString(R.string.longitude) + " " + prLocation.getLocation().getLongitude() + "\n" + context.getString(R.string.latitude) + " " + prLocation.getLocation().getLatitude());
+                            confirmButt.setEnabled(true);
+                            confirmButt.getBackground().setColorFilter(null);
+                        }
+                    });
+                    currentLocation = prLocation;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    // future to get location got canceled. nothing to do.
+                } finally {
+                    pd.dismiss();
+                }
+            }
+        };
+        mThread.start();
+    }
+
+    private ProgressDialog createPD(final SettableFuture<PRLocation> locationFuture){
+        ProgressDialog pd = new ProgressDialog(selectLocation.this);
+        pd.setTitle(getString(R.string.loadLocation));
+        pd.setMessage(getString(R.string.waitLocation));
+        pd.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                lb.cancelLocationUpdate();
+                locationFuture.cancel(true);
+                dialog.dismiss();
+            }
+        });
+        return pd;
+    }
+
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager == null) {
+            return false;
+        }
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        return (activeNetworkInfo != null && activeNetworkInfo.isConnected());
     }
 
     public void confirmButtFunction(View view) {
         Toast.makeText(selectLocation.this, getString(R.string.locationUpdated), Toast.LENGTH_LONG).show();
+        StorageManager.saveLocation(currentLocation.getLocation().getLatitude(), currentLocation.getLocation().getLongitude(), currentLocation.getCountry(), currentLocation.getCity(), selectLocation.this);
+        prayerTimesCalculator.setLatitude(currentLocation.getLocation().getLatitude());
+        prayerTimesCalculator.setLongitude(currentLocation.getLocation().getLongitude());
+        AlarmSetter.createOrUpdateAllAlarms(view.getContext());
         finish();
     }
 }
