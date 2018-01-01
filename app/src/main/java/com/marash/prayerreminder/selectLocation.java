@@ -58,7 +58,7 @@ public class selectLocation extends AppCompatActivity {
         String city = this.getString(R.string.unknownCity);
         // lastKnownLocationText null point exception fixed
         // TODO: support string.xml files
-        if(lastKnownLocationText != null){
+        if (lastKnownLocationText != null) {
             if (lastKnownLocationText[2] == null && lastKnownLocationText[3] == null) {
             } else if (lastKnownLocationText[2] == null) {
                 city = lastKnownLocationText[3];
@@ -72,7 +72,7 @@ public class selectLocation extends AppCompatActivity {
             String latitude = lastKnownLocationText[0];
             locationText.setText(getString(R.string.country) + ": " + country + "\n" + getString(R.string.city) + ": " + city + "\n" +
                     getString(R.string.longitude) + " " + longitude + "\n" + getString(R.string.latitude) + " " + latitude);
-        }else{
+        } else {
             locationText.setText(getString(R.string.country) + ": " + country + "\n" + getString(R.string.city) + ": " + city + "\n" +
                     getString(R.string.longitude) + " " + "Unknown longitude" + "\n" + getString(R.string.latitude) + " " + "Unknown latitude");
         }
@@ -80,11 +80,20 @@ public class selectLocation extends AppCompatActivity {
     }
 
     public void updateLocationByGPSFunction(View view) {
-        final Context context = view.getContext();
-        final SettableFuture<PRLocation> locationFuture = lb.getLocationByGPS(context);
-        if (locationFuture != null) {
-            handleFuture(locationFuture, context);
+        if (isGPSAvailable()) {
+            final Context context = view.getContext();
+            final SettableFuture<PRLocation> locationFuture = lb.getLocationByGPS(context);
+            if (locationFuture != null) {
+                handleFuture(locationFuture, context);
+            }
+        } else {
+            Toast.makeText(this, getString(R.string.NoGPSMessage), Toast.LENGTH_LONG).show();
         }
+    }
+
+    private boolean isGPSAvailable() {
+        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        return (manager != null && manager.isProviderEnabled(LocationManager.GPS_PROVIDER));
     }
 
     public void updateLocationByNetworkFunction(View view) {
@@ -127,7 +136,7 @@ public class selectLocation extends AppCompatActivity {
         mThread.start();
     }
 
-    private ProgressDialog createPD(final SettableFuture<PRLocation> locationFuture){
+    private ProgressDialog createPD(final SettableFuture<PRLocation> locationFuture) {
         ProgressDialog pd = new ProgressDialog(selectLocation.this);
         pd.setTitle(getString(R.string.loadLocation));
         pd.setMessage(getString(R.string.waitLocation));

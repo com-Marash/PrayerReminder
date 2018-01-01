@@ -67,6 +67,7 @@
     <string name="longitude">Longitude:</string>
     <string name="latitude">Latitude:</string>
     <string name="offlineMessage">You are offline! Check connection and try again.</string>
+    <string name="NoGPSMessage">GPS is disabled! Please Enable GPS and try again.</string>
     <string name="locationUpdated">Location updated successfully.</string>
     <string name="completeAll">Please complete all parts.</string>
     <string name="newAlarmSaved">Your new alarm has been successfully saved.</string>
