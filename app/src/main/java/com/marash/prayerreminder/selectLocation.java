@@ -119,10 +119,19 @@ public class selectLocation extends AppCompatActivity {
     }
 
     public void updateLocationByGPSFunction(View view) {
-        lb.setLocationListener(selectLocation.this, locationText);
-        coordinationTextChangedListener(view.getContext());
-        lb.GPS_Function(selectLocation.this);
-        pd.show();
+        if(isGPSAvailable()){
+            lb.setLocationListener(selectLocation.this, locationText);
+            coordinationTextChangedListener(view.getContext());
+            lb.GPS_Function(selectLocation.this);
+            pd.show();
+        }else{
+            Toast.makeText(this, getString(R.string.NoGPSMessage), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private boolean isGPSAvailable() {
+        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        return manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
     public void updateLocationByNetworkFunction(View view) {

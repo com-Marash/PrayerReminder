@@ -1,6 +1,7 @@
 package com.marash.prayerreminder;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -112,11 +113,19 @@ public class FirstUsage extends Activity {
     }
 
     public void findLocationByGPS(View view) {
+        if(isGPSAvailable()){
+            lb.setLocationListener(FirstUsage.this, tv);
+            coordinationTextChangedListener();
+            lb.GPS_Function(FirstUsage.this);
+            pd.show();
+        }else{
+            Toast.makeText(this, getString(R.string.NoGPSMessage), Toast.LENGTH_LONG).show();
+        }
+    }
 
-        lb.setLocationListener(FirstUsage.this, tv);
-        coordinationTextChangedListener();
-        lb.GPS_Function(FirstUsage.this);
-        pd.show();
+    private boolean isGPSAvailable() {
+        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        return manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
     public void findLocationByNetwork(View view) {
@@ -136,6 +145,7 @@ public class FirstUsage extends Activity {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return (activeNetworkInfo != null && activeNetworkInfo.isConnected());
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {

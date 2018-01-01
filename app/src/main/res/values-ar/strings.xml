@@ -65,6 +65,7 @@
     <string name="longitude">خط الطول :</string>
     <string name="latitude">خط العرض :</string>
     <string name="offlineMessage">خارج الشبكه! اتصل بالشبكه ثم حاول مره اخرى</string>
+    <string name="NoGPSMessage">خارج الخرائط! اتصل بالخرائط ثم حاول مره اخرى</string>
     <string name="locationUpdated">تم تحديث الموقع بنجاح</string>
     <string name="completeAll">يرجى تعبئه جميع المتطلبات</string>
     <string name="newAlarmSaved">تم حفظ المنبه الجديد بنجاح</string>
