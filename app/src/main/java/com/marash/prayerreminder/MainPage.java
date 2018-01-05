@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.style.RelativeSizeSpan;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -146,7 +148,14 @@ public class MainPage extends AppCompatActivity {
 
         dateText = dateText + "\n" + DateHijri.writeIslamicDate(MainPage.this, calendar);
 
-        showDateText.setText(dateText);
+        //for making hijridate smaller font
+        int begin = dateText.indexOf('\n') + 1;
+        int end = dateText.length();
+        SpannableString dateSpan = new SpannableString(dateText);
+        dateSpan.setSpan(new RelativeSizeSpan(0.8f),begin,end,0);
+        ///////////////////////////////////
+
+        showDateText.setText(dateSpan);
 
         Calendar currentCalender = Calendar.getInstance();
         if (calendar.get(Calendar.YEAR) == currentCalender.get(Calendar.YEAR)

@@ -80,31 +80,44 @@ public class selectLocation extends AppCompatActivity {
     }
 
     public void updateLocationByGPSFunction(View view) {
-        if (isGPSAvailable()) {
-            final Context context = view.getContext();
-            final SettableFuture<PRLocation> locationFuture = lb.getLocationByGPS(context);
-            if (locationFuture != null) {
-                handleFuture(locationFuture, context);
+        final LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if(manager != null) {
+            if (isGPSAvailable(manager)) {
+                final Context context = view.getContext();
+                final SettableFuture<PRLocation> locationFuture = lb.getLocationByGPS(context);
+                if (locationFuture != null) {
+                    handleFuture(locationFuture, context);
+                }
+            } else {
+                Toast.makeText(this, getString(R.string.NoGPSMessage), Toast.LENGTH_LONG).show();
             }
-        } else {
-            Toast.makeText(this, getString(R.string.NoGPSMessage), Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(this, getString(R.string.LocationIsNotEnabled), Toast.LENGTH_LONG).show();
         }
     }
 
-    private boolean isGPSAvailable() {
-        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        return (manager != null && manager.isProviderEnabled(LocationManager.GPS_PROVIDER));
+    private boolean isNetworkProviderAvailable(LocationManager manager) {
+        return manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+    private boolean isGPSAvailable(LocationManager manager) {
+        return manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
     public void updateLocationByNetworkFunction(View view) {
         Context context = view.getContext();
-        if (isNetworkAvailable()) {
-            SettableFuture<PRLocation> locationFuture = lb.getLocationByNetwork(context);
-            if (locationFuture != null) {
-                handleFuture(locationFuture, context);
+        final LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if(manager != null && isNetworkProviderAvailable(manager)) {
+            if (isNetworkAvailable()) {
+                SettableFuture<PRLocation> locationFuture = lb.getLocationByNetwork(context);
+                if (locationFuture != null) {
+                    handleFuture(locationFuture, context);
+                }
+            } else {
+                Toast.makeText(this, getString(R.string.offlineMessage), Toast.LENGTH_LONG).show();
             }
-        } else {
-            Toast.makeText(this, getString(R.string.offlineMessage), Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(this, getString(R.string.LocationIsNotEnabled), Toast.LENGTH_LONG).show();
         }
     }
 

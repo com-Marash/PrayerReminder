@@ -99,4 +99,6 @@
     <string name="Shawwal">شوّال</string>
     <string name="DhulQaada">ذی القعده</string>
     <string name="DhulHijja">ذی الحجه</string>
+    <string name="LocationIsNotEnabled">موقعیت جغرافیایی در دستگاه شما فعال نیست. موقعیت جغرافیایی را فعال کرده و دوباره تلاش کنید.</string>
+
 </resources>
