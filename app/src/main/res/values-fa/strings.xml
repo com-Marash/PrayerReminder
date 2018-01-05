@@ -65,6 +65,7 @@
     <string name="longitude">طول جغرافیایی:</string>
     <string name="latitude">عرض جغرافیایی:</string>
     <string name="offlineMessage">ارتباط دستگاه شما با اینترنت قطع میباشد. لطفا ارتباط را برقرار نمایید.</string>
+    <string name="NoGPSMessage">جی پی اس دستگاه شما غیر فعال میباشد. لطفا آن را فعال نموده و دوباره تلاش کنید.</string>
     <string name="locationUpdated">موقعیت جغرافیایی با موفقیت بروزرسانی شد.</string>
     <string name="completeAll">لطفا تمامی موارد خواسته شده را انتخاب نمایید.</string>
     <string name="newAlarmSaved">یادآور جدید شما با موفقیت ذخیره شد.</string>
@@ -98,4 +99,6 @@
     <string name="Shawwal">شوّال</string>
     <string name="DhulQaada">ذی القعده</string>
     <string name="DhulHijja">ذی الحجه</string>
+    <string name="LocationIsNotEnabled">موقعیت جغرافیایی در دستگاه شما فعال نیست. موقعیت جغرافیایی را فعال کرده و دوباره تلاش کنید.</string>
+
 </resources>

@@ -37,7 +37,7 @@
         android:textSize="18sp"
         android:padding="8sp"
         android:textColor="#000000"
-        android:background="@drawable/roundedcorner"
+        android:background="@drawable/textview_border"
         android:id="@+id/textView_firstPageHint"/>
 
 
@@ -55,6 +55,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/TextView_firstPageCoordination"
+        android:layout_marginTop="20sp"
+        android:layout_marginLeft="15sp"
+        android:layout_marginStart="15sp"
+        android:text="@string/FindNetwork"
+        android:id="@+id/Button_firstPageNetwork"
+        android:background="@drawable/button_shape"
+        android:padding="15sp"
+        android:textSize="15sp"
+        android:onClick="findLocationByNetwork"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Button_firstPageNetwork"
         android:layout_marginStart="15sp"
         android:layout_marginLeft="15sp"
         android:layout_marginTop="25sp"
@@ -69,22 +83,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Button_firstPageGPS"
-        android:layout_marginTop="20sp"
-        android:layout_marginLeft="15sp"
-        android:layout_marginStart="15sp"
-        android:text="@string/FindNetwork"
-        android:id="@+id/Button_firstPageNetwork"
-        android:background="@drawable/button_shape"
-        android:padding="15sp"
-        android:textSize="15sp"
-        android:onClick="findLocationByNetwork"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/OK"
-        android:layout_below="@+id/Button_firstPageNetwork"
+        android:layout_below="@+id/Button_firstPageGPS"
         android:layout_marginStart="250sp"
         android:layout_marginLeft="250sp"
         android:layout_marginTop="35sp"

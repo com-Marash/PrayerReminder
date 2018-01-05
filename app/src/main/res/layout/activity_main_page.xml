@@ -24,7 +24,7 @@
         android:clickable="true"
         android:textStyle="bold"
         android:layout_marginTop="20sp"
-        android:background="@drawable/roundedcorner"
+        android:background="@drawable/button_shape"
         android:padding="5sp" />
 
     <TextView
@@ -35,7 +35,7 @@
         android:layout_below="@+id/editTextShowDate"
         android:layout_centerHorizontal="true"
         android:text="@string/GoToday"
-        android:textColor="#7028a4"
+        android:textColor="#FF3C6414"
         android:textSize="20sp"
         android:clickable="true"
         android:background="@drawable/roundedcorner"
@@ -58,7 +58,7 @@
         android:background="@drawable/button_shape"
         android:textStyle="bold"
         android:padding="5sp"
-        android:layout_marginTop="18sp"/>
+        android:layout_marginTop="27sp"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -75,7 +75,7 @@
         android:textStyle="bold"
         android:padding="5sp"
         android:gravity="center"
-        android:layout_marginTop="18sp"/>
+        android:layout_marginTop="27sp"/>
 
     <TableLayout
         android:id="@+id/tableLayout1"
@@ -86,12 +86,12 @@
             <TextView
                 android:text="@string/Imsaak"
                 android:id="@+id/textView_Imsaaktext"
-                android:layout_marginTop="30sp"
+                android:layout_marginTop="40sp"
                 style="@style/leftColumn"/>
 
             <TextView
                 android:id="@+id/textView_imsak"
-                android:layout_marginTop="30sp"
+                android:layout_marginTop="40sp"
                 style="@style/rightColumn"/>
         </TableRow>
 

@@ -1,6 +1,7 @@
 package com.marash.prayerreminder;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -80,10 +81,23 @@ public class FirstUsage extends Activity {
     }
 
     public void findLocationByGPS(final Context context) {
-        final SettableFuture<PRLocation> locationFuture = lb.getLocationByGPS(FirstUsage.this);
-        if (locationFuture != null) {
-            handleFuture(locationFuture, context);
+        final LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (manager != null) {
+            if (isGPSAvailable(manager)) {
+                final SettableFuture<PRLocation> locationFuture = lb.getLocationByGPS(FirstUsage.this);
+                if (locationFuture != null) {
+                    handleFuture(locationFuture, context);
+                }
+            } else {
+                Toast.makeText(this, getString(R.string.NoGPSMessage), Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(this, getString(R.string.LocationIsNotEnabled), Toast.LENGTH_LONG).show();
         }
+    }
+
+    private boolean isGPSAvailable(LocationManager manager) {
+        return manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
     public void findLocationByNetwork(View view) {
@@ -91,14 +105,32 @@ public class FirstUsage extends Activity {
     }
 
     public void findLocationByNetwork(Context context) {
-        if (isNetworkAvailable()) {
-            SettableFuture<PRLocation> locationFuture = lb.getLocationByNetwork(FirstUsage.this);
-            if (locationFuture != null) {
-                handleFuture(locationFuture, context);
+        final LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (manager != null && isNetworkProviderAvailable(manager)) {
+            if (isNetworkAvailable()) {
+                SettableFuture<PRLocation> locationFuture = lb.getLocationByNetwork(FirstUsage.this);
+                if (locationFuture != null) {
+                    handleFuture(locationFuture, context);
+                }
+            } else {
+                Toast.makeText(this, getString(R.string.offlineMessage), Toast.LENGTH_LONG).show();
             }
         } else {
-            Toast.makeText(this, getString(R.string.offlineMessage), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.LocationIsNotEnabled), Toast.LENGTH_LONG).show();
         }
+    }
+
+    private boolean isNetworkProviderAvailable(LocationManager manager) {
+        return manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager == null) {
+            return false;
+        }
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return (activeNetworkInfo != null && activeNetworkInfo.isConnected());
     }
 
     private void handleFuture(final SettableFuture<PRLocation> locationFuture, final Context context) {
@@ -142,15 +174,6 @@ public class FirstUsage extends Activity {
             }
         });
         return pd;
-    }
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivityManager == null) {
-            return false;
-        }
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return (activeNetworkInfo != null && activeNetworkInfo.isConnected());
     }
 
     @Override
