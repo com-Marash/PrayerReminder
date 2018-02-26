@@ -38,6 +38,7 @@ public class Setting extends AppCompatActivity {
         setAlertFunction();
         showSavedAlertsFunction();
 
+        selectPrayersToShowFunction();
     }
 
     public void selectLocationFunction() {
@@ -189,4 +190,43 @@ public class Setting extends AppCompatActivity {
         builder.create();
         builder.show();
     }
+
+    public void selectPrayersToShowFunction() {
+
+        Button selectLocationButton = findViewById(R.id.button_prayersToShow);
+        selectLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prayersToShowFunction().show();
+            }
+        });
+    }
+
+    private AlertDialog prayersToShowFunction() {
+        final CharSequence[] methodsItems = {getString(R.string.Imsaak), getString(R.string.Fajr), getString(R.string.Sunrise), getString(R.string.Dhuhr),
+                getString(R.string.Asr), getString(R.string.Sunset), getString(R.string.Maghrib), getString(R.string.Isha), getString(R.string.Midnight)};
+
+        final boolean[] savedPrayersToShowBoolean = StorageManager.loadSavedPrayersToShow(Setting.this.getApplicationContext());
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
+
+        builder.setTitle(getString(R.string.PrayersToShow)).setMultiChoiceItems(methodsItems, savedPrayersToShowBoolean, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
+                savedPrayersToShowBoolean[indexSelected] = isChecked;
+            }
+        }).setPositiveButton(getString(R.string.save), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                StringBuilder s = new StringBuilder("" + savedPrayersToShowBoolean[0]);
+                for (int j = 1; j < savedPrayersToShowBoolean.length; j++) {
+                    s.append(",").append(savedPrayersToShowBoolean[j]);
+                }
+                StorageManager.saveSavedPrayersToShow(s.toString(), Setting.this.getApplicationContext());
+                MainPage.refreshPrayerTimes = true;
+            }
+        });
+        return builder.create();
+    }
+
 }

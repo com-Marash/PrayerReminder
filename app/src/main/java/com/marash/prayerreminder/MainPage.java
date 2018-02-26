@@ -27,12 +27,32 @@ import java.util.GregorianCalendar;
 
 public class MainPage extends AppCompatActivity {
 
+    public static boolean refreshPrayerTimes = false;
+    private boolean[] prayersToShow;
+    private final CharSequence[] prayersNameOrders = {"Imsaak", "Fajr", "Sunrise", "Dhuhr", "Asr", "Sunset", "Maghrib", "Isha", "Midnight"};
+
     private TextView showDateText, goToTodayText;
     private Button nextDayButton, previousDayButton;
     private Calendar calendar = new GregorianCalendar();
 
     protected GoogleApiClient client;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (refreshPrayerTimes || prayersToShow == null) {
+            refreshPrayerTimes = false;
+            prayersToShow = StorageManager.loadSavedPrayersToShow(this);
+        }
+        for (int k = 0; k < prayersToShow.length; k++) {
+            int tableRowId = getResources().getIdentifier("tableRow_" + prayersNameOrders[k], "id", this.getPackageName());
+            if (prayersToShow[k]) {
+                findViewById(tableRowId).setVisibility(View.VISIBLE);
+            } else {
+                findViewById(tableRowId).setVisibility(View.GONE);
+            }
+        }
+    }
 
     @Override
     protected void onStart() {
@@ -49,6 +69,7 @@ public class MainPage extends AppCompatActivity {
             setListeners();
 
             showDateInformation();
+
         } else {
             Intent firstUsageIntent = new Intent("com.marash.prayerreminder.FirstUsage");
             startActivity(firstUsageIntent);
@@ -85,11 +106,11 @@ public class MainPage extends AppCompatActivity {
     }
 
     private boolean isLocationAvailable(Context context) {
-        return StorageManager.loadLocation(context) == null ? false : true;
+        return StorageManager.loadLocation(context) != null;
     }
 
     private boolean isMethodAvailable(Context context) {
-        return StorageManager.loadCalculationMethode(context) == null ? false : true;
+        return StorageManager.loadCalculationMethode(context) != null;
     }
 
     private void setListeners() {
@@ -152,7 +173,7 @@ public class MainPage extends AppCompatActivity {
         int begin = dateText.indexOf('\n') + 1;
         int end = dateText.length();
         SpannableString dateSpan = new SpannableString(dateText);
-        dateSpan.setSpan(new RelativeSizeSpan(0.8f),begin,end,0);
+        dateSpan.setSpan(new RelativeSizeSpan(0.8f), begin, end, 0);
         ///////////////////////////////////
 
         showDateText.setText(dateSpan);
@@ -200,12 +221,12 @@ public class MainPage extends AppCompatActivity {
         }
     }
 
-    private String minuteFormatting(String s){
+    private String minuteFormatting(String s) {
         String result;
         String[] t = s.split(":");
         String s1 = t[0];
         String s2 = t[1];
-        if(s2.length() == 1){
+        if (s2.length() == 1) {
             s2 = "0" + s2;
         }
         result = s1 + ":" + s2;

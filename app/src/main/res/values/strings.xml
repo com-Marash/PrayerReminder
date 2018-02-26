@@ -102,5 +102,6 @@
     <string name="DhulQaada">Dhul Qaaada</string>
     <string name="DhulHijja">Dhul Hijja</string>
     <string name="LocationIsNotEnabled">Location is not enabled on your phone! please check and try again.</string>
+    <string name="PrayersToShow">Select the times you want the app shows them daily.</string>
 
 </resources>

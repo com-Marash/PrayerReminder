@@ -17,14 +17,15 @@ import java.util.ArrayList;
 public class StorageManager {
 
     private final static String STORED_Alerts_TEXT = "storedAlertsText.txt";
-    static OutputStreamWriter out;
-    static FileOutputStream outputFile;
-    static FileInputStream inputFile;
+    private static OutputStreamWriter out;
+    private static FileOutputStream outputFile;
+    private static FileInputStream inputFile;
     private static BufferedReader inputReader;
-    static String inputString;
+    private static String inputString;
     private final static String STORED_ringtone = "storedRingtoneText.txt";
     private final static String STORED_calcmethode = "storedCalculationMethode.txt";
     private final static String STORED_location = "storedLocation.txt";
+    private final static String STORED_savedPrayersToShow = "storedPrayersToShow.txt";
 
 
     public static void saveAlert(Alert alert, Context context) {
@@ -171,6 +172,42 @@ public class StorageManager {
 
         }
         return null;
+    }
+
+    public static boolean[] loadSavedPrayersToShow(Context context) {
+        String temp;
+        try {
+            inputFile = context.openFileInput(STORED_savedPrayersToShow);
+            inputReader = new BufferedReader(new InputStreamReader(inputFile));
+            temp = inputReader.readLine();
+            inputReader.close();
+
+            String[] savedPrayersToShowArray = temp.split(",");
+            final boolean[] savedPrayersToShowBoolean = new boolean[savedPrayersToShowArray.length];
+            for (int i = 0; i < savedPrayersToShowArray.length; i++) {
+                savedPrayersToShowBoolean[i] = savedPrayersToShowArray[i].equals("true");
+            }
+            return savedPrayersToShowBoolean;
+
+        } catch (IOException e) {
+            String firstPrayers = "true,true,true,true,true,true,true,true,true";
+            StorageManager.saveSavedPrayersToShow(firstPrayers, context);
+            return new boolean[]{true, true, true, true, true, true, true, true, true};
+        }
+    }
+
+    public static void saveSavedPrayersToShow(String savedPrayers, Context context) {
+
+        try {
+            outputFile = context.openFileOutput(STORED_savedPrayersToShow, Context.MODE_PRIVATE);
+            out = new OutputStreamWriter(outputFile);
+            out.write(savedPrayers);
+            out.close();
+        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
+
+        }
     }
 
 }
