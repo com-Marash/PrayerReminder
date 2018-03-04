@@ -3,6 +3,8 @@ package com.marash.prayerreminder;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
@@ -12,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.google.android.gms.appindexing.AppIndex;
@@ -35,8 +38,6 @@ public class MainPage extends AppCompatActivity {
     private Button nextDayButton, previousDayButton;
     private Calendar calendar = new GregorianCalendar();
 
-    protected GoogleApiClient client;
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -46,10 +47,13 @@ public class MainPage extends AppCompatActivity {
         }
         for (int k = 0; k < prayersToShow.length; k++) {
             int tableRowId = getResources().getIdentifier("tableRow_" + prayersNameOrders[k], "id", this.getPackageName());
-            if (prayersToShow[k]) {
-                findViewById(tableRowId).setVisibility(View.VISIBLE);
-            } else {
-                findViewById(tableRowId).setVisibility(View.GONE);
+            TableRow tableRow = findViewById(tableRowId);
+            if (tableRow != null) {
+                if (prayersToShow[k]) {
+                    tableRow.setVisibility(View.VISIBLE);
+                } else {
+                    tableRow.setVisibility(View.GONE);
+                }
             }
         }
     }
@@ -74,7 +78,6 @@ public class MainPage extends AppCompatActivity {
             Intent firstUsageIntent = new Intent("com.marash.prayerreminder.FirstUsage");
             startActivity(firstUsageIntent);
         }
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override

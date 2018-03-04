@@ -21,7 +21,6 @@ public class StorageManager {
     private static FileOutputStream outputFile;
     private static FileInputStream inputFile;
     private static BufferedReader inputReader;
-    private static String inputString;
     private final static String STORED_ringtone = "storedRingtoneText.txt";
     private final static String STORED_calcmethode = "storedCalculationMethode.txt";
     private final static String STORED_location = "storedLocation.txt";
@@ -52,6 +51,7 @@ public class StorageManager {
             String alertInfo;
             String[] alertParts;
 
+            String inputString;
             while ((inputString = inputReader.readLine()) != null) {
                 alertInfo = inputString;
                 alertParts = alertInfo.split(",");
