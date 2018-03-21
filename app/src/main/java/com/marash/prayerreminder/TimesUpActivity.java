@@ -75,7 +75,7 @@ public class TimesUpActivity extends Activity {
 
     public void stopAlarm(View view) {
 
-        if (AlarmReciever.wakelock.isHeld()) {
+        if (AlarmReciever.wakelock != null && AlarmReciever.wakelock.isHeld()) {
             AlarmReciever.wakelock.release();
         }
         mp.stop();

@@ -3,6 +3,8 @@ package com.marash.prayerreminder;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
@@ -12,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.google.android.gms.appindexing.AppIndex;
@@ -27,12 +30,33 @@ import java.util.GregorianCalendar;
 
 public class MainPage extends AppCompatActivity {
 
+    public static boolean refreshPrayerTimes = false;
+    private boolean[] prayersToShow;
+    private final CharSequence[] prayersNameOrders = {"Imsaak", "Fajr", "Sunrise", "Dhuhr", "Asr", "Sunset", "Maghrib", "Isha", "Midnight"};
+
     private TextView showDateText, goToTodayText;
     private Button nextDayButton, previousDayButton;
     private Calendar calendar = new GregorianCalendar();
 
-    protected GoogleApiClient client;
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (refreshPrayerTimes || prayersToShow == null) {
+            refreshPrayerTimes = false;
+            prayersToShow = StorageManager.loadSavedPrayersToShow(this);
+        }
+        for (int k = 0; k < prayersToShow.length; k++) {
+            int tableRowId = getResources().getIdentifier("tableRow_" + prayersNameOrders[k], "id", this.getPackageName());
+            TableRow tableRow = findViewById(tableRowId);
+            if (tableRow != null) {
+                if (prayersToShow[k]) {
+                    tableRow.setVisibility(View.VISIBLE);
+                } else {
+                    tableRow.setVisibility(View.GONE);
+                }
+            }
+        }
+    }
 
     @Override
     protected void onStart() {
@@ -49,11 +73,11 @@ public class MainPage extends AppCompatActivity {
             setListeners();
 
             showDateInformation();
+
         } else {
             Intent firstUsageIntent = new Intent("com.marash.prayerreminder.FirstUsage");
             startActivity(firstUsageIntent);
         }
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
@@ -85,11 +109,11 @@ public class MainPage extends AppCompatActivity {
     }
 
     private boolean isLocationAvailable(Context context) {
-        return StorageManager.loadLocation(context) == null ? false : true;
+        return StorageManager.loadLocation(context) != null;
     }
 
     private boolean isMethodAvailable(Context context) {
-        return StorageManager.loadCalculationMethode(context) == null ? false : true;
+        return StorageManager.loadCalculationMethode(context) != null;
     }
 
     private void setListeners() {
@@ -152,7 +176,7 @@ public class MainPage extends AppCompatActivity {
         int begin = dateText.indexOf('\n') + 1;
         int end = dateText.length();
         SpannableString dateSpan = new SpannableString(dateText);
-        dateSpan.setSpan(new RelativeSizeSpan(0.8f),begin,end,0);
+        dateSpan.setSpan(new RelativeSizeSpan(0.8f), begin, end, 0);
         ///////////////////////////////////
 
         showDateText.setText(dateSpan);
@@ -200,12 +224,12 @@ public class MainPage extends AppCompatActivity {
         }
     }
 
-    private String minuteFormatting(String s){
+    private String minuteFormatting(String s) {
         String result;
         String[] t = s.split(":");
         String s1 = t[0];
         String s2 = t[1];
-        if(s2.length() == 1){
+        if (s2.length() == 1) {
             s2 = "0" + s2;
         }
         result = s1 + ":" + s2;

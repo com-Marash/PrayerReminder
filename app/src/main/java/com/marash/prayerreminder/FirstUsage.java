@@ -62,7 +62,6 @@ public class FirstUsage extends Activity {
         Ringtone ringtone = RingtoneManager.getRingtone(FirstUsage.this.getApplicationContext(), uri);
         String title = ringtone.getTitle(this);
         StorageManager.saveAlarmRingtone(title, uri.toString(), FirstUsage.this.getApplicationContext());
-
     }
 
     // ok button onclick event

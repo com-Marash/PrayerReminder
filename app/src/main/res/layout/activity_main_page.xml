@@ -80,108 +80,117 @@
     <TableLayout
         android:id="@+id/tableLayout1"
         style="@style/mainTable"
-        android:layout_below="@id/textView_goToToday">
+        android:layout_below="@+id/textView_goToToday"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:gravity="top">
 
-        <TableRow>
+        <TableRow android:id="@+id/tableRow_Imsaak">
+
             <TextView
-                android:text="@string/Imsaak"
                 android:id="@+id/textView_Imsaaktext"
-                android:layout_marginTop="40sp"
-                style="@style/leftColumn"/>
+                style="@style/leftColumn"
+                android:text="@string/Imsaak" />
 
             <TextView
                 android:id="@+id/textView_imsak"
-                android:layout_marginTop="40sp"
-                style="@style/rightColumn"/>
+                style="@style/rightColumn" />
         </TableRow>
 
-        <TableRow>
+        <TableRow android:id="@+id/tableRow_Fajr">
+
             <TextView
-                android:text="@string/Fajr"
                 android:id="@+id/textView_fajrtext"
-                style="@style/leftColumn"/>
+                style="@style/leftColumn"
+                android:text="@string/Fajr" />
 
             <TextView
                 android:id="@+id/textView_fajr"
-                style="@style/rightColumn"/>
+                style="@style/rightColumn" />
         </TableRow>
 
-        <TableRow>
+        <TableRow android:id="@+id/tableRow_Sunrise">
+
             <TextView
-                android:text="@string/Sunrise"
                 android:id="@+id/textView_sunrisetext"
-                style="@style/leftColumn"/>
+                style="@style/leftColumn"
+                android:text="@string/Sunrise" />
 
             <TextView
-                style="@style/rightColumn"
-                android:id="@+id/textView_sunrise" />
+                android:id="@+id/textView_sunrise"
+                style="@style/rightColumn" />
         </TableRow>
 
-        <TableRow>
+        <TableRow android:id="@+id/tableRow_Dhuhr">
+
             <TextView
-                android:text="@string/Dhuhr"
                 android:id="@+id/textView_Dhuhrtext"
-                style="@style/leftColumn"/>
+                style="@style/leftColumn"
+                android:text="@string/Dhuhr" />
 
             <TextView
                 android:id="@+id/textView_Dhuhr"
-                style="@style/rightColumn"/>
-
+                style="@style/rightColumn" />
         </TableRow>
 
-        <TableRow>
+        <TableRow android:id="@+id/tableRow_Asr">
+
             <TextView
-                android:text="@string/Asr"
                 android:id="@+id/textView_Asrtext"
-                style="@style/leftColumn"/>
+                style="@style/leftColumn"
+                android:text="@string/Asr" />
 
             <TextView
                 android:id="@+id/textView_asr"
-                style="@style/rightColumn"/>
+                style="@style/rightColumn" />
         </TableRow>
 
-        <TableRow>
+        <TableRow android:id="@+id/tableRow_Sunset">
+
             <TextView
-                android:text="@string/Sunset"
                 android:id="@+id/textView_sunsettext"
-                style="@style/leftColumn"/>
+                style="@style/leftColumn"
+                android:text="@string/Sunset" />
 
             <TextView
                 android:id="@+id/textView_sunset"
-                style="@style/rightColumn"/>
+                style="@style/rightColumn" />
         </TableRow>
 
-        <TableRow>
+        <TableRow android:id="@+id/tableRow_Maghrib">
+
             <TextView
-                android:text="@string/Maghrib"
                 android:id="@+id/textView_Maghribtext"
-                style="@style/leftColumn"/>
+                style="@style/leftColumn"
+                android:text="@string/Maghrib" />
 
             <TextView
                 android:id="@+id/textView_maghrib"
-                style="@style/rightColumn"/>
+                style="@style/rightColumn" />
         </TableRow>
 
-        <TableRow>
+        <TableRow android:id="@+id/tableRow_Isha">
+
             <TextView
-                android:text="@string/Isha"
                 android:id="@+id/textView_Ishatext"
-                style="@style/leftColumn"/>
+                style="@style/leftColumn"
+                android:text="@string/Isha" />
 
             <TextView
                 android:id="@+id/textView_isha"
-                style="@style/rightColumn"/>
+                style="@style/rightColumn" />
         </TableRow>
 
-        <TableRow>
+        <TableRow android:id="@+id/tableRow_Midnight">
+
             <TextView
-                android:text="@string/Midnight"
                 android:id="@+id/textView_midnighttext"
-                style="@style/leftColumn"/>
+                style="@style/leftColumn"
+                android:text="@string/Midnight" />
 
             <TextView
                 android:id="@+id/textView_midnight"
-                style="@style/rightColumn"/>
+                style="@style/rightColumn" />
         </TableRow>
 
     </TableLayout>

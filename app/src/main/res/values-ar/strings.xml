@@ -100,5 +100,6 @@
     <string name="DhulQaada">ذوالقعده</string>
     <string name="DhulHijja">ذوالحجه</string>
     <string name="LocationIsNotEnabled">لم يتم تمكين الموقع على هاتفك! يرجى التحقق وحاول مرة أخرى.</string>
+    <string name="PrayersToShow">حدد الأوقات التي تريد أن تظهر التطبيق يوميا</string>
 
 </resources>
