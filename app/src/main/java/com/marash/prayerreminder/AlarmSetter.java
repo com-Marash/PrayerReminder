@@ -50,8 +50,10 @@ public class AlarmSetter {
 
         if (Build.VERSION.SDK_INT >= 23) {
             alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
-        } else {
+        } else if (Build.VERSION.SDK_INT >= 19) {
             alarmMgr.setExact(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
+        } else{
+            alarmMgr.set(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
         }
     }
 
@@ -80,8 +82,10 @@ public class AlarmSetter {
         Log.d(TAG, "setMainAlarm: " + alertCalendar.toString());
         if (Build.VERSION.SDK_INT >= 23) {
             alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
-        } else {
+        } else if (Build.VERSION.SDK_INT >= 19){
             alarmMgr.setExact(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
+        }else {
+            alarmMgr.set(AlarmManager.RTC_WAKEUP, alertCalendar.getTimeInMillis(), alarmIntent);
         }
     }
 }
