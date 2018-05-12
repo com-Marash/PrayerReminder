@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -33,8 +34,15 @@ public class TimesUpActivity extends Activity {
         alarmTextView.setText(textViewString);
         blink();
 
-        String ringtoneUriString = StorageManager.loadAlarmRingtone(this)[1];
-        Uri ringtoneUri = Uri.parse(ringtoneUriString);
+        String[] ringtoneTitleAndUri = StorageManager.loadAlarmRingtone(this);
+        Uri ringtoneUri;
+
+        if (ringtoneTitleAndUri != null && ringtoneTitleAndUri.length > 1){
+            String ringtoneUriString = ringtoneTitleAndUri[1];
+            ringtoneUri = Uri.parse(ringtoneUriString);
+        }else{
+            ringtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+        }
 
         mp = new MediaPlayer();
         mp.setAudioStreamType(AudioManager.STREAM_ALARM);
@@ -46,7 +54,6 @@ public class TimesUpActivity extends Activity {
             e.printStackTrace();
         }
         mp.start();
-        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         final Window win = getWindow();
         win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
@@ -54,7 +61,7 @@ public class TimesUpActivity extends Activity {
     }
 
     private void blink() {
-        Animation anim = new AlphaAnimation(0.4f, 1.0f);
+        Animation anim = new AlphaAnimation(0.6f, 1.0f);
         anim.setDuration(1000); //You can manage the blinking time with this parameter
         anim.setStartOffset(10);
         anim.setRepeatMode(Animation.REVERSE);
@@ -74,11 +81,10 @@ public class TimesUpActivity extends Activity {
     }
 
     public void stopAlarm(View view) {
-
-        if (AlarmReciever.wakelock != null && AlarmReciever.wakelock.isHeld()) {
-            AlarmReciever.wakelock.release();
-        }
         mp.stop();
+        if (AlarmReceiver.wakelock != null && AlarmReceiver.wakelock.isHeld()) {
+            AlarmReceiver.wakelock.release();
+        }
         ExitApplication.exitApp(TimesUpActivity.this);
     }
 }

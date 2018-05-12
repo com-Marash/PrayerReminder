@@ -9,7 +9,7 @@ import android.util.Log;
 /**
  * Created by Maedeh on 8/23/2016.
  */
-public class AlarmReciever extends BroadcastReceiver {
+public class AlarmReceiver extends BroadcastReceiver {
 
     public static PowerManager.WakeLock wakelock;
 
@@ -18,15 +18,15 @@ public class AlarmReciever extends BroadcastReceiver {
 
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "");
-        wl.acquire();
+        wl.acquire(300000);
         wakelock = wl;
 
         Intent timesUpIntent = new Intent(context, TimesUpActivity.class);
         timesUpIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         TimesUpActivity.setAlarmText(intent.getIntExtra("prayerTime", -1), intent.getStringExtra("prayerName"),context);
-        Log.d("recieved this alarm: ", String.valueOf(intent.getIntExtra("prayerTime", -1)));
-        Log.d("recieved this alarm: ", intent.getStringExtra("prayerName"));
+        Log.d("received this alarm: ", String.valueOf(intent.getIntExtra("prayerTime", -1)));
+        Log.d("received this alarm: ", intent.getStringExtra("prayerName"));
         context.startActivity(timesUpIntent);
     }
 }

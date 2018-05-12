@@ -174,14 +174,14 @@
             android:name=".TimesUpActivity"
             android:screenOrientation="portrait"></activity>
 
-        <receiver android:name=".AlarmReciever">
+        <receiver android:name=".AlarmReceiver">
             <intent-filter>
-                <action android:name="com.marash.prayerreminder.AlarmReciever" />
+                <action android:name="com.marash.prayerreminder.AlarmReceiver" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".mainAlarmReciever">
+        <receiver android:name=".MainAlarmReceiver">
             <intent-filter>
-                <action android:name="com.marash.prayerreminder.mainAlarmReciever" />
+                <action android:name="com.marash.prayerreminder.mainAlarmReceiver" />
             </intent-filter>
         </receiver>
         <receiver android:name=".DeviceBootReceiver">
@@ -189,6 +189,11 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <service
+            android:name=".MainAlarmReceiverService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="true"/>
 
     </application>
 
