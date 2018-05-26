@@ -1,9 +1,6 @@
 package com.marash.prayerreminder.dto;
 
-import android.content.Context;
 import android.location.Location;
-
-import com.marash.prayerreminder.R;
 
 /**
  * Location class including
