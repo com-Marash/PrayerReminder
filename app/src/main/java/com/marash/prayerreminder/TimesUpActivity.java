@@ -85,6 +85,10 @@ public class TimesUpActivity extends Activity {
         if (AlarmReceiver.wakelock != null && AlarmReceiver.wakelock.isHeld()) {
             AlarmReceiver.wakelock.release();
         }
-        ExitApplication.exitApp(TimesUpActivity.this);
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            finishAndRemoveTask();
+        } else {
+            finish();
+        }
     }
 }

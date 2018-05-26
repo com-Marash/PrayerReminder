@@ -166,13 +166,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ExitApplication"
-            android:autoRemoveFromRecents="true"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoDisplay"></activity>
-        <activity
             android:name=".TimesUpActivity"
-            android:screenOrientation="portrait"></activity>
+            android:autoRemoveFromRecents="true"
+            android:screenOrientation="portrait"/>
 
         <receiver android:name=".AlarmReceiver">
             <intent-filter>
