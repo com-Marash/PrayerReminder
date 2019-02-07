@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.marash.prayerreminder.MainPage"
@@ -20,64 +18,63 @@
         android:padding="5sp"
         android:background="@drawable/button_shape"
         android:textColor="#FF3C6414"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp" />
 
-    <TextView
-        android:layout_width="240sp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextShowDate"
+        android:id="@+id/dateInfoLayout"
         android:layout_below="@id/locationText"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:textSize="21sp"
-        android:textColor="#FF3C6414"
-        android:clickable="true"
-        android:textStyle="bold"
-        android:layout_marginTop="20sp"
-        android:background="@drawable/button_shape"
-        android:padding="5sp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/text_view_shape">
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="40sp"
-        android:layout_height="40sp"
-        android:text="@string/beforeSymbol"
-        android:id="@+id/buttonNextDay"
-        android:layout_below="@id/locationText"
-        android:layout_toEndOf="@+id/editTextShowDate"
-        android:layout_toRightOf="@+id/editTextShowDate"
-        android:layout_marginStart="10sp"
-        android:layout_marginLeft="10sp"
-        android:textSize="20sp"
-        android:background="@drawable/button_shape"
-        android:textStyle="bold"
-        android:padding="5sp"
-        android:layout_marginTop="27sp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.15"
+            android:layout_height="wrap_content"
+            android:text="@string/afterSymbol"
+            android:id="@+id/buttonPreviousDay"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="start"
+            android:paddingLeft="15dp"
+            android:paddingStart="15dp" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="40sp"
-        android:layout_height="40sp"
-        android:text="@string/afterSymbol"
-        android:id="@+id/buttonPreviousDay"
-        android:layout_below="@id/locationText"
-        android:layout_toStartOf="@+id/editTextShowDate"
-        android:layout_toLeftOf="@+id/editTextShowDate"
-        android:layout_marginEnd="10sp"
-        android:layout_marginRight="10sp"
-        android:textSize="20sp"
-        android:background="@drawable/button_shape"
-        android:textStyle="bold"
-        android:padding="5sp"
-        android:gravity="center"
-        android:layout_marginTop="27sp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.70"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextShowDate"
+            android:textSize="20sp"
+            android:textColor="#FF3C6414"
+            android:clickable="true"
+            android:textStyle="bold"
+            android:padding="1sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.15"
+            android:layout_height="wrap_content"
+            android:text="@string/beforeSymbol"
+            android:id="@+id/buttonNextDay"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="end"
+            android:paddingRight="15dp"
+            android:paddingEnd="15dp"/>
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/textView_goToToday"
-        android:layout_below="@+id/editTextShowDate"
+        android:layout_below="@+id/dateInfoLayout"
         android:layout_centerHorizontal="true"
         android:text="@string/GoToday"
         android:textColor="#FF3C6414"

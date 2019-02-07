@@ -35,7 +35,7 @@ public class MainPage extends AppCompatActivity {
     private TextView showDateText;
     public TextView locationText;
     private TextView goToTodayText;
-    private Button nextDayButton, previousDayButton;
+    private TextView nextDayButton, previousDayButton;
     private Calendar calendar = new GregorianCalendar();
     private Double[] todayPrayerTimes = new Double[9];
     private String[] location;
@@ -80,8 +80,8 @@ public class MainPage extends AppCompatActivity {
             showDateText = (TextView) findViewById(R.id.editTextShowDate);
             goToTodayText = (TextView) findViewById(R.id.textView_goToToday);
             locationText = findViewById(R.id.locationText);
-            nextDayButton = (Button) findViewById(R.id.buttonNextDay);
-            previousDayButton = (Button) findViewById(R.id.buttonPreviousDay);
+            nextDayButton = (TextView) findViewById(R.id.buttonNextDay);
+            previousDayButton = (TextView) findViewById(R.id.buttonPreviousDay);
 
             calendar.setTime(new Date());
             setListeners();
