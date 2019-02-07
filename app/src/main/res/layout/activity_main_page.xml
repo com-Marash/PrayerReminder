@@ -27,23 +27,6 @@
         android:background="@drawable/button_shape"
         android:padding="5sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/textView_goToToday"
-        android:layout_below="@+id/editTextShowDate"
-        android:layout_centerHorizontal="true"
-        android:text="@string/GoToday"
-        android:textColor="#FF3C6414"
-        android:textSize="20sp"
-        android:clickable="true"
-        android:background="@drawable/roundedcorner"
-        android:textStyle="bold"
-        android:paddingLeft="5sp"
-        android:paddingRight="5sp"
-        android:layout_marginTop="8sp"/>
-
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="40sp"
@@ -77,10 +60,41 @@
         android:gravity="center"
         android:layout_marginTop="27sp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textView_goToToday"
+        android:layout_below="@+id/editTextShowDate"
+        android:layout_centerHorizontal="true"
+        android:text="@string/GoToday"
+        android:textColor="#FF3C6414"
+        android:textSize="20sp"
+        android:clickable="true"
+        android:background="@drawable/roundedcorner"
+        android:textStyle="bold"
+        android:paddingLeft="5sp"
+        android:paddingRight="5sp"
+        android:layout_marginTop="8sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_nextPrayer"
+        android:layout_below="@+id/textView_goToToday"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FF3C6414"
+        android:textSize="20sp"
+        android:background="@drawable/roundedcorner"
+        android:paddingLeft="8sp"
+        android:paddingRight="8sp"
+        android:layout_marginTop="12sp"/>
+
+
     <TableLayout
         android:id="@+id/tableLayout1"
         style="@style/mainTable"
-        android:layout_below="@+id/textView_goToToday"
+        android:layout_below="@+id/textView_nextPrayer"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:gravity="top">

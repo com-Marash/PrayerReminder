@@ -3,8 +3,6 @@ package com.marash.prayerreminder;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
@@ -17,13 +15,12 @@ import android.widget.DatePicker;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.marash.prayerTimes.dto.Coordination;
 import com.marash.prayerTimes.dto.prayerTimesData;
 import com.marash.prayerTimes.main.PrayerTimes;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -34,9 +31,11 @@ public class MainPage extends AppCompatActivity {
     private boolean[] prayersToShow;
     private final CharSequence[] prayersNameOrders = {"Imsaak", "Fajr", "Sunrise", "Dhuhr", "Asr", "Sunset", "Maghrib", "Isha", "Midnight"};
 
-    private TextView showDateText, goToTodayText;
+    private TextView showDateText;
+    private TextView goToTodayText;
     private Button nextDayButton, previousDayButton;
     private Calendar calendar = new GregorianCalendar();
+    private Double[] todayPrayerTimes = new Double[9];
 
     @Override
     protected void onResume() {
@@ -56,7 +55,9 @@ public class MainPage extends AppCompatActivity {
                 }
             }
         }
+        nextPrayerFunction();
     }
+
 
     @Override
     protected void onStart() {
@@ -167,7 +168,7 @@ public class MainPage extends AppCompatActivity {
      */
     private void showDateInformation() {
 
-        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE dd/MM/yyyy");
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE dd MMM yyyy");
         String dateText = dayFormat.format(calendar.getTime());
 
         dateText = dateText + "\n" + DateHijri.writeIslamicDate(MainPage.this, calendar);
@@ -195,32 +196,49 @@ public class MainPage extends AppCompatActivity {
         prayerTimesData calculatedTimes = myPrayerTimes.getTimes(new int[]{calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH)}, new Coordination(location[0], location[1]));
 
         if (calculatedTimes != null) {
-            TextView fajr = (TextView) findViewById(R.id.textView_fajr);
+
+            TextView fajr = findViewById(R.id.textView_fajr);
             fajr.setText(minuteFormatting(calculatedTimes.getFajr().getFormatedTime()));
+            todayPrayerTimes[0] = calculatedTimes.getFajr().getTime();
 
-            TextView sunrise = (TextView) findViewById(R.id.textView_sunrise);
+            TextView sunrise = findViewById(R.id.textView_sunrise);
             sunrise.setText(minuteFormatting(calculatedTimes.getSunrise().getFormatedTime()));
+            todayPrayerTimes[1] = calculatedTimes.getSunrise().getTime();
 
-            TextView Dhuhr = (TextView) findViewById(R.id.textView_Dhuhr);
+
+            TextView Dhuhr = findViewById(R.id.textView_Dhuhr);
             Dhuhr.setText(minuteFormatting(calculatedTimes.getDhuhr().getFormatedTime()));
+            todayPrayerTimes[2] = calculatedTimes.getDhuhr().getTime();
 
-            TextView asr = (TextView) findViewById(R.id.textView_asr);
+
+            TextView asr = findViewById(R.id.textView_asr);
             asr.setText(minuteFormatting(calculatedTimes.getAsr().getFormatedTime()));
+            todayPrayerTimes[3] = calculatedTimes.getAsr().getTime();
 
-            TextView sunset = (TextView) findViewById(R.id.textView_sunset);
+
+            TextView sunset = findViewById(R.id.textView_sunset);
             sunset.setText(minuteFormatting(calculatedTimes.getSunset().getFormatedTime()));
+            todayPrayerTimes[4] = calculatedTimes.getSunset().getTime();
 
-            TextView maghrib = (TextView) findViewById(R.id.textView_maghrib);
+
+            TextView maghrib = findViewById(R.id.textView_maghrib);
             maghrib.setText(minuteFormatting(calculatedTimes.getMaghrib().getFormatedTime()));
+            todayPrayerTimes[5] = calculatedTimes.getMaghrib().getTime();
 
-            TextView isha = (TextView) findViewById(R.id.textView_isha);
+
+            TextView isha = findViewById(R.id.textView_isha);
             isha.setText(minuteFormatting(calculatedTimes.getIsha().getFormatedTime()));
+            todayPrayerTimes[6] = calculatedTimes.getIsha().getTime();
 
-            TextView midnight = (TextView) findViewById(R.id.textView_midnight);
+
+            TextView midnight = findViewById(R.id.textView_midnight);
             midnight.setText(minuteFormatting(calculatedTimes.getMidnight().getFormatedTime()));
+            todayPrayerTimes[7] = calculatedTimes.getMidnight().getTime();
 
-            TextView imsak = (TextView) findViewById(R.id.textView_imsak);
+            TextView imsak = findViewById(R.id.textView_imsak);
             imsak.setText(minuteFormatting(calculatedTimes.getImsak().getFormatedTime()));
+            todayPrayerTimes[8] = calculatedTimes.getImsak().getTime();
+
         }
     }
 
@@ -234,6 +252,41 @@ public class MainPage extends AppCompatActivity {
         }
         result = s1 + ":" + s2;
         return result;
+    }
+
+    private void nextPrayerFunction() {
+        // make sure prayerTimes are calculated
+        if (todayPrayerTimes[0] != null) {
+            TextView nextPrayer = findViewById(R.id.textView_nextPrayer);
+
+            long currentTime = System.currentTimeMillis();
+            int nextPrayerIndex = 0;
+            Double smallest = 10.0;
+            for (int i = 1; i < todayPrayerTimes.length; i++) {
+                if (todayPrayerTimes[i] - currentTime < smallest) {
+                    smallest = todayPrayerTimes[i] - currentTime;
+                    nextPrayerIndex = i;
+                }
+            }
+            if (smallest == 10) {
+                nextPrayerIndex = 8;
+            }
+
+
+            // only show visible next prayer times
+            do{
+                if(prayersToShow[nextPrayerIndex]){
+                    break;
+                }else{
+                    nextPrayerIndex++;
+                    if(nextPrayerIndex == 9){
+                        nextPrayerIndex = 0;
+                    }
+                }
+            }while(true);
+
+            nextPrayer.setText(prayersNameOrders[nextPrayerIndex]);
+        }
     }
 }
 
