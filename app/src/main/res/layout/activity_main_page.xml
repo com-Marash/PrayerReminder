@@ -13,10 +13,20 @@
     android:id="@+id/activity_main_page">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationText"
+        android:textSize="21sp"
+        android:padding="5sp"
+        android:background="@drawable/button_shape"
+        android:textColor="#FF3C6414"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
         android:layout_width="240sp"
         android:layout_height="wrap_content"
         android:id="@+id/editTextShowDate"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/locationText"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:textSize="21sp"
@@ -33,6 +43,7 @@
         android:layout_height="40sp"
         android:text="@string/beforeSymbol"
         android:id="@+id/buttonNextDay"
+        android:layout_below="@id/locationText"
         android:layout_toEndOf="@+id/editTextShowDate"
         android:layout_toRightOf="@+id/editTextShowDate"
         android:layout_marginStart="10sp"
@@ -49,6 +60,7 @@
         android:layout_height="40sp"
         android:text="@string/afterSymbol"
         android:id="@+id/buttonPreviousDay"
+        android:layout_below="@id/locationText"
         android:layout_toStartOf="@+id/editTextShowDate"
         android:layout_toLeftOf="@+id/editTextShowDate"
         android:layout_marginEnd="10sp"

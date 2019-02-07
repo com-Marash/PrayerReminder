@@ -28,18 +28,30 @@ import java.util.GregorianCalendar;
 public class MainPage extends AppCompatActivity {
 
     public static boolean refreshPrayerTimes = false;
+    public static boolean refreshLocation = false;
     private boolean[] prayersToShow;
     private final CharSequence[] prayersNameOrders = {"Imsaak", "Fajr", "Sunrise", "Dhuhr", "Asr", "Sunset", "Maghrib", "Isha", "Midnight"};
 
     private TextView showDateText;
+    public TextView locationText;
     private TextView goToTodayText;
     private Button nextDayButton, previousDayButton;
     private Calendar calendar = new GregorianCalendar();
     private Double[] todayPrayerTimes = new Double[9];
+    private String[] location;
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        if(refreshLocation){
+            location = StorageManager.loadLocation(this);
+            if(location != null && !location[2].equals("unknown") && !location[3].equals("unknown")){
+                locationText.setText(location[3] + ", " + location[2]);
+                refreshLocation = false;
+            }
+        }
+
         if (refreshPrayerTimes || prayersToShow == null) {
             refreshPrayerTimes = false;
             prayersToShow = StorageManager.loadSavedPrayersToShow(this);
@@ -67,6 +79,7 @@ public class MainPage extends AppCompatActivity {
             setContentView(R.layout.activity_main_page);
             showDateText = (TextView) findViewById(R.id.editTextShowDate);
             goToTodayText = (TextView) findViewById(R.id.textView_goToToday);
+            locationText = findViewById(R.id.locationText);
             nextDayButton = (Button) findViewById(R.id.buttonNextDay);
             previousDayButton = (Button) findViewById(R.id.buttonPreviousDay);
 
@@ -75,6 +88,10 @@ public class MainPage extends AppCompatActivity {
 
             showDateInformation();
 
+            location = StorageManager.loadLocation(this);
+            if(location != null && !location[2].equals("unknown") && !location[3].equals("unknown")){
+                locationText.setText(location[3] + ", " + location[2]);
+            }
         } else {
             Intent firstUsageIntent = new Intent("com.marash.prayerreminder.FirstUsage");
             startActivity(firstUsageIntent);

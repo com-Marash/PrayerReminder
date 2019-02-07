@@ -179,6 +179,7 @@ public class selectLocation extends AppCompatActivity {
         prayerTimesCalculator.setLatitude(currentLocation.getLocation().getLatitude());
         prayerTimesCalculator.setLongitude(currentLocation.getLocation().getLongitude());
         AlarmSetter.createOrUpdateAllAlarms(view.getContext());
+        MainPage.refreshLocation = true;
         finish();
     }
 }
