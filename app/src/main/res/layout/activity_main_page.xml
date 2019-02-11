@@ -16,32 +16,39 @@
         android:id="@+id/locationText"
         android:textSize="21sp"
         android:padding="5sp"
-        android:background="@drawable/button_shape"
+        android:background="@drawable/text_view_shape"
         android:textColor="#FF3C6414"
         android:layout_marginBottom="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/locationText"
+        android:id="@+id/returnToday"
+        android:src="@drawable/ic_today_icon"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/dateInfoLayout"
-        android:layout_below="@id/locationText"
+        android:layout_below="@id/returnToday"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="@drawable/text_view_shape">
 
-        <TextView
+        <ImageView
             android:layout_width="0dp"
             android:layout_weight="0.15"
             android:layout_height="wrap_content"
-            android:text="@string/afterSymbol"
+            android:src="@drawable/ic_before_icon"
             android:id="@+id/buttonPreviousDay"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:gravity="start"
-            android:paddingLeft="15dp"
-            android:paddingStart="15dp" />
+            android:gravity="start" />
 
         <TextView
             android:layout_width="0dp"
@@ -55,42 +62,23 @@
             android:padding="1sp"
             android:gravity="center"/>
 
-        <TextView
+        <ImageView
             android:layout_width="0dp"
             android:layout_weight="0.15"
             android:layout_height="wrap_content"
-            android:text="@string/beforeSymbol"
+            android:src="@drawable/ic_after_icon"
             android:id="@+id/buttonNextDay"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:gravity="end"
-            android:paddingRight="15dp"
-            android:paddingEnd="15dp"/>
+            android:gravity="end" />
 
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/textView_goToToday"
-        android:layout_below="@+id/dateInfoLayout"
-        android:layout_centerHorizontal="true"
-        android:text="@string/GoToday"
-        android:textColor="#FF3C6414"
-        android:textSize="20sp"
-        android:clickable="true"
-        android:background="@drawable/roundedcorner"
-        android:textStyle="bold"
-        android:paddingLeft="5sp"
-        android:paddingRight="5sp"
-        android:layout_marginTop="8sp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/textView_nextPrayer"
-        android:layout_below="@+id/textView_goToToday"
+        android:layout_below="@+id/dateInfoLayout"
         android:layout_centerHorizontal="true"
         android:textColor="#FF3C6414"
         android:textSize="20sp"

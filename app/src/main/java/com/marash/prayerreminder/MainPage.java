@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -34,8 +35,8 @@ public class MainPage extends AppCompatActivity {
 
     private TextView showDateText;
     public TextView locationText;
-    private TextView goToTodayText;
-    private TextView nextDayButton, previousDayButton;
+    private ImageView goToTodayText;
+    private ImageView nextDayButton, previousDayButton;
     private Calendar calendar = new GregorianCalendar();
     private Double[] todayPrayerTimes = new Double[9];
     private String[] location;
@@ -78,10 +79,10 @@ public class MainPage extends AppCompatActivity {
         if (isLocationAvailable(MainPage.this) && isMethodAvailable(MainPage.this)) {
             setContentView(R.layout.activity_main_page);
             showDateText = (TextView) findViewById(R.id.editTextShowDate);
-            goToTodayText = (TextView) findViewById(R.id.textView_goToToday);
+            goToTodayText = (ImageView) findViewById(R.id.returnToday);
             locationText = findViewById(R.id.locationText);
-            nextDayButton = (TextView) findViewById(R.id.buttonNextDay);
-            previousDayButton = (TextView) findViewById(R.id.buttonPreviousDay);
+            nextDayButton = (ImageView) findViewById(R.id.buttonNextDay);
+            previousDayButton = (ImageView) findViewById(R.id.buttonPreviousDay);
 
             calendar.setTime(new Date());
             setListeners();
