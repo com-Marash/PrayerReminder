@@ -5,37 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.marash.prayerreminder.MainPage"
     android:id="@+id/activity_main_page">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/locationText"
-        android:textSize="21sp"
-        android:padding="5sp"
-        android:background="@drawable/text_view_shape"
-        android:textColor="#FF3C6414"
-        android:layout_marginBottom="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp" />
+        android:id="@+id/topScreen"
+        android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/locationText"
-        android:id="@+id/returnToday"
-        android:src="@drawable/ic_today_icon"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.90"
+            android:layout_height="wrap_content"
+            android:id="@+id/locationText"
+            android:textSize="21sp"
+            android:padding="5sp"
+            android:textColor="#FF3C6414"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="start"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="0.10"
+            android:layout_height="wrap_content"
+            android:id="@+id/returnToday"
+            android:src="@drawable/ic_today_icon"
+            android:layout_marginTop="36dp"/>
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/dateInfoLayout"
-        android:layout_below="@id/returnToday"
+        android:layout_below="@id/topScreen"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="@drawable/text_view_shape">

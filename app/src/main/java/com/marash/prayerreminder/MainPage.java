@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TableRow;
@@ -21,7 +20,6 @@ import com.marash.prayerTimes.dto.prayerTimesData;
 import com.marash.prayerTimes.main.PrayerTimes;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -45,9 +43,9 @@ public class MainPage extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if(refreshLocation){
+        if (refreshLocation) {
             location = StorageManager.loadLocation(this);
-            if(location != null && !location[2].equals("unknown") && !location[3].equals("unknown")){
+            if (location != null && !location[2].equals("unknown") && !location[3].equals("unknown")) {
                 locationText.setText(location[3] + ", " + location[2]);
                 refreshLocation = false;
             }
@@ -90,7 +88,7 @@ public class MainPage extends AppCompatActivity {
             showDateInformation();
 
             location = StorageManager.loadLocation(this);
-            if(location != null && !location[2].equals("unknown") && !location[3].equals("unknown")){
+            if (location != null && !location[2].equals("unknown") && !location[3].equals("unknown")) {
                 locationText.setText(location[3] + ", " + location[2]);
             }
         } else {
@@ -279,7 +277,7 @@ public class MainPage extends AppCompatActivity {
 
             long currentTime = System.currentTimeMillis();
             int nextPrayerIndex = 0;
-            Double smallest = 10.0;
+            double smallest = 10.0;
             for (int i = 1; i < todayPrayerTimes.length; i++) {
                 if (todayPrayerTimes[i] - currentTime < smallest) {
                     smallest = todayPrayerTimes[i] - currentTime;
@@ -292,16 +290,16 @@ public class MainPage extends AppCompatActivity {
 
 
             // only show visible next prayer times
-            do{
-                if(prayersToShow[nextPrayerIndex]){
+            do {
+                if (prayersToShow[nextPrayerIndex]) {
                     break;
-                }else{
+                } else {
                     nextPrayerIndex++;
-                    if(nextPrayerIndex == 9){
+                    if (nextPrayerIndex == 9) {
                         nextPrayerIndex = 0;
                     }
                 }
-            }while(true);
+            } while (true);
 
             nextPrayer.setText(prayersNameOrders[nextPrayerIndex]);
         }
