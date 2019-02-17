@@ -11,13 +11,13 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".MainPage"
             android:screenOrientation="portrait">
@@ -169,10 +169,10 @@
             android:name=".ExitApplication"
             android:autoRemoveFromRecents="true"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoDisplay"></activity>
+            android:theme="@android:style/Theme.NoDisplay" />
         <activity
             android:name=".TimesUpActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
         <receiver android:name=".AlarmReceiver">
             <intent-filter>
@@ -192,9 +192,8 @@
 
         <service
             android:name=".MainAlarmReceiverService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="true"/>
-
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 
 </manifest>

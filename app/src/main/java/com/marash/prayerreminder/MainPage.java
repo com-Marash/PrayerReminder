@@ -1,25 +1,40 @@
 package com.marash.prayerreminder;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.marash.prayerTimes.dto.Coordination;
 import com.marash.prayerTimes.dto.prayerTimesData;
 import com.marash.prayerTimes.main.PrayerTimes;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -38,6 +53,62 @@ public class MainPage extends AppCompatActivity {
     private Calendar calendar = new GregorianCalendar();
     private Double[] todayPrayerTimes = new Double[9];
     private String[] location;
+    private String selection;
+    private String selectionValue;
+
+    private DrawerLayout mDrawerLayout;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_page);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        final NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        // close drawer when item is tapped
+                        switch (menuItem.getItemId()) {
+                            case R.id.nav_setNewAlarm:
+                                Intent setAlertIntent = new Intent("com.marash.prayerreminder.setAlerts");
+                                startActivity(setAlertIntent);
+                                mDrawerLayout.closeDrawers();
+                                break;
+                            case R.id.nav_savedAlarms:
+                                Intent showSavedAlertsIntent = new Intent("com.marash.prayerreminder.showSavedAlerts");
+                                startActivity(showSavedAlertsIntent);
+                                mDrawerLayout.closeDrawers();;
+                                break;
+                            case R.id.nav_updateLocation:
+                                Intent selectLocationIntent = new Intent("com.marash.prayerreminder.selectLocation");
+                                startActivity(selectLocationIntent);
+                                mDrawerLayout.closeDrawers();
+                                break;
+                            case R.id.nav_prayersToShow:
+                                prayersToShowFunction().show();
+                                break;
+                            case R.id.nav_alarmRingtone:
+                                Intent selectSoundIntent = new Intent("com.marash.prayerreminder.selectSound");
+                                startActivity(selectSoundIntent);
+                                mDrawerLayout.closeDrawers();
+                                break;
+                            case R.id.nav_calculatoonMethod:
+                                calculationMethodFunction().show();
+                                break;
+                            case R.id.nav_alarmVolume:
+                                AlarmVolume(navigationView);
+                                break;
+                            case R.id.nav_aboutUs:
+                                Intent aboutUsIntent = new Intent("com.marash.prayerreminder.aboutUs");
+                                startActivity(aboutUsIntent);
+                                mDrawerLayout.closeDrawers();
+                                break;
+                        }
+                        return true;
+                    }
+                });
+    }
 
     @Override
     protected void onResume() {
@@ -75,7 +146,6 @@ public class MainPage extends AppCompatActivity {
         super.onStart();
         //FirstUse Handler
         if (isLocationAvailable(MainPage.this) && isMethodAvailable(MainPage.this)) {
-            setContentView(R.layout.activity_main_page);
             showDateText = (TextView) findViewById(R.id.editTextShowDate);
             goToTodayText = (ImageView) findViewById(R.id.returnToday);
             locationText = findViewById(R.id.locationText);
@@ -119,8 +189,11 @@ public class MainPage extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.settingsItem:
-                Intent settingIntent = new Intent("com.marash.prayerreminder.Setting");
-                startActivity(settingIntent);
+                if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
+                } else {
+                    mDrawerLayout.openDrawer(GravityCompat.START);
+                }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -304,5 +377,129 @@ public class MainPage extends AppCompatActivity {
             nextPrayer.setText(prayersNameOrders[nextPrayerIndex]);
         }
     }
+
+    private AlertDialog prayersToShowFunction() {
+        final CharSequence[] methodsItems = {getString(R.string.Imsaak), getString(R.string.Fajr), getString(R.string.Sunrise), getString(R.string.Dhuhr),
+                getString(R.string.Asr), getString(R.string.Sunset), getString(R.string.Maghrib), getString(R.string.Isha), getString(R.string.Midnight)};
+
+        final boolean[] savedPrayersToShowBoolean = StorageManager.loadSavedPrayersToShow(MainPage.this.getApplicationContext());
+
+        final AlertDialog alertDialog = new AlertDialog.Builder(MainPage.this).setTitle(getString(R.string.PrayersToShow)).setMultiChoiceItems(methodsItems, savedPrayersToShowBoolean, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
+                savedPrayersToShowBoolean[indexSelected] = isChecked;
+            }
+        }).setPositiveButton(getString(R.string.save), null).create();
+
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                Button button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        boolean allUnchecked = true;
+                        StringBuilder s = new StringBuilder("" + savedPrayersToShowBoolean[0]);
+                        for (int j = 1; j < savedPrayersToShowBoolean.length; j++) {
+                            s.append(",").append(savedPrayersToShowBoolean[j]);
+                            if (savedPrayersToShowBoolean[j]) {
+                                allUnchecked = false;
+                            }
+                        }
+                        if (allUnchecked) {
+                            Toast.makeText(MainPage.this, getString(R.string.prayersToShowMinSelect), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        StorageManager.saveSavedPrayersToShow(s.toString(), MainPage.this.getApplicationContext());
+                        MainPage.refreshPrayerTimes = true;
+                        alertDialog.dismiss();
+                    }
+                });
+            }
+        });
+
+        return alertDialog;
+    }
+
+    private AlertDialog calculationMethodFunction() {
+        final CharSequence[] methodsItems = {getString(R.string.Egypt), getString(R.string.Tehran), getString(R.string.Jafari), getString(R.string.Karachi),
+                getString(R.string.Makkah), getString(R.string.MWL), getString(R.string.Isna)};
+        final CharSequence[] methodsItemValues = {"Egypt", "Tehran", "Jafari", "Karachi", "Makkah", "MWL", "ISNA"};
+        String savedCalcMethod;
+
+        savedCalcMethod = StorageManager.loadCalculationMethode(MainPage.this.getApplicationContext());
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainPage.this);
+        builder.setTitle(getString(R.string.calculationMethodButton)).setSingleChoiceItems(methodsItems, Arrays.asList(methodsItemValues).indexOf(savedCalcMethod), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int methodNumber) {
+                selection = (String) methodsItems[methodNumber];
+                selectionValue = (String) methodsItemValues[methodNumber];
+            }
+        }).setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (selection != null) {
+                    Toast.makeText(MainPage.this, selection + " " + getString(R.string.calculationMethodSelected), Toast.LENGTH_LONG).show();
+                    StorageManager.saveCalculationMethode(selectionValue, MainPage.this.getApplicationContext());
+                    prayerTimesCalculator.setMethod(selectionValue);
+                    AlarmSetter.createOrUpdateAllAlarms(MainPage.this);
+                }
+            }
+        }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        return builder.create();
+
+    }
+
+    public void AlarmVolume(View view) {
+
+        /*
+        This part of code creates a dialog which has a seekbar for volume.
+         */
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        @SuppressLint("InflateParams")
+        View v = inflater.inflate(R.layout.volume_dialog, null);
+        builder.setView(v).setTitle(getString(R.string.alarmVolumeTitle)).setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        //setContentView(R.layout.volume_dialog);
+        SeekBar seekbarVolume = (SeekBar) v.findViewById(R.id.volumeSeekBar);
+        final AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        seekbarVolume.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM));
+        seekbarVolume.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_ALARM));
+
+        seekbarVolume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                audioManager.setStreamVolume(AudioManager.STREAM_ALARM, progress, 0);
+            }
+        });
+        builder.create();
+        builder.show();
+    }
+
 }
 

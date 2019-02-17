@@ -104,5 +104,6 @@
     <string name="LocationIsNotEnabled">Location is not enabled on your phone! please check and try again.</string>
     <string name="PrayersToShow">Select the times you want the app shows them daily.</string>
     <string name="prayersToShowMinSelect">Please select at least one prayer.</string>
+    <string name="prayersToShowButton">Prayers To Show</string>
 
 </resources>

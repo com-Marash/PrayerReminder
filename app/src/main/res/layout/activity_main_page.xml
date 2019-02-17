@@ -1,217 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.marash.prayerreminder.MainPage"
-    android:id="@+id/activity_main_page">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/topScreen"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="0.90"
-            android:layout_height="wrap_content"
-            android:id="@+id/locationText"
-            android:textSize="21sp"
-            android:padding="5sp"
-            android:textColor="#FF3C6414"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:gravity="start"/>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/activity_main_page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context="com.marash.prayerreminder.MainPage">
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_weight="0.10"
-            android:layout_height="wrap_content"
-            android:id="@+id/returnToday"
-            android:src="@drawable/ic_today_icon"
-            android:layout_marginTop="36dp"/>
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/topScreen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/locationText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="0.90"
+                    android:gravity="start"
+                    android:padding="5sp"
+                    android:textColor="#FF3C6414"
+                    android:textSize="21sp" />
+
+                <ImageView
+                    android:id="@+id/returnToday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    android:layout_weight="0.10"
+                    android:src="@drawable/ic_today_icon" />
+            </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/dateInfoLayout"
-        android:layout_below="@id/topScreen"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:background="@drawable/text_view_shape">
+            <LinearLayout
+                android:id="@+id/dateInfoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/topScreen"
+                android:background="@drawable/text_view_shape"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_weight="0.15"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_before_icon"
-            android:id="@+id/buttonPreviousDay"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="start" />
+                <ImageView
+                    android:id="@+id/buttonPreviousDay"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:gravity="start"
+                    android:src="@drawable/ic_before_icon"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="0.70"
-            android:layout_height="wrap_content"
-            android:id="@+id/editTextShowDate"
-            android:textSize="20sp"
-            android:textColor="#FF3C6414"
-            android:clickable="true"
-            android:textStyle="bold"
-            android:padding="1sp"
-            android:gravity="center"/>
+                <TextView
+                    android:id="@+id/editTextShowDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.70"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:padding="1sp"
+                    android:textColor="#FF3C6414"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_weight="0.15"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_after_icon"
-            android:id="@+id/buttonNextDay"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="end" />
+                <ImageView
+                    android:id="@+id/buttonNextDay"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:gravity="end"
+                    android:src="@drawable/ic_after_icon"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <TextView
+            <TextView
+                android:id="@+id/textView_nextPrayer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dateInfoLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12sp"
+                android:background="@drawable/roundedcorner"
+                android:paddingLeft="8sp"
+                android:paddingRight="8sp"
+                android:textColor="#FF3C6414"
+                android:textSize="20sp" />
+
+
+            <TableLayout
+                android:id="@+id/tableLayout1"
+                style="@style/mainTable"
+                android:layout_below="@+id/textView_nextPrayer"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:gravity="top">
+
+                <TableRow android:id="@+id/tableRow_Imsaak">
+
+                    <TextView
+                        android:id="@+id/textView_Imsaaktext"
+                        style="@style/leftColumn"
+                        android:text="@string/Imsaak" />
+
+                    <TextView
+                        android:id="@+id/textView_imsak"
+                        style="@style/rightColumn" />
+                </TableRow>
+
+                <TableRow android:id="@+id/tableRow_Fajr">
+
+                    <TextView
+                        android:id="@+id/textView_fajrtext"
+                        style="@style/leftColumn"
+                        android:text="@string/Fajr" />
+
+                    <TextView
+                        android:id="@+id/textView_fajr"
+                        style="@style/rightColumn" />
+                </TableRow>
+
+                <TableRow android:id="@+id/tableRow_Sunrise">
+
+                    <TextView
+                        android:id="@+id/textView_sunrisetext"
+                        style="@style/leftColumn"
+                        android:text="@string/Sunrise" />
+
+                    <TextView
+                        android:id="@+id/textView_sunrise"
+                        style="@style/rightColumn" />
+                </TableRow>
+
+                <TableRow android:id="@+id/tableRow_Dhuhr">
+
+                    <TextView
+                        android:id="@+id/textView_Dhuhrtext"
+                        style="@style/leftColumn"
+                        android:text="@string/Dhuhr" />
+
+                    <TextView
+                        android:id="@+id/textView_Dhuhr"
+                        style="@style/rightColumn" />
+                </TableRow>
+
+                <TableRow android:id="@+id/tableRow_Asr">
+
+                    <TextView
+                        android:id="@+id/textView_Asrtext"
+                        style="@style/leftColumn"
+                        android:text="@string/Asr" />
+
+                    <TextView
+                        android:id="@+id/textView_asr"
+                        style="@style/rightColumn" />
+                </TableRow>
+
+                <TableRow android:id="@+id/tableRow_Sunset">
+
+                    <TextView
+                        android:id="@+id/textView_sunsettext"
+                        style="@style/leftColumn"
+                        android:text="@string/Sunset" />
+
+                    <TextView
+                        android:id="@+id/textView_sunset"
+                        style="@style/rightColumn" />
+                </TableRow>
+
+                <TableRow android:id="@+id/tableRow_Maghrib">
+
+                    <TextView
+                        android:id="@+id/textView_Maghribtext"
+                        style="@style/leftColumn"
+                        android:text="@string/Maghrib" />
+
+                    <TextView
+                        android:id="@+id/textView_maghrib"
+                        style="@style/rightColumn" />
+                </TableRow>
+
+                <TableRow android:id="@+id/tableRow_Isha">
+
+                    <TextView
+                        android:id="@+id/textView_Ishatext"
+                        style="@style/leftColumn"
+                        android:text="@string/Isha" />
+
+                    <TextView
+                        android:id="@+id/textView_isha"
+                        style="@style/rightColumn" />
+                </TableRow>
+
+                <TableRow android:id="@+id/tableRow_Midnight">
+
+                    <TextView
+                        android:id="@+id/textView_midnighttext"
+                        style="@style/leftColumn"
+                        android:text="@string/Midnight" />
+
+                    <TextView
+                        android:id="@+id/textView_midnight"
+                        style="@style/rightColumn" />
+                </TableRow>
+
+            </TableLayout>
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView_nextPrayer"
-        android:layout_below="@+id/dateInfoLayout"
-        android:layout_centerHorizontal="true"
-        android:textColor="#FF3C6414"
-        android:textSize="20sp"
-        android:background="@drawable/roundedcorner"
-        android:paddingLeft="8sp"
-        android:paddingRight="8sp"
-        android:layout_marginTop="12sp"/>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:menu="@menu/setting_menu">
 
+    </android.support.design.widget.NavigationView>
+</android.support.v4.widget.DrawerLayout>
 
-    <TableLayout
-        android:id="@+id/tableLayout1"
-        style="@style/mainTable"
-        android:layout_below="@+id/textView_nextPrayer"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:gravity="top">
-
-        <TableRow android:id="@+id/tableRow_Imsaak">
-
-            <TextView
-                android:id="@+id/textView_Imsaaktext"
-                style="@style/leftColumn"
-                android:text="@string/Imsaak" />
-
-            <TextView
-                android:id="@+id/textView_imsak"
-                style="@style/rightColumn" />
-        </TableRow>
-
-        <TableRow android:id="@+id/tableRow_Fajr">
-
-            <TextView
-                android:id="@+id/textView_fajrtext"
-                style="@style/leftColumn"
-                android:text="@string/Fajr" />
-
-            <TextView
-                android:id="@+id/textView_fajr"
-                style="@style/rightColumn" />
-        </TableRow>
-
-        <TableRow android:id="@+id/tableRow_Sunrise">
-
-            <TextView
-                android:id="@+id/textView_sunrisetext"
-                style="@style/leftColumn"
-                android:text="@string/Sunrise" />
-
-            <TextView
-                android:id="@+id/textView_sunrise"
-                style="@style/rightColumn" />
-        </TableRow>
-
-        <TableRow android:id="@+id/tableRow_Dhuhr">
-
-            <TextView
-                android:id="@+id/textView_Dhuhrtext"
-                style="@style/leftColumn"
-                android:text="@string/Dhuhr" />
-
-            <TextView
-                android:id="@+id/textView_Dhuhr"
-                style="@style/rightColumn" />
-        </TableRow>
-
-        <TableRow android:id="@+id/tableRow_Asr">
-
-            <TextView
-                android:id="@+id/textView_Asrtext"
-                style="@style/leftColumn"
-                android:text="@string/Asr" />
-
-            <TextView
-                android:id="@+id/textView_asr"
-                style="@style/rightColumn" />
-        </TableRow>
-
-        <TableRow android:id="@+id/tableRow_Sunset">
-
-            <TextView
-                android:id="@+id/textView_sunsettext"
-                style="@style/leftColumn"
-                android:text="@string/Sunset" />
-
-            <TextView
-                android:id="@+id/textView_sunset"
-                style="@style/rightColumn" />
-        </TableRow>
-
-        <TableRow android:id="@+id/tableRow_Maghrib">
-
-            <TextView
-                android:id="@+id/textView_Maghribtext"
-                style="@style/leftColumn"
-                android:text="@string/Maghrib" />
-
-            <TextView
-                android:id="@+id/textView_maghrib"
-                style="@style/rightColumn" />
-        </TableRow>
-
-        <TableRow android:id="@+id/tableRow_Isha">
-
-            <TextView
-                android:id="@+id/textView_Ishatext"
-                style="@style/leftColumn"
-                android:text="@string/Isha" />
-
-            <TextView
-                android:id="@+id/textView_isha"
-                style="@style/rightColumn" />
-        </TableRow>
-
-        <TableRow android:id="@+id/tableRow_Midnight">
-
-            <TextView
-                android:id="@+id/textView_midnighttext"
-                style="@style/leftColumn"
-                android:text="@string/Midnight" />
-
-            <TextView
-                android:id="@+id/textView_midnight"
-                style="@style/rightColumn" />
-        </TableRow>
-
-    </TableLayout>
-
-</RelativeLayout>

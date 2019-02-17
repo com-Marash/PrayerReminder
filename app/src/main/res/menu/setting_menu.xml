@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_setNewAlarm"
+            android:title="@string/setNewAlarmButton"
+            android:icon="@drawable/ic_add_alarm_icon"
+            app:showAsAction="always">
+        </item>
+
+        <item
+            android:id="@+id/nav_savedAlarms"
+            android:title="@string/title_activity_show_saved_alerts"
+            app:showAsAction="always">
+        </item>
+
+        <item
+            android:id="@+id/nav_updateLocation"
+            android:title="@string/updateLocationButton"
+            app:showAsAction="always">
+        </item>
+
+        <item
+            android:id="@+id/nav_prayersToShow"
+            android:title="@string/prayersToShowButton"
+            app:showAsAction="always">
+        </item>
+
+        <item
+            android:id="@+id/nav_alarmRingtone"
+            android:title="@string/AlarmRingtoneButton"
+            app:showAsAction="always">
+        </item>
+
+        <item
+            android:id="@+id/nav_calculatoonMethod"
+            android:title="@string/calculationMethodButton"
+            app:showAsAction="always">
+        </item>
+
+        <item
+            android:id="@+id/nav_alarmVolume"
+            android:title="@string/aَlarmVolumeButton"
+            app:showAsAction="always">
+        </item>
+
+        <item
+            android:id="@+id/nav_aboutUs"
+            android:title="@string/title_activity_about_us"
+            app:showAsAction="always">
+        </item>
+
+
+    </group>
+</menu>

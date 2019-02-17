@@ -29,4 +29,8 @@ dependencies {
     compile 'com.google.firebase:firebase-appindexing:17.1.0'
     compile 'com.google.guava:guava:24.1-android'
     compile files('libs/prayerTimes.jar')
+
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+
 }
