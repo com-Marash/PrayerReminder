@@ -22,8 +22,8 @@
     <string name="last_location">Your last known location:</string>
     <string name="setAlertsFor">Set a new alarm for:</string>
     <string name="aboutUsText">This application was written by Marash Company.\n
-        \nIf you liked this application, kindly support our team and rate for this app.
-        \n\nThank you for choosing this application.</string>
+        \nIf you liked this application, kindly support our team and rate this application.
+        \n\nThank you for choosing our application.</string>
     <string name="NoRingtone">No ringtone selected yet.</string>
     <string name="zero">0</string>
     <string name="beforeSymbol">&gt;</string>
@@ -103,7 +103,7 @@
     <string name="DhulHijja">Dhul Hijja</string>
     <string name="LocationIsNotEnabled">Location is not enabled on your phone! please check and try again.</string>
     <string name="PrayersToShow">Select the times you want the app shows them daily.</string>
-    <string name="prayersToShowMinSelect">Please select at least one prayer.</string>
+    <string name="prayersToShowMinSelect" translatable="false">Please select at least one prayer.</string>
     <string name="prayersToShowButton">Prayers To Show</string>
 
 </resources>
