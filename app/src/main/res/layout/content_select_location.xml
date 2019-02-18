@@ -5,36 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.marash.prayerreminder.selectLocation"
     tools:showIn="@layout/activity_select_location">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/last_location"
-        android:id="@+id/lastLocationTiltle"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:orientation="vertical"
+        android:id="@+id/updateLocationText"
+        android:background="@drawable/text_view_shape">
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/lastLocation"
-        android:id="@+id/textView_lastKnownLocation"
-        android:layout_below="@+id/lastLocationTiltle"
-        android:layout_alignParentRight="@+id/lastLocationTiltle"
-        android:layout_alignParentEnd="@+id/lastLocationTiltle"
-        android:layout_alignEnd="@+id/lastLocationTiltle"
-        android:layout_alignRight="@+id/lastLocationTiltle"
-        android:textSize="18sp"
-        android:layout_marginTop="58sp"
-        android:background="@drawable/text_view_shape"
-        android:padding="10sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/last_location"
+            android:id="@+id/lastLocationTiltle"
+            android:paddingTop="10sp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lastLocation"
+            android:id="@+id/textView_lastKnownLocation"
+            android:textSize="18sp"
+            android:layout_marginTop="38sp"
+            android:paddingLeft="25sp"
+            android:paddingStart="25sp"
+            android:paddingEnd="25sp"
+            android:paddingRight="25sp"
+            android:paddingBottom="10sp"/>
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
@@ -42,10 +46,12 @@
         android:text="@string/UpdateLocationNetwork"
         android:background="@drawable/button_shape"
         android:id="@+id/updateLocationNetwork"
-        android:layout_below="@+id/textView_lastKnownLocation"
+        android:layout_below="@+id/updateLocationText"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
+        android:layout_marginLeft="25sp"
+        android:layout_marginStart="25sp"
         android:onClick="updateLocationByNetworkFunction"
         android:layout_marginTop="25sp"/>
 
@@ -58,7 +64,9 @@
         android:layout_below="@+id/updateLocationNetwork"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="35sp"
+        android:layout_marginLeft="25sp"
+        android:layout_marginStart="25sp"
+        android:layout_marginTop="30sp"
         android:onClick="updateLocationByGPSFunction"/>
 
     <Button
@@ -70,7 +78,9 @@
         android:layout_below="@+id/button_updateLocationGPS"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="50sp"
+        android:layout_marginLeft="25sp"
+        android:layout_marginStart="25sp"
+        android:layout_marginTop="60sp"
         android:onClick="confirmButtFunction"/>
 
 </RelativeLayout>

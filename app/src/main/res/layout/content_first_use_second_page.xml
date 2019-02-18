@@ -6,52 +6,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="16sp"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.marash.prayerreminder.FirstUsageSecondPage"
     tools:showIn="@layout/activity_first_use_second_page">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/step2"
-        android:id="@+id/textView_secondPageStep1"
-        android:layout_marginStart="15sp"
-        android:layout_marginLeft="15sp"
-        android:layout_marginTop="20sp"
-        android:textSize="25sp"
-        android:textColor="#4c7815"
-        android:background="@drawable/textview_border"
-        android:padding="10sp"
-        android:textStyle="bold"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="160sp"
+        android:orientation="vertical"
+        android:id="@+id/stepTwoText"
+        android:background="@drawable/text_view_shape">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/step2"
+            android:id="@+id/textView_secondPageStep1"
+            android:layout_marginStart="15sp"
+            android:layout_marginLeft="15sp"
+            android:layout_marginTop="15sp"
+            android:textSize="25sp"
+            android:textColor="#4c7815"
+            android:padding="10sp"
+            android:textStyle="bold"/>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView_secondPageStep1"
-        android:layout_marginTop="15sp"
-        android:layout_marginLeft="15sp"
-        android:layout_marginRight="5sp"
-        android:text="@string/PreferredMethod"
-        android:textSize="18sp"
-        android:padding="8sp"
-        android:textColor="#000000"
-        android:background="@drawable/textview_border"
-        android:id="@+id/textView_secondPageHint"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:layout_marginLeft="15sp"
+            android:layout_marginEnd="15sp"
+            android:layout_marginRight="15sp"
+            android:layout_marginTop="15sp"
+            android:layout_marginBottom="15sp"
+            android:text="@string/PreferredMethod"
+            android:textSize="18sp"
+            android:padding="10sp"
+            android:textColor="#000000"
+            android:id="@+id/textView_secondPageHint"/>
+    </LinearLayout>
 
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_below="@+id/textView_secondPageHint"
+        android:layout_below="@+id/stepTwoText"
         android:orientation="vertical"
         android:layout_marginTop="35sp"
-        android:layout_marginLeft="15sp"
-        android:layout_marginRight="15sp"
+        android:layout_marginLeft="30sp"
+        android:layout_marginRight="30sp"
         android:id="@+id/radioGroup">
 
         <RadioButton
@@ -113,7 +119,7 @@
         android:layout_below="@+id/radioGroup"
         android:layout_marginStart="250sp"
         android:layout_marginLeft="250sp"
-        android:layout_marginTop="30sp"
+        android:layout_marginTop="45sp"
         android:textSize="20sp"
         android:background="@drawable/button_shape"
         android:enabled="false"

@@ -38,7 +38,7 @@
     <string name="Dismiss">Dismiss</string>
     <string name="Fajr">Fajr</string>
     <string name="PreferredMethod">Select preferred calculation method.</string>
-    <string name="ApplicationGetLocation">Application needs to get your location to set up precise prayer times.</string>
+    <string name="ApplicationGetLocation">Application needs to get your location to set up accurate prayer times.</string>
     <string name="GoToday">Go to today</string>
     <string name="Sunrise">Sunrise</string>
     <string name="Dhuhr">Dhuhr</string>
