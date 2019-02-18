@@ -104,7 +104,8 @@
                 android:paddingLeft="8sp"
                 android:paddingRight="8sp"
                 android:textColor="#FF3C6414"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:visibility="gone"/>
 
 
             <TableLayout
@@ -112,7 +113,7 @@
                 style="@style/mainTable"
                 android:layout_below="@+id/textView_nextPrayer"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="30dp"
                 android:gravity="top">
 
                 <TableRow android:id="@+id/tableRow_Imsaak">
