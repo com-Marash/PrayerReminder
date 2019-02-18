@@ -44,10 +44,11 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/button_showSavedAlerts"/>
 
-    <Button app:layout_widthPercent="75%"
+    <Button
+        app:layout_widthPercent="75%"
         app:layout_heightPercent="8%"
         app:layout_marginTopPercent="2%"
-        android:text="Prayers to show"
+        android:text="@string/prayersToShowButton"
         android:background="@drawable/button_shape"
         android:id="@+id/button_prayersToShow"
         android:layout_centerHorizontal="true"

@@ -38,7 +38,7 @@
     <string name="Dismiss">Dismiss</string>
     <string name="Fajr">Fajr</string>
     <string name="PreferredMethod">Select preferred calculation method.</string>
-    <string name="ApplicationGetLocation">Application needs to get your location to set up precise prayer times.</string>
+    <string name="ApplicationGetLocation">Application needs to get your location to set up accurate prayer times.</string>
     <string name="GoToday">Go to today</string>
     <string name="Sunrise">Sunrise</string>
     <string name="Dhuhr">Dhuhr</string>
@@ -103,5 +103,7 @@
     <string name="DhulHijja">Dhul Hijja</string>
     <string name="LocationIsNotEnabled">Location is not enabled on your phone! please check and try again.</string>
     <string name="PrayersToShow">Select the times you want the app shows them daily.</string>
+    <string name="prayersToShowMinSelect">Please select at least one prayer.</string>
+    <string name="prayersToShowButton">Prayers To Show</string>
 
 </resources>

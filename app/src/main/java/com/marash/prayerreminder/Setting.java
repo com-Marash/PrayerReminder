@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import java.util.Arrays;
 
+import static com.marash.prayerreminder.R.string.prayersToShowMinSelect;
+
 public class Setting extends AppCompatActivity {
 
     private String selection;
@@ -208,25 +210,41 @@ public class Setting extends AppCompatActivity {
 
         final boolean[] savedPrayersToShowBoolean = StorageManager.loadSavedPrayersToShow(Setting.this.getApplicationContext());
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
-
-        builder.setTitle(getString(R.string.PrayersToShow)).setMultiChoiceItems(methodsItems, savedPrayersToShowBoolean, new DialogInterface.OnMultiChoiceClickListener() {
+        final AlertDialog alertDialog = new AlertDialog.Builder(Setting.this).setTitle(getString(R.string.PrayersToShow)).setMultiChoiceItems(methodsItems, savedPrayersToShowBoolean, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
                 savedPrayersToShowBoolean[indexSelected] = isChecked;
             }
-        }).setPositiveButton(getString(R.string.save), new DialogInterface.OnClickListener() {
+        }).setPositiveButton(getString(R.string.save), null).create();
+
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
-            public void onClick(DialogInterface dialog, int id) {
-                StringBuilder s = new StringBuilder("" + savedPrayersToShowBoolean[0]);
-                for (int j = 1; j < savedPrayersToShowBoolean.length; j++) {
-                    s.append(",").append(savedPrayersToShowBoolean[j]);
-                }
-                StorageManager.saveSavedPrayersToShow(s.toString(), Setting.this.getApplicationContext());
-                MainPage.refreshPrayerTimes = true;
+            public void onShow(DialogInterface dialogInterface) {
+                Button button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        boolean allUnchecked = true;
+                        StringBuilder s = new StringBuilder("" + savedPrayersToShowBoolean[0]);
+                        for (int j = 1; j < savedPrayersToShowBoolean.length; j++) {
+                            s.append(",").append(savedPrayersToShowBoolean[j]);
+                            if (savedPrayersToShowBoolean[j]) {
+                                allUnchecked = false;
+                            }
+                        }
+                        if (allUnchecked) {
+                            Toast.makeText(Setting.this, getString(R.string.prayersToShowMinSelect), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        StorageManager.saveSavedPrayersToShow(s.toString(), Setting.this.getApplicationContext());
+                        MainPage.refreshPrayerTimes = true;
+                        alertDialog.dismiss();
+                    }
+                });
             }
         });
-        return builder.create();
+
+        return alertDialog;
     }
 
 }
