@@ -101,7 +101,6 @@
     <string name="DhulHijja">ذی الحجه</string>
     <string name="LocationIsNotEnabled">موقعیت جغرافیایی در دستگاه شما فعال نیست. موقعیت جغرافیایی را فعال کرده و دوباره تلاش کنید.</string>
     <string name="PrayersToShow">زمان هایی را که میخواهید برنامه بطور روزانه نشان دهد را انتخاب کنید.</string>
-    <string name="prayersToShowMinSelect">لطفا حداقل یک نماز را انتخاب کنید</string>
     <string name="prayersToShowButton">نمازهای انتخاب شده</string>
-
+    <string name="prayersToShowMinSelect">لطفا حداقل یک نماز را انتخاب نمایید.</string>
 </resources>
