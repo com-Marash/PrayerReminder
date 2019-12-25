@@ -17,8 +17,6 @@ import android.widget.Toast;
 
 import java.util.Arrays;
 
-import static com.marash.prayerreminder.R.string.prayersToShowMinSelect;
-
 public class Setting extends AppCompatActivity {
 
     private String selection;
@@ -49,7 +47,7 @@ public class Setting extends AppCompatActivity {
         selectLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent selectLocationIntent = new Intent("com.marash.prayerreminder.selectLocation");
+                Intent selectLocationIntent = new Intent("com.marash.prayerreminder.SelectLocation");
                 startActivity(selectLocationIntent);
             }
         });
@@ -99,7 +97,7 @@ public class Setting extends AppCompatActivity {
                 if (selection != null) {
                     Toast.makeText(Setting.this, selection + " " + getString(R.string.calculationMethodSelected), Toast.LENGTH_LONG).show();
                     StorageManager.saveCalculationMethode(selectionValue, Setting.this.getApplicationContext());
-                    prayerTimesCalculator.setMethod(selectionValue);
+                    PrayerTimesCalculatorService.setMethod(selectionValue);
                     AlarmSetter.createOrUpdateAllAlarms(Setting.this);
                 }
             }
@@ -132,7 +130,7 @@ public class Setting extends AppCompatActivity {
         butten_setAlerts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent setAlertIntent = new Intent("com.marash.prayerreminder.setAlerts");
+                Intent setAlertIntent = new Intent("com.marash.prayerreminder.SetAlertsPage");
                 startActivity(setAlertIntent);
             }
         });
@@ -144,7 +142,7 @@ public class Setting extends AppCompatActivity {
         butten_aboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent aboutUsIntent = new Intent("com.marash.prayerreminder.aboutUs");
+                Intent aboutUsIntent = new Intent("com.marash.prayerreminder.AboutUs");
                 startActivity(aboutUsIntent);
             }
         });

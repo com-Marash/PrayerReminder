@@ -13,7 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-public class setAlerts extends AppCompatActivity {
+public class SetAlertsPage extends AppCompatActivity {
 
     private RadioGroup prayersButGroup;
     private RadioButton selectedPrayer;
@@ -62,19 +62,19 @@ public class setAlerts extends AppCompatActivity {
                 desiredTime = Integer.parseInt(String.valueOf(timeText.getText()));
 
                 if ((selectedPrayerId == -1) && (selectedTimeId == -1) && (timeText.getText().toString().matches(""))) {
-                    Toast.makeText(setAlerts.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
+                    Toast.makeText(SetAlertsPage.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
                 } else if ((selectedPrayerId == -1) && (selectedTimeId == -1)) {
-                    Toast.makeText(setAlerts.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
+                    Toast.makeText(SetAlertsPage.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
                 } else if ((selectedTimeId == -1) && (timeText.getText().toString().matches(""))) {
-                    Toast.makeText(setAlerts.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
+                    Toast.makeText(SetAlertsPage.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
                 } else if ((selectedPrayerId == -1) && (timeText.getText().toString().matches(""))) {
-                    Toast.makeText(setAlerts.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
+                    Toast.makeText(SetAlertsPage.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
                 } else if (selectedPrayerId == -1) {
-                    Toast.makeText(setAlerts.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
+                    Toast.makeText(SetAlertsPage.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
                 } else if (selectedTimeId == -1) {
-                    Toast.makeText(setAlerts.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
+                    Toast.makeText(SetAlertsPage.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
                 } else if (timeText.getText().toString().matches("")) {
-                    Toast.makeText(setAlerts.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
+                    Toast.makeText(SetAlertsPage.this, getString(R.string.completeAll), Toast.LENGTH_LONG).show();
                 } else {
                     selectedPrayer = (RadioButton) findViewById(selectedPrayerId);
                     selectedPrayerText = selectedPrayer.getTag().toString();
@@ -86,7 +86,7 @@ public class setAlerts extends AppCompatActivity {
                         desiredTime = -desiredTime;
                     }
 
-                    ArrayList<Alert> savedAlerts = StorageManager.loadAlert(setAlerts.this.getApplicationContext());
+                    ArrayList<Alert> savedAlerts = StorageManager.loadAlert(SetAlertsPage.this.getApplicationContext());
                     boolean isNewAlert = true;
 
                     if (savedAlerts != null) {
@@ -109,23 +109,23 @@ public class setAlerts extends AppCompatActivity {
                                 randomNumber = (int) ((Math.random() * (10000001) + 1000));
                             }
                             Alert alert = new Alert(selectedPrayerText, desiredTime, randomNumber);
-                            StorageManager.saveAlert(alert, setAlerts.this.getApplicationContext());
-                            AlarmSetter.createOrUpdateAlarm(alert, setAlerts.this.getApplicationContext());
+                            StorageManager.saveAlert(alert, SetAlertsPage.this.getApplicationContext());
+                            AlarmSetter.createOrUpdateAlarm(alert, SetAlertsPage.this.getApplicationContext());
                             ///
-                            AlarmSetter.setMainAlarm(setAlerts.this);
-                            Toast.makeText(setAlerts.this, getString(R.string.newAlarmSaved), Toast.LENGTH_LONG).show();
+                            AlarmSetter.setMainAlarm(SetAlertsPage.this);
+                            Toast.makeText(SetAlertsPage.this, getString(R.string.newAlarmSaved), Toast.LENGTH_LONG).show();
                             finish();
                         } else {
-                            Toast.makeText(setAlerts.this, getString(R.string.alarmPreviouslySaved), Toast.LENGTH_LONG).show();
+                            Toast.makeText(SetAlertsPage.this, getString(R.string.alarmPreviouslySaved), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         int randomNumber = (int) ((Math.random() * (10000001) + 1000));
                         Alert alert = new Alert(selectedPrayerText, desiredTime, randomNumber);
-                        StorageManager.saveAlert(alert, setAlerts.this.getApplicationContext());
-                        AlarmSetter.createOrUpdateAlarm(alert, setAlerts.this.getApplicationContext());
-                        AlarmSetter.setMainAlarm(setAlerts.this);
+                        StorageManager.saveAlert(alert, SetAlertsPage.this.getApplicationContext());
+                        AlarmSetter.createOrUpdateAlarm(alert, SetAlertsPage.this.getApplicationContext());
+                        AlarmSetter.setMainAlarm(SetAlertsPage.this);
 
-                        Toast.makeText(setAlerts.this, getString(R.string.newAlarmSaved), Toast.LENGTH_LONG).show();
+                        Toast.makeText(SetAlertsPage.this, getString(R.string.newAlarmSaved), Toast.LENGTH_LONG).show();
                         finish();
                     }
                 }

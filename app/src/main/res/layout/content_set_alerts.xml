@@ -1,200 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.marash.prayerreminder.setAlerts"
-    tools:showIn="@layout/activity_set_alerts">
+    tools:context="com.marash.prayerreminder.SetAlertsPage"
+    tools:showIn="@layout/activity_set_alerts"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/setAlertsFor"
-        android:id="@+id/textView_setAnewAlertFor"
-        android:layout_alignParentTop="true"
-        android:textSize="20sp"
-        android:textColor="#000000"/>
 
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/prayerGroup"
-        android:layout_below="@+id/beforeAfter"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="20sp"
-        android:padding="10sp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <RadioButton
+        <TextView
+            android:id="@+id/textView_setAnewAlertFor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Imsaak"
-            android:tag="Imsaak"
-            android:textSize="16sp"
-            android:id="@+id/radioButton_Imsaak"
-            android:checked="false" />
-
-        <RadioButton
+            android:layout_alignParentTop="true"
+            android:text="@string/setAlertsFor"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+        <RadioGroup
+            android:id="@+id/beforeAfter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Fajr"
-            android:tag="Fajr"
-            android:textSize="16sp"
-            android:id="@+id/radioButton_fajr"
-            android:checked="false" />
+            android:layout_marginStart="5sp"
+            android:layout_marginLeft="5sp"
+            android:layout_marginTop="50sp"
+            android:layout_toEndOf="@+id/textView_minutes"
+            android:layout_toRightOf="@+id/textView_minutes"
+            android:orientation="horizontal">
 
-        <RadioButton
+            <RadioButton
+                android:id="@+id/radioButton_before"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:tag="Before"
+                android:text="@string/Before"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton_after"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:tag="After"
+                android:text="@string/After"
+                android:textSize="16sp" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/editText_preferableTime"
+            android:layout_width="50sp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView_setAnewAlertFor"
+            android:layout_marginStart="15sp"
+            android:layout_marginLeft="15sp"
+            android:layout_marginTop="15sp"
+            android:layout_marginEnd="5sp"
+            android:layout_marginRight="5sp"
+            android:inputType="time"
+            android:text="@string/zero"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView_minutes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Sunrise"
-            android:tag="Sunrise"
-            android:textSize="16sp"
-            android:id="@+id/radioButton_sunrise"
-            android:checked="false" />
+            android:layout_below="@+id/textView_setAnewAlertFor"
+            android:layout_marginTop="27sp"
+            android:layout_toEndOf="@+id/editText_preferableTime"
+            android:layout_toRightOf="@+id/editText_preferableTime"
+            android:labelFor="@id/editText_preferableTime"
+            android:text="@string/Minutes"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
-        <RadioButton
+        <RadioGroup
+            android:id="@+id/prayerGroup"
+            android:layout_below="@+id/beforeAfter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Dhuhr"
-            android:tag="Dhuhr"
-            android:textSize="16sp"
-            android:id="@+id/radioButton_zohr"
-            android:checked="false"/>
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:orientation="vertical"
+            android:padding="10sp">
 
-        <RadioButton
+            <RadioButton
+                android:id="@+id/radioButton_Imsaak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:tag="Imsaak"
+                android:text="@string/Imsaak"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton_fajr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:tag="Fajr"
+                android:text="@string/Fajr"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton_sunrise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:tag="Sunrise"
+                android:text="@string/Sunrise"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton_zohr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:tag="Dhuhr"
+                android:text="@string/Dhuhr"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton_asr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:tag="Asr"
+                android:text="@string/Asr"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton_sunset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:tag="Sunset"
+                android:text="@string/Sunset"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton_maghrib"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:tag="Maghrib"
+                android:text="@string/Maghrib"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton_isha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:tag="Isha"
+                android:text="@string/Isha"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton_midnight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:tag="Midnight"
+                android:text="@string/Midnight"
+                android:textSize="16sp" />
+        </RadioGroup>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_saveAlert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Asr"
-            android:tag="Asr"
-            android:textSize="16sp"
-            android:id="@+id/radioButton_asr"
-            android:checked="false" />
+            android:layout_marginTop="20sp"
+            android:layout_marginRight="40sp"
+            android:layout_marginEnd="40sp"
+            android:background="@drawable/button_shape"
+            android:text="@string/save"/>
 
-        <RadioButton
+        <Button
+            android:id="@+id/button_cancelAlert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Sunset"
-            android:tag="Sunset"
-            android:textSize="16sp"
-            android:id="@+id/radioButton_sunset"
-            android:checked="false" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Maghrib"
-            android:tag="Maghrib"
-            android:textSize="16sp"
-            android:id="@+id/radioButton_maghrib"
-            android:checked="false" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Isha"
-            android:tag="Isha"
-            android:textSize="16sp"
-            android:id="@+id/radioButton_isha"
-            android:checked="false" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Midnight"
-            android:tag="Midnight"
-            android:textSize="16sp"
-            android:id="@+id/radioButton_midnight"
-            android:checked="false" />
-    </RadioGroup>
-
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/beforeAfter"
-        android:layout_toEndOf="@+id/textView_minutes"
-        android:layout_toRightOf="@+id/textView_minutes"
-        android:layout_marginTop="50sp"
-        android:layout_marginStart="5sp"
-        android:layout_marginLeft="5sp">
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Before"
-            android:tag="Before"
-            android:textSize="16sp"
-            android:id="@+id/radioButton_before"
-            android:checked="false" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/After"
-            android:tag="After"
-            android:textSize="16sp"
-            android:id="@+id/radioButton_after"
-            android:checked="false" />
-    </RadioGroup>
-
-    <EditText
-        android:layout_width="50sp"
-        android:layout_height="wrap_content"
-        android:inputType="time"
-        android:id="@+id/editText_preferableTime"
-        android:layout_below="@+id/textView_setAnewAlertFor"
-        android:layout_marginLeft="15sp"
-        android:layout_marginStart="15sp"
-        android:layout_marginTop="15sp"
-        android:layout_marginEnd="5sp"
-        android:layout_marginRight="5sp"
-        android:text="@string/zero"
-        android:textSize="18sp"/>
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/Minutes"
-        android:id="@+id/textView_minutes"
-        android:layout_below="@+id/textView_setAnewAlertFor"
-        android:layout_toEndOf="@+id/editText_preferableTime"
-        android:layout_toRightOf="@+id/editText_preferableTime"
-        android:layout_marginTop="27sp"
-        android:textSize="18sp"
-        android:labelFor="@id/editText_preferableTime"
-        android:textColor="#000000" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        android:background="@drawable/button_shape"
-        android:id="@+id/button_saveAlert"
-        android:layout_below="@+id/prayerGroup"
-        android:layout_marginTop="40sp"
-        android:layout_marginEnd="40sp"
-        android:layout_marginRight="40sp"
-        android:layout_marginStart="20sp"
-        android:layout_marginLeft="20sp"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cancel"
-        android:background="@drawable/button_shape"
-        android:id="@+id/button_cancelAlert"
-        android:layout_below="@+id/prayerGroup"
-        android:layout_marginTop="40sp"
-        android:layout_toEndOf="@+id/button_saveAlert"
-        android:layout_toRightOf="@+id/button_saveAlert"
-        android:onClick="cancelAlertFunction"/>
-</RelativeLayout>
+            android:layout_marginTop="20sp"
+            android:background="@drawable/button_shape"
+            android:onClick="cancelAlertFunction"
+            android:text="@string/cancel" />
+    </LinearLayout>
+</LinearLayout>

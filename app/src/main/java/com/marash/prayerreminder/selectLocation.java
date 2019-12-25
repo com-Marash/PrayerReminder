@@ -21,7 +21,7 @@ import com.marash.prayerreminder.dto.PRLocation;
 import static android.graphics.Color.GRAY;
 
 
-public class selectLocation extends AppCompatActivity {
+public class SelectLocation extends AppCompatActivity {
 
     private TextView locationText;
     private LocationBuilder lb;
@@ -51,7 +51,7 @@ public class selectLocation extends AppCompatActivity {
     }
 
     private void checkForLastKnownLocation() {
-        String[] lastKnownLocationText = StorageManager.loadLocation(selectLocation.this);
+        String[] lastKnownLocationText = StorageManager.loadLocation(SelectLocation.this);
         String country = this.getString(R.string.unknownCountry);
         String city = this.getString(R.string.unknownCity);
         // lastKnownLocationText null point exception fixed
@@ -148,7 +148,7 @@ public class selectLocation extends AppCompatActivity {
     }
 
     private ProgressDialog createPD(final SettableFuture<PRLocation> locationFuture) {
-        ProgressDialog pd = new ProgressDialog(selectLocation.this);
+        ProgressDialog pd = new ProgressDialog(SelectLocation.this);
         pd.setTitle(getString(R.string.loadLocation));
         pd.setMessage(getString(R.string.waitLocation));
         pd.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -172,10 +172,10 @@ public class selectLocation extends AppCompatActivity {
     }
 
     public void confirmButtFunction(View view) {
-        Toast.makeText(selectLocation.this, getString(R.string.locationUpdated), Toast.LENGTH_LONG).show();
-        StorageManager.saveLocation(currentLocation.getLocation().getLatitude(), currentLocation.getLocation().getLongitude(), currentLocation.getCountry(), currentLocation.getCity(), selectLocation.this);
-        prayerTimesCalculator.setLatitude(currentLocation.getLocation().getLatitude());
-        prayerTimesCalculator.setLongitude(currentLocation.getLocation().getLongitude());
+        Toast.makeText(SelectLocation.this, getString(R.string.locationUpdated), Toast.LENGTH_LONG).show();
+        StorageManager.saveLocation(currentLocation.getLocation().getLatitude(), currentLocation.getLocation().getLongitude(), currentLocation.getCountry(), currentLocation.getCity(), SelectLocation.this);
+        PrayerTimesCalculatorService.setLatitude(currentLocation.getLocation().getLatitude());
+        PrayerTimesCalculatorService.setLongitude(currentLocation.getLocation().getLongitude());
         AlarmSetter.createOrUpdateAllAlarms(view.getContext());
         MainPage.refreshLocation = true;
         finish();

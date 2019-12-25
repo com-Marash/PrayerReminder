@@ -20,7 +20,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -38,6 +37,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 public class MainPage extends AppCompatActivity {
 
@@ -71,7 +71,7 @@ public class MainPage extends AppCompatActivity {
                         // close drawer when item is tapped
                         switch (menuItem.getItemId()) {
                             case R.id.nav_setNewAlarm:
-                                Intent setAlertIntent = new Intent("com.marash.prayerreminder.setAlerts");
+                                Intent setAlertIntent = new Intent("com.marash.prayerreminder.SetAlertsPage");
                                 startActivity(setAlertIntent);
                                 mDrawerLayout.closeDrawers();
                                 break;
@@ -81,7 +81,7 @@ public class MainPage extends AppCompatActivity {
                                 mDrawerLayout.closeDrawers();;
                                 break;
                             case R.id.nav_updateLocation:
-                                Intent selectLocationIntent = new Intent("com.marash.prayerreminder.selectLocation");
+                                Intent selectLocationIntent = new Intent("com.marash.prayerreminder.SelectLocation");
                                 startActivity(selectLocationIntent);
                                 mDrawerLayout.closeDrawers();
                                 break;
@@ -100,7 +100,7 @@ public class MainPage extends AppCompatActivity {
                                 AlarmVolume(navigationView);
                                 break;
                             case R.id.nav_aboutUs:
-                                Intent aboutUsIntent = new Intent("com.marash.prayerreminder.aboutUs");
+                                Intent aboutUsIntent = new Intent("com.marash.prayerreminder.AboutUs");
                                 startActivity(aboutUsIntent);
                                 mDrawerLayout.closeDrawers();
                                 break;
@@ -280,9 +280,10 @@ public class MainPage extends AppCompatActivity {
             goToTodayText.setVisibility(View.VISIBLE);
         }
 
-        PrayerTimes myPrayerTimes = new PrayerTimes(PrayerTimes.methods.valueOf(prayerTimesCalculator.getMethod(this)));
-        double[] location = prayerTimesCalculator.getLocation(this);
-        prayerTimesData calculatedTimes = myPrayerTimes.getTimes(new int[]{calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH)}, new Coordination(location[0], location[1]));
+        PrayerTimes myPrayerTimes = new PrayerTimes(PrayerTimes.methods.valueOf(PrayerTimesCalculatorService.getMethod(this)));
+        double[] location = PrayerTimesCalculatorService.getLocation(this);
+        prayerTimesData calculatedTimes = myPrayerTimes.getTimes(new int[]{calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH)},
+                new Coordination(location[0], location[1]), TimeZone.getDefault().getOffset(calendar.getTimeInMillis())/ 3600000d, null);
 
         if (calculatedTimes != null) {
 
@@ -412,6 +413,7 @@ public class MainPage extends AppCompatActivity {
                         }
                         StorageManager.saveSavedPrayersToShow(s.toString(), MainPage.this.getApplicationContext());
                         MainPage.refreshPrayerTimes = true;
+                        onResume();
                         alertDialog.dismiss();
                     }
                 });
@@ -443,7 +445,7 @@ public class MainPage extends AppCompatActivity {
                 if (selection != null) {
                     Toast.makeText(MainPage.this, selection + " " + getString(R.string.calculationMethodSelected), Toast.LENGTH_LONG).show();
                     StorageManager.saveCalculationMethode(selectionValue, MainPage.this.getApplicationContext());
-                    prayerTimesCalculator.setMethod(selectionValue);
+                    PrayerTimesCalculatorService.setMethod(selectionValue);
                     AlarmSetter.createOrUpdateAllAlarms(MainPage.this);
                 }
             }

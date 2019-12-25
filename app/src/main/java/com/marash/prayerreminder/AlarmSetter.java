@@ -35,13 +35,13 @@ public class AlarmSetter {
 
     public static void createOrUpdateAlarm(Alert alert, Context context) {
 
-        Calendar alertCalendar = prayerTimesCalculator.getPrayerTime(alert.getPrayerName(), Calendar.getInstance(), context);
+        Calendar alertCalendar = PrayerTimesCalculatorService.getPrayerTime(alert.getPrayerName(), Calendar.getInstance(), context);
 
         alertCalendar.add(Calendar.MINUTE, alert.getTime());
         if (alertCalendar.getTimeInMillis() < Calendar.getInstance().getTimeInMillis()) {
             Calendar tomorrowCalendar = Calendar.getInstance();
             tomorrowCalendar.add(Calendar.DAY_OF_YEAR, 1);
-            alertCalendar = prayerTimesCalculator.getPrayerTime(alert.getPrayerName(), tomorrowCalendar, context);
+            alertCalendar = PrayerTimesCalculatorService.getPrayerTime(alert.getPrayerName(), tomorrowCalendar, context);
             alertCalendar.add(Calendar.MINUTE, alert.getTime());
         }
 

@@ -8,26 +8,27 @@ import com.marash.prayerTimes.dto.prayerTimesData;
 import com.marash.prayerTimes.main.PrayerTimes;
 
 import java.util.Calendar;
+import java.util.TimeZone;
 
 /**
  * Created by Maedeh on 8/23/2016.
  */
-public class prayerTimesCalculator {
+public class PrayerTimesCalculatorService {
 
     private static String method;
     private static Double latitude;
     private static Double longitude;
 
     public static void setLatitude(Double latitude) {
-        prayerTimesCalculator.latitude = latitude;
+        PrayerTimesCalculatorService.latitude = latitude;
     }
 
     public static void setLongitude(Double longitude) {
-        prayerTimesCalculator.longitude = longitude;
+        PrayerTimesCalculatorService.longitude = longitude;
     }
 
     public static void setMethod(String method) {
-        prayerTimesCalculator.method = method;
+        PrayerTimesCalculatorService.method = method;
     }
 
     public static double[] getLocation(Context context) {
@@ -50,38 +51,39 @@ public class prayerTimesCalculator {
 
         PrayerTimes prayerTimes = new PrayerTimes(PrayerTimes.methods.valueOf(getMethod(context)));
         double[] location = getLocation(context);
-        prayerTimesData calculatesprayerTimes = prayerTimes.getTimes(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH), location[0], location[1]);
+        prayerTimesData calculatePrayerTimes = prayerTimes.getTimes(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH),
+                location[0], location[1], TimeZone.getDefault().getOffset(calendar.getTimeInMillis()) / 3600000d, null);
 
         Calendar result = (Calendar) calendar.clone();
         PrayerTimesDate calculatesprayerTime = null;
         switch (prayerType) {
             case "Fajr":
-                calculatesprayerTime = calculatesprayerTimes.getFajr();
+                calculatesprayerTime = calculatePrayerTimes.getFajr();
                 break;
             case "Sunrise":
-                calculatesprayerTime = calculatesprayerTimes.getSunrise();
+                calculatesprayerTime = calculatePrayerTimes.getSunrise();
                 break;
             case "Dhuhr":
-                calculatesprayerTime = calculatesprayerTimes.getDhuhr();
+                calculatesprayerTime = calculatePrayerTimes.getDhuhr();
                 break;
             case "Asr":
-                calculatesprayerTime = calculatesprayerTimes.getAsr();
+                calculatesprayerTime = calculatePrayerTimes.getAsr();
                 break;
             case "Sunset":
-                calculatesprayerTime = calculatesprayerTimes.getSunset();
+                calculatesprayerTime = calculatePrayerTimes.getSunset();
                 break;
             case "Maghrib":
-                calculatesprayerTime = calculatesprayerTimes.getMaghrib();
+                calculatesprayerTime = calculatePrayerTimes.getMaghrib();
                 break;
             case "Isha":
-                calculatesprayerTime = calculatesprayerTimes.getIsha();
+                calculatesprayerTime = calculatePrayerTimes.getIsha();
                 break;
             case "Midnight":
-                calculatesprayerTime = calculatesprayerTimes.getMidnight();
+                calculatesprayerTime = calculatePrayerTimes.getMidnight();
                 break;
             case "Imsaak":
                 // TODO: fix this issue after prayerTime module got fixed
-                calculatesprayerTime = calculatesprayerTimes.getImsak();
+                calculatesprayerTime = calculatePrayerTimes.getImsak();
                 break;
             default:
                 return null;

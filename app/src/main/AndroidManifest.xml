@@ -49,7 +49,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".aboutUs"
+            android:name=".AboutUs"
             android:label="@string/title_activity_about_us"
             android:parentActivityName=".Setting"
             android:screenOrientation="portrait"
@@ -59,13 +59,13 @@
                 android:value="com.marash.prayerreminder.Setting" />
 
             <intent-filter>
-                <action android:name="com.marash.prayerreminder.aboutUs" />
+                <action android:name="com.marash.prayerreminder.AboutUs" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".setAlerts"
+            android:name=".SetAlertsPage"
             android:label="@string/title_activity_set_alerts"
             android:parentActivityName=".Setting"
             android:screenOrientation="portrait"
@@ -75,13 +75,13 @@
                 android:value="com.marash.prayerreminder.Setting" />
 
             <intent-filter>
-                <action android:name="com.marash.prayerreminder.setAlerts" />
+                <action android:name="com.marash.prayerreminder.SetAlertsPage" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".selectLocation"
+            android:name=".SelectLocation"
             android:label="@string/title_activity_select_location"
             android:parentActivityName=".Setting"
             android:screenOrientation="portrait"
@@ -91,7 +91,7 @@
                 android:value="com.marash.prayerreminder.Setting" />
 
             <intent-filter>
-                <action android:name="com.marash.prayerreminder.selectLocation" />
+                <action android:name="com.marash.prayerreminder.SelectLocation" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

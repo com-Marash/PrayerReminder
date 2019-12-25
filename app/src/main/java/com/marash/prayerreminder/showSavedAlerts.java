@@ -50,7 +50,7 @@ public class showSavedAlerts extends AppCompatActivity {
             }
 
             prayerListView = (ListView) findViewById(R.id.listView_savedAlertsList);
-            customAdaptorFor_showAlertLayout myAdaptor = new customAdaptorFor_showAlertLayout(alerts, this);
+            CustomAdaptorForShowAlertLayout myAdaptor = new CustomAdaptorForShowAlertLayout(alerts, this);
             prayerListView.setAdapter(myAdaptor);
         } else {
             showText.setText(R.string.noSavedAlarm);

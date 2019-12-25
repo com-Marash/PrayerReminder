@@ -67,8 +67,8 @@ public class FirstUsage extends Activity {
     public void openSecondPage(View view) {
         if (okButt.isEnabled()) {
             StorageManager.saveLocation(currentLocation.getLocation().getLatitude(), currentLocation.getLocation().getLongitude(), currentLocation.getCountry(), currentLocation.getCity(), FirstUsage.this);
-            prayerTimesCalculator.setLatitude(currentLocation.getLocation().getLatitude());
-            prayerTimesCalculator.setLongitude(currentLocation.getLocation().getLongitude());
+            PrayerTimesCalculatorService.setLatitude(currentLocation.getLocation().getLatitude());
+            PrayerTimesCalculatorService.setLongitude(currentLocation.getLocation().getLongitude());
             Intent firstUsageSecondPageIntent = new Intent("com.marash.prayerreminder.FirstUsageSecondPage");
             startActivity(firstUsageSecondPageIntent);
         }

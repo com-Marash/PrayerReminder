@@ -14,11 +14,11 @@ import java.util.ArrayList;
 /**
  * Created by Maedeh on 3/3/2016.
  */
-public class customAdaptorFor_showAlertLayout extends BaseAdapter implements ListAdapter {
+public class CustomAdaptorForShowAlertLayout extends BaseAdapter implements ListAdapter {
     private ArrayList<String> list = new ArrayList<String>();
     private Context context;
 
-    public customAdaptorFor_showAlertLayout(ArrayList<String> list, Context context) {
+    public CustomAdaptorForShowAlertLayout(ArrayList<String> list, Context context) {
         this.list = list;
         this.context = context;
     }
