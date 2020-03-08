@@ -283,7 +283,7 @@ public class MainPage extends AppCompatActivity {
         PrayerTimes myPrayerTimes = new PrayerTimes(PrayerTimes.methods.valueOf(PrayerTimesCalculatorService.getMethod(this)));
         double[] location = PrayerTimesCalculatorService.getLocation(this);
         prayerTimesData calculatedTimes = myPrayerTimes.getTimes(new int[]{calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH)},
-                new Coordination(location[0], location[1]), TimeZone.getDefault().getOffset(calendar.getTimeInMillis())/ 3600000d, null);
+                new Coordination(location[0], location[1]), TimeZone.getDefault().getOffset(calendar.getTimeInMillis())/ 3600000d, false);
 
         if (calculatedTimes != null) {
 

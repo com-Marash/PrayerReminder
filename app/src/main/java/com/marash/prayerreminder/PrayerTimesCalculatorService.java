@@ -52,7 +52,7 @@ public class PrayerTimesCalculatorService {
         PrayerTimes prayerTimes = new PrayerTimes(PrayerTimes.methods.valueOf(getMethod(context)));
         double[] location = getLocation(context);
         prayerTimesData calculatePrayerTimes = prayerTimes.getTimes(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH),
-                location[0], location[1], TimeZone.getDefault().getOffset(calendar.getTimeInMillis()) / 3600000d, null);
+                location[0], location[1], TimeZone.getDefault().getOffset(calendar.getTimeInMillis()) / 3600000d, false);
 
         Calendar result = (Calendar) calendar.clone();
         PrayerTimesDate calculatesprayerTime = null;
