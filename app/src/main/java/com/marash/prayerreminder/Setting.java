@@ -59,7 +59,7 @@ public class Setting extends AppCompatActivity {
         selectAlarmSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent selectSoundIntent = new Intent("com.marash.prayerreminder.selectSound");
+                Intent selectSoundIntent = new Intent("com.marash.prayerreminder.SelectSound");
                 startActivity(selectSoundIntent);
             }
         });
@@ -81,7 +81,7 @@ public class Setting extends AppCompatActivity {
         final CharSequence[] methodsItemValues = {"Egypt", "Tehran", "Jafari", "Karachi", "Makkah", "MWL", "ISNA"};
         String savedCalcMethod;
 
-        savedCalcMethod = StorageManager.loadCalculationMethode(Setting.this.getApplicationContext());
+        savedCalcMethod = StorageManager.loadCalculationMethod(Setting.this.getApplicationContext());
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
@@ -99,6 +99,7 @@ public class Setting extends AppCompatActivity {
                     StorageManager.saveCalculationMethode(selectionValue, Setting.this.getApplicationContext());
                     PrayerTimesCalculatorService.setMethod(selectionValue);
                     AlarmSetter.createOrUpdateAllAlarms(Setting.this);
+                    MainPage.refreshPrayerTimes = true;
                 }
             }
         }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {

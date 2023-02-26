@@ -31,7 +31,7 @@
     <string name="Imsaak">الامساك</string>
     <string name="Delete">مسح</string>
     <string name="lastLocation">اخر تحديد للموقع</string>
-    <string name="changeRingtone">تغيير نغمه التنبيه</string>
+    <string name="changeRingtone">نغمات الهاتف</string>
     <string name="Rate">تقييم</string>
     <string name="Dismiss">تجاهل</string>
     <string name="Fajr">الفجر</string>
@@ -70,7 +70,7 @@
     <string name="completeAll">يرجى تعبئه جميع المتطلبات</string>
     <string name="newAlarmSaved">تم حفظ المنبه الجديد بنجاح</string>
     <string name="alarmPreviouslySaved">تم حفظ هذا المنبه سابقا</string>
-    <string name="noRingtone">لم يتم تحديد نغمه لمنبه الصلاه٬ يرجى الاختبار من القائمه</string>
+    <string name="noRingtone">لم يتم تحديد نغمه لمنبه الصلاه٬ يرجى الاختبار من القوائم</string>
     <string name="ringtoneHasSet">تم تحديده كنغمه منبه للصلاه</string>
     <string name="selectANewRingtone">اختار منبه جديد</string>
     <string name="alarmWasSet">تم تحديده كمنبه للصلاه</string>
@@ -103,4 +103,17 @@
     <string name="PrayersToShow">حدد الأوقات التي تريد أن تظهر التطبيق يوميا</string>
     <string name="prayersToShowMinSelect">يرجى تحديد صلاة واحدة على الأقل.</string>
     <string name="prayersToShowButton">صلاة مختارة</string>
+    <string name="AzanSelection">تحديدات أذان</string>
+    <string name="aghati">آقاتی</string>
+    <string name="moazenzadeh">مؤذن زاده</string>
+    <string name="rezaeian">رضاییان</string>
+    <string name="sobhdel">صبحدل</string>
+    <string name="tantavi">طنطاوی</string>
+    <string name="abuzeid">ابوزید</string>
+    <string name="abdolbaset">عبدالباسط</string>
+    <string name="abdorrahman">عبدالرحمن</string>
+    <string name="madinah">مدینه</string>
+    <string name="makkah">مکه</string>
+    <string name="menshawi">منشاوی</string>
+    <string name="saeedhafez">سعید حافظ</string>
 </resources>

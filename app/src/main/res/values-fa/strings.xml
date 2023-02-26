@@ -31,7 +31,7 @@
     <string name="Imsaak">امساک</string>
     <string name="Delete">حذف</string>
     <string name="lastLocation">آخرین موقعیت جغرافیایی شناسایی شده: </string>
-    <string name="changeRingtone">تغییر موزیک یادآور</string>
+    <string name="changeRingtone">آهنگ های زنگ تلفن</string>
     <string name="Rate">امتیازدهی</string>
     <string name="Dismiss">خاموش</string>
     <string name="Fajr">فجر</string>
@@ -70,7 +70,7 @@
     <string name="completeAll">لطفا تمامی موارد خواسته شده را انتخاب نمایید.</string>
     <string name="newAlarmSaved">یادآور جدید شما با موفقیت ذخیره شد.</string>
     <string name="alarmPreviouslySaved">این یادآور قبلا ایجاد شده است.</string>
-    <string name="noRingtone">موردی برای زنگ یادآور انتخاب نشده است. لطفا از لیست انتخاب نمایید.</string>
+    <string name="noRingtone">موردی برای زنگ یادآور انتخاب نشده است. لطفا از لیست ها انتخاب نمایید.</string>
     <string name="ringtoneHasSet">به عنوان موزیک یادآور نمازهای شما انتخاب شده است.</string>
     <string name="selectANewRingtone">صدای زنگ دلخواه خود را انتخاب نمایید.</string>
     <string name="alarmWasSet">به عنوان زنگ یادآور شما انتخاب شد.</string>
@@ -103,4 +103,17 @@
     <string name="PrayersToShow">زمان هایی را که میخواهید برنامه بطور روزانه نشان دهد را انتخاب کنید.</string>
     <string name="prayersToShowButton">نمازهای انتخاب شده</string>
     <string name="prayersToShowMinSelect">لطفا حداقل یک نماز را انتخاب نمایید.</string>
+    <string name="AzanSelection">مجموعه اذان ها</string>
+    <string name="aghati">آقاتی</string>
+    <string name="moazenzadeh">مؤذن زاده</string>
+    <string name="rezaeian">رضاییان</string>
+    <string name="sobhdel">صبحدل</string>
+    <string name="tantavi">طنطاوی</string>
+    <string name="abuzeid">ابوزید</string>
+    <string name="abdolbaset">عبدالباسط</string>
+    <string name="abdorrahman">عبدالرحمن</string>
+    <string name="madinah">مدینه</string>
+    <string name="makkah">مکه</string>
+    <string name="menshawi">منشاوی</string>
+    <string name="saeedhafez">سعید حافظ</string>
 </resources>

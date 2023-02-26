@@ -121,7 +121,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".selectSound"
+            android:name=".SelectSound"
             android:parentActivityName=".Setting"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">

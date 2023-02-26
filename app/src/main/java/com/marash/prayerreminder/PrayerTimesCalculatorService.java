@@ -42,7 +42,7 @@ public class PrayerTimesCalculatorService {
 
     public static String getMethod(Context context) {
         if (method == null) {
-            method = StorageManager.loadCalculationMethode(context);
+            method = StorageManager.loadCalculationMethod(context);
         }
         return method;
     }

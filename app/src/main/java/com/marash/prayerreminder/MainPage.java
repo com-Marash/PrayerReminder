@@ -89,7 +89,7 @@ public class MainPage extends AppCompatActivity {
                                 prayersToShowFunction().show();
                                 break;
                             case R.id.nav_alarmRingtone:
-                                Intent selectSoundIntent = new Intent("com.marash.prayerreminder.selectSound");
+                                Intent selectSoundIntent = new Intent("com.marash.prayerreminder.SelectSound");
                                 startActivity(selectSoundIntent);
                                 mDrawerLayout.closeDrawers();
                                 break;
@@ -203,7 +203,7 @@ public class MainPage extends AppCompatActivity {
     }
 
     private boolean isMethodAvailable(Context context) {
-        return StorageManager.loadCalculationMethode(context) != null;
+        return StorageManager.loadCalculationMethod(context) != null;
     }
 
     private void setListeners() {
@@ -429,7 +429,7 @@ public class MainPage extends AppCompatActivity {
         final CharSequence[] methodsItemValues = {"Egypt", "Tehran", "Jafari", "Karachi", "Makkah", "MWL", "ISNA"};
         String savedCalcMethod;
 
-        savedCalcMethod = StorageManager.loadCalculationMethode(MainPage.this.getApplicationContext());
+        savedCalcMethod = StorageManager.loadCalculationMethod(MainPage.this.getApplicationContext());
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MainPage.this);
@@ -447,6 +447,8 @@ public class MainPage extends AppCompatActivity {
                     StorageManager.saveCalculationMethode(selectionValue, MainPage.this.getApplicationContext());
                     PrayerTimesCalculatorService.setMethod(selectionValue);
                     AlarmSetter.createOrUpdateAllAlarms(MainPage.this);
+                    MainPage.refreshPrayerTimes = true;
+                    onResume();
                 }
             }
         }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {

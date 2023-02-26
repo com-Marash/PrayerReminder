@@ -81,10 +81,8 @@ public class StorageManager {
                 out.write(alert.getPrayerName() + "," + alert.getTime() + "," + alert.getAlertNumber() + "\n");
             }
             out.close();
-        } catch (FileNotFoundException e) {
-
         } catch (IOException e) {
-
+            throw new IllegalStateException(e);
         }
     }
 
@@ -96,8 +94,19 @@ public class StorageManager {
             out.write(ringtoneTitle + "\n" + URIString);
             out.close();
         } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
+    }
 
+    public static void saveAlarmRingtone(String azanTitle, Context context) {
+        try {
 
+            outputFile = context.openFileOutput(STORED_ringtone, Context.MODE_PRIVATE);
+            out = new OutputStreamWriter(outputFile);
+            out.write(azanTitle);
+            out.close();
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
         }
     }
 
@@ -112,9 +121,8 @@ public class StorageManager {
             return result;
 
         } catch (IOException e) {
-
+           throw new IllegalStateException(e);
         }
-        return null;
     }
 
     public static void saveCalculationMethode(String calcMethod, Context context) {
@@ -130,7 +138,7 @@ public class StorageManager {
         }
     }
 
-    public static String loadCalculationMethode(Context context) {
+    public static String loadCalculationMethod(Context context) {
         String temp;
         try {
             inputFile = context.openFileInput(STORED_calcmethode);

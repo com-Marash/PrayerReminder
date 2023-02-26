@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.marash.prayerreminder.selectSound"
+    tools:context="com.marash.prayerreminder.SelectSound"
     tools:showIn="@layout/activity_sound_selection">
 
     <TextView
@@ -25,12 +25,25 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/changeRingtone"
+        android:text="@string/AzanSelection"
         android:background="@drawable/button_shape"
-        android:id="@+id/button_changePrayerAlarm"
+        android:id="@+id/button_changeAzan"
         android:layout_below="@+id/textView_soundText"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="89sp"
-        android:onClick="changeAlarmRingtone"/>
+        android:onClick="azanselections"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/changeRingtone"
+        android:background="@drawable/button_shape"
+        android:id="@+id/button_changePhoneRingtone"
+        android:layout_below="@+id/button_changeAzan"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20sp"
+        android:onClick="phoneRingtones"/>
+
 </RelativeLayout>

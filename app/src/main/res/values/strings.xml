@@ -33,7 +33,7 @@
     <string name="Imsaak">Imsaak</string>
     <string name="Delete">Delete</string>
     <string name="lastLocation">Last known location</string>
-    <string name="changeRingtone">Change Alarm ringtone</string>
+    <string name="changeRingtone">Phone ringtones</string>
     <string name="Rate">Rate</string>
     <string name="Dismiss">Dismiss</string>
     <string name="Fajr">Fajr</string>
@@ -72,7 +72,7 @@
     <string name="completeAll">Please complete all parts.</string>
     <string name="newAlarmSaved">Your new alarm has been successfully saved.</string>
     <string name="alarmPreviouslySaved">This alarm has been saved previously.</string>
-    <string name="noRingtone">No ringtone has been set for prayers alarm. Please choose from list.</string>
+    <string name="noRingtone">No ringtone has been set for prayers alarm. Please choose from lists.</string>
     <string name="ringtoneHasSet">has been set as your prayers alarm ringtone.</string>
     <string name="selectANewRingtone">Select a new ringtone</string>
     <string name="alarmWasSet">was set as your prayer alarm.</string>
@@ -105,4 +105,17 @@
     <string name="PrayersToShow">Select the times you want the app shows them daily.</string>
     <string name="prayersToShowButton">Prayers To Show</string>
     <string name="prayersToShowMinSelect">Please select at least one prayer.</string>
+    <string name="AzanSelection">Azan Selections</string>
+    <string name="aghati">Aghati</string>
+    <string name="moazenzadeh">Moazenzadeh</string>
+    <string name="rezaeian">Rezaeian</string>
+    <string name="sobhdel">Sobhdel</string>
+    <string name="tantavi">Tantavi</string>
+    <string name="abuzeid">Abuzeid</string>
+    <string name="abdolbaset">Abdolbaset</string>
+    <string name="abdorrahman">Abdorrahman</string>
+    <string name="madinah">Madinah</string>
+    <string name="makkah">Makkah</string>
+    <string name="menshawi">Menshawi</string>
+    <string name="saeedhafez">Saeed Hafez</string>
 </resources>
