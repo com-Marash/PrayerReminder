@@ -16,7 +16,7 @@ import android.widget.Toast;
 /**
  * Created by Maedeh on 5/25/2016.
  */
-public class selectSound extends AppCompatActivity {
+public class SelectSound extends AppCompatActivity {
 
     private TextView sound_TextView;
     private Uri existingRingtone = null;
@@ -33,7 +33,7 @@ public class selectSound extends AppCompatActivity {
 
     public void defaultFunction() {
         String[] selectedRingToneData;
-        selectedRingToneData = StorageManager.loadAlarmRingtone(selectSound.this);
+        selectedRingToneData = StorageManager.loadAlarmRingtone(SelectSound.this);
         sound_TextView = (TextView) findViewById(R.id.textView_soundText);
 
         if (selectedRingToneData == null || selectedRingToneData[0] == null || selectedRingToneData[1] == null) {
@@ -73,19 +73,19 @@ public class selectSound extends AppCompatActivity {
                 existingRingtone = uri;
                 //default changed to the selected ringtone.
                 //////
-                Ringtone ringtone = RingtoneManager.getRingtone(selectSound.this.getApplicationContext(), uri);
+                Ringtone ringtone = RingtoneManager.getRingtone(SelectSound.this.getApplicationContext(), uri);
                 String title = ringtone.getTitle(this);
 
-                Toast.makeText(selectSound.this, title + " " + getString(R.string.alarmWasSet), Toast.LENGTH_LONG).show();
+                Toast.makeText(SelectSound.this, title + " " + getString(R.string.alarmWasSet), Toast.LENGTH_LONG).show();
 
                 sound_TextView = (TextView) findViewById(R.id.textView_soundText);
                 sound_TextView.setText(title + " " + getString(R.string.alarmWasSelected));
 
-                StorageManager.saveAlarmRingtone(title, uri.toString(), selectSound.this);
+                StorageManager.saveAlarmRingtone(title, uri.toString(), SelectSound.this);
                 finish();
 
             } else {
-                Toast.makeText(selectSound.this, getString(R.string.selectARingtone), Toast.LENGTH_LONG).show();
+                Toast.makeText(SelectSound.this, getString(R.string.selectARingtone), Toast.LENGTH_LONG).show();
             }
         }
     }

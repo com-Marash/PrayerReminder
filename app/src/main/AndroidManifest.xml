@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.marash.prayerreminder">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -20,7 +19,8 @@
 
         <activity
             android:name=".MainPage"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,7 +37,8 @@
             android:label="@string/title_activity_setting"
             android:parentActivityName=".MainPage"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.marash.prayerreminder.MainPage" />
@@ -53,7 +54,8 @@
             android:label="@string/title_activity_about_us"
             android:parentActivityName=".Setting"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.marash.prayerreminder.Setting" />
@@ -69,7 +71,8 @@
             android:label="@string/title_activity_set_alerts"
             android:parentActivityName=".Setting"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.marash.prayerreminder.Setting" />
@@ -85,7 +88,8 @@
             android:label="@string/title_activity_select_location"
             android:parentActivityName=".Setting"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.marash.prayerreminder.Setting" />
@@ -105,11 +109,12 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".showSavedAlerts"
+            android:name=".ShowSavedAlerts"
             android:label="@string/title_activity_show_saved_alerts"
             android:parentActivityName=".Setting"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.marash.prayerreminder.Setting" />
@@ -121,10 +126,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".selectSound"
+            android:name=".SelectSound"
             android:parentActivityName=".Setting"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.marash.prayerreminder.Setting" />
@@ -139,7 +145,8 @@
             android:name=".FirstUsage"
             android:parentActivityName=".MainPage"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.marash.prayerreminder.MainPage" />
@@ -154,7 +161,8 @@
             android:name=".FirstUsageSecondPage"
             android:parentActivityName=".FirstUsage"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.marash.prayerreminder.FirstUsage" />
@@ -174,17 +182,20 @@
             android:name=".TimesUpActivity"
             android:screenOrientation="portrait" />
 
-        <receiver android:name=".AlarmReceiver">
+        <receiver android:name=".AlarmReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.marash.prayerreminder.AlarmReceiver" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".MainAlarmReceiver">
+        <receiver android:name=".MainAlarmReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.marash.prayerreminder.mainAlarmReceiver" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".DeviceBootReceiver">
+        <receiver android:name=".DeviceBootReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
