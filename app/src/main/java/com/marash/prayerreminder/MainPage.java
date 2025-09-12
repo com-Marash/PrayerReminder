@@ -69,41 +69,36 @@ public class MainPage extends AppCompatActivity {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         // close drawer when item is tapped
-                        switch (menuItem.getItemId()) {
-                            case R.id.nav_setNewAlarm:
-                                Intent setAlertIntent = new Intent("com.marash.prayerreminder.SetAlertsPage");
-                                startActivity(setAlertIntent);
-                                mDrawerLayout.closeDrawers();
-                                break;
-                            case R.id.nav_savedAlarms:
-                                Intent showSavedAlertsIntent = new Intent("com.marash.prayerreminder.showSavedAlerts");
-                                startActivity(showSavedAlertsIntent);
-                                mDrawerLayout.closeDrawers();;
-                                break;
-                            case R.id.nav_updateLocation:
-                                Intent selectLocationIntent = new Intent("com.marash.prayerreminder.SelectLocation");
-                                startActivity(selectLocationIntent);
-                                mDrawerLayout.closeDrawers();
-                                break;
-                            case R.id.nav_prayersToShow:
-                                prayersToShowFunction().show();
-                                break;
-                            case R.id.nav_alarmRingtone:
-                                Intent selectSoundIntent = new Intent("com.marash.prayerreminder.SelectSound");
-                                startActivity(selectSoundIntent);
-                                mDrawerLayout.closeDrawers();
-                                break;
-                            case R.id.nav_calculatoonMethod:
-                                calculationMethodFunction().show();
-                                break;
-                            case R.id.nav_alarmVolume:
-                                AlarmVolume(navigationView);
-                                break;
-                            case R.id.nav_aboutUs:
-                                Intent aboutUsIntent = new Intent("com.marash.prayerreminder.AboutUs");
-                                startActivity(aboutUsIntent);
-                                mDrawerLayout.closeDrawers();
-                                break;
+                        int itemId = menuItem.getItemId();
+                        if (itemId == R.id.nav_setNewAlarm) {
+                            Intent setAlertIntent = new Intent("com.marash.prayerreminder.SetAlertsPage");
+                            startActivity(setAlertIntent);
+                            mDrawerLayout.closeDrawers();
+                        } else if (itemId == R.id.nav_savedAlarms) {
+                            Intent showSavedAlertsIntent = new Intent("com.marash.prayerreminder.showSavedAlerts");
+                            startActivity(showSavedAlertsIntent);
+                            mDrawerLayout.closeDrawers();
+                        } else if (itemId == R.id.nav_updateLocation) {
+                            Intent selectLocationIntent = new Intent("com.marash.prayerreminder.SelectLocation");
+                            startActivity(selectLocationIntent);
+                            mDrawerLayout.closeDrawers();
+                        } else if (itemId == R.id.nav_prayersToShow) {
+                            prayersToShowFunction().show();
+                            // mDrawerLayout.closeDrawers(); // Consider closing the drawer here too if appropriate
+                        } else if (itemId == R.id.nav_alarmRingtone) {
+                            Intent selectSoundIntent = new Intent("com.marash.prayerreminder.SelectSound");
+                            startActivity(selectSoundIntent);
+                            mDrawerLayout.closeDrawers();
+                        } else if (itemId == R.id.nav_calculatoonMethod) {
+                            calculationMethodFunction().show();
+                            // mDrawerLayout.closeDrawers(); // Consider closing the drawer here too if appropriate
+                        } else if (itemId == R.id.nav_alarmVolume) {
+                            AlarmVolume(navigationView);
+                            // mDrawerLayout.closeDrawers(); // Consider closing the drawer here too if appropriate
+                        } else if (itemId == R.id.nav_aboutUs) {
+                            Intent aboutUsIntent = new Intent("com.marash.prayerreminder.AboutUs");
+                            startActivity(aboutUsIntent);
+                            mDrawerLayout.closeDrawers();
                         }
                         return true;
                     }
@@ -185,15 +180,12 @@ public class MainPage extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-
-            case R.id.settingsItem:
-                if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    mDrawerLayout.closeDrawer(GravityCompat.START);
-                } else {
-                    mDrawerLayout.openDrawer(GravityCompat.START);
-                }
+        if (item.getItemId() == R.id.settingsItem) {
+            if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+            } else {
+                mDrawerLayout.openDrawer(GravityCompat.START);
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -283,7 +275,7 @@ public class MainPage extends AppCompatActivity {
         PrayerTimes myPrayerTimes = new PrayerTimes(PrayerTimes.methods.valueOf(PrayerTimesCalculatorService.getMethod(this)));
         double[] location = PrayerTimesCalculatorService.getLocation(this);
         prayerTimesData calculatedTimes = myPrayerTimes.getTimes(new int[]{calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH)},
-                new Coordination(location[0], location[1]), TimeZone.getDefault().getOffset(calendar.getTimeInMillis())/ 3600000d, false);
+                new Coordination(location[0], location[1]), TimeZone.getDefault().getOffset(calendar.getTimeInMillis()) / 3600000d, false);
 
         if (calculatedTimes != null) {
 
