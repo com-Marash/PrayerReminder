@@ -49,14 +49,14 @@ public class AlarmSetter {
         intent.putExtra("prayerName", alert.getPrayerName());
         intent.putExtra("prayerTime", alert.getTime());
 
-        PendingIntent alarmIntent = PendingIntent.getBroadcast(context, alert.getAlertNumber(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(context, alert.getAlertNumber(), intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE );
 
         doSetAlarm(alertCalendar.getTimeInMillis(), alarmIntent, context);
     }
 
     public static void deleteAlarm(int alarmRandomNumber, Context context) {
         Intent intent = new Intent(context, AlarmReceiver.class);
-        PendingIntent alarmIntent = PendingIntent.getBroadcast(context, alarmRandomNumber, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(context, alarmRandomNumber, intent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(alarmIntent);
@@ -86,7 +86,7 @@ public class AlarmSetter {
 
         } else {
             Intent intent = new Intent(context, MainAlarmReceiver.class);
-            PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
             Calendar alertCalendar = Calendar.getInstance();
             alertCalendar.set(Calendar.HOUR_OF_DAY, 10);
@@ -107,10 +107,8 @@ public class AlarmSetter {
             alarmMgr.setAlarmClock(new AlarmManager.AlarmClockInfo(timeInMillis, null), alarmIntent);
         } else if (Build.VERSION.SDK_INT >= 23) {
             alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMillis, alarmIntent);
-        } else if (Build.VERSION.SDK_INT >= 19) {
+        } else  {
             alarmMgr.setExact(AlarmManager.RTC_WAKEUP, timeInMillis, alarmIntent);
-        } else {
-            alarmMgr.set(AlarmManager.RTC_WAKEUP, timeInMillis, alarmIntent);
         }
     }
 }
