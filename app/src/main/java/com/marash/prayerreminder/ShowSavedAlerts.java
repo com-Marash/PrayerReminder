@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class showSavedAlerts extends AppCompatActivity {
+public class ShowSavedAlerts extends AppCompatActivity {
 
     private TextView showText;
 
@@ -30,7 +30,7 @@ public class showSavedAlerts extends AppCompatActivity {
 
     public void showSavedAlertsFunction() {
 
-        ArrayList<Alert> savedAlerts = StorageManager.loadAlert(showSavedAlerts.this.getApplicationContext());
+        ArrayList<Alert> savedAlerts = StorageManager.loadAlert(ShowSavedAlerts.this.getApplicationContext());
 
         if (savedAlerts != null && !(savedAlerts.isEmpty())) {
             alerts = new ArrayList<String>();
