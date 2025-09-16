@@ -1,5 +1,7 @@
 package com.marash.prayerreminder;
 
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +11,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.marash.prayerreminder.dto.AlertDTO;
 
 import java.util.ArrayList;
 
@@ -33,6 +37,14 @@ public class SetAlertsPage extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        if (Build.VERSION.SDK_INT >= 33) {
+            if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(SetAlertsPage.this, "Cannot Set Alarm Without Notification Permission", Toast.LENGTH_SHORT).show();
+                requestPermissions(new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 101);
+            }
+        }
 
         setPrayerTime();
 
@@ -86,14 +98,14 @@ public class SetAlertsPage extends AppCompatActivity {
                         desiredTime = -desiredTime;
                     }
 
-                    ArrayList<Alert> savedAlerts = StorageManager.loadAlert(SetAlertsPage.this.getApplicationContext());
+                    ArrayList<AlertDTO> savedAlerts = StorageManager.loadAlert(SetAlertsPage.this.getApplicationContext());
                     boolean isNewAlert = true;
 
                     if (savedAlerts != null) {
                         String savedAlertPrayerName;
                         int savedAlertTime;
                         ArrayList<Integer> savedRandNumber = new ArrayList<Integer>();
-                        for (Alert a : savedAlerts) {
+                        for (AlertDTO a : savedAlerts) {
                             savedAlertPrayerName = a.getPrayerName();
                             savedAlertTime = a.getTime();
                             savedRandNumber.add(a.getAlertNumber());
@@ -108,7 +120,7 @@ public class SetAlertsPage extends AppCompatActivity {
                             while (savedRandNumber.contains(randomNumber)) {
                                 randomNumber = (int) ((Math.random() * (10000001) + 1000));
                             }
-                            Alert alert = new Alert(selectedPrayerText, desiredTime, randomNumber);
+                            AlertDTO alert = new AlertDTO(selectedPrayerText, desiredTime, randomNumber);
                             StorageManager.saveAlert(alert, SetAlertsPage.this.getApplicationContext());
                             AlarmSetter.createOrUpdateAlarm(alert, SetAlertsPage.this.getApplicationContext());
                             ///
@@ -120,7 +132,7 @@ public class SetAlertsPage extends AppCompatActivity {
                         }
                     } else {
                         int randomNumber = (int) ((Math.random() * (10000001) + 1000));
-                        Alert alert = new Alert(selectedPrayerText, desiredTime, randomNumber);
+                        AlertDTO alert = new AlertDTO(selectedPrayerText, desiredTime, randomNumber);
                         StorageManager.saveAlert(alert, SetAlertsPage.this.getApplicationContext());
                         AlarmSetter.createOrUpdateAlarm(alert, SetAlertsPage.this.getApplicationContext());
                         AlarmSetter.setMainAlarm(SetAlertsPage.this);

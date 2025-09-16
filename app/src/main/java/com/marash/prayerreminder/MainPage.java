@@ -1,15 +1,24 @@
 package com.marash.prayerreminder;
 
+import static com.marash.prayerreminder.AlarmService.ALARM_CHANNEL_ID;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -103,6 +112,7 @@ public class MainPage extends AppCompatActivity {
                         return true;
                     }
                 });
+        ensureNotificationRegistered();
     }
 
     @Override
@@ -495,6 +505,29 @@ public class MainPage extends AppCompatActivity {
         });
         builder.create();
         builder.show();
+    }
+
+    private void ensureNotificationRegistered() {
+        SharedPreferences prefs = getSharedPreferences("prayerReminder", MODE_PRIVATE);
+        boolean registered = prefs.getBoolean("notification_registered", false);
+
+        if (!registered) {
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, ALARM_CHANNEL_ID)
+                    .setContentTitle("Prayer Reminder")
+                    .setContentText("First Time Notification Setup")
+                    .setSmallIcon(R.drawable.ic_add_alarm_icon)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH);
+
+            NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            if (manager != null) {
+                manager.notify(999, builder.build());
+
+                // Optional: cancel after a short delay so it does not stay
+                new Handler(Looper.getMainLooper()).postDelayed(() -> manager.cancel(999), 1000);
+            }
+
+            prefs.edit().putBoolean("notification_registered", true).apply();
+        }
     }
 
 }

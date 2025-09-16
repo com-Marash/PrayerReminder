@@ -8,15 +8,16 @@ import android.location.Location;
  * @author Maedeh.
  */
 
-public class PRLocation {
-    public PRLocation(String city, String country, Location location){
+public class PRLocationDTO {
+
+    private final String city;
+    private final String country;
+    private final Location location;
+    public PRLocationDTO(String city, String country, Location location){
         this.city = city;
         this.country = country;
         this.location = location;
     }
-    private String city;
-    private String country;
-    private Location location;
 
     public Location getLocation() {
         return location;

@@ -1,6 +1,11 @@
 package com.marash.prayerreminder;
 
 import android.content.Context;
+import android.text.TextUtils;
+
+import com.marash.prayerreminder.dto.AlarmRingtoneDTO;
+import com.marash.prayerreminder.dto.AlarmRingtoneType;
+import com.marash.prayerreminder.dto.AlertDTO;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -27,7 +32,7 @@ public class StorageManager {
     private final static String STORED_savedPrayersToShow = "storedPrayersToShow.txt";
 
 
-    public static void saveAlert(Alert alert, Context context) {
+    public static void saveAlert(AlertDTO alert, Context context) {
 
         try {
             outputFile = context.openFileOutput(STORED_Alerts_TEXT, Context.MODE_APPEND);
@@ -41,9 +46,9 @@ public class StorageManager {
         }
     }
 
-    public static ArrayList<Alert> loadAlert(Context context) {
+    public static ArrayList<AlertDTO> loadAlert(Context context) {
         try {
-            ArrayList<Alert> alertsList = new ArrayList<Alert>();
+            ArrayList<AlertDTO> alertsList = new ArrayList<AlertDTO>();
 
             inputFile = context.openFileInput(STORED_Alerts_TEXT);
             inputReader = new BufferedReader(new InputStreamReader(inputFile));
@@ -55,7 +60,7 @@ public class StorageManager {
             while ((inputString = inputReader.readLine()) != null) {
                 alertInfo = inputString;
                 alertParts = alertInfo.split(",");
-                Alert a = new Alert(alertParts[0], Integer.parseInt(alertParts[1]), Integer.parseInt(alertParts[2]));
+                AlertDTO a = new AlertDTO(alertParts[0], Integer.parseInt(alertParts[1]), Integer.parseInt(alertParts[2]));
                 alertsList.add(a);
             }
             inputReader.close();
@@ -68,7 +73,7 @@ public class StorageManager {
 
 
     public static void deleteAlert(int index, Context context) {
-        ArrayList<Alert> alertsList = loadAlert(context);
+        ArrayList<AlertDTO> alertsList = loadAlert(context);
         AlarmSetter.deleteAlarm(alertsList.get(index).getAlertNumber(), context);
         alertsList.remove(index);
 
@@ -77,7 +82,7 @@ public class StorageManager {
         try {
             outputFile = context.openFileOutput(STORED_Alerts_TEXT, Context.MODE_APPEND);
             out = new OutputStreamWriter(outputFile);
-            for (Alert alert : alertsList) {
+            for (AlertDTO alert : alertsList) {
                 out.write(alert.getPrayerName() + "," + alert.getTime() + "," + alert.getAlertNumber() + "\n");
             }
             out.close();
@@ -86,12 +91,17 @@ public class StorageManager {
         }
     }
 
-    public static void saveAlarmRingtone(String ringtoneTitle, String URIString, Context context) {
+    public static void saveAlarmRingtone(AlarmRingtoneDTO alarmRingtone, Context context) {
         try {
-
             outputFile = context.openFileOutput(STORED_ringtone, Context.MODE_PRIVATE);
             out = new OutputStreamWriter(outputFile);
-            out.write(ringtoneTitle + "\n" + URIString);
+            if (alarmRingtone.getType().equals(AlarmRingtoneType.NOT_SET)) {
+                out.write("");
+            } else if (alarmRingtone.getType().equals(AlarmRingtoneType.RINGTONE)) {
+                out.write(alarmRingtone.getRingtoneTitle() + "\n" + alarmRingtone.getRingtoneURI());
+            } else if (alarmRingtone.getType().equals(AlarmRingtoneType.AZAN)) {
+                out.write(alarmRingtone.getAzanValue() + "\n");
+            }
             out.close();
         } catch (IOException e) {
             throw new IllegalStateException(e);
@@ -110,18 +120,24 @@ public class StorageManager {
         }
     }
 
-    public static String[] loadAlarmRingtone(Context context) {
+    public static AlarmRingtoneDTO loadAlarmRingtone(Context context) {
         try {
-            String[] result = new String[2];
-
             inputFile = context.openFileInput(STORED_ringtone);
             inputReader = new BufferedReader(new InputStreamReader(inputFile));
-            result[0] = inputReader.readLine();
-            result[1] = inputReader.readLine();
-            return result;
-
+            String firstLine = inputReader.readLine();
+            String secondLine = inputReader.readLine();
+            if (TextUtils.isEmpty(firstLine)) {
+                // no ringtone or azan selected
+                return new AlarmRingtoneDTO(AlarmRingtoneType.NOT_SET, null, null, null);
+            } else if (TextUtils.isEmpty(secondLine)) {
+                //Azan selected
+                return new AlarmRingtoneDTO(AlarmRingtoneType.AZAN, null, null, firstLine);
+            } else {
+                //Rington Selected
+                return new AlarmRingtoneDTO(AlarmRingtoneType.RINGTONE, firstLine, secondLine, null);
+            }
         } catch (IOException e) {
-           throw new IllegalStateException(e);
+            throw new IllegalStateException(e);
         }
     }
 
@@ -131,26 +147,21 @@ public class StorageManager {
             out = new OutputStreamWriter(outputFile);
             out.write(calcMethod);
             out.close();
-        } catch (FileNotFoundException e) {
-
         } catch (IOException e) {
-
+            throw new IllegalStateException(e);
         }
     }
 
     public static String loadCalculationMethod(Context context) {
-        String temp;
         try {
             inputFile = context.openFileInput(STORED_calcmethode);
             inputReader = new BufferedReader(new InputStreamReader(inputFile));
-            temp = inputReader.readLine();
+            String calculationMethod = inputReader.readLine();
             inputReader.close();
-            return temp;
-
+            return calculationMethod;
         } catch (IOException e) {
-
+            return null;
         }
-        return null;
     }
 
     public static void saveLocation(Double latitude, Double longitude, String country, String city, Context context) {

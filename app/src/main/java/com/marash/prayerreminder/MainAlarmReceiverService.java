@@ -11,7 +11,6 @@ import android.support.annotation.RequiresApi;
  *
  * author: Arash Khosravi
  */
-@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class MainAlarmReceiverService extends JobService {
 
     @Override

@@ -3,13 +3,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 36
     defaultConfig {
         applicationId "com.marash.prayerreminder"
-        minSdkVersion 21
-        targetSdkVersion 31
-        versionCode 15
-        versionName "6.2.2"
+        minSdkVersion 23
+        targetSdkVersion 36
+        versionCode 16
+        versionName "7.0.3"
     }
     buildTypes {
         release {

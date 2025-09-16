@@ -1,15 +1,15 @@
-package com.marash.prayerreminder;
+package com.marash.prayerreminder.dto;
 
 /**
  * Created by Maedeh on 2/22/2016.
  */
-public class Alert {
+public class AlertDTO {
 
-    private String prayerName;
-    private int time;
-    private int alertNumber;
+    private final String prayerName;
+    private final int time;
+    private final int alertNumber;
 
-    public Alert(String prayerName, int time, int alertNumber) {
+    public AlertDTO(String prayerName, int time, int alertNumber) {
         this.prayerName = prayerName;
         this.time = time;
         this.alertNumber = alertNumber;
@@ -26,10 +26,5 @@ public class Alert {
     public int getTime() {
         return time;
     }
-
-    public void setTime(int time) {
-        this.time = time;
-    }
-
 
 }

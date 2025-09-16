@@ -9,14 +9,13 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
 import com.google.common.util.concurrent.SettableFuture;
-import com.marash.prayerreminder.dto.PRLocation;
+import com.marash.prayerreminder.dto.PRLocationDTO;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,21 +37,21 @@ public class LocationBuilder {
         return locl;
     }
 
-    public SettableFuture<PRLocation> getLocationByGPS(final Context context) {
-        SettableFuture<PRLocation> settableFuture = SettableFuture.create();
+    public SettableFuture<PRLocationDTO> getLocationByGPS(final Context context) {
+        SettableFuture<PRLocationDTO> settableFuture = SettableFuture.create();
         setLocationListener(settableFuture, context);
         requestLocationUpdatebyGPS(settableFuture, context);
         return settableFuture;
     }
 
-    public SettableFuture<PRLocation> getLocationByNetwork(final Context context) {
-        SettableFuture<PRLocation> settableFuture = SettableFuture.create();
+    public SettableFuture<PRLocationDTO> getLocationByNetwork(final Context context) {
+        SettableFuture<PRLocationDTO> settableFuture = SettableFuture.create();
         setLocationListener(settableFuture, context);
         requestLocationUpdateByNetwork(settableFuture, context);
         return settableFuture;
     }
 
-    private void setLocationListener(final SettableFuture<PRLocation> futureToUpdate, final Context context) {
+    private void setLocationListener(final SettableFuture<PRLocationDTO> futureToUpdate, final Context context) {
         this.locl = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
@@ -77,7 +76,7 @@ public class LocationBuilder {
                         // could not get country and city. It is fine, we show them as "unknown" , continue the code
                     }
                 }
-                futureToUpdate.set(new PRLocation(city, country, location));
+                futureToUpdate.set(new PRLocationDTO(city, country, location));
             }
 
             @Override
@@ -94,21 +93,11 @@ public class LocationBuilder {
         };
     }
 
-    private void requestLocationUpdatebyGPS(SettableFuture<PRLocation> settableFuture, Context context) {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                settableFuture.cancel(true);
-                cancelLocationUpdate();
-                ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            } else {
-                try {
-                    locm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 200, locl);
-                } catch (SecurityException e) {
-                    settableFuture.cancel(true);
-                    cancelLocationUpdate();
-                    Toast.makeText(context, context.getString(R.string.cannotUpdateByGPS), Toast.LENGTH_LONG).show();
-                }
-            }
+    private void requestLocationUpdatebyGPS(SettableFuture<PRLocationDTO> settableFuture, Context context) {
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            settableFuture.cancel(true);
+            cancelLocationUpdate();
+            ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         } else {
             try {
                 locm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 200, locl);
@@ -120,21 +109,11 @@ public class LocationBuilder {
         }
     }
 
-    private void requestLocationUpdateByNetwork(SettableFuture<PRLocation> settableFuture, Context context) {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                settableFuture.cancel(true);
-                cancelLocationUpdate();
-                ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 2);
-            } else {
-                try {
-                    locm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 200, locl);
-                } catch (SecurityException e) {
-                    settableFuture.cancel(true);
-                    cancelLocationUpdate();
-                    Toast.makeText(context, context.getString(R.string.cannotUpdateByNetwork), Toast.LENGTH_LONG).show();
-                }
-            }
+    private void requestLocationUpdateByNetwork(SettableFuture<PRLocationDTO> settableFuture, Context context) {
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            settableFuture.cancel(true);
+            cancelLocationUpdate();
+            ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 2);
         } else {
             try {
                 locm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 200, locl);

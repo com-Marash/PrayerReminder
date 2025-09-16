@@ -6,6 +6,8 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.marash.prayerreminder.dto.AlertDTO;
+
 import java.util.ArrayList;
 
 public class ShowSavedAlerts extends AppCompatActivity {
@@ -30,13 +32,13 @@ public class ShowSavedAlerts extends AppCompatActivity {
 
     public void showSavedAlertsFunction() {
 
-        ArrayList<Alert> savedAlerts = StorageManager.loadAlert(ShowSavedAlerts.this.getApplicationContext());
+        ArrayList<AlertDTO> savedAlerts = StorageManager.loadAlert(ShowSavedAlerts.this.getApplicationContext());
 
         if (savedAlerts != null && !(savedAlerts.isEmpty())) {
             alerts = new ArrayList<String>();
             String st;
 
-            for (Alert a : savedAlerts) {
+            for (AlertDTO a : savedAlerts) {
                 String savedAlertPrayerName = a.getPrayerName();
                 int savedAlertTime = a.getTime();
                 if (savedAlertTime < 0) {

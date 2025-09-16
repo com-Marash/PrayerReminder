@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.AudioAttributes;
+import android.media.MediaPlayer;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -11,13 +13,16 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.util.ArrayUtils;
+import com.marash.prayerreminder.dto.AlarmRingtoneDTO;
+import com.marash.prayerreminder.dto.AlarmRingtoneType;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 /**
@@ -27,8 +32,12 @@ public class SelectSound extends AppCompatActivity {
 
     private TextView sound_TextView;
     private Uri existingRingtone = null;
-    private String azanSelections;
-    private String azanSelectionsValue;
+    private String selectedAzanTitle;
+    private String selectedAzanValue;
+
+    // for playing selected azan
+    private MediaPlayer mediaPlayer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,26 +46,36 @@ public class SelectSound extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        defaultFunction();
+        setRingtoneText();
     }
 
-    public void defaultFunction() {
-        String[] selectedRingToneData;
-        selectedRingToneData = StorageManager.loadAlarmRingtone(SelectSound.this);
+    private void setRingtoneText() {
+
+        AlarmRingtoneDTO selectedRingTone = StorageManager.loadAlarmRingtone(SelectSound.this);
         sound_TextView = (TextView) findViewById(R.id.textView_soundText);
 
-        if (selectedRingToneData == null) {
+        if (selectedRingTone.getType().equals(AlarmRingtoneType.NOT_SET)) {
             sound_TextView.setText(getString(R.string.noRingtone));
             existingRingtone = (Uri) null;
-        } else {
-            if(selectedRingToneData[1] == null){
-                // azan rington is selecred
-                sound_TextView.setText("TODO: Azan selected : " + selectedRingToneData[0]);
-            }else{
-                sound_TextView.setText(getString(R.string.musicWithName) + " " + selectedRingToneData[0] + " " + getString(R.string.ringtoneHasSet));
-                existingRingtone = Uri.parse(selectedRingToneData[1]);
-            }
+        } else if (selectedRingTone.getType().equals(AlarmRingtoneType.AZAN)) {
+            sound_TextView.setText("Azan selected : " + getAzanTitleByAnaznValue(selectedRingTone.getAzanValue()));
+        } else if (selectedRingTone.getType().equals(AlarmRingtoneType.RINGTONE)){
+            sound_TextView.setText(getString(R.string.musicWithName) + " " + selectedRingTone.getRingtoneTitle() + " " + getString(R.string.ringtoneHasSet));
+            existingRingtone = Uri.parse(selectedRingTone.getRingtoneURI());
+
         }
+    }
+
+    private String getAzanTitleByAnaznValue(String azanValue) {
+        final CharSequence[] shiaAzanTitles = {getString(R.string.aghati), getString(R.string.moazenzadeh), getString(R.string.rezaeian), getString(R.string.sobhdel), getString(R.string.tantavi), getString(R.string.abuzeid)};
+        final CharSequence[] shiaAzanValues = {"shia_aghati", "shia_moazenzadeh", "shia_rezaeian", "shia_sobhdel", "shia_tantavi", "shia_abuzeid"};
+        final CharSequence[] sunniAzanTitles = {getString(R.string.abdolbaset), getString(R.string.abdorrahman), getString(R.string.madinah), getString(R.string.makkah), getString(R.string.menshawi), getString(R.string.saeedhafez)};
+        final CharSequence[] sunniAzanValues = {"sunni_abdolbaset", "sunni_abdorrahman", "sunni_madinah", "sunni_makkah", "sunni_menshawi", "sunni_saeedhafez"};
+
+        CharSequence[] azanItems = ArrayUtils.concat(sunniAzanTitles, shiaAzanTitles);
+        CharSequence[] azanItemValues = ArrayUtils.concat(sunniAzanValues, shiaAzanValues);
+        int rowIdIndex = Arrays.asList(azanItemValues).indexOf(azanValue);
+        return rowIdIndex != -1 ? (String) azanItems[rowIdIndex] : "";
     }
 
     public void phoneRingtone_selection_list() {
@@ -80,43 +99,63 @@ public class SelectSound extends AppCompatActivity {
         String calculationMethod = StorageManager.loadCalculationMethod(SelectSound.this);
         CharSequence[] azanItems;
         CharSequence[] azanItemValues;
-        final CharSequence[] shiaAzanItems = {getString(R.string.aghati), getString(R.string.moazenzadeh), getString(R.string.rezaeian), getString(R.string.sobhdel), getString(R.string.tantavi), getString(R.string.abuzeid)};
-        final CharSequence[] shiaAzanValues = {"aghati","moazenzadeh","rezaeian","sobhdel","tantavi","abuzeid" };
-        final CharSequence[] sunniAzanItems = {getString(R.string.abdolbaset), getString(R.string.abdorrahman), getString(R.string.madinah), getString(R.string.makkah), getString(R.string.menshawi), getString(R.string.saeedhafez)};
-        final CharSequence[] sunniAzanValues = {"abdolbaset","abdorrahman","madinah","makkah","menshawi","saeedhafez"};
 
-        if(calculationMethod.equals("Tehran") || calculationMethod.equals("Jafari")){
-            azanItems = shiaAzanItems;
+        final CharSequence[] shiaAzantitles = {getString(R.string.aghati), getString(R.string.moazenzadeh), getString(R.string.rezaeian), getString(R.string.sobhdel), getString(R.string.tantavi), getString(R.string.abuzeid)};
+        final CharSequence[] shiaAzanValues = {"shia_aghati", "shia_moazenzadeh", "shia_rezaeian", "shia_sobhdel", "shia_tantavi", "shia_abuzeid"};
+        final CharSequence[] sunniAzantitles = {getString(R.string.abdolbaset), getString(R.string.abdorrahman), getString(R.string.madinah), getString(R.string.makkah), getString(R.string.menshawi), getString(R.string.saeedhafez)};
+        final CharSequence[] sunniAzanValues = {"sunni_abdolbaset", "sunni_abdorrahman", "sunni_madinah", "sunni_makkah", "sunni_menshawi", "sunni_saeedhafez"};
+
+        if (calculationMethod.equals("Tehran") || calculationMethod.equals("Jafari")) {
+            azanItems = shiaAzantitles;
             azanItemValues = shiaAzanValues;
-        }else if(calculationMethod.equals("Egypt") || calculationMethod.equals("Karachi") || calculationMethod.equals("Makkah") || calculationMethod.equals("MWL")){
-            azanItems = sunniAzanItems;
+        } else if (calculationMethod.equals("Egypt") || calculationMethod.equals("Karachi") || calculationMethod.equals("Makkah") || calculationMethod.equals("MWL")) {
+            azanItems = sunniAzantitles;
             azanItemValues = sunniAzanValues;
-        }else{
+        } else {
             //this is for ISNA.
-            azanItems = ArrayUtils.concat(sunniAzanItems, shiaAzanItems);
-            azanItemValues = ArrayUtils.concat(sunniAzanValues , shiaAzanValues);
+            azanItems = ArrayUtils.concat(sunniAzantitles, shiaAzantitles);
+            azanItemValues = ArrayUtils.concat(sunniAzanValues, shiaAzanValues);
         }
 
-        String[] savedAzan;
-        savedAzan = StorageManager.loadAlarmRingtone(this.getApplicationContext());
+        AlarmRingtoneDTO savedAzan = StorageManager.loadAlarmRingtone(this.getApplicationContext());
         AlertDialog.Builder builder = new AlertDialog.Builder(SelectSound.this);
 
-        if(savedAzan != null && savedAzan[1] == null){
-            builder.setSingleChoiceItems(azanItems, Arrays.asList(azanItemValues).indexOf(savedAzan[0]), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int methodNumber) {
-                    azanSelections = (String) azanItems[methodNumber];
-                    azanSelectionsValue = (String) azanItemValues[methodNumber];
-                }
-            });
+        int currentSelectedAzan = -1;
+        if (savedAzan.getType().equals(AlarmRingtoneType.AZAN)) {
+            currentSelectedAzan = Arrays.asList(azanItemValues).indexOf(savedAzan.getAzanValue());
         }
+        builder.setSingleChoiceItems(azanItems, currentSelectedAzan, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int methodNumber) {
+                selectedAzanTitle = (String) azanItems[methodNumber];
+                selectedAzanValue = (String) azanItemValues[methodNumber];
+                int azanID = getResources().getIdentifier(selectedAzanValue, "raw", getPackageName());
+                if (mediaPlayer != null) {
+                    mediaPlayer.release();
+                }
+                mediaPlayer = new MediaPlayer();
+                mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_ALARM)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .build());
+                try {
+                    mediaPlayer.setDataSource(SelectSound.this.getApplicationContext(), Uri.parse("android.resource://" + getPackageName() + "/" + azanID));
+                    mediaPlayer.prepare();
+                } catch (IOException e) {
+                    Log.e("TimesUpActivity", "Could not load ringtone url for some reason", e);
+                }
+                mediaPlayer.start();
+            }
+        });
 
-        builder.setTitle("TODO: Select Azan title").setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
+
+        builder.setTitle("Select Azan").setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (azanSelections != null) {
-                    Toast.makeText(SelectSound.this, azanSelections + " " + "TODO: Azan have been selecred", Toast.LENGTH_LONG).show();
-                    StorageManager.saveAlarmRingtone(azanSelectionsValue, SelectSound.this.getApplicationContext());
+                if (selectedAzanTitle != null) {
+                    Toast.makeText(SelectSound.this, selectedAzanTitle + " " + "Azan have been selected", Toast.LENGTH_LONG).show();
+                    StorageManager.saveAlarmRingtone(selectedAzanValue, SelectSound.this.getApplicationContext());
+                    setRingtoneText();
                 }
             }
         });
@@ -126,19 +165,12 @@ public class SelectSound extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
             }
         });
-
-        builder.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                // TODO: play the selected azan
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
+        builder.setOnDismissListener(dialog -> {
+            if (mediaPlayer != null) {
+                mediaPlayer.release();
             }
         });
+
         builder.create().show();
     }
 
@@ -161,7 +193,7 @@ public class SelectSound extends AppCompatActivity {
                 sound_TextView = (TextView) findViewById(R.id.textView_soundText);
                 sound_TextView.setText(title + " " + getString(R.string.alarmWasSelected));
 
-                StorageManager.saveAlarmRingtone(title, uri.toString(), SelectSound.this);
+                StorageManager.saveAlarmRingtone(new AlarmRingtoneDTO(AlarmRingtoneType.RINGTONE, title, uri.toString(), null), SelectSound.this);
                 finish();
 
             } else {

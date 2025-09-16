@@ -2,17 +2,23 @@ package com.marash.prayerreminder;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.TextView;
+
+import com.marash.prayerreminder.dto.AlarmRingtoneDTO;
+import com.marash.prayerreminder.dto.AlarmRingtoneType;
 
 import java.io.IOException;
 
@@ -34,30 +40,48 @@ public class TimesUpActivity extends Activity {
         alarmTextView.setText(textViewString);
         blink();
 
-        String[] ringtoneTitleAndUri = StorageManager.loadAlarmRingtone(this);
-        Uri ringtoneUri;
+        AlarmRingtoneDTO ringtoneDTO = StorageManager.loadAlarmRingtone(this);
 
-        if (ringtoneTitleAndUri != null && ringtoneTitleAndUri.length > 1){
-            String ringtoneUriString = ringtoneTitleAndUri[1];
-            ringtoneUri = Uri.parse(ringtoneUriString);
-        }else{
-            ringtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
-        }
-
+        Uri ringtoneOrAzanUri;
         mp = new MediaPlayer();
-        mp.setAudioStreamType(AudioManager.STREAM_ALARM);
-        mp.setLooping(true);
+        mp.setAudioAttributes(new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ALARM)
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .build());
+
+        if (ringtoneDTO.getType().equals(AlarmRingtoneType.AZAN)) {
+            // it is azan not ringtone
+            int azanID = getResources().getIdentifier(ringtoneDTO.getAzanValue(), "raw", getPackageName());
+            if (azanID == 0) {
+                Log.d("TimesUpActivity", "Azan resource not found, defaulting to moazenzadeh.");
+                azanID = R.raw.shia_moazenzadeh;
+            }
+            ringtoneOrAzanUri = Uri.parse("android.resource://" + getPackageName() + "/" + azanID);
+        } else {
+            // It is ringtone
+            if (ringtoneDTO.getType().equals(AlarmRingtoneType.RINGTONE)) {
+                ringtoneOrAzanUri = Uri.parse(ringtoneDTO.getRingtoneURI());
+            } else {
+                ringtoneOrAzanUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+            }
+            mp.setLooping(true);
+
+        }
         try {
-            mp.setDataSource(this, ringtoneUri);
+            mp.setDataSource(this, ringtoneOrAzanUri);
             mp.prepare();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e("TimesUpActivity", "Could not load ringtone url for some reason", e);
         }
         mp.start();
 
         final Window win = getWindow();
         win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+        if (Build.VERSION.SDK_INT >= 27) {
+            setShowWhenLocked(true);
+            setTurnScreenOn(true);
+        }
     }
 
     private void blink() {
@@ -82,13 +106,9 @@ public class TimesUpActivity extends Activity {
 
     public void stopAlarm(View view) {
         mp.stop();
-        if (AlarmReceiver.wakelock != null && AlarmReceiver.wakelock.isHeld()) {
-            AlarmReceiver.wakelock.release();
-        }
-        if (android.os.Build.VERSION.SDK_INT >= 21) {
-            finishAndRemoveTask();
-        } else {
-            finish();
-        }
+//        if (AlarmReceiver.wakelock != null && AlarmReceiver.wakelock.isHeld()) {
+//            AlarmReceiver.wakelock.release();
+//        }
+        finish();
     }
 }

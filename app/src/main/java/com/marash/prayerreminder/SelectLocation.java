@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.common.util.concurrent.SettableFuture;
-import com.marash.prayerreminder.dto.PRLocation;
+import com.marash.prayerreminder.dto.PRLocationDTO;
 
 import static android.graphics.Color.GRAY;
 
@@ -26,7 +26,7 @@ public class SelectLocation extends AppCompatActivity {
     private TextView locationText;
     private LocationBuilder lb;
     private Button confirmButt;
-    private PRLocation currentLocation;
+    private PRLocationDTO currentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +82,7 @@ public class SelectLocation extends AppCompatActivity {
         if(manager != null) {
             if (isGPSAvailable(manager)) {
                 final Context context = view.getContext();
-                final SettableFuture<PRLocation> locationFuture = lb.getLocationByGPS(context);
+                final SettableFuture<PRLocationDTO> locationFuture = lb.getLocationByGPS(context);
                 if (locationFuture != null) {
                     handleFuture(locationFuture, context);
                 }
@@ -107,7 +107,7 @@ public class SelectLocation extends AppCompatActivity {
         final LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if(manager != null && isNetworkProviderAvailable(manager)) {
             if (isNetworkAvailable()) {
-                SettableFuture<PRLocation> locationFuture = lb.getLocationByNetwork(context);
+                SettableFuture<PRLocationDTO> locationFuture = lb.getLocationByNetwork(context);
                 if (locationFuture != null) {
                     handleFuture(locationFuture, context);
                 }
@@ -119,14 +119,14 @@ public class SelectLocation extends AppCompatActivity {
         }
     }
 
-    private void handleFuture(final SettableFuture<PRLocation> locationFuture, final Context context) {
+    private void handleFuture(final SettableFuture<PRLocationDTO> locationFuture, final Context context) {
         final ProgressDialog pd = createPD(locationFuture);
         pd.show();
         Thread mThread = new Thread() {
             @Override
             public void run() {
                 try {
-                    final PRLocation prLocation = locationFuture.get();
+                    final PRLocationDTO prLocation = locationFuture.get();
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -147,7 +147,7 @@ public class SelectLocation extends AppCompatActivity {
         mThread.start();
     }
 
-    private ProgressDialog createPD(final SettableFuture<PRLocation> locationFuture) {
+    private ProgressDialog createPD(final SettableFuture<PRLocationDTO> locationFuture) {
         ProgressDialog pd = new ProgressDialog(SelectLocation.this);
         pd.setTitle(getString(R.string.loadLocation));
         pd.setMessage(getString(R.string.waitLocation));

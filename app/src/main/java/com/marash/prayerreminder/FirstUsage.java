@@ -20,7 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.common.util.concurrent.SettableFuture;
-import com.marash.prayerreminder.dto.PRLocation;
+import com.marash.prayerreminder.dto.AlarmRingtoneDTO;
+import com.marash.prayerreminder.dto.AlarmRingtoneType;
+import com.marash.prayerreminder.dto.PRLocationDTO;
 
 import static android.graphics.Color.GRAY;
 
@@ -37,7 +39,7 @@ public class FirstUsage extends Activity {
     private TextView tv;
     private Button okButt;
     private LocationBuilder lb;
-    private PRLocation currentLocation;
+    private PRLocationDTO currentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +62,7 @@ public class FirstUsage extends Activity {
         Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
         Ringtone ringtone = RingtoneManager.getRingtone(FirstUsage.this.getApplicationContext(), uri);
         String title = ringtone.getTitle(this);
-        StorageManager.saveAlarmRingtone(title, uri.toString(), FirstUsage.this.getApplicationContext());
+        StorageManager.saveAlarmRingtone(new AlarmRingtoneDTO(AlarmRingtoneType.RINGTONE, title, uri.toString(), null), FirstUsage.this.getApplicationContext());
     }
 
     // ok button onclick event
@@ -82,7 +84,7 @@ public class FirstUsage extends Activity {
         final LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (manager != null) {
             if (isGPSAvailable(manager)) {
-                final SettableFuture<PRLocation> locationFuture = lb.getLocationByGPS(FirstUsage.this);
+                final SettableFuture<PRLocationDTO> locationFuture = lb.getLocationByGPS(FirstUsage.this);
                 if (locationFuture != null) {
                     handleFuture(locationFuture, context);
                 }
@@ -106,7 +108,7 @@ public class FirstUsage extends Activity {
         final LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (manager != null && isNetworkProviderAvailable(manager)) {
             if (isNetworkAvailable()) {
-                SettableFuture<PRLocation> locationFuture = lb.getLocationByNetwork(FirstUsage.this);
+                SettableFuture<PRLocationDTO> locationFuture = lb.getLocationByNetwork(FirstUsage.this);
                 if (locationFuture != null) {
                     handleFuture(locationFuture, context);
                 }
@@ -131,14 +133,14 @@ public class FirstUsage extends Activity {
         return (activeNetworkInfo != null && activeNetworkInfo.isConnected());
     }
 
-    private void handleFuture(final SettableFuture<PRLocation> locationFuture, final Context context) {
+    private void handleFuture(final SettableFuture<PRLocationDTO> locationFuture, final Context context) {
         final ProgressDialog pd = createPD(locationFuture);
         pd.show();
         Thread mThread = new Thread() {
             @Override
             public void run() {
                 try {
-                    final PRLocation prLocation = locationFuture.get();
+                    final PRLocationDTO prLocation = locationFuture.get();
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -159,7 +161,7 @@ public class FirstUsage extends Activity {
         mThread.start();
     }
 
-    private ProgressDialog createPD(final SettableFuture<PRLocation> locationFuture) {
+    private ProgressDialog createPD(final SettableFuture<PRLocationDTO> locationFuture) {
         ProgressDialog pd = new ProgressDialog(FirstUsage.this);
         pd.setTitle(getString(R.string.loadLocation));
         pd.setMessage(getString(R.string.waitLocation));
